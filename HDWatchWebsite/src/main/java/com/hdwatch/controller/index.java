@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class index {
 	@RequestMapping("/index")
 	public String index() {
-		return "index";
+		return "login_register";
 	}
 }
