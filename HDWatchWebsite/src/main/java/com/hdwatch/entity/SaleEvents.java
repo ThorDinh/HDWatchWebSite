@@ -5,20 +5,21 @@
 package com.hdwatch.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.*;
 
 import lombok.Data;
 
 /**
- * JPA entity class for "Productimages"
+ * JPA entity class for "SaleEvents"
  *
  * @author Telosys
  *
  */
 @Data
 @Entity
-@Table(name="productimages", schema="dbo", catalog="HDWatch" )
-public class Productimages implements Serializable {
+@Table(name="sale_events", schema="dbo", catalog="HDWatch" )
+public class SaleEvents implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -29,16 +30,21 @@ public class Productimages implements Serializable {
     private Integer    id ;
 
     //--- ENTITY DATA FIELDS 
-    @Column(name="name", nullable=false, length=100)
+    @Column(name="name", nullable=false, length=255)
     private String     name ;
 
-    @Column(name="productId", nullable=false)
-    private Integer    productid ;
+    @Temporal(TemporalType.DATE)
+    @Column(name="startDate", nullable=false)
+    private Date       startdate ;
+
+    @Temporal(TemporalType.DATE)
+    @Column(name="endDate", nullable=false)
+    private Date       enddate ;
+
+    @Column(name="priceSale", nullable=false)
+    private Integer    pricesale ;
 
 
     //--- ENTITY LINKS ( RELATIONSHIP )
-    @ManyToOne
-    @JoinColumn(name="productId", referencedColumnName="id", insertable=false, updatable=false)
-    private Products   products ; 
 
 }
