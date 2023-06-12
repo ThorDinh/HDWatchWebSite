@@ -14,7 +14,7 @@ import com.hdwatch.service.CategoriesService;
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/rest/categories")
-public class CateGoriesRestController {
+public class CategoriesRestController {
 	@Autowired
 	CategoriesService categoriesService;
 	@GetMapping("{id}")
