@@ -12,20 +12,20 @@
  		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
  		<!-- Bootstrap -->
- 		<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
+ 		<link type="text/css" rel="stylesheet" href="customer/css/bootstrap.min.css"/>
 
  		<!-- Slick -->
- 		<link type="text/css" rel="stylesheet" href="css/slick.css"/>
- 		<link type="text/css" rel="stylesheet" href="css/slick-theme.css"/>
+ 		<link type="text/css" rel="stylesheet" href="customer/css/slick.css"/>
+ 		<link type="text/css" rel="stylesheet" href="customer/css/slick-theme.css"/>
 
  		<!-- nouislider -->
- 		<link type="text/css" rel="stylesheet" href="css/nouislider.min.css"/>
+ 		<link type="text/css" rel="stylesheet" href="customer/css/nouislider.min.css"/>
 
  		<!-- Font Awesome Icon -->
- 		<link rel="stylesheet" href="css/font-awesome.min.css">
+ 		<link rel="stylesheet" href="customer/css/font-awesome.min.css">
 
  		<!-- Custom stlylesheet -->
- 		<link type="text/css" rel="stylesheet" href="css/style.css"/>
+ 		<link type="text/css" rel="stylesheet" href="customer/css/style.css"/>
 
  		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
  		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -35,7 +35,7 @@
  		<![endif]-->
 
     </head>
-	<body>
+	<body ng-app="myapp">
 		<!-- HEADER -->
 		<header>
 			<!-- TOP HEADER -->
@@ -124,8 +124,7 @@
 											<h5>SUBTOTAL: $2940.00</h5>
 										</div>
 										<div class="cart-btns">
-											<a href="#">View Cart</a>
-											<a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
+											<a href="#cart">View Cart</a>
 										</div>
 									</div>
 								</div>
@@ -159,9 +158,11 @@
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Categories</a></li>
-						<li><a href="#">Brands</a></li>
+						<li><a href="#home">Trang chủ</a></li>
+						<li><a href="#category">Danh mục</a></li>
+						<li><a href="#brand">Thương hiệu</a></li>
+						<li><a href="#about">Giới thiệu</a></li>
+						<li><a href="#contact">Liên lạc</a></li>
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -171,18 +172,9 @@
 		</nav>
 		<!-- /NAVIGATION -->
 
-		<!-- SECTION -->
-		<div class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /SECTION -->
+		<!--Nội dung trang web-->
+	<div ng-show="loading" class="pull-right label label-info">Loading...</div>
+	<ng-view></ng-view>
 
 		<!-- FOOTER -->
 		<footer id="footer">
@@ -273,12 +265,17 @@
 		<!-- /FOOTER -->
 
 		<!-- jQuery Plugins -->
-		<script src="js/jquery.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/slick.min.js"></script>
-		<script src="js/nouislider.min.js"></script>
-		<script src="js/jquery.zoom.min.js"></script>
-		<script src="js/main.js"></script>
+		<script src="customer/js/jquery.min.js"></script>
+		<script src="customer/js/bootstrap.min.js"></script>
+		<script src="customer/js/slick.min.js"></script>
+		<script src="customer/js/nouislider.min.js"></script>
+		<script src="customer/js/jquery.zoom.min.js"></script>
+		<script src="customer/js/main.js"></script>
+		<script src="customer/js/angular.min.js"></script>
+		<script src="customer/js/angular-route.js"></script>
+		
+		<!--Custom JS-->
+		<script src="customer/js/webapp.js"></script>
 
 	</body>
 </html>
