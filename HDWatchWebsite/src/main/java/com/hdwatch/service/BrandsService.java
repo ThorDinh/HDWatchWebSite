@@ -6,16 +6,20 @@ import com.hdwatch.entity.Brands;
 
 
 public interface BrandsService {
+	
 	List<Brands> findAll();
+	
 
 	Brands findById(Integer id);
 
 	boolean existsById(Integer id);
+	
+	Brands create(Brands brand);
 
 	Brands save(Brands brand);
 
 	void deleteById(Integer id);
 
 	List<Brands> findNameById(Integer id);
-
+	
 }

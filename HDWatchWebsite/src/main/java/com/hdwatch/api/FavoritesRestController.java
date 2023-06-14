@@ -5,23 +5,25 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hdwatch.entity.Brands;
-import com.hdwatch.service.BrandsService;
 
+import com.hdwatch.entity.Favorites;
+
+import com.hdwatch.service.FavoritesService;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/rest/brands")
-public class BrandsRestController {
+@RequestMapping("/rest/favorites")
+public class FavoritesRestController {
 	@Autowired
-	BrandsService brandsService;
+	FavoritesService favoritesService;
 	@GetMapping("{id}")
-	public List<Brands> findBrandNamesById(Integer id) {
-	    return brandsService.findNameById(id);
+	public Favorites findById(@PathVariable("id") Integer id) {
+		return favoritesService.findById(id);
 	}
-	
-		
 }
+	
+

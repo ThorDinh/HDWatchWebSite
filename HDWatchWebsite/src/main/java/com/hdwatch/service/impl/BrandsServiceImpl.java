@@ -51,4 +51,10 @@ public class BrandsServiceImpl implements BrandsService {
 		
 		return bDao.findByNameId(id);
 	}
+
+	@Override
+	public Brands create(Brands brand) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
