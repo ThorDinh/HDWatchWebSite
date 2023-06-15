@@ -9,6 +9,6 @@ import org.springframework.data.repository.query.Param;
 import com.hdwatch.entity.Carts;
 
 public interface CartsDAO extends JpaRepository<Carts, Integer>{
-	@Query("SELECT c.accountid FROM Favorites c WHERE c.accountid = :accountid")
-	List<Carts> findByAccountId(@Param("accountid") Integer accountid);
+//	@Query("SELECT c.accountid FROM Favorites c WHERE c.accountid = :accountid")
+//	List<Carts> findByAccountId(@Param("accountid") Integer accountid);
 }

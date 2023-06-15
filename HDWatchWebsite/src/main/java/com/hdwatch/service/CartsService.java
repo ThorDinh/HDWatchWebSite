@@ -11,5 +11,5 @@ public interface CartsService {
 	
 	void deleteById(Integer id);
 	
-	List<Carts> findByAccountId(Integer id);
+//	List<Carts> findByAccountId(Integer id);
 }

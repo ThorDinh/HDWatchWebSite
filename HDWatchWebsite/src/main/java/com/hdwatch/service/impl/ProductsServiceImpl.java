@@ -15,9 +15,6 @@ public class  ProductsServiceImpl implements ProductsService  {
 	@Autowired
 	ProductsDAO pdao;
 	
-	@Autowired
-	ProductimagesDAO pIDAO;
-	
 	@Override
 	public List<Products> findAll(){
 		return pdao.findAll();
@@ -39,21 +36,22 @@ public class  ProductsServiceImpl implements ProductsService  {
 		 Products existingProduct = pdao.findById(id).orElse(null);
 	        if (existingProduct != null) {
 	            existingProduct.setName(products.getName());
-	            existingProduct.setBrandid(products.getBrandid());
-	            existingProduct.setCategoryid(products.getCategoryid());
+	            existingProduct.setBrandId(products.getBrandId());
+	            existingProduct.setCategoryId(products.getCategoryId());
 	            existingProduct.setAvailable(products.getAvailable());
-	            existingProduct.setCreatedate(products.getCreatedate());
-	            existingProduct.setListOfProductimages(products.getListOfProductimages());;
+	            existingProduct.setCreateDate(products.getCreateDate());
+	            existingProduct.setStock(products.getStock());;
 	            existingProduct.setPrice(products.getPrice());
-	            existingProduct.setOldprice(products.getOldprice());
+	            existingProduct.setOldPrice(products.getOldPrice());
 	            existingProduct.setDescription(products.getDescription());
-
 	            return pdao.save(existingProduct);
 	        }
 		return pdao.save(products);
 	}
 
 	@Override
-	public void deleteByid(Integer id) {}
+	public void deleteByid(Integer id) {
+		pdao.deleteById(id);
+	}
 		
 }

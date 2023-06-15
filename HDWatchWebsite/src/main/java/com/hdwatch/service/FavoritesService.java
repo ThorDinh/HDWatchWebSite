@@ -13,8 +13,8 @@ public interface FavoritesService {
 	
 	void deleteById(Integer id);
 	
-	List<Favorites> findByAccountId(Integer acountid);
+//	List<Favorites> findByAccountId(Integer acountid);
 	
-	Favorites create(JsonNode favoriteData);
+//	Favorites create(JsonNode favoriteData);
 	
 }
