@@ -18,12 +18,6 @@ import com.hdwatch.service.FavoritesService;
 @RestController
 @RequestMapping("/rest/favorites")
 public class FavoritesRestController {
-	@Autowired
-	FavoritesService favoritesService;
-	@GetMapping("{id}")
-	public Favorites findById(@PathVariable("id") Integer id) {
-		return favoritesService.findById(id);
-	}
 }
 	
 

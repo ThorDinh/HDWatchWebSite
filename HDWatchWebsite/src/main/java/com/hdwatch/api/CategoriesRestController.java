@@ -15,10 +15,5 @@ import com.hdwatch.service.CategoriesService;
 @RestController
 @RequestMapping("/rest/categories")
 public class CategoriesRestController {
-	@Autowired
-	CategoriesService categoriesService;
-	@GetMapping("{id}")
-	public List<Categories> findBrandNamesById(Integer id) {
-	    return categoriesService.findByName(id);
-	}
+	
 }

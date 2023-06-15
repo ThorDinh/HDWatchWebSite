@@ -10,5 +10,9 @@ public interface ProductsService {
 	
 	Products findById(Integer id);
 
-
+	Products create(Products products);
+	
+	Products save(Products products,Integer id);
+	
+	void deleteByid(Integer id);
 }

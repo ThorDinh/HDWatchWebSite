@@ -13,11 +13,11 @@ public interface OrdersService {
 
 	Orders findById(Integer id);
 
-	List<Orders> findByAccountId(Integer accountid);
-
+//	List<Orders> findByAccountId(Integer accountid);
+//
 //	Double sumCostInMonth(Integer month);
-
-	List<Orders> findOrderInMonth(Integer createdate);
-
-	Integer countOrderInMonth(Integer createdate);
+//
+//	List<Orders> findOrderInMonth(Integer createdate);
+//
+//	Integer countOrderInMonth(Integer createdate);
 }

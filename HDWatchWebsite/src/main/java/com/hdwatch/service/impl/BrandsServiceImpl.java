@@ -14,47 +14,42 @@ import com.hdwatch.service.BrandsService;
 public class BrandsServiceImpl implements BrandsService {
 	@Autowired
 	BrandsDAO bDao;
+	
 	@Override
 	public List<Brands> findAll() {
-		// TODO Auto-generated method stub
 		Sort sort = Sort.by(Direction.ASC,"name");
 		return bDao.findAll(sort);
 	}
 
 	@Override
 	public Brands findById(Integer id) {
-		// TODO Auto-generated method stub
 		return bDao.findById(id).get();
 	}
 
 	@Override
 	public boolean existsById(Integer id) {
-		// TODO Auto-generated method stub
 		return bDao.existsById(id);
 	}
 
 	@Override
-	public Brands save(Brands brand) {
-		// TODO Auto-generated method stub
+	public Brands save(Brands brand,Integer id) {
+		   Brands existingBrand = bDao.findById(id).orElse(null);
+	        if (existingBrand != null) {
+	            existingBrand.setName(brand.getName());
+	            existingBrand.setImages(brand.getImages());
+	            return bDao.save(existingBrand);
+	        }
 		return bDao.save(brand);
 	}
 
 	@Override
 	public void deleteById(Integer id) {
-		// TODO Auto-generated method stub
 		bDao.deleteById(id);
 	}
 
 	@Override
-	public List<Brands> findNameById(Integer id){
-		// TODO Auto-generated method stub
-		
-		return bDao.findByNameId(id);
-	}
-
-	@Override
 	public Brands create(Brands brand) {
-		// TODO Auto-generated method stub
-		return null;
+		return bDao.save(brand);
 	}
+	
 }

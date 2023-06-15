@@ -13,9 +13,9 @@ public interface CategoriesService {
 
 	Categories findById(Integer id);
 
-	List<Categories> findByName(Integer id);
+	Categories save(Categories cate, Integer id);
 
-	Categories save(Categories cate);
-
+	Categories create(Categories cate);
+		
 	void deleteById(Integer id);
 }

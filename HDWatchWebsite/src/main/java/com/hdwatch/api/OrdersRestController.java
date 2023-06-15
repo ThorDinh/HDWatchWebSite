@@ -16,12 +16,5 @@ import com.hdwatch.service.OrdersService;
 @RestController
 @RequestMapping("/rest/orders")
 public class OrdersRestController {
-	@Autowired
-	OrdersService ordersService;
-	@GetMapping("{id}")
-	public Orders getOne(@PathVariable("id") Integer id) {
-		
-		return ordersService.findById(id);
-	}
 
 }

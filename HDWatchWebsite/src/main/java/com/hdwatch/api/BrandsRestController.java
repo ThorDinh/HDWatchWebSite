@@ -18,10 +18,6 @@ import com.hdwatch.service.BrandsService;
 public class BrandsRestController {
 	@Autowired
 	BrandsService brandsService;
-	@GetMapping("{id}")
-	public List<Brands> findBrandNamesById(Integer id) {
-	    return brandsService.findNameById(id);
-	}
 	
-		
+	
 }

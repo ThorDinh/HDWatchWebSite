@@ -29,23 +29,23 @@ public class OrdersServiceImpl implements OrdersService {
 		return oDao.findById(id).get();
 	}
 
-	@Override
-	public List<Orders> findByAccountId(Integer accountid) {
-		// TODO Auto-generated method stub
-		return oDao.findByAccountid(accountid);
-	}
-
-	@Override
-	public List<Orders> findOrderInMonth(Integer createdate) {
-		// TODO Auto-generated method stub
-		return oDao.findOrderInMonth(createdate);
-	}
-
-	@Override
-	public Integer countOrderInMonth(Integer createdate) {
-		// TODO Auto-generated method stub
-		return oDao.countOrderInMonth(createdate);
-	}
+//	@Override
+//	public List<Orders> findByAccountId(Integer accountid) {
+//		// TODO Auto-generated method stub
+//		return oDao.findByAccountid(accountid);
+//	}
+//
+//	@Override
+//	public List<Orders> findOrderInMonth(Integer createdate) {
+//		// TODO Auto-generated method stub
+//		return oDao.findOrderInMonth(createdate);
+//	}
+//
+//	@Override
+//	public Integer countOrderInMonth(Integer createdate) {
+//		// TODO Auto-generated method stub
+//		return oDao.countOrderInMonth(createdate);
+//	}
 
 	@Override
 	public Orders create(JsonNode orderData) {
