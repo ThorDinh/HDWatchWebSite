@@ -8,14 +8,14 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 /**
- * JPA entity class for "Orderdetails"
+ * JPA entity class for "Productimagedetail"
  *
  * @author Telosys
  *
  */
 @Entity
-@Table(name="orderdetails", schema="dbo", catalog="HDWatch" )
-public class Orderdetails implements Serializable {
+@Table(name="productimagedetail", schema="dbo", catalog="HDWatch" )
+public class Productimagedetail implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -26,23 +26,17 @@ public class Orderdetails implements Serializable {
     private Integer    id ;
 
     //--- ENTITY DATA FIELDS 
-    @Column(name="order_id", nullable=false)
-    private Integer    orderId ;
-
     @Column(name="product_id", nullable=false)
     private Integer    productId ;
 
-    @Column(name="price", nullable=false)
-    private Double     price ;
-
-    @Column(name="quantity", nullable=false)
-    private Integer    quantity ;
+    @Column(name="product_img_id", nullable=false)
+    private Integer    productImgId ;
 
 
     //--- ENTITY LINKS ( RELATIONSHIP )
     @ManyToOne
-    @JoinColumn(name="order_id", referencedColumnName="id", insertable=false, updatable=false)
-    private Orders     orders ; 
+    @JoinColumn(name="product_img_id", referencedColumnName="id", insertable=false, updatable=false)
+    private Productimages productimages ; 
 
     @ManyToOne
     @JoinColumn(name="product_id", referencedColumnName="id", insertable=false, updatable=false)
@@ -52,7 +46,7 @@ public class Orderdetails implements Serializable {
     /**
      * Constructor
      */
-    public Orderdetails() {
+    public Productimagedetail() {
 		super();
     }
     
@@ -64,13 +58,6 @@ public class Orderdetails implements Serializable {
         return this.id;
     }
 
-    public void setOrderId( Integer orderId ) {
-        this.orderId = orderId ;
-    }
-    public Integer getOrderId() {
-        return this.orderId;
-    }
-
     public void setProductId( Integer productId ) {
         this.productId = productId ;
     }
@@ -78,23 +65,16 @@ public class Orderdetails implements Serializable {
         return this.productId;
     }
 
-    public void setPrice( Double price ) {
-        this.price = price ;
+    public void setProductImgId( Integer productImgId ) {
+        this.productImgId = productImgId ;
     }
-    public Double getPrice() {
-        return this.price;
-    }
-
-    public void setQuantity( Integer quantity ) {
-        this.quantity = quantity ;
-    }
-    public Integer getQuantity() {
-        return this.quantity;
+    public Integer getProductImgId() {
+        return this.productImgId;
     }
 
     //--- GETTERS FOR LINKS
-    public Orders getOrders() {
-        return this.orders;
+    public Productimages getProductimages() {
+        return this.productimages;
     } 
 
     public Products getProducts() {
@@ -107,13 +87,9 @@ public class Orderdetails implements Serializable {
         StringBuilder sb = new StringBuilder(); 
         sb.append(id);
         sb.append("|");
-        sb.append(orderId);
-        sb.append("|");
         sb.append(productId);
         sb.append("|");
-        sb.append(price);
-        sb.append("|");
-        sb.append(quantity);
+        sb.append(productImgId);
         return sb.toString(); 
     } 
 
