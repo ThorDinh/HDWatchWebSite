@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Telosys Database Repository --><root>
-    <tableList databaseId="0" databaseName="SQL-SERVER" databaseProductName="Microsoft SQL Server" generation="2023-06-15 14:26:16">
+    <tableList databaseId="0" databaseName="SQL-SERVER" databaseProductName="Microsoft SQL Server" generation="2023-06-16 14:09:06">
         <table catalog="HDWatch" databaseComment="" databaseType="TABLE" javaBean="Accounts" name="accounts" schema="dbo">
             <column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="int identity" inputType="number" javaName="id" javaType="java.lang.Integer" jdbcTypeCode="4" label="Id" notNull="true" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="username" dbNotNull="true" dbPosition="2" dbSize="50" dbTypeName="varchar" inputType="text" javaName="username" javaType="java.lang.String" jdbcTypeCode="12" label="Username" maxLength="50" notEmpty="true" notNull="true" selected="true"/>
@@ -136,31 +136,18 @@
                 </joinColumns>
             </link>
         </table>
-        <table catalog="HDWatch" databaseComment="" databaseType="TABLE" javaBean="Productimagedetail" name="productimagedetail" schema="dbo">
+        <table catalog="HDWatch" databaseComment="" databaseType="TABLE" javaBean="Productimages" name="productimages" schema="dbo">
             <column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="int identity" inputType="number" javaName="id" javaType="java.lang.Integer" jdbcTypeCode="4" label="Id" notNull="true" selected="true"/>
-            <column dbComment="" dbDefaultValue="" dbName="product_id" dbNotNull="true" dbPosition="2" dbSize="10" dbTypeName="int" inputType="number" javaName="productId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Product id" notNull="true" selected="true"/>
-            <column dbComment="" dbDefaultValue="" dbName="product_img_id" dbNotNull="true" dbPosition="3" dbSize="10" dbTypeName="int" inputType="number" javaName="productImgId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Product img id" notNull="true" selected="true"/>
-            <fk name="FK_productimagedetail_productimages">
-                <fkcol colname="product_img_id" colref="id" deferrable="7" deleterule="3" sequence="1" tablename="productimagedetail" tableref="productimages" updaterule="3"/>
+            <column dbComment="" dbDefaultValue="" dbName="name" dbNotNull="true" dbPosition="2" dbSize="2147483647" dbTypeName="nvarchar" inputType="" javaName="name" javaType="java.lang.String" jdbcTypeCode="-9" label="Name" maxLength="2147483647" notEmpty="true" notNull="true" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="product_id" dbNotNull="true" dbPosition="3" dbSize="10" dbTypeName="int" inputType="number" javaName="productId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Product id" notNull="true" selected="true"/>
+            <fk name="FK_productimages_products">
+                <fkcol colname="product_id" colref="id" deferrable="7" deleterule="3" sequence="1" tablename="productimages" tableref="products" updaterule="3"/>
             </fk>
-            <fk name="FK_productimagedetail_products">
-                <fkcol colname="product_id" colref="id" deferrable="7" deleterule="3" sequence="1" tablename="productimagedetail" tableref="products" updaterule="3"/>
-            </fk>
-            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK_productimagedetail_productimages" id="LINK_FK_FK_productimagedetail_productimages_O" inverseSideOf="" javaName="productimages" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="productimagedetail" targetEntity="Productimages" targetTableName="productimages" used="true">
-                <joinColumns>
-                    <joinColumn insertable="false" name="product_img_id" nullable="true" referencedColumnName="id" unique="false" updatable="false"/>
-                </joinColumns>
-            </link>
-            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK_productimagedetail_products" id="LINK_FK_FK_productimagedetail_products_O" inverseSideOf="" javaName="products" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="productimagedetail" targetEntity="Products" targetTableName="products" used="true">
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK_productimages_products" id="LINK_FK_FK_productimages_products_O" inverseSideOf="" javaName="products" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="productimages" targetEntity="Products" targetTableName="products" used="true">
                 <joinColumns>
                     <joinColumn insertable="false" name="product_id" nullable="true" referencedColumnName="id" unique="false" updatable="false"/>
                 </joinColumns>
             </link>
-        </table>
-        <table catalog="HDWatch" databaseComment="" databaseType="TABLE" javaBean="Productimages" name="productimages" schema="dbo">
-            <column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="int identity" inputType="number" javaName="id" javaType="java.lang.Integer" jdbcTypeCode="4" label="Id" notNull="true" selected="true"/>
-            <column dbComment="" dbDefaultValue="" dbName="name" dbNotNull="true" dbPosition="2" dbSize="2147483647" dbTypeName="nvarchar" inputType="" javaName="name" javaType="java.lang.String" jdbcTypeCode="-9" label="Name" maxLength="2147483647" notEmpty="true" notNull="true" selected="true"/>
-            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK_productimagedetail_productimages" id="LINK_FK_FK_productimagedetail_productimages_I" inverseSideOf="LINK_FK_FK_productimagedetail_productimages_O" javaName="listOfProductimagedetail" javaType="unused" joinTableName="" mappedBy="productimages" optional="" owningSide="false" sourceTableName="productimages" targetEntity="Productimagedetail" targetTableName="productimagedetail" used="true"/>
         </table>
         <table catalog="HDWatch" databaseComment="" databaseType="TABLE" javaBean="Products" name="products" schema="dbo">
             <column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="int identity" inputType="number" javaName="id" javaType="java.lang.Integer" jdbcTypeCode="4" label="Id" notNull="true" selected="true"/>
@@ -168,41 +155,41 @@
             <column dbComment="" dbDefaultValue="" dbName="price" dbNotNull="true" dbPosition="3" dbSize="53" dbTypeName="float" inputType="number" javaName="price" javaType="java.lang.Double" jdbcTypeCode="8" label="Price" notNull="true" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="old_price" dbNotNull="true" dbPosition="4" dbSize="53" dbTypeName="float" inputType="number" javaName="oldPrice" javaType="java.lang.Double" jdbcTypeCode="8" label="Old price" notNull="true" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="available" dbNotNull="true" dbPosition="5" dbSize="1" dbTypeName="bit" inputType="checkbox" javaName="available" javaType="java.lang.Boolean" jdbcTypeCode="-7" label="Available" notNull="true" selected="true"/>
-            <column dateType="D" dbComment="" dbDefaultValue="" dbName="create_date" dbNotNull="true" dbPosition="6" dbSize="10" dbTypeName="date" inputType="date" javaName="createDate" javaType="java.util.Date" jdbcTypeCode="91" label="Create date" notNull="true" selected="true"/>
-            <column dbComment="" dbDefaultValue="" dbName="brand_id" dbNotNull="true" dbPosition="7" dbSize="10" dbTypeName="int" inputType="number" javaName="brandId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Brand id" notNull="true" selected="true"/>
-            <column dbComment="" dbDefaultValue="" dbName="category_id" dbNotNull="true" dbPosition="8" dbSize="10" dbTypeName="int" inputType="number" javaName="categoryId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Category id" notNull="true" selected="true"/>
+            <column dateType="D" dbComment="" dbDefaultValue="" dbName="createDate" dbNotNull="true" dbPosition="6" dbSize="10" dbTypeName="date" inputType="date" javaName="createdate" javaType="java.util.Date" jdbcTypeCode="91" label="Createdate" notNull="true" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="brandId" dbNotNull="true" dbPosition="7" dbSize="10" dbTypeName="int" inputType="number" javaName="brandid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Brandid" notNull="true" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="categoryId" dbNotNull="true" dbPosition="8" dbSize="10" dbTypeName="int" inputType="number" javaName="categoryid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Categoryid" notNull="true" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="stock" dbNotNull="true" dbPosition="9" dbSize="10" dbTypeName="int" inputType="number" javaName="stock" javaType="java.lang.Integer" jdbcTypeCode="4" label="Stock" notNull="true" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="description" dbNotNull="false" dbPosition="10" dbSize="2147483647" dbTypeName="nvarchar" inputType="" javaName="description" javaType="java.lang.String" jdbcTypeCode="-9" label="Description" maxLength="2147483647" notNull="false" selected="true"/>
             <fk name="FK_products_brands">
-                <fkcol colname="brand_id" colref="id" deferrable="7" deleterule="3" sequence="1" tablename="products" tableref="brands" updaterule="3"/>
+                <fkcol colname="brandId" colref="id" deferrable="7" deleterule="3" sequence="1" tablename="products" tableref="brands" updaterule="3"/>
             </fk>
             <fk name="FK_products_categories">
-                <fkcol colname="category_id" colref="id" deferrable="7" deleterule="3" sequence="1" tablename="products" tableref="categories" updaterule="3"/>
+                <fkcol colname="categoryId" colref="id" deferrable="7" deleterule="3" sequence="1" tablename="products" tableref="categories" updaterule="3"/>
             </fk>
             <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK_products_brands" id="LINK_FK_FK_products_brands_O" inverseSideOf="" javaName="brands" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="products" targetEntity="Brands" targetTableName="brands" used="true">
                 <joinColumns>
-                    <joinColumn insertable="false" name="brand_id" nullable="true" referencedColumnName="id" unique="false" updatable="false"/>
+                    <joinColumn insertable="false" name="brandId" nullable="true" referencedColumnName="id" unique="false" updatable="false"/>
                 </joinColumns>
             </link>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK_productimages_products" id="LINK_FK_FK_productimages_products_I" inverseSideOf="LINK_FK_FK_productimages_products_O" javaName="listOfProductimages" javaType="unused" joinTableName="" mappedBy="products" optional="" owningSide="false" sourceTableName="products" targetEntity="Productimages" targetTableName="productimages" used="true"/>
             <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK_cartdetails_products" id="LINK_FK_FK_cartdetails_products_I" inverseSideOf="LINK_FK_FK_cartdetails_products_O" javaName="listOfCartdetails" javaType="unused" joinTableName="" mappedBy="products" optional="" owningSide="false" sourceTableName="products" targetEntity="Cartdetails" targetTableName="cartdetails" used="true"/>
             <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK_products_categories" id="LINK_FK_FK_products_categories_O" inverseSideOf="" javaName="categories" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="products" targetEntity="Categories" targetTableName="categories" used="true">
                 <joinColumns>
-                    <joinColumn insertable="false" name="category_id" nullable="true" referencedColumnName="id" unique="false" updatable="false"/>
+                    <joinColumn insertable="false" name="categoryId" nullable="true" referencedColumnName="id" unique="false" updatable="false"/>
                 </joinColumns>
             </link>
             <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK_favoritedetails_products" id="LINK_FK_FK_favoritedetails_products_I" inverseSideOf="LINK_FK_FK_favoritedetails_products_O" javaName="listOfFavoritedetails" javaType="unused" joinTableName="" mappedBy="products" optional="" owningSide="false" sourceTableName="products" targetEntity="Favoritedetails" targetTableName="favoritedetails" used="true"/>
             <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK_orderdetails_products" id="LINK_FK_FK_orderdetails_products_I" inverseSideOf="LINK_FK_FK_orderdetails_products_O" javaName="listOfOrderdetails" javaType="unused" joinTableName="" mappedBy="products" optional="" owningSide="false" sourceTableName="products" targetEntity="Orderdetails" targetTableName="orderdetails" used="true"/>
-            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK_productimagedetail_products" id="LINK_FK_FK_productimagedetail_products_I" inverseSideOf="LINK_FK_FK_productimagedetail_products_O" javaName="listOfProductimagedetail" javaType="unused" joinTableName="" mappedBy="products" optional="" owningSide="false" sourceTableName="products" targetEntity="Productimagedetail" targetTableName="productimagedetail" used="true"/>
         </table>
         <table catalog="HDWatch" databaseComment="" databaseType="TABLE" javaBean="Roledetails" name="roledetails" schema="dbo">
             <column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="int identity" inputType="number" javaName="id" javaType="java.lang.Integer" jdbcTypeCode="4" label="Id" notNull="true" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="account_id" dbNotNull="true" dbPosition="2" dbSize="10" dbTypeName="int" inputType="number" javaName="accountId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Account id" notNull="true" selected="true"/>
-            <column dbComment="" dbDefaultValue="" dbName="role_id" dbNotNull="true" dbPosition="3" dbSize="10" dbTypeName="int" inputType="number" javaName="roleId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Role id" notNull="true" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="roleId" dbNotNull="true" dbPosition="3" dbSize="10" dbTypeName="int" inputType="number" javaName="roleid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Roleid" notNull="true" selected="true"/>
             <fk name="FK_roledetails_accounts">
                 <fkcol colname="account_id" colref="id" deferrable="7" deleterule="3" sequence="1" tablename="roledetails" tableref="accounts" updaterule="3"/>
             </fk>
             <fk name="FK_roledetails_roles">
-                <fkcol colname="role_id" colref="id" deferrable="7" deleterule="3" sequence="1" tablename="roledetails" tableref="roles" updaterule="3"/>
+                <fkcol colname="roleId" colref="id" deferrable="7" deleterule="3" sequence="1" tablename="roledetails" tableref="roles" updaterule="3"/>
             </fk>
             <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK_roledetails_accounts" id="LINK_FK_FK_roledetails_accounts_O" inverseSideOf="" javaName="accounts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="roledetails" targetEntity="Accounts" targetTableName="accounts" used="true">
                 <joinColumns>
@@ -211,7 +198,7 @@
             </link>
             <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK_roledetails_roles" id="LINK_FK_FK_roledetails_roles_O" inverseSideOf="" javaName="roles" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="roledetails" targetEntity="Roles" targetTableName="roles" used="true">
                 <joinColumns>
-                    <joinColumn insertable="false" name="role_id" nullable="true" referencedColumnName="id" unique="false" updatable="false"/>
+                    <joinColumn insertable="false" name="roleId" nullable="true" referencedColumnName="id" unique="false" updatable="false"/>
                 </joinColumns>
             </link>
         </table>
@@ -226,7 +213,7 @@
             <column dbComment="" dbDefaultValue="" dbName="name" dbNotNull="true" dbPosition="2" dbSize="255" dbTypeName="nvarchar" inputType="" javaName="name" javaType="java.lang.String" jdbcTypeCode="-9" label="Name" maxLength="255" notEmpty="true" notNull="true" selected="true"/>
             <column dateType="D" dbComment="" dbDefaultValue="" dbName="start_date" dbNotNull="true" dbPosition="3" dbSize="10" dbTypeName="date" inputType="date" javaName="startDate" javaType="java.util.Date" jdbcTypeCode="91" label="Start date" notNull="true" selected="true"/>
             <column dateType="D" dbComment="" dbDefaultValue="" dbName="end_date" dbNotNull="true" dbPosition="4" dbSize="10" dbTypeName="date" inputType="date" javaName="endDate" javaType="java.util.Date" jdbcTypeCode="91" label="End date" notNull="true" selected="true"/>
-            <column dbComment="" dbDefaultValue="" dbName="priceSale" dbNotNull="true" dbPosition="5" dbSize="10" dbTypeName="int" inputType="number" javaName="pricesale" javaType="java.lang.Integer" jdbcTypeCode="4" label="Pricesale" notNull="true" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="price_sale" dbNotNull="true" dbPosition="5" dbSize="10" dbTypeName="int" inputType="number" javaName="priceSale" javaType="java.lang.Integer" jdbcTypeCode="4" label="Price sale" notNull="true" selected="true"/>
         </table>
     </tableList>
 </root>
