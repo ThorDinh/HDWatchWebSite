@@ -1,16 +1,9 @@
 package com.hdwatch.service.impl;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hdwatch.dao.OrderdetailsDAO;
 import com.hdwatch.dao.OrdersDAO;
-import com.hdwatch.entity.Orderdetails;
 import com.hdwatch.entity.Orders;
 import com.hdwatch.service.OrdersService;
 

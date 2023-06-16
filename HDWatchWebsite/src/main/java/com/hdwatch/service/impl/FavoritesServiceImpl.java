@@ -1,16 +1,11 @@
 package com.hdwatch.service.impl;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hdwatch.dao.FavoritedetailsDAO;
 import com.hdwatch.dao.FavoritesDAO;
-import com.hdwatch.entity.Favoritedetails;
 import com.hdwatch.entity.Favorites;
 import com.hdwatch.service.FavoritesService;
 

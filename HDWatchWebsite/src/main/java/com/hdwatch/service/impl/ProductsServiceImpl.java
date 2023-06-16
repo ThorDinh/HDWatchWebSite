@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hdwatch.dao.ProductimagesDAO;
 import com.hdwatch.dao.ProductsDAO;
 import com.hdwatch.entity.Products;
 import com.hdwatch.service.ProductsService;
@@ -36,10 +35,10 @@ public class  ProductsServiceImpl implements ProductsService  {
 		 Products existingProduct = pdao.findById(id).orElse(null);
 	        if (existingProduct != null) {
 	            existingProduct.setName(products.getName());
-	            existingProduct.setBrandId(products.getBrandId());
-	            existingProduct.setCategoryId(products.getCategoryId());
+	            existingProduct.setBrandid(products.getBrandid());
+	            existingProduct.setCategoryid(products.getCategoryid());
 	            existingProduct.setAvailable(products.getAvailable());
-	            existingProduct.setCreateDate(products.getCreateDate());
+	            existingProduct.setCreatedate(products.getCreatedate());
 	            existingProduct.setStock(products.getStock());;
 	            existingProduct.setPrice(products.getPrice());
 	            existingProduct.setOldPrice(products.getOldPrice());

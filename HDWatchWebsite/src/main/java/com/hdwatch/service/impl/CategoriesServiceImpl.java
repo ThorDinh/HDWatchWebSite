@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hdwatch.dao.CategoriesDAO;
-import com.hdwatch.entity.Brands;
 import com.hdwatch.entity.Categories;
 import com.hdwatch.service.CategoriesService;
 
