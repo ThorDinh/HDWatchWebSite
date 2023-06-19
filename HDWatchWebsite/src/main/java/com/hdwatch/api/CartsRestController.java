@@ -2,6 +2,8 @@ package com.hdwatch.api;
 
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,36 +15,35 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hdwatch.dao.CategoriesDAO;
-import com.hdwatch.entity.Categories;
-import com.hdwatch.service.CategoriesService;
+import com.hdwatch.entity.Carts;
+import com.hdwatch.service.CartsService;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/rest/categories")
-public class CategoriesRestController {
+@RequestMapping("/rest/carts")
+public class CartsRestController {
 	@Autowired
-	CategoriesService categoriesService;
+	CartsService cartsService;
 	
-	@GetMapping 
-	public List<Categories> getAll(){
-		return categoriesService.findAll();
+	@GetMapping
+	public List<Carts> getAll() {
+		return cartsService.findAll();
 	}
 	
 	@GetMapping("{id}")
-	public Categories getOne(@PathVariable("id")Integer id) {
-		return categoriesService.findById(id);
+	public Carts getOne(@PathVariable("id")Integer id) {
+		return cartsService.findById(id);
 	}
 	@PostMapping
-	public Categories createCategories(@RequestBody Categories categories) {
-		return categoriesService.create(categories);
+	public Carts createCarts(@RequestBody Carts carts) {
+		return cartsService.create(carts);
 	}
 	@PutMapping("{id}")
-	public Categories updateCategories(@PathVariable("id")Integer id,@RequestBody Categories upCategories) {
-		return categoriesService.save(upCategories, id);
+	public Carts updateCarts(@PathVariable("id")Integer id,@RequestBody Carts carts) {
+		 return cartsService.save(carts, id);
 	}
 	@DeleteMapping("{id}")
-	public void deleteCategory(@PathVariable("id")Integer id) {
-		categoriesService.deleteById(id);
+	public void deleteCart(@PathVariable("id")Integer id) {
+		cartsService.deleteById(id);
 	}
 }
