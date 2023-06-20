@@ -8,16 +8,14 @@ import com.hdwatch.entity.Orders;
 
 
 public interface OrdersService {
+//	List<Orders> findAll();
+//	
+//	Orders findById(Integer id);
+//	
+//	Orders create(Orders orders);
+//	
+//	Orders save(Integer id,Orders orders);
+//	
+//	void deleteById(Integer id);
 
-//	Orders create(JsonNode orderData);
-
-	Orders findById(Integer id);
-
-//	List<Orders> findByAccountId(Integer accountid);
-//
-//	Double sumCostInMonth(Integer month);
-//
-//	List<Orders> findOrderInMonth(Integer createdate);
-//
-//	Integer countOrderInMonth(Integer createdate);
 }

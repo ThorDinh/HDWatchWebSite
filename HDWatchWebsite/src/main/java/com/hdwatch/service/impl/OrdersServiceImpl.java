@@ -1,5 +1,7 @@
 package com.hdwatch.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.hdwatch.dao.OrderdetailsDAO;
@@ -9,18 +11,57 @@ import com.hdwatch.service.OrdersService;
 
 
 public class OrdersServiceImpl implements OrdersService {
-	@Autowired
-	OrdersDAO oDao;
-	
-	@Autowired
-	OrderdetailsDAO o2Dao;
-	
-
-	@Override
-	public Orders findById(Integer id) {
-		// TODO Auto-generated method stub
-		return oDao.findById(id).get();
-	}
+//	@Autowired
+//	OrdersDAO ordersDAO;
+//	
+//	public OrdersServiceImpl(OrdersDAO ordersDAO) {
+//        this.ordersDAO = ordersDAO;
+//    }
+//	
+////	@Autowired
+////	OrderdetailsDAO o2Dao;
+//	
+//
+//	@Override
+//	public Orders findById(Integer id) {
+//		return ordersDAO.findById(id).get();
+//	}
+//
+//
+//	@Override
+//	public List<Orders> findAll() {
+//
+//		return ordersDAO.findAll();
+//	}
+//
+//
+//	@Override
+//	public Orders create(Orders orders) {
+//
+//		return ordersDAO.save(orders);
+//	}
+//
+//
+//	@Override
+//	public Orders save(Integer id, Orders orders) {
+//		 Orders existingOrders = ordersDAO.findById(id).orElse(null);
+//	        if (existingOrders != null) {
+//	            existingOrders.setId(orders.getId());;
+//	            existingOrders.setAccountId(orders.getAccountId());
+//	            existingOrders.setCreateDate(orders.getCreateDate());
+//	            existingOrders.setAddress(orders.getAddress());
+//	            existingOrders.setStatus(orders.getStatus());
+//	            return ordersDAO.save(existingOrders);
+//	        }
+//	        return ordersDAO.save(orders);
+//	}
+//
+//
+//	@Override
+//	public void deleteById(Integer id) {
+//		ordersDAO.deleteById(id);
+//		
+//	}
 
 //	@Override
 //	public List<Orders> findByAccountId(Integer accountid) {
