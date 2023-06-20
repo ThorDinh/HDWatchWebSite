@@ -13,14 +13,14 @@ import com.hdwatch.service.ProductsService;
 
 @Controller
 public class index {
-	@Autowired
-	ProductsService productsService;
-	@RequestMapping("/index")
-	public String index(Model model) {
-		List<Products> list = productsService.findAll();
-		model.addAttribute("items" ,list);
-		return "index";
-	}
+//	@Autowired
+//	ProductsService productsService;
+//	@RequestMapping("/index")
+//	public String index(Model model) {
+//		List<Products> list = productsService.findAll();
+//		model.addAttribute("items" ,list);
+//		return "index";
+//	}
 //	@RequestMapping(/index/detail)
 //	public String detail
 }
