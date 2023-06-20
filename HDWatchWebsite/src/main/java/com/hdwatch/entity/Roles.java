@@ -32,9 +32,6 @@ public class Roles implements Serializable {
     @Column(name="role", nullable=false, length=50)
     private String     role ;
 
-    @Column(name="description", nullable=false, length=50)
-    private String     description ;
-
 
     //--- ENTITY LINKS ( RELATIONSHIP )
     @JsonIgnore
@@ -64,13 +61,6 @@ public class Roles implements Serializable {
         return this.role;
     }
 
-    public void setDescription( String description ) {
-        this.description = description ;
-    }
-    public String getDescription() {
-        return this.description;
-    }
-
     //--- GETTERS FOR LINKS
     public List<Roledetails> getListOfRoledetails() {
         return this.listOfRoledetails;
@@ -84,7 +74,6 @@ public class Roles implements Serializable {
         sb.append("|");
         sb.append(role);
         sb.append("|");
-        sb.append(description);
         return sb.toString(); 
     } 
 
