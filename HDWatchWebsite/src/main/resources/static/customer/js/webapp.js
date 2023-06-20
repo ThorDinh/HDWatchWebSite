@@ -3,7 +3,8 @@ var app = angular.module("myapp", ["ngRoute"]);
 app.config(function ($routeProvider) {
     $routeProvider
         .when("/", {
-            templateUrl: "customer/product/home.html"
+            templateUrl: "customer/product/home.html",
+            controller: "homeController"
         })
         .when("/about", {
             templateUrl: "customer/about.html"
@@ -12,10 +13,12 @@ app.config(function ($routeProvider) {
             templateUrl: "customer/contact.html"
         })
         .when("/category", {
-            templateUrl: "customer/product/category.html"
+            templateUrl: "customer/product/category.html",
+            controller: "categoryController"
         })
         .when("/brand", {
-            templateUrl: "customer/product/brand.html"
+            templateUrl: "customer/product/brand.html",
+            controller: "brandController"
         })
         .when("/cart", {
             templateUrl: "customer/cart/cart.html"
