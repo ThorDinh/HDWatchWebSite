@@ -11,7 +11,7 @@ import com.hdwatch.entity.Carts;
 
 public interface CartsDAO extends JpaRepository<Carts, Integer>{
 
-	Object status(HttpStatus badRequest);
+//	Object status(HttpStatus badRequest);
 //	@Query("SELECT c.accountid FROM Favorites c WHERE c.accountid = :accountid")
 //	List<Carts> findByAccountId(@Param("accountid") Integer accountid);
 }
