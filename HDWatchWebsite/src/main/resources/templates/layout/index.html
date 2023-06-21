@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="dynamic(main)">
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -140,9 +140,7 @@
 		</nav>
 		<!-- /NAVIGATION -->
 
-		<!--Nội dung trang web-->
-	<div ng-show="loading" class="pull-right label label-info">Loading...</div>
-	<ng-view></ng-view>
+		<div th:replace="${main}"></div>
 
 		<!-- FOOTER -->
 		<footer id="footer">
@@ -244,6 +242,7 @@
 		
 		<!--Custom JS-->
 		<script src="customer/js/webapp.js"></script>
+		<script src="customer/js/homeController.js"></script>
 
 	</body>
 </html>
