@@ -12,24 +12,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.hdwatch.dao.ProductimagesDAO;
 import com.hdwatch.entity.Productimages;
 import com.hdwatch.entity.Products;
+import com.hdwatch.service.BrandsService;
 import com.hdwatch.service.ProductimagesService;
 import com.hdwatch.service.ProductsService;
 
 
 @Controller
-public class ProductsController {
+public class BrandController {
 	@Autowired
-	ProductsService productsService;
+	BrandsService brandsService;
 	
-	@Autowired
-	ProductimagesService productimagesService;
-	
-	@RequestMapping(value = {"/", "/home", "/index"})
+	@RequestMapping("/brand")
 	public String index(Model model) {
-		List<Productimages> list = productimagesService.findAllProductWithOneImage();
-		model.addAttribute("items", list);
-		model.addAttribute("pageTitle", "Home");
-		return "product/home";
+		model.addAttribute("pageTitle", "Brand");
+		return "product/brand";
 	}
 	
 //	@RequestMapping(/index/detail)

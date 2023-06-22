@@ -6,7 +6,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-		<title>Electro - HTML Ecommerce Template</title>
+		<!-- Dynamic Title -->
+	<title th:if="${#strings.startsWith(pageTitle, 'HD Watch')} and ${!#strings.endsWith(pageTitle, 'HD Watch')}"
+	th:text="${pageTitle} - HD Watch"></title>
+	<title th:unless="${#strings.startsWith(pageTitle, 'HD Watch')} and ${#strings.endsWith(pageTitle, 'HD Watch')}"
+	th:text="${pageTitle}"></title>
+	<!-- /Dynamic Title -->
 
  		<!-- Google font -->
  		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -42,7 +47,7 @@
 			<div id="top-header">
 				<div class="container">
 					<ul class="header-links pull-right">
-						<li><a href="#"><i class="fa fa-user-o"></i>Tài khoản</a></li>
+						<li><a href="#"><i class="fa fa-user-o"></i>Account</a></li>
 					</ul>
 				</div>
 			</div>
@@ -57,7 +62,7 @@
 						<!-- LOGO -->
 						<div class="col-md-3">
 							<div class="header-logo">
-								<a href="#home" class="logo">
+								<a href="/" class="logo">
 									<img src="./img/logo.png" alt="">
 								</a>
 							</div>
@@ -68,8 +73,8 @@
 						<div class="col-md-6">
 							<div class="header-search">
 								<form>
-									<input class="input" placeholder="Từ khóa">
-									<button class="search-btn">Tìm kiếm</button>
+									<input class="input" placeholder="Search">
+									<button class="search-btn">Search</button>
 								</form>
 							</div>
 						</div>
@@ -82,7 +87,7 @@
 								<div>
 									<a href="#">
 										<i class="fa fa-heart-o"></i>
-										<span>Yêu thích</span>
+										<span>Your Favorite</span>
 										<div class="qty">2</div>
 									</a>
 								</div>
@@ -92,7 +97,7 @@
 								<div>
 									<a href="#cart">
 										<i class="fa fa-shopping-cart"></i>
-										<span>Giỏ hàng</span>
+										<span>Your Cart</span>
 										<div class="qty">3</div>
 									</a>
 								</div>
@@ -126,11 +131,11 @@
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li><a href="#home">Trang chủ</a></li>
-						<li><a href="#category">Danh mục</a></li>
-						<li><a href="#brand">Thương hiệu</a></li>
-						<li><a href="#about">Giới thiệu</a></li>
-						<li><a href="#contact">Liên lạc</a></li>
+						<li><a href="/home">Home</a></li>
+						<li><a href="/category">Category</a></li>
+						<li><a href="/brand">Brand</a></li>
+						<li><a href="/about">About Us</a></li>
+						<li><a href="/contact">Contact Us</a></li>
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -152,25 +157,11 @@
 					<div class="row">
 						<div class="col-md-3 col-xs-6">
 							<div class="footer">
-								<h3 class="footer-title">About Us</h3>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
-								<ul class="footer-links">
-									<li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
-									<li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
-									<li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
-								</ul>
-							</div>
-						</div>
-
-						<div class="col-md-3 col-xs-6">
-							<div class="footer">
 								<h3 class="footer-title">Categories</h3>
 								<ul class="footer-links">
-									<li><a href="#">Hot deals</a></li>
-									<li><a href="#">Laptops</a></li>
-									<li><a href="#">Smartphones</a></li>
-									<li><a href="#">Cameras</a></li>
-									<li><a href="#">Accessories</a></li>
+									<li><a href="#">For men</a></li>
+									<li><a href="#">For ladies</a></li>
+									<li><a href="#">Unisex</a></li>
 								</ul>
 							</div>
 						</div>
@@ -181,11 +172,8 @@
 							<div class="footer">
 								<h3 class="footer-title">Information</h3>
 								<ul class="footer-links">
-									<li><a href="#">About Us</a></li>
-									<li><a href="#">Contact Us</a></li>
-									<li><a href="#">Privacy Policy</a></li>
-									<li><a href="#">Orders and Returns</a></li>
-									<li><a href="#">Terms & Conditions</a></li>
+									<li><i class="fa fa-map-marker"></i><a href="#">About Us</a></li>
+									<li><i class="fa fa-phone"></i><a href="#">Contact Us</a></li>
 								</ul>
 							</div>
 						</div>
@@ -194,11 +182,9 @@
 							<div class="footer">
 								<h3 class="footer-title">Service</h3>
 								<ul class="footer-links">
-									<li><a href="#">My Account</a></li>
-									<li><a href="#">View Cart</a></li>
-									<li><a href="#">Wishlist</a></li>
-									<li><a href="#">Track My Order</a></li>
-									<li><a href="#">Help</a></li>
+									<li><a href="#"><i class="fa fa-user-o"></i>Account</a></li>
+									<li><a href="#"><i class="fa fa-shopping-cart"></i>Cart</a></li>
+									<li><a href="#"><i class="fa fa-heart-o"></i>Favorite</a></li>
 								</ul>
 							</div>
 						</div>
@@ -216,7 +202,7 @@
 					<div class="row">
 						<div class="col-md-12 text-center">
 							<span class="copyright">
-								 <a target="_blank" href="https://www.templateshub.net">Templates Hub</a>
+								 <a target="_blank" href="https://www.templateshub.net">HDWATCH.COM</a>
 							</span>
 
 
