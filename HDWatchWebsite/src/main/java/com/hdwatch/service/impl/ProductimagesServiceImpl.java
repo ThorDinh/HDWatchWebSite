@@ -57,6 +57,6 @@ public class ProductimagesServiceImpl implements ProductimagesService {
 	
 	@Override
 	public List<Productimages> findAllProductWithCategory(Integer id) {
-		return productimagesDAO.findAllForCategory(id);
+		return productimagesDAO.findAllByCategory(id);
 	}
 }
