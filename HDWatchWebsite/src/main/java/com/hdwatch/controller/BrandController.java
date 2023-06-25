@@ -25,7 +25,7 @@ public class BrandController {
 	@RequestMapping("/brand")
 	public String index(Model model) {
 		model.addAttribute("pageTitle", "Brand");
-		return "product/brand";
+		return "brand";
 	}
 	
 //	@RequestMapping(/index/detail)

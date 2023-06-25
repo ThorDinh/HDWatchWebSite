@@ -1,7 +1,6 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
-<body>
-<main>
+<div xmlns:th="http://www.thymeleaf.org" 
+	th:replace="~{/layout/index :: dynamic (~{::main})}">
+	<main>
 	
 	<!-- SECTION -->
 <div class="section">
@@ -24,11 +23,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td><button class="btn btn-default">x</button></td>
-                            <td>Product Name Goes Here</td>
-                            <td><input type="number" class="form-control" /></td>
-                            <td>$980.00</td>
+                        <tr ng-repeat="item in cart.items">
+                            <td><button ng-click="cart.remove(item.id)" class="btn btn-default">x</button></td>
+                            <td>{{item.name}}</td>
+                            <td><input ng-change="cart.saveToLocalStorage()" ng-model="item.qty" 
+                            type="number" min="1" class="form-control" /></td>
+                            <td>${{item.qty*item.price | number : 2}}</td>
                         </tr>
                     </tbody>
                     <tfoot>
@@ -49,6 +49,4 @@
 <!-- /SECTION -->
 	
 </main>
-</body>
-
-</html>
+</div>

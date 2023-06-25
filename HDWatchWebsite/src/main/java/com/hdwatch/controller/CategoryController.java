@@ -25,7 +25,7 @@ public class CategoryController {
 	@RequestMapping("/category")
 	public String index(Model model) {
 		model.addAttribute("pageTitle", "Category");
-		return "product/category";
+		return "category";
 	}
 	
 //	@RequestMapping(/index/detail)

@@ -32,7 +32,6 @@ public class ProductsRestController {
 	
 	@GetMapping("{id}")
 	public Products getOne(@PathVariable("id") Integer id) {
-		
 		return productsService.findById(id);
 	}
 	

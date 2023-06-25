@@ -1,3 +1,13 @@
+window.addEventListener('scroll', function() {
+  var header = document.getElementById('header');
+  var scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+
+  if (scrollPosition > 0) {
+    header.classList.add('sticky');
+  } else {
+    header.classList.remove('sticky');
+  }
+});
 (function($) {
 	"use strict"
 
