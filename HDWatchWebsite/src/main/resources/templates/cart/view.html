@@ -27,14 +27,14 @@
                             <td><button ng-click="cart.remove(item.id)" class="btn btn-default">x</button></td>
                             <td>{{item.name}}</td>
                             <td><input ng-change="cart.saveToLocalStorage()" ng-model="item.qty" 
-                            type="number" min="1" class="form-control" /></td>
+                            type="number" min="1" class="form-control" style="width:50%;"/></td>
                             <td>${{item.qty*item.price | number : 2}}</td>
                         </tr>
                     </tbody>
                     <tfoot>
                         <tr>
                             <td colspan="3"><strong>TỔNG TIỀN</strong></td>
-                            <td><strong class="order-total">$2940.00</strong></td>
+                            <td><strong class="order-total">{{ getTotalPrice() | number : 2}}</strong></td>
                         </tr>
                     </tfoot>
                 </table>

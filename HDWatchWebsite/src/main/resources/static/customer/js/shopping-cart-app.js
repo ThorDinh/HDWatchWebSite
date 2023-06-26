@@ -82,4 +82,12 @@ app.controller("shopping-cart-ctrl",function($scope,$http){
 			})
 		}
 	}
+	
+	$scope.getTotalPrice = function() {
+        var total = 0;
+        angular.forEach($scope.cart.items, function(item) {
+            total += item.qty * item.price;
+        });
+        return total;
+    };
 })
