@@ -9,11 +9,12 @@
         <!-- row -->
         <div class="row">
             <!-- Order Details -->
-            <div class="col-md-12 order-details">
+            <div class="col-md-12 order-details" >
                 <div class="section-title text-center">
                     <h3 class="title">GIỎ HÀNG</h3>
                 </div>
-                <table class="table order-summary">
+                
+                <table class="table order-summary" ng-show="cart.items.length > 0">
                     <thead>
                         <tr>
                             <th></th>
@@ -38,8 +39,13 @@
                         </tr>
                     </tfoot>
                 </table>
-                <a href="#" class="primary-btn order-submit">Place order</a>
+                
+                <a href="/home" class="text-danger" style="font-size: 20px" ng-show="cart.items.length === 0">Giỏ hàng của bạn đang trống.</a>
+                
+                <a href="#" class="primary-btn order-submit" ng-show="cart.items.length > 0">Place order</a>
             </div>
+            
+            
             <!-- /Order Details -->
         </div>
         <!-- /row -->

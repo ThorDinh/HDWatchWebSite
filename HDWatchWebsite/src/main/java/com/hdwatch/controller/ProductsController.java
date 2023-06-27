@@ -36,10 +36,21 @@ public class ProductsController {
 	public String index(Model model) {
 		List<Productimages> list = productimagesService.findAllProductWithOneImage();
 		model.addAttribute("items", list);
-		model.addAttribute("pageTitle", "Home");
+		model.addAttribute("pageTitle", "Trang chủ");
 		return "product/home";
 	}
 	
+	@RequestMapping("/about")
+	public String about(Model model) {
+		model.addAttribute("pageTitle", "Giới thiệu");
+		return "about";
+	}
+	
+	@RequestMapping("/contact")
+	public String contact(Model model) {
+		model.addAttribute("pageTitle", "Liên lạc");
+		return "contact";
+	}
 //	@RequestMapping("product/search")
 //	public String seachAndPage(Model model,
 //			@RequestParam("keywords") Optional<String> kw,

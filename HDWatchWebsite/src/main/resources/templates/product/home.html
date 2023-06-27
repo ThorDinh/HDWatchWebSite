@@ -17,8 +17,8 @@
 							<img src="./img/shop01.jpg" alt="">
 						</div>
 						<div class="shop-body">
-							<h3>Men<br>Collection</h3>
-							<a href="#" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+							<h3>Bộ sưu tập<br>Cho nam</h3>
+							<a href="/category?cid=1" class="cta-btn">Mua hàng thôi <i class="fa fa-arrow-circle-right"></i></a>
 						</div>
 					</div>
 				</div>
@@ -31,8 +31,8 @@
 							<img src="./img/shop03.jpg" alt="" >
 						</div>
 						<div class="shop-body">
-							<h3>Ladies<br>Collection</h3>
-							<a href="#" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+							<h3>Bộ sưu tập<br>Cho nữ</h3>
+							<a href="/category?cid=2" class="cta-btn">Mua hàng thôi <i class="fa fa-arrow-circle-right"></i></a>
 						</div>
 					</div>
 				</div>
@@ -45,8 +45,8 @@
 							<img src="./img/shop02.jpg" alt="">
 						</div>
 						<div class="shop-body">
-							<h3>Unisex<br>Collection</h3>
-							<a href="#" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+							<h3>Bộ sưu tập<br>Unisex</h3>
+							<a href="/category?cid=3" class="cta-btn">Mua hàng thôi <i class="fa fa-arrow-circle-right"></i></a>
 						</div>
 					</div>
 				</div>
@@ -68,7 +68,7 @@
 				<!-- section title -->
 				<div class="col-md-12">
 					<div class="section-title">
-						<h3 class="title">New Products</h3>
+						<h3 class="title">Sản phẩm mới</h3>
 					</div>
 				</div>
 				<!-- /section title -->
@@ -85,7 +85,7 @@
 										<div class="product-img">
 											<img th:src="@{|${p.name}|}" alt="">
 											<div class="product-label">
-											<span th:if="${iterStat.index < 5}" class="new">NEW</span>
+											<span th:if="${iterStat.index < 5}" class="new">Mới nhất</span>
 											</div>
 										</div>
 										<div class="product-body">
@@ -99,8 +99,8 @@
 											</div>
 										</div>
 										<div class="add-to-cart">
-											<button class="add-to-cart-btn" th:attr="ng-click=@{|cart.add(${p.products.id})|}"><i class="fa fa-shopping-cart"></i> add to
-												cart</button>
+											<button class="add-to-cart-btn" th:attr="ng-click=@{|cart.add(${p.products.id})|}"><i class="fa fa-shopping-cart"></i>
+												Thêm vào giỏ</button>
 										</div>
 									</div>
 									<!-- /product -->
@@ -130,7 +130,7 @@
 				<!-- section title -->
 				<div class="col-md-12">
 					<div class="section-title">
-						<h3 class="title">Top selling</h3>
+						<h3 class="title">Bán cháy hàng</h3>
 					</div>
 				</div>
 				<!-- /section title -->
@@ -181,10 +181,10 @@
 	<!-- /SECTION -->
 
 	<!-- SECTION -->
-	<div class="section">
-		<!-- container -->
+	<!-- <div class="section">
+		container
 		<div class="container">
-			<!-- row -->
+			row
 			<div class="row">
 				<div class="col-md-4 col-xs-6">
 					<div class="section-title">
@@ -196,7 +196,7 @@
 
 					<div class="products-widget-slick" data-nav="#slick-nav-3">
 						<div>
-							<!-- product widget -->
+							product widget
 							<div class="product-widget">
 								<div class="product-img">
 									<img src="./img/product07.png" alt="">
@@ -207,9 +207,9 @@
 									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
 								</div>
 							</div>
-							<!-- /product widget -->
+							/product widget
 
-							<!-- product widget -->
+							product widget
 							<div class="product-widget">
 								<div class="product-img">
 									<img src="./img/product08.png" alt="">
@@ -220,9 +220,9 @@
 									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
 								</div>
 							</div>
-							<!-- /product widget -->
+							/product widget
 
-							<!-- product widget -->
+							product widget
 							<div class="product-widget">
 								<div class="product-img">
 									<img src="./img/product09.png" alt="">
@@ -233,11 +233,11 @@
 									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
 								</div>
 							</div>
-							<!-- product widget -->
+							product widget
 						</div>
 
 						<div>
-							<!-- product widget -->
+							product widget
 							<div class="product-widget">
 								<div class="product-img">
 									<img src="./img/product01.png" alt="">
@@ -248,9 +248,9 @@
 									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
 								</div>
 							</div>
-							<!-- /product widget -->
+							/product widget
 
-							<!-- product widget -->
+							product widget
 							<div class="product-widget">
 								<div class="product-img">
 									<img src="./img/product02.png" alt="">
@@ -261,9 +261,9 @@
 									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
 								</div>
 							</div>
-							<!-- /product widget -->
+							/product widget
 
-							<!-- product widget -->
+							product widget
 							<div class="product-widget">
 								<div class="product-img">
 									<img src="./img/product03.png" alt="">
@@ -274,7 +274,7 @@
 									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
 								</div>
 							</div>
-							<!-- product widget -->
+							product widget
 						</div>
 					</div>
 				</div>
@@ -289,7 +289,7 @@
 
 					<div class="products-widget-slick" data-nav="#slick-nav-4">
 						<div>
-							<!-- product widget -->
+							product widget
 							<div class="product-widget">
 								<div class="product-img">
 									<img src="./img/product04.png" alt="">
@@ -300,9 +300,9 @@
 									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
 								</div>
 							</div>
-							<!-- /product widget -->
+							/product widget
 
-							<!-- product widget -->
+							product widget
 							<div class="product-widget">
 								<div class="product-img">
 									<img src="./img/product05.png" alt="">
@@ -313,9 +313,9 @@
 									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
 								</div>
 							</div>
-							<!-- /product widget -->
+							/product widget
 
-							<!-- product widget -->
+							product widget
 							<div class="product-widget">
 								<div class="product-img">
 									<img src="./img/product06.png" alt="">
@@ -326,11 +326,11 @@
 									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
 								</div>
 							</div>
-							<!-- product widget -->
+							product widget
 						</div>
 
 						<div>
-							<!-- product widget -->
+							product widget
 							<div class="product-widget">
 								<div class="product-img">
 									<img src="./img/product07.png" alt="">
@@ -341,9 +341,9 @@
 									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
 								</div>
 							</div>
-							<!-- /product widget -->
+							/product widget
 
-							<!-- product widget -->
+							product widget
 							<div class="product-widget">
 								<div class="product-img">
 									<img src="./img/product08.png" alt="">
@@ -354,9 +354,9 @@
 									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
 								</div>
 							</div>
-							<!-- /product widget -->
+							/product widget
 
-							<!-- product widget -->
+							product widget
 							<div class="product-widget">
 								<div class="product-img">
 									<img src="./img/product09.png" alt="">
@@ -367,7 +367,7 @@
 									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
 								</div>
 							</div>
-							<!-- product widget -->
+							product widget
 						</div>
 					</div>
 				</div>
@@ -384,7 +384,7 @@
 
 					<div class="products-widget-slick" data-nav="#slick-nav-5">
 						<div>
-							<!-- product widget -->
+							product widget
 							<div class="product-widget">
 								<div class="product-img">
 									<img src="./img/product01.png" alt="">
@@ -395,9 +395,9 @@
 									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
 								</div>
 							</div>
-							<!-- /product widget -->
+							/product widget
 
-							<!-- product widget -->
+							product widget
 							<div class="product-widget">
 								<div class="product-img">
 									<img src="./img/product02.png" alt="">
@@ -408,9 +408,9 @@
 									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
 								</div>
 							</div>
-							<!-- /product widget -->
+							/product widget
 
-							<!-- product widget -->
+							product widget
 							<div class="product-widget">
 								<div class="product-img">
 									<img src="./img/product03.png" alt="">
@@ -421,11 +421,11 @@
 									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
 								</div>
 							</div>
-							<!-- product widget -->
+							product widget
 						</div>
 
 						<div>
-							<!-- product widget -->
+							product widget
 							<div class="product-widget">
 								<div class="product-img">
 									<img src="./img/product04.png" alt="">
@@ -436,9 +436,9 @@
 									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
 								</div>
 							</div>
-							<!-- /product widget -->
+							/product widget
 
-							<!-- product widget -->
+							product widget
 							<div class="product-widget">
 								<div class="product-img">
 									<img src="./img/product05.png" alt="">
@@ -449,9 +449,9 @@
 									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
 								</div>
 							</div>
-							<!-- /product widget -->
+							/product widget
 
-							<!-- product widget -->
+							product widget
 							<div class="product-widget">
 								<div class="product-img">
 									<img src="./img/product06.png" alt="">
@@ -462,16 +462,16 @@
 									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
 								</div>
 							</div>
-							<!-- product widget -->
+							product widget
 						</div>
 					</div>
 				</div>
 
 			</div>
-			<!-- /row -->
+			/row
 		</div>
-		<!-- /container -->
-	</div>
+		/container
+	</div> -->
 	<!-- /SECTION -->
 	
 	

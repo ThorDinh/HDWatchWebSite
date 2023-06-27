@@ -64,7 +64,17 @@
 			<div id="top-header">
 				<div class="container">
 					<ul class="header-links pull-right">
-						<li><a href="#"><i class="fa fa-user-o"></i>Account</a></li>
+						<div class="dropdown show">
+							<a class="btn btn-danger dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							  <i class="fa fa-user-o"></i>Tài khoản
+							</a>
+							<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+							  <a class="dropdown-item" href="#"> Thông tin tài khoản</a>
+							  <a class="dropdown-item" href="#"> Lịch sử giao dịch</a><br>
+							  <a class="dropdown-item" href="#"> Đổi mật khẩu</a><br>
+							  <a class="dropdown-item" href="#"> Đăng xuất</a>
+							</div>
+						  </div>
 					</ul>
 				</div>
 			</div>
@@ -90,8 +100,8 @@
 						<div class="col-md-6">
 							<div class="header-search">
 								<form>
-									<input class="input" placeholder="Search">
-									<button class="search-btn">Search</button>
+									<input class="input" placeholder="Tìm kiếm">
+									<button class="search-btn">Tìm kiếm</button>
 								</form>
 							</div>
 						</div>
@@ -104,7 +114,7 @@
 								<div>
 									<a href="#">
 										<i class="fa fa-heart-o"></i>
-										<span>Your Favorite</span>
+										<span>Yêu thích</span>
 										<div class="qty">2</div>
 									</a>
 								</div>
@@ -114,7 +124,7 @@
 								<div>
 									<a th:href="@{/cart-view}">
 										<i class="fa fa-shopping-cart"></i>
-										<span>Your Cart</span>
+										<span>Giỏ hàng</span>
 										<div class="qty">{{cart.count}}</div>
 									</a>
 								</div>
@@ -148,11 +158,11 @@
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li><a href="/home">Home</a></li>
-						<li><a href="/category">Category</a></li>
-						<li><a href="/brand">Brand</a></li>
-						<li><a href="/about">About Us</a></li>
-						<li><a href="/contact">Contact Us</a></li>
+						<li><a href="/home">Trang chủ</a></li>
+						<li><a href="/category">Danh mục</a></li>
+						<li><a href="/brand">Thương hiệu</a></li>
+						<li><a href="/about">Giới thiệu</a></li>
+						<li><a href="/contact">Liên lạc</a></li>
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -172,36 +182,26 @@
 				<div class="container">
 					<!-- row -->
 					<div class="row">
-						<div class="col-md-3 col-xs-6">
-							<div class="footer">
-								<h3 class="footer-title">Categories</h3>
-								<ul class="footer-links">
-									<li><a href="#">For men</a></li>
-									<li><a href="#">For ladies</a></li>
-									<li><a href="#">Unisex</a></li>
-								</ul>
-							</div>
-						</div>
 
 						<div class="clearfix visible-xs"></div>
 
 						<div class="col-md-3 col-xs-6">
 							<div class="footer">
-								<h3 class="footer-title">Information</h3>
+								<h3 class="footer-title">Thông tin về chúng tôi</h3>
 								<ul class="footer-links">
-									<li><i class="fa fa-map-marker"></i><a href="#">About Us</a></li>
-									<li><i class="fa fa-phone"></i><a href="#">Contact Us</a></li>
+									<li><i class="fa fa-map-marker"></i><a href="/about">Giới thiệu</a></li>
+									<li><i class="fa fa-phone"></i><a href="/contact">Liên lạc</a></li>
 								</ul>
 							</div>
 						</div>
 
 						<div class="col-md-3 col-xs-6">
 							<div class="footer">
-								<h3 class="footer-title">Service</h3>
+								<h3 class="footer-title">Dịch vụ</h3>
 								<ul class="footer-links">
-									<li><a href="#"><i class="fa fa-user-o"></i>Account</a></li>
-									<li><a href="#"><i class="fa fa-shopping-cart"></i>Cart</a></li>
-									<li><a href="#"><i class="fa fa-heart-o"></i>Favorite</a></li>
+									<li><a href="#"><i class="fa fa-user-o"></i>Tài khoản</a></li>
+									<li><a href="#"><i class="fa fa-shopping-cart"></i>Giỏ hàng</a></li>
+									<li><a href="#"><i class="fa fa-heart-o"></i>Yêu thích</a></li>
 								</ul>
 							</div>
 						</div>

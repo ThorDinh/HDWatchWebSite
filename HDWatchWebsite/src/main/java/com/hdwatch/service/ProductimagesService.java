@@ -18,5 +18,7 @@ public interface ProductimagesService {
 
 	List<Productimages> findAllProductWithOneImage();
 
-	List<Productimages> findAllProductWithCategory(Integer string);
+	List<Productimages> findAllProductWithCategory(Integer id);
+
+	List<Productimages> findAllProductWithBrand(Integer id);
 }

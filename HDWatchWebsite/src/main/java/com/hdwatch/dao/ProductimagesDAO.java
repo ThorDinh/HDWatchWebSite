@@ -39,4 +39,14 @@ public interface ProductimagesDAO extends JpaRepository<Productimages, Integer>{
 	        + "WHERE p.category_id = ?1", nativeQuery = true)
 	List<Productimages> findAllByCategory(Integer id);
 	
+	@Query(value = "SELECT pi.id, pi.product_id, pi.name "
+	        + "FROM productimages pi "
+	        + "INNER JOIN ( "
+	        + "  SELECT product_id, MIN(name) AS min_name "
+	        + "  FROM productimages "
+	        + "  GROUP BY product_id "
+	        + ") sub ON pi.product_id = sub.product_id AND pi.name = sub.min_name "
+	        + "INNER JOIN products p ON p.id = pi.product_id "
+	        + "WHERE p.brand_id = ?1", nativeQuery = true)
+	List<Productimages> findAllByBrand(Integer id);
 }
