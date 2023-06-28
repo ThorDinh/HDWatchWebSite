@@ -24,7 +24,7 @@ public class CategoryController {
 	
 	@RequestMapping("/category")
 	public String index(Model model, @RequestParam("cid") Optional<Integer> cid) {
-		model.addAttribute("pageTitle", "Category");
+		model.addAttribute("pageTitle", "Danh mục");
 		model.addAttribute("cates", categoriesService.findAll());
 		if(cid.isEmpty() || cid.get().equals(0)) {
 			List<Productimages> list = productImageService.findAllProductWithOneImage();

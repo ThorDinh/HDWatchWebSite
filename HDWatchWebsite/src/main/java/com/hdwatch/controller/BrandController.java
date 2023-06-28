@@ -24,7 +24,7 @@ public class BrandController {
 	
 	@RequestMapping("/brand")
 	public String index(Model model, @RequestParam("bid") Optional<Integer> bid) {
-		model.addAttribute("pageTitle", "Brand");
+		model.addAttribute("pageTitle", "Thương hiệu");
 		model.addAttribute("brands", brandsService.findAll());
 		if(bid.isEmpty() || bid.get().equals(0)) {
 			List<Productimages> list = productImageService.findAllProductWithOneImage();

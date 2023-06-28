@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CartController {
 	@RequestMapping("/cart-view")
 	public String cart(Model model) {
-		model.addAttribute("pageTitle", "Cart");
+		model.addAttribute("pageTitle", "Giỏ hàng");
 		return "cart/view";
 	}
 }
