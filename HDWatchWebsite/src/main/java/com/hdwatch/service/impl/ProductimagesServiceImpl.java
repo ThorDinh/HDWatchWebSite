@@ -64,4 +64,9 @@ public class ProductimagesServiceImpl implements ProductimagesService {
 	public List<Productimages> findAllProductWithBrand(Integer id) {
 		return productimagesDAO.findAllByBrand(id);
 	}
+	
+	@Override
+	public List<Productimages> findAllImagesByProductId(Integer id) {
+		return productimagesDAO.findAllImageByProductId(id);
+	}
 }

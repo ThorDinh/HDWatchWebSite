@@ -21,4 +21,6 @@ public interface ProductimagesService {
 	List<Productimages> findAllProductWithCategory(Integer id);
 
 	List<Productimages> findAllProductWithBrand(Integer id);
+
+	List<Productimages> findAllImagesByProductId(Integer id);
 }

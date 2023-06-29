@@ -1,6 +1,7 @@
 package com.hdwatch.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +21,8 @@ public class  ProductsServiceImpl implements ProductsService  {
 	}
 	
 	@Override
-	public Products findById(Integer id) {
-		return pdao.findById(id).get();
+	public Optional<Products> findById(Integer  id) {
+		return pdao.findById(id);
 	}
 
 	@Override

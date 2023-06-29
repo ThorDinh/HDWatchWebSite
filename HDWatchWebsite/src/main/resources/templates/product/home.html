@@ -84,13 +84,15 @@
 									<div class="product" th:each="p, iterStat:${items}" th:if="${iterStat.count <= 15}">
 										<div class="product-img">
 											<img th:src="@{|${p.name}|}" alt="">
+
+											
 											<div class="product-label">
 											<span th:if="${iterStat.index < 5}" class="new">Mới nhất</span>
 											</div>
 										</div>
 										<div class="product-body">
 
-											<h3 class="product-name"><a href="#" th:text="${p.products.name}"></a></h3>
+											<h3 class="product-name"><a th:href="@{|/product/detail/${p.products.id}|}" th:text="${p.products.name}"></a></h3>
 											<h4 class="product-price"> <p th:text="${p.products.price}"></p> <del
 													class="product-old-price"><p th:text="${p.products.oldPrice}"></p></del></h4>
 											<div class="product-btns">
@@ -151,7 +153,7 @@
 										</div>
 										<div class="product-body">
 
-											<h3 class="product-name"><a href="#" th:text="${p.products.name}"></a></h3>
+											<h3 class="product-name"><a th:href="@{|/product/detail/${p.products.id}|}" th:text="${p.products.name}"></h3>
 											<h4 class="product-price"> <p th:text="${p.products.price}"></p> <del
 													class="product-old-price"><p th:text="${p.products.oldPrice}"></p></del></h4>
 											<div class="product-btns">
@@ -160,8 +162,7 @@
 											</div>
 										</div>
 										<div class="add-to-cart">
-											<button class="add-to-cart-btn" th:attr="ng-click=@{|cart.add(${p.products.id})|}"><i class="fa fa-shopping-cart"></i> add to
-												cart</button>
+											<button class="add-to-cart-btn" th:attr="ng-click=@{|cart.add(${p.products.id})|}"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
 										</div>
 									</div>
 									<!-- /product -->

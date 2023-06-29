@@ -2,13 +2,11 @@ package com.hdwatch.dao;
 
 import java.util.List;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.hdwatch.entity.Productimages;
-import com.hdwatch.entity.Products;
 
 public interface ProductimagesDAO extends JpaRepository<Productimages, Integer>{
 
@@ -49,4 +47,7 @@ public interface ProductimagesDAO extends JpaRepository<Productimages, Integer>{
 	        + "INNER JOIN products p ON p.id = pi.product_id "
 	        + "WHERE p.brand_id = ?1", nativeQuery = true)
 	List<Productimages> findAllByBrand(Integer id);
+	
+	@Query(value="SELECT pi.id, pi.product_id, pi.name FROM productimages pi WHERE pi.product_id = ?1", nativeQuery=true)
+	List<Productimages> findAllImageByProductId(Integer id);
 }

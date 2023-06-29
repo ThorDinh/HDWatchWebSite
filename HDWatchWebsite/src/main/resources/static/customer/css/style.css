@@ -1428,7 +1428,7 @@ textarea.input {
   -ms-transform: translateX(0%);
   transform: translateX(0%);
   opacity: 1;
-  visibility: visible;
+  visibility: hidden;
 }
 
 #product-main-img .zoomImg {
