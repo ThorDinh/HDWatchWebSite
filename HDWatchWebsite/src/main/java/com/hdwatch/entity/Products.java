@@ -57,13 +57,15 @@ public class Products implements Serializable {
 
     @Column(name="description", length=2147483647)
     private String     description ;
+    
+    @Column(name="detail", length=2147483647)
+    private String     detail ;
+    
+    @Column(name="productImages", length=2147483647)
+    private String     productimages ;
 
 
     //--- ENTITY LINKS ( RELATIONSHIP )
-    @JsonIgnore
-    @OneToMany(mappedBy="products")
-    private List<Productimages> listOfProductimages ; 
-
     @ManyToOne
     @JoinColumn(name="brandId", referencedColumnName="id", insertable=false, updatable=false)
     private Brands     brands ; 
@@ -163,10 +165,7 @@ public class Products implements Serializable {
         return this.description;
     }
 
-    //--- GETTERS FOR LINKS
-    public List<Productimages> getListOfProductimages() {
-        return this.listOfProductimages;
-    } 
+    //--- GETTERS FOR LINKS 
 
     public Brands getBrands() {
         return this.brands;
