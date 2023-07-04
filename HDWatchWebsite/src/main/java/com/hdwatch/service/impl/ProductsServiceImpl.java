@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.hdwatch.dao.ProductsDAO;
@@ -52,5 +54,11 @@ public class  ProductsServiceImpl implements ProductsService  {
 	public void deleteByid(Integer id) {
 		pdao.deleteById(id);
 	}
-		
+	
+	@Override
+	public List<Products> findProductByCreateDateDESC(){
+		Sort sort = Sort.by(Direction.DESC,"id");
+		List<Products> list = pdao.findAll(sort);
+		return list;
+	}
 }

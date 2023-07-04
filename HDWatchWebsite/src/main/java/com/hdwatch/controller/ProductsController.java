@@ -19,8 +19,11 @@ public class ProductsController {
 	
 	@RequestMapping(value = {"/", "/home", "/index"})
 	public String index(Model model) {
-		List<Products> list = productsService.findAll();
+		//sản phẩm mới nhất
+		List<Products> list = productsService.findProductByCreateDateDESC();
 		model.addAttribute("items", list);
+		//sản phẩm bán chạy
+		model.addAttribute("list", list);
 		model.addAttribute("pageTitle", "Trang chủ");
 		return "home";
 	}

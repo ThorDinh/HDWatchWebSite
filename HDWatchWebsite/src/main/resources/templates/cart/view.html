@@ -18,6 +18,7 @@
                     <thead>
                         <tr>
                             <th></th>
+                            <th style="width: 10%;"></th>
                             <th>SẢN PHẨM</th>
                             <th>SỐ LƯỢNG</th>
                             <th>GIÁ</th>
@@ -25,16 +26,17 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="item in cart.items">
-                            <td><button ng-click="cart.remove(item.id)" class="btn btn-default">x</button></td>
-                            <td>{{item.name}}</td>
-                            <td><input ng-change="cart.saveToLocalStorage()" ng-model="item.qty" 
+                            <td style="padding-top: 30px;"><button ng-click="cart.remove(item.id)" class="btn btn-default btn-danger">x</button></td>
+                            <td><img ng-src="/images/{{getImageName(item.productimages)}}" alt="" style="width:100%;"></td>
+                            <td style="padding-top: 30px;">{{item.name}}</td>
+                            <td style="padding-top: 30px;"><input ng-change="cart.saveToLocalStorage()" ng-model="item.qty" 
                             type="number" min="1" class="form-control" style="width:50%;"/></td>
-                            <td>${{item.qty*item.price | number : 2}}</td>
+                            <td style="padding-top: 30px;">${{item.qty*item.price | number : 2}}</td>
                         </tr>
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="3"><strong>TỔNG TIỀN</strong></td>
+                            <td colspan="4"><strong>TỔNG TIỀN</strong></td>
                             <td><strong class="order-total">{{ getTotalPrice() | number : 2}}</strong></td>
                         </tr>
                     </tfoot>

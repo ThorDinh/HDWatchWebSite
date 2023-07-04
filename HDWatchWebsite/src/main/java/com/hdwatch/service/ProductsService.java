@@ -16,4 +16,6 @@ public interface ProductsService {
 	Products save(Products products,Integer id);
 	
 	void deleteByid(Integer id);
+
+	List<Products> findProductByCreateDateDESC();
 }

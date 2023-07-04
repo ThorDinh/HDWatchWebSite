@@ -1,4 +1,4 @@
-const app = angular.module("shopping-cart-app",[]);
+const app = angular.module("my-app",[]);
 app.controller("shopping-cart-ctrl",function($scope,$http){
 	//Quản lí giỏ hàng
 	$scope.cart = {
@@ -6,9 +6,11 @@ app.controller("shopping-cart-ctrl",function($scope,$http){
 		//Thêm sản phẩm vào giỏ hàng
 		add(id){
 			var item = this.items.find(item => item.id == id);
+			//nếu giỏ hàng có sản phẩm
 			if(item){
 				item.qty++;
 				this.saveToLocalStorage();
+			//nếu không có sản phẩm
 			} else {
 				$http.get(`/rest/products/${id}`).then(resp =>{
 					resp.data.qty = 1;
@@ -90,4 +92,11 @@ app.controller("shopping-cart-ctrl",function($scope,$http){
         });
         return total;
     };
+    
+    $scope.getImageName = function(productImages) {
+  		var images = productImages.split(',');
+  		var imageName = images[0].replace(/"/g, '').replace('[','').replace(']','');
+  		return imageName;
+	};
+
 })
