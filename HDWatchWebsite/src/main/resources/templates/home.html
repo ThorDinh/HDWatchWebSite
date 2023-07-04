@@ -83,25 +83,23 @@
 									<!-- product -->
 									<div class="product" th:each="p, iterStat:${items}" th:if="${iterStat.count <= 15}">
 										<div class="product-img">
-											<img th:src="@{|${p.name}|}" alt="">
-
-											
+											<img th:src="@{/images/__${#strings.arraySplit(p.productimages, ',')[0].replace('&quot;', '').replace('[','').replace(']','')}__}" alt="">											
 											<div class="product-label">
 											<span th:if="${iterStat.index < 5}" class="new">Mới nhất</span>
 											</div>
 										</div>
 										<div class="product-body">
 
-											<h3 class="product-name"><a th:href="@{|/product/detail/${p.products.id}|}" th:text="${p.products.name}"></a></h3>
-											<h4 class="product-price"> <p th:text="${p.products.price}"></p> <del
-													class="product-old-price"><p th:text="${p.products.oldPrice}"></p></del></h4>
+											<h3 class="product-name"><a th:href="@{|/product/detail/${p.id}|}" th:text="${p.name}"></a></h3>
+											<h4 class="product-price"> <p th:text="${p.price}"></p> <del
+													class="product-old-price"><p th:text="${p.oldprice}"></p></del></h4>
 											<div class="product-btns">
 												<button class="add-to-wishlist"><i class="fa fa-heart-o"></i></button>
 												<button class="quick-view"><i class="fa fa-eye"></i></button>
 											</div>
 										</div>
 										<div class="add-to-cart">
-											<button class="add-to-cart-btn" th:attr="ng-click=@{|cart.add(${p.products.id})|}"><i class="fa fa-shopping-cart"></i>
+											<button class="add-to-cart-btn" th:attr="ng-click=@{|cart.add(${p.id})|}"><i class="fa fa-shopping-cart"></i>
 												Thêm vào giỏ</button>
 										</div>
 									</div>
@@ -145,26 +143,7 @@
 							<div id="tab2" class="tab-pane fade in active">
 								<div class="products-slick" data-nav="#slick-nav-2">
 									<!-- product -->
-									<div class="product" th:each="p, iterStat:${items}" th:if="${iterStat.count <= 15}">
-										<div class="product-img">
-											<img th:src="@{|${p.name}|}" alt="">
-											<div class="product-label">
-											</div>
-										</div>
-										<div class="product-body">
-
-											<h3 class="product-name"><a th:href="@{|/product/detail/${p.products.id}|}" th:text="${p.products.name}"></h3>
-											<h4 class="product-price"> <p th:text="${p.products.price}"></p> <del
-													class="product-old-price"><p th:text="${p.products.oldPrice}"></p></del></h4>
-											<div class="product-btns">
-												<button class="add-to-wishlist"><i class="fa fa-heart-o"></i></button>
-												<button class="quick-view"><i class="fa fa-eye"></i></button>
-											</div>
-										</div>
-										<div class="add-to-cart">
-											<button class="add-to-cart-btn" th:attr="ng-click=@{|cart.add(${p.products.id})|}"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
-										</div>
-									</div>
+									
 									<!-- /product -->
 								</div>
 								<div id="slick-nav-2" class="products-slick-nav"></div>

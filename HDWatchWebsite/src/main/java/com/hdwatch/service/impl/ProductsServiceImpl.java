@@ -41,7 +41,7 @@ public class  ProductsServiceImpl implements ProductsService  {
 	            existingProduct.setCreatedate(products.getCreatedate());
 	            existingProduct.setStock(products.getStock());;
 	            existingProduct.setPrice(products.getPrice());
-	            existingProduct.setOldPrice(products.getOldPrice());
+	            existingProduct.setOldprice(products.getOldprice());
 	            existingProduct.setDescription(products.getDescription());
 	            return pdao.save(existingProduct);
 	        }

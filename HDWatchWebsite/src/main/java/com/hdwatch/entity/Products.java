@@ -11,12 +11,19 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  * JPA entity class for "Products"
  *
  * @author Telosys
  *
  */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name="products", schema="dbo", catalog="HDWatch" )
 public class Products implements Serializable {
@@ -37,7 +44,7 @@ public class Products implements Serializable {
     private Double     price ;
 
     @Column(name="old_price", nullable=false)
-    private Double     oldPrice ;
+    private Double     oldprice ;
 
     @Column(name="available", nullable=false)
     private Boolean    available ;
@@ -57,13 +64,12 @@ public class Products implements Serializable {
 
     @Column(name="description", length=2147483647)
     private String     description ;
+    
+    @Column(name="productImages", length=2147483647)
+    private String     productimages ;
 
 
     //--- ENTITY LINKS ( RELATIONSHIP )
-    @JsonIgnore
-    @OneToMany(mappedBy="products")
-    private List<Productimages> listOfProductimages ; 
-
     @ManyToOne
     @JoinColumn(name="brandId", referencedColumnName="id", insertable=false, updatable=false)
     private Brands     brands ; 
@@ -83,135 +89,4 @@ public class Products implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy="products")
     private List<Orderdetails> listOfOrderdetails ; 
-
-
-    /**
-     * Constructor
-     */
-    public Products() {
-		super();
-    }
-    
-    //--- GETTERS & SETTERS FOR FIELDS
-    public void setId( Integer id ) {
-        this.id = id ;
-    }
-    public Integer getId() {
-        return this.id;
-    }
-
-    public void setName( String name ) {
-        this.name = name ;
-    }
-    public String getName() {
-        return this.name;
-    }
-
-    public void setPrice( Double price ) {
-        this.price = price ;
-    }
-    public Double getPrice() {
-        return this.price;
-    }
-
-    public void setOldPrice( Double oldPrice ) {
-        this.oldPrice = oldPrice ;
-    }
-    public Double getOldPrice() {
-        return this.oldPrice;
-    }
-
-    public void setAvailable( Boolean available ) {
-        this.available = available ;
-    }
-    public Boolean getAvailable() {
-        return this.available;
-    }
-
-    public void setCreatedate( Date createdate ) {
-        this.createdate = createdate ;
-    }
-    public Date getCreatedate() {
-        return this.createdate;
-    }
-
-    public void setBrandid( Integer brandid ) {
-        this.brandid = brandid ;
-    }
-    public Integer getBrandid() {
-        return this.brandid;
-    }
-
-    public void setCategoryid( Integer categoryid ) {
-        this.categoryid = categoryid ;
-    }
-    public Integer getCategoryid() {
-        return this.categoryid;
-    }
-
-    public void setStock( Integer stock ) {
-        this.stock = stock ;
-    }
-    public Integer getStock() {
-        return this.stock;
-    }
-
-    public void setDescription( String description ) {
-        this.description = description ;
-    }
-    public String getDescription() {
-        return this.description;
-    }
-
-    //--- GETTERS FOR LINKS
-    public List<Productimages> getListOfProductimages() {
-        return this.listOfProductimages;
-    } 
-
-    public Brands getBrands() {
-        return this.brands;
-    } 
-
-    public List<Cartdetails> getListOfCartdetails() {
-        return this.listOfCartdetails;
-    } 
-
-    public Categories getCategories() {
-        return this.categories;
-    } 
-
-    public List<Favoritedetails> getListOfFavoritedetails() {
-        return this.listOfFavoritedetails;
-    } 
-
-    public List<Orderdetails> getListOfOrderdetails() {
-        return this.listOfOrderdetails;
-    } 
-
-    //--- toString specific method
-	@Override
-    public String toString() { 
-        StringBuilder sb = new StringBuilder(); 
-        sb.append(id);
-        sb.append("|");
-        sb.append(name);
-        sb.append("|");
-        sb.append(price);
-        sb.append("|");
-        sb.append(oldPrice);
-        sb.append("|");
-        sb.append(available);
-        sb.append("|");
-        sb.append(createdate);
-        sb.append("|");
-        sb.append(brandid);
-        sb.append("|");
-        sb.append(categoryid);
-        sb.append("|");
-        sb.append(stock);
-        sb.append("|");
-        sb.append(description);
-        return sb.toString(); 
-    } 
-
 }
