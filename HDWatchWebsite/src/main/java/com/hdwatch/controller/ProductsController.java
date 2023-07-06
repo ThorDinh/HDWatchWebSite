@@ -53,6 +53,13 @@ public class ProductsController {
 	
 	@RequestMapping("/product/detail/{id}")
 	public String detail(Model model, @PathVariable("id") Integer id) {
+		//hiển thị 1 sản phẩm
+		Products product = productsService.findById(id);
+		model.addAttribute("pageTitle",product.getBrands().getName()+ " - " + product.getName());
+		model.addAttribute("item", product);
+		//sản phẩm liên quan
+		List<Products> list = productsService.findAll();
+		model.addAttribute("list", list);
 		return "product/detail";
 	}
 }

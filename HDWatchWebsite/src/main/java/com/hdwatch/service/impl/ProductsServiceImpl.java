@@ -23,8 +23,8 @@ public class  ProductsServiceImpl implements ProductsService  {
 	}
 	
 	@Override
-	public Optional<Products> findById(Integer  id) {
-		return pdao.findById(id);
+	public Products findById(Integer  id) {
+		return pdao.findById(id).get();
 	}
 
 	@Override

@@ -32,7 +32,7 @@ public class ProductsRestController {
 	}
 	
 	@GetMapping("{id}")
-	public Optional<Products> getOne(@PathVariable("id") Integer id) {
+	public Products getOne(@PathVariable("id") Integer id) {
 		return productsService.findById(id);
 	}
 	

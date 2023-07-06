@@ -9,7 +9,7 @@ public interface ProductsService {
 	
 	List<Products> findAll();
 	
-	Optional<Products> findById(Integer id);
+	Products findById(Integer id);
 
 	Products create(Products products);
 	

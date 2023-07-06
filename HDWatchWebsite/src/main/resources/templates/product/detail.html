@@ -12,8 +12,8 @@
 					<!-- Product main img -->
 					<div class="col-md-5 col-md-push-2">
 						<div id="product-main-img" >
-							<div class="product-preview" th:each="i:${images}">
-								<img th:src="@{|${i.name}|}" alt="">
+							<div class="product-preview" th:each="image : ${#strings.arraySplit(item.productimages, ',')}">
+								<img th:src="@{/images/__${image.replace('&quot;', '').replace('[','').replace(']','')}__}" alt="">
 							</div>
 						</div>
 					</div>
@@ -22,9 +22,9 @@
 					<!-- Product thumb imgs -->
 					<div class="col-md-2  col-md-pull-5">
 						<div id="product-imgs">
-							<div class="product-preview" th:each="i:${images}">
-								<img th:src="@{|${i.name}|}" alt="">
-							</div>
+							<div class="product-preview" th:each="image : ${#strings.arraySplit(item.productimages, ',')}">
+								<img th:src="@{/images/__${image.replace('&quot;', '').replace('[','').replace(']','')}__}" alt="">
+							</div> 
 						</div>
 					</div>
 					<!-- /Product thumb imgs -->
@@ -36,7 +36,7 @@
 							<h2 class="product-name" th:text="${item.name}"></h2>
 							<div>
 								<h3 class="product-price"><p th:text="${item.price}"></p> 
-									<del class="product-old-price"><p th:text="${item.oldPrice}"></p></del></h3><br>
+									<del class="product-old-price"><p th:text="${item.oldprice}"></p></del></h3><br>
 								<span class="product-available" th:if="${item.available}">Còn hàng</span>
 							</div>
 							<p th:text="${item.description}"></p>
@@ -57,11 +57,11 @@
 								<li><a href="#"><i class="fa fa-heart-o"></i> Yêu thích</a></li>
 							</ul>
 
-							<!-- <ul class="product-links">
-								<li>Category:</li>
-								<li><a href="#">categories</a></li>
-								<li><a href="#">brands</a></li>
-							</ul> -->
+							<ul class="product-links">
+								<li>Đồng hồ:</li>
+								<li><a th:href="@{|/category?cid=${item.categoryid}|}" th:text="${item.categories.name}">categories</a></li>
+								<li><a th:href="@{|/brand?bid=${item.brandid}|}" th:text="${item.brands.name}"></a></li>
+							</ul>
 
 						</div>
 					</div>
@@ -110,53 +110,67 @@
 		</div>
 		<!-- /SECTION -->
 
-		<!-- Section -->
-		<div class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
+		<!-- SECTION -->
+	<div class="section">
+		<!-- container -->
+		<div class="container">
+			<!-- row -->
+			<div class="row">
 
-					<div class="col-md-12">
-						<div class="section-title text-center">
-							<h3 class="title">Sản phẩm cùng loại</h3>
-						</div>
+				<!-- section title -->
+				<div class="col-md-12">
+					<div class="section-title text-center">
+						<h3 class="title">Sản phẩm liên quan</h3>
 					</div>
-
-					<!-- product -->
-					<div class="col-md-3 col-xs-6">
-						<div class="product">
-							<div class="product-img">
-								<img src="./img/product01.png" alt="">
-								<div class="product-label">
-									<span class="sale">-30%</span>
-								</div>
-							</div>
-							<div class="product-body">
-								
-								<h3 class="product-name"><a href="#">product name goes here</a></h3>
-								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								<div class="product-rating">
-								</div>
-								<div class="product-btns">
-									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-								</div>
-							</div>
-							<div class="add-to-cart">
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
-							</div>
-						</div>
-					</div>
-					<!-- /product -->
-
 				</div>
-				<!-- /row -->
+				<!-- /section title -->
+
+				<!-- Products tab & slick -->
+				<div class="col-md-12">
+					<div class="row">
+						<div class="products-tabs">
+							<!-- tab -->
+							<div id="tab1" class="tab-pane active">
+								<div class="products-slick" data-nav="#slick-nav-1">
+									<!-- product -->
+									<div class="product" th:each="p, iterStat:${list}" th:if="${iterStat.count <= 15}">
+										<div class="product-img">
+											<img th:src="@{/images/__${#strings.arraySplit(p.productimages, ',')[0].replace('&quot;', '').replace('[','').replace(']','')}__}" alt="">											
+											<div class="product-label">
+
+											</div>
+										</div>
+										<div class="product-body">
+
+											<h3 class="product-name"><a th:href="@{|/product/detail/${p.id}|}" th:text="${p.name}"></a></h3>
+											<h4 class="product-price"> <p th:text="${p.price}"></p> <del
+													class="product-old-price"><p th:text="${p.oldprice}"></p></del></h4>
+											<div class="product-btns">
+												<button class="add-to-wishlist"><i class="fa fa-heart-o"></i></button>
+												<button class="quick-view"><i class="fa fa-eye"></i></button>
+											</div>
+										</div>
+										<div class="add-to-cart">
+											<button class="add-to-cart-btn" th:attr="ng-click=@{|cart.add(${p.id})|}"><i class="fa fa-shopping-cart"></i>
+												Thêm vào giỏ</button>
+										</div>
+									</div>
+									<!-- /product -->
+								</div>
+								<div  id="slick-nav-1" class="products-slick-nav"></div>
+								
+							</div>
+							<!-- /tab -->
+						</div>
+					</div>
+				</div>
+				<!-- Products tab & slick -->
 			</div>
-			<!-- /container -->
+			<!-- /row -->
 		</div>
-		<!-- /Section -->
+		<!-- /container -->
+	</div>
+	<!-- /SECTION -->
 </main>
 </body>
 </html>
