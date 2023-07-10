@@ -95,7 +95,7 @@
 													class="product-old-price"><p th:text="${p.oldprice}"></p></del></h4>
 											<div class="product-btns">
 												<button class="add-to-wishlist"><i class="fa fa-heart-o"></i></button>
-												<button class="quick-view"><i class="fa fa-eye"></i></button>
+												<button class="quick-view"><a th:href="@{|/product/detail/${p.id}|}"><i class="fa fa-eye"></i></a></button>
 											</div>
 										</div>
 										<div class="add-to-cart">
