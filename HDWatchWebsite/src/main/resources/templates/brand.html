@@ -84,24 +84,25 @@
 						<div class="row">
 							<!-- product -->
 							<div class="col-md-4 col-xs-6" th:each="p: ${items}">
+								
 								<div class="product">
 									<div class="product-img">
-											<img th:src="@{|${p.name}|}" alt="">
+											<img th:src="@{/images/__${#strings.arraySplit(p.productimages, ',')[0].replace('&quot;', '').replace('[','').replace(']','')}__}" alt="">											
 											<div class="product-label">
 											</div>
 										</div>
 										<div class="product-body">
-											<p class="product-category" th:text="${p.products.brands.name}"></p>
-											<h3 class="product-name"><a th:href="@{|/product/detail/${p.products.id}|}" th:text="${p.products.name}"></a></h3>
-											<h4 class="product-price"> <p th:text="${p.products.price}"></p> <del
-													class="product-old-price"><p th:text="${p.products.oldPrice}"></p></del></h4>
+											<p class="product-category" th:text="${p.brands.name}"></p>
+											<h3 class="product-name"><a th:href="@{|/product/detail/${p.id}|}" th:text="${p.name}"></a></h3>
+											<h4 class="product-price"> <p th:text="${p.price}"></p> <del
+													class="product-old-price"><p th:text="${p.oldprice}"></p></del></h4>
 											<div class="product-btns">
 												<button class="add-to-wishlist"><i class="fa fa-heart-o"></i></button>
-												<button class="quick-view"><i class="fa fa-eye"></i></button>
+												<button class="quick-view"><a th:href="@{|/product/detail/${p.id}|}"><i class="fa fa-eye"></i></a></button>
 											</div>
 										</div>
 										<div class="add-to-cart">
-											<button class="add-to-cart-btn" th:attr="ng-click=@{|cart.add(${p.products.id})|}"><i class="fa fa-shopping-cart"></i> 
+											<button class="add-to-cart-btn" th:attr="ng-click=@{|cart.add(${p.id})|}"><i class="fa fa-shopping-cart"></i>
 												Thêm vào giỏ</button>
 										</div>
 								</div>

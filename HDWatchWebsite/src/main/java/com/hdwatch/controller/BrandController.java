@@ -9,9 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.hdwatch.entity.Productimages;
+import com.hdwatch.entity.Products;
 import com.hdwatch.service.BrandsService;
-import com.hdwatch.service.ProductimagesService;
+import com.hdwatch.service.ProductsService;
 
 
 @Controller
@@ -20,18 +20,22 @@ public class BrandController {
 	BrandsService brandsService;
 	
 	@Autowired
-	ProductimagesService productImageService;
+	ProductsService productsService;
 	
 	@RequestMapping("/brand")
 	public String index(Model model, @RequestParam("bid") Optional<Integer> bid) {
 		model.addAttribute("pageTitle", "Thương hiệu");
 		model.addAttribute("brands", brandsService.findAll());
 		if(bid.isEmpty() || bid.get().equals(0)) {
-			List<Productimages> list = productImageService.findAllProductWithOneImage();
+//			List<Productimages> list = productImageService.findAllProductWithOneImage();
+//			model.addAttribute("items", list);
+			List<Products> list = productsService.findAll();
 			model.addAttribute("items", list);
 		}
 		else {
-			List<Productimages> list = productImageService.findAllProductWithBrand(bid.get());
+//			List<Productimages> list = productImageService.findAllProductWithBrand(bid.get());
+//			model.addAttribute("items", list);
+			List<Products> list = productsService.findAllByBrandId(bid.get());
 			model.addAttribute("items", list);
 		}
 		return "brand";

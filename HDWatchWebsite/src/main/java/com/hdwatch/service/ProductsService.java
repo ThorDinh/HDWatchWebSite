@@ -18,4 +18,8 @@ public interface ProductsService {
 	void deleteByid(Integer id);
 
 	List<Products> findProductByCreateDateDESC();
+
+	List<Products> findAllByBrandId(Integer integer);
+
+	List<Products> findAllByCategoryId(Integer id);
 }

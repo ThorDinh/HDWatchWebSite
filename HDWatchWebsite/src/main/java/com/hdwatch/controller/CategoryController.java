@@ -9,9 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.hdwatch.entity.Productimages;
+import com.hdwatch.entity.Products;
 import com.hdwatch.service.CategoriesService;
-import com.hdwatch.service.ProductimagesService;
+import com.hdwatch.service.ProductsService;
 
 
 @Controller
@@ -20,18 +20,22 @@ public class CategoryController {
 	CategoriesService categoriesService;
 	
 	@Autowired
-	ProductimagesService productImageService;
+	ProductsService productsService;
 	
 	@RequestMapping("/category")
 	public String index(Model model, @RequestParam("cid") Optional<Integer> cid) {
 		model.addAttribute("pageTitle", "Danh mục");
 		model.addAttribute("cates", categoriesService.findAll());
 		if(cid.isEmpty() || cid.get().equals(0)) {
-			List<Productimages> list = productImageService.findAllProductWithOneImage();
+//			List<Products> list = productsService.findAll();
+//			model.addAttribute("items", list);
+			List<Products> list = productsService.findAll();
 			model.addAttribute("items", list);
 		}
 		else {
-			List<Productimages> list = productImageService.findAllProductWithCategory(cid.get());
+//			List<Productimages> list = productImageService.findAllProductWithCategory(cid.get());
+//			model.addAttribute("items", list);
+			List<Products> list = productsService.findAllByCategoryId(cid.get());
 			model.addAttribute("items", list);
 		}
 		return "category";

@@ -61,4 +61,14 @@ public class  ProductsServiceImpl implements ProductsService  {
 		List<Products> list = pdao.findAll(sort);
 		return list;
 	}
+	
+	@Override
+	public List<Products> findAllByBrandId(Integer id){
+		return pdao.findByBrandid(id);
+	}
+	
+	@Override
+	public List<Products> findAllByCategoryId(Integer id){
+		return pdao.findByCategoryid(id);
+	}
 }

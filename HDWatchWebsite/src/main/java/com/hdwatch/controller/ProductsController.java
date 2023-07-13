@@ -58,7 +58,7 @@ public class ProductsController {
 		model.addAttribute("pageTitle",product.getBrands().getName()+ " - " + product.getName());
 		model.addAttribute("item", product);
 		//sản phẩm liên quan
-		List<Products> list = productsService.findAll();
+		List<Products> list = productsService.findAllByBrandId(product.getBrandid());
 		model.addAttribute("list", list);
 		return "product/detail";
 	}
