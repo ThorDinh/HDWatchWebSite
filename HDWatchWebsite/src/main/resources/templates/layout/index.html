@@ -6,11 +6,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-		<!-- Dynamic Title -->
-	<title th:if="${#strings.startsWith(pageTitle, 'HD Watch')} and ${!#strings.endsWith(pageTitle, 'HD Watch')}"
-	th:text="${pageTitle} - HD Watch"></title>
-	<title th:unless="${#strings.startsWith(pageTitle, 'HD Watch')} and ${#strings.endsWith(pageTitle, 'HD Watch')}"
-	th:text="${pageTitle}"></title>
+	<!-- Dynamic Title -->
+		<title th:if="${#strings.startsWith(pageTitle, 'HD Watch')} and ${!#strings.endsWith(pageTitle, 'HD Watch')}"
+		th:text="${pageTitle} - HD Watch"></title>
+		<title th:unless="${#strings.startsWith(pageTitle, 'HD Watch')} and ${#strings.endsWith(pageTitle, 'HD Watch')}"
+		th:text="${pageTitle}"></title>
 	<!-- /Dynamic Title -->
 		
 		<style>
@@ -122,7 +122,7 @@
 
 								<!-- Cart -->
 								<div>
-									<a th:href="@{/cart-view}">
+									<a th:href="@{/cart/view}">
 										<i class="fa fa-shopping-cart"></i>
 										<span>Giỏ hàng</span>
 										<div class="qty">{{cart.count}}</div>
@@ -200,7 +200,7 @@
 								<h3 class="footer-title">Dịch vụ</h3>
 								<ul class="footer-links">
 									<li><a href="#"><i class="fa fa-user-o"></i>Tài khoản</a></li>
-									<li><a href="#"><i class="fa fa-shopping-cart"></i>Giỏ hàng</a></li>
+									<li><a th:href="@{/cart/view}"><i class="fa fa-shopping-cart"></i>Giỏ hàng</a></li>
 									<li><a href="#"><i class="fa fa-heart-o"></i>Yêu thích</a></li>
 								</ul>
 							</div>
