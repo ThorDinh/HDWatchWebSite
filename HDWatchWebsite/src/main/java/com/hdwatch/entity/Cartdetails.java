@@ -7,6 +7,10 @@ package com.hdwatch.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  * JPA entity class for "Cartdetails"
  *
@@ -14,6 +18,9 @@ import javax.persistence.*;
  *
  */
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name="cartdetails", schema="dbo", catalog="HDWatch" )
 public class Cartdetails implements Serializable {
 
@@ -47,74 +54,5 @@ public class Cartdetails implements Serializable {
     @ManyToOne
     @JoinColumn(name="product_id", referencedColumnName="id", insertable=false, updatable=false)
     private Products   products ; 
-
-
-    /**
-     * Constructor
-     */
-    public Cartdetails() {
-		super();
-    }
-    
-    //--- GETTERS & SETTERS FOR FIELDS
-    public void setId( Integer id ) {
-        this.id = id ;
-    }
-    public Integer getId() {
-        return this.id;
-    }
-
-    public void setCartId( Integer cartId ) {
-        this.cartId = cartId ;
-    }
-    public Integer getCartId() {
-        return this.cartId;
-    }
-
-    public void setProductId( Integer productId ) {
-        this.productId = productId ;
-    }
-    public Integer getProductId() {
-        return this.productId;
-    }
-
-    public void setQuantity( Integer quantity ) {
-        this.quantity = quantity ;
-    }
-    public Integer getQuantity() {
-        return this.quantity;
-    }
-
-    public void setPrice( Double price ) {
-        this.price = price ;
-    }
-    public Double getPrice() {
-        return this.price;
-    }
-
-    //--- GETTERS FOR LINKS
-    public Carts getCarts() {
-        return this.carts;
-    } 
-
-    public Products getProducts() {
-        return this.products;
-    } 
-
-    //--- toString specific method
-	@Override
-    public String toString() { 
-        StringBuilder sb = new StringBuilder(); 
-        sb.append(id);
-        sb.append("|");
-        sb.append(cartId);
-        sb.append("|");
-        sb.append(productId);
-        sb.append("|");
-        sb.append(quantity);
-        sb.append("|");
-        sb.append(price);
-        return sb.toString(); 
-    } 
 
 }

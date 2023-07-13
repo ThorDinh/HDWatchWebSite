@@ -8,6 +8,10 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  * JPA entity class for "SaleEvents"
  *
@@ -15,6 +19,9 @@ import javax.persistence.*;
  *
  */
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name="sale_events", schema="dbo", catalog="HDWatch" )
 public class SaleEvents implements Serializable {
 
@@ -43,65 +50,5 @@ public class SaleEvents implements Serializable {
 
 
     //--- ENTITY LINKS ( RELATIONSHIP )
-
-    /**
-     * Constructor
-     */
-    public SaleEvents() {
-		super();
-    }
-    
-    //--- GETTERS & SETTERS FOR FIELDS
-    public void setId( Integer id ) {
-        this.id = id ;
-    }
-    public Integer getId() {
-        return this.id;
-    }
-
-    public void setName( String name ) {
-        this.name = name ;
-    }
-    public String getName() {
-        return this.name;
-    }
-
-    public void setStartDate( Date startDate ) {
-        this.startDate = startDate ;
-    }
-    public Date getStartDate() {
-        return this.startDate;
-    }
-
-    public void setEndDate( Date endDate ) {
-        this.endDate = endDate ;
-    }
-    public Date getEndDate() {
-        return this.endDate;
-    }
-
-    public void setPriceSale( Integer priceSale ) {
-        this.priceSale = priceSale ;
-    }
-    public Integer getPriceSale() {
-        return this.priceSale;
-    }
-
-    //--- GETTERS FOR LINKS
-    //--- toString specific method
-	@Override
-    public String toString() { 
-        StringBuilder sb = new StringBuilder(); 
-        sb.append(id);
-        sb.append("|");
-        sb.append(name);
-        sb.append("|");
-        sb.append(startDate);
-        sb.append("|");
-        sb.append(endDate);
-        sb.append("|");
-        sb.append(priceSale);
-        return sb.toString(); 
-    } 
 
 }

@@ -11,6 +11,10 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  * JPA entity class for "Orders"
  *
@@ -18,6 +22,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *
  */
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name="orders", schema="dbo", catalog="HDWatch" )
 public class Orders implements Serializable {
 
@@ -52,74 +59,5 @@ public class Orders implements Serializable {
     @ManyToOne
     @JoinColumn(name="account_id", referencedColumnName="id", insertable=false, updatable=false)
     private Accounts   accounts ; 
-
-
-    /**
-     * Constructor
-     */
-    public Orders() {
-		super();
-    }
-    
-    //--- GETTERS & SETTERS FOR FIELDS
-    public void setId( Integer id ) {
-        this.id = id ;
-    }
-    public Integer getId() {
-        return this.id;
-    }
-
-    public void setAccountId( Integer accountId ) {
-        this.accountId = accountId ;
-    }
-    public Integer getAccountId() {
-        return this.accountId;
-    }
-
-    public void setAddress( String address ) {
-        this.address = address ;
-    }
-    public String getAddress() {
-        return this.address;
-    }
-
-    public void setCreateDate( Date createDate ) {
-        this.createDate = createDate ;
-    }
-    public Date getCreateDate() {
-        return this.createDate;
-    }
-
-    public void setStatus( String status ) {
-        this.status = status ;
-    }
-    public String getStatus() {
-        return this.status;
-    }
-
-    //--- GETTERS FOR LINKS
-    public List<Orderdetails> getListOfOrderdetails() {
-        return this.listOfOrderdetails;
-    } 
-
-    public Accounts getAccounts() {
-        return this.accounts;
-    } 
-
-    //--- toString specific method
-	@Override
-    public String toString() { 
-        StringBuilder sb = new StringBuilder(); 
-        sb.append(id);
-        sb.append("|");
-        sb.append(accountId);
-        sb.append("|");
-        sb.append(address);
-        sb.append("|");
-        sb.append(createDate);
-        sb.append("|");
-        sb.append(status);
-        return sb.toString(); 
-    } 
 
 }

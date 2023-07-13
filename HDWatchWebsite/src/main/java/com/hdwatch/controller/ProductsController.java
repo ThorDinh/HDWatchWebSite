@@ -19,47 +19,41 @@ public class ProductsController {
 	
 	@RequestMapping(value = {"/", "/home", "/index"})
 	public String index(Model model) {
+		//Tiêu đề trang
+		model.addAttribute("pageTitle", "Trang chủ");
 		//sản phẩm mới nhất
 		List<Products> list = productsService.findProductByCreateDateDESC();
 		model.addAttribute("items", list);
 		//sản phẩm bán chạy
 		model.addAttribute("list", list);
-		model.addAttribute("pageTitle", "Trang chủ");
 		return "home";
 	}
 	
 	@RequestMapping("/about")
 	public String about(Model model) {
+		//Tiêu đề trang
 		model.addAttribute("pageTitle", "Giới thiệu");
 		return "about";
 	}
 	
 	@RequestMapping("/contact")
 	public String contact(Model model) {
+		//Tiêu đề trang
 		model.addAttribute("pageTitle", "Liên lạc");
 		return "contact";
 	}
-//	@RequestMapping("product/search")
-//	public String seachAndPage(Model model,
-//			@RequestParam("keywords") Optional<String> kw,
-//			@RequestParam("p") Optional<Integer> p) {
-//		String kwords = kw.orElse(session.get("keywords",""));
-//		session.set("keywords", kwords);
-//		Pageable pageable = PageRequest.of(p.orElse(0),5);
-//		Page<Products> page=dao.findByKeywords("%"+kwords+"%", pageable);
-//		model.addAttribute("page",page);
-//		return "/product/search-page";
-//	}
 	
 	@RequestMapping("/product/detail/{id}")
 	public String detail(Model model, @PathVariable("id") Integer id) {
 		//hiển thị 1 sản phẩm
 		Products product = productsService.findById(id);
-		model.addAttribute("pageTitle",product.getBrands().getName()+ " - " + product.getName());
 		model.addAttribute("item", product);
+		//Tiêu đề trang
+		model.addAttribute("pageTitle",product.getBrands().getName()+ " - " + product.getName());
 		//sản phẩm liên quan
 		List<Products> list = productsService.findAllByBrandId(product.getBrandid());
 		model.addAttribute("list", list);
 		return "product/detail";
 	}
+	
 }

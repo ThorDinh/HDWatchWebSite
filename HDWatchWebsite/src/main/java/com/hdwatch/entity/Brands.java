@@ -10,6 +10,10 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  * JPA entity class for "Brands"
  *
@@ -17,6 +21,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *
  */
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name="brands", schema="dbo", catalog="HDWatch" )
 public class Brands implements Serializable {
 
@@ -40,52 +47,5 @@ public class Brands implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy="brands")
     private List<Products> listOfProducts ; 
-
-
-    /**
-     * Constructor
-     */
-    public Brands() {
-		super();
-    }
-    
-    //--- GETTERS & SETTERS FOR FIELDS
-    public void setId( Integer id ) {
-        this.id = id ;
-    }
-    public Integer getId() {
-        return this.id;
-    }
-
-    public void setName( String name ) {
-        this.name = name ;
-    }
-    public String getName() {
-        return this.name;
-    }
-
-    public void setImages( String images ) {
-        this.images = images ;
-    }
-    public String getImages() {
-        return this.images;
-    }
-
-    //--- GETTERS FOR LINKS
-    public List<Products> getListOfProducts() {
-        return this.listOfProducts;
-    } 
-
-    //--- toString specific method
-	@Override
-    public String toString() { 
-        StringBuilder sb = new StringBuilder(); 
-        sb.append(id);
-        sb.append("|");
-        sb.append(name);
-        sb.append("|");
-        sb.append(images);
-        return sb.toString(); 
-    } 
 
 }

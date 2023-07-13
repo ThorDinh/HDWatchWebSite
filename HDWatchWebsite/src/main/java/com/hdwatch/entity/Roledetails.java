@@ -7,6 +7,10 @@ package com.hdwatch.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  * JPA entity class for "Roledetails"
  *
@@ -14,6 +18,9 @@ import javax.persistence.*;
  *
  */
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name="roledetails", schema="dbo", catalog="HDWatch" )
 public class Roledetails implements Serializable {
 
@@ -41,56 +48,5 @@ public class Roledetails implements Serializable {
     @ManyToOne
     @JoinColumn(name="roleId", referencedColumnName="id", insertable=false, updatable=false)
     private Roles      roles ; 
-
-
-    /**
-     * Constructor
-     */
-    public Roledetails() {
-		super();
-    }
-    
-    //--- GETTERS & SETTERS FOR FIELDS
-    public void setId( Integer id ) {
-        this.id = id ;
-    }
-    public Integer getId() {
-        return this.id;
-    }
-
-    public void setAccountId( Integer accountId ) {
-        this.accountId = accountId ;
-    }
-    public Integer getAccountId() {
-        return this.accountId;
-    }
-
-    public void setRoleid( Integer roleid ) {
-        this.roleid = roleid ;
-    }
-    public Integer getRoleid() {
-        return this.roleid;
-    }
-
-    //--- GETTERS FOR LINKS
-    public Accounts getAccounts() {
-        return this.accounts;
-    } 
-
-    public Roles getRoles() {
-        return this.roles;
-    } 
-
-    //--- toString specific method
-	@Override
-    public String toString() { 
-        StringBuilder sb = new StringBuilder(); 
-        sb.append(id);
-        sb.append("|");
-        sb.append(accountId);
-        sb.append("|");
-        sb.append(roleid);
-        return sb.toString(); 
-    } 
 
 }

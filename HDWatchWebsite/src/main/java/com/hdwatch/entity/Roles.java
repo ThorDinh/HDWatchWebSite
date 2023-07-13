@@ -10,6 +10,10 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  * JPA entity class for "Roles"
  *
@@ -17,6 +21,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *
  */
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name="roles", schema="dbo", catalog="HDWatch" )
 public class Roles implements Serializable {
 
@@ -37,44 +44,5 @@ public class Roles implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy="roles")
     private List<Roledetails> listOfRoledetails ; 
-
-
-    /**
-     * Constructor
-     */
-    public Roles() {
-		super();
-    }
-    
-    //--- GETTERS & SETTERS FOR FIELDS
-    public void setId( Integer id ) {
-        this.id = id ;
-    }
-    public Integer getId() {
-        return this.id;
-    }
-
-    public void setRole( String role ) {
-        this.role = role ;
-    }
-    public String getRole() {
-        return this.role;
-    }
-
-    //--- GETTERS FOR LINKS
-    public List<Roledetails> getListOfRoledetails() {
-        return this.listOfRoledetails;
-    } 
-
-    //--- toString specific method
-	@Override
-    public String toString() { 
-        StringBuilder sb = new StringBuilder(); 
-        sb.append(id);
-        sb.append("|");
-        sb.append(role);
-        sb.append("|");
-        return sb.toString(); 
-    } 
 
 }

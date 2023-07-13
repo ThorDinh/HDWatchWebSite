@@ -24,23 +24,22 @@ public class CategoryController {
 	
 	@RequestMapping("/category")
 	public String index(Model model, @RequestParam("cid") Optional<Integer> cid) {
+		//tiêu đề trang
 		model.addAttribute("pageTitle", "Danh mục");
+		//Đổ danh mục
 		model.addAttribute("cates", categoriesService.findAll());
+		
+		//Nếu cid = 0 thì đổ tất cả sản phẩm
 		if(cid.isEmpty() || cid.get().equals(0)) {
-//			List<Products> list = productsService.findAll();
-//			model.addAttribute("items", list);
 			List<Products> list = productsService.findAll();
 			model.addAttribute("items", list);
 		}
+		// ngược lại thì đổ dữ liệu theo số cid 
 		else {
-//			List<Productimages> list = productImageService.findAllProductWithCategory(cid.get());
-//			model.addAttribute("items", list);
 			List<Products> list = productsService.findAllByCategoryId(cid.get());
 			model.addAttribute("items", list);
 		}
 		return "category";
 	}
 	
-//	@RequestMapping(/index/detail)
-//	public String detail
 }

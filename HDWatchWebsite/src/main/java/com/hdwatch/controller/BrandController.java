@@ -24,23 +24,22 @@ public class BrandController {
 	
 	@RequestMapping("/brand")
 	public String index(Model model, @RequestParam("bid") Optional<Integer> bid) {
+		//tiêu đề trang
 		model.addAttribute("pageTitle", "Thương hiệu");
+		//Đổ thương hiệu
 		model.addAttribute("brands", brandsService.findAll());
+		
+		//Nếu bid = 0 thì đổ tất cả sản phẩm lên
 		if(bid.isEmpty() || bid.get().equals(0)) {
-//			List<Productimages> list = productImageService.findAllProductWithOneImage();
-//			model.addAttribute("items", list);
 			List<Products> list = productsService.findAll();
 			model.addAttribute("items", list);
 		}
+		//Ngược lại thì đổ sản phẩm theo số bid 
 		else {
-//			List<Productimages> list = productImageService.findAllProductWithBrand(bid.get());
-//			model.addAttribute("items", list);
 			List<Products> list = productsService.findAllByBrandId(bid.get());
 			model.addAttribute("items", list);
 		}
 		return "brand";
 	}
 	
-//	@RequestMapping(/index/detail)
-//	public String detail
 }

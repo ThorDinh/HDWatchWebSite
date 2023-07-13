@@ -7,6 +7,10 @@ package com.hdwatch.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  * JPA entity class for "Orderdetails"
  *
@@ -14,6 +18,9 @@ import javax.persistence.*;
  *
  */
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name="orderdetails", schema="dbo", catalog="HDWatch" )
 public class Orderdetails implements Serializable {
 
@@ -47,74 +54,5 @@ public class Orderdetails implements Serializable {
     @ManyToOne
     @JoinColumn(name="product_id", referencedColumnName="id", insertable=false, updatable=false)
     private Products   products ; 
-
-
-    /**
-     * Constructor
-     */
-    public Orderdetails() {
-		super();
-    }
-    
-    //--- GETTERS & SETTERS FOR FIELDS
-    public void setId( Integer id ) {
-        this.id = id ;
-    }
-    public Integer getId() {
-        return this.id;
-    }
-
-    public void setOrderId( Integer orderId ) {
-        this.orderId = orderId ;
-    }
-    public Integer getOrderId() {
-        return this.orderId;
-    }
-
-    public void setProductId( Integer productId ) {
-        this.productId = productId ;
-    }
-    public Integer getProductId() {
-        return this.productId;
-    }
-
-    public void setPrice( Double price ) {
-        this.price = price ;
-    }
-    public Double getPrice() {
-        return this.price;
-    }
-
-    public void setQuantity( Integer quantity ) {
-        this.quantity = quantity ;
-    }
-    public Integer getQuantity() {
-        return this.quantity;
-    }
-
-    //--- GETTERS FOR LINKS
-    public Orders getOrders() {
-        return this.orders;
-    } 
-
-    public Products getProducts() {
-        return this.products;
-    } 
-
-    //--- toString specific method
-	@Override
-    public String toString() { 
-        StringBuilder sb = new StringBuilder(); 
-        sb.append(id);
-        sb.append("|");
-        sb.append(orderId);
-        sb.append("|");
-        sb.append(productId);
-        sb.append("|");
-        sb.append(price);
-        sb.append("|");
-        sb.append(quantity);
-        return sb.toString(); 
-    } 
 
 }

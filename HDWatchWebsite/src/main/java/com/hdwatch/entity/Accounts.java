@@ -10,6 +10,10 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  * JPA entity class for "Accounts"
  *
@@ -17,6 +21,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *
  */
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name="accounts", schema="dbo", catalog="HDWatch" )
 public class Accounts implements Serializable {
 
@@ -67,109 +74,5 @@ public class Accounts implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy="accounts")
     private List<Carts> listOfCarts ; 
-
-
-    /**
-     * Constructor
-     */
-    public Accounts() {
-		super();
-    }
-    
-    //--- GETTERS & SETTERS FOR FIELDS
-    public void setId( Integer id ) {
-        this.id = id ;
-    }
-    public Integer getId() {
-        return this.id;
-    }
-
-    public void setUsername( String username ) {
-        this.username = username ;
-    }
-    public String getUsername() {
-        return this.username;
-    }
-
-    public void setActivated( Boolean activated ) {
-        this.activated = activated ;
-    }
-    public Boolean getActivated() {
-        return this.activated;
-    }
-
-    public void setEmail( String email ) {
-        this.email = email ;
-    }
-    public String getEmail() {
-        return this.email;
-    }
-
-    public void setFullname( String fullname ) {
-        this.fullname = fullname ;
-    }
-    public String getFullname() {
-        return this.fullname;
-    }
-
-    public void setPassword( String password ) {
-        this.password = password ;
-    }
-    public String getPassword() {
-        return this.password;
-    }
-
-    public void setGoogle( String google ) {
-        this.google = google ;
-    }
-    public String getGoogle() {
-        return this.google;
-    }
-
-    public void setFacebook( String facebook ) {
-        this.facebook = facebook ;
-    }
-    public String getFacebook() {
-        return this.facebook;
-    }
-
-    //--- GETTERS FOR LINKS
-    public List<Favorites> getListOfFavorites() {
-        return this.listOfFavorites;
-    } 
-
-    public List<Orders> getListOfOrders() {
-        return this.listOfOrders;
-    } 
-
-    public List<Roledetails> getListOfRoledetails() {
-        return this.listOfRoledetails;
-    } 
-
-    public List<Carts> getListOfCarts() {
-        return this.listOfCarts;
-    } 
-
-    //--- toString specific method
-	@Override
-    public String toString() { 
-        StringBuilder sb = new StringBuilder(); 
-        sb.append(id);
-        sb.append("|");
-        sb.append(username);
-        sb.append("|");
-        sb.append(activated);
-        sb.append("|");
-        sb.append(email);
-        sb.append("|");
-        sb.append(fullname);
-        sb.append("|");
-        sb.append(password);
-        sb.append("|");
-        sb.append(google);
-        sb.append("|");
-        sb.append(facebook);
-        return sb.toString(); 
-    } 
 
 }

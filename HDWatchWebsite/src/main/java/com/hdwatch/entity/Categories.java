@@ -10,6 +10,10 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  * JPA entity class for "Categories"
  *
@@ -17,6 +21,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *
  */
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name="categories", schema="dbo", catalog="HDWatch" )
 public class Categories implements Serializable {
 
@@ -37,43 +44,5 @@ public class Categories implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy="categories")
     private List<Products> listOfProducts ; 
-
-
-    /**
-     * Constructor
-     */
-    public Categories() {
-		super();
-    }
-    
-    //--- GETTERS & SETTERS FOR FIELDS
-    public void setId( Integer id ) {
-        this.id = id ;
-    }
-    public Integer getId() {
-        return this.id;
-    }
-
-    public void setName( String name ) {
-        this.name = name ;
-    }
-    public String getName() {
-        return this.name;
-    }
-
-    //--- GETTERS FOR LINKS
-    public List<Products> getListOfProducts() {
-        return this.listOfProducts;
-    } 
-
-    //--- toString specific method
-	@Override
-    public String toString() { 
-        StringBuilder sb = new StringBuilder(); 
-        sb.append(id);
-        sb.append("|");
-        sb.append(name);
-        return sb.toString(); 
-    } 
 
 }

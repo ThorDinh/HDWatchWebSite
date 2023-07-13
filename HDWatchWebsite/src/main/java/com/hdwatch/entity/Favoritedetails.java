@@ -7,6 +7,10 @@ package com.hdwatch.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  * JPA entity class for "Favoritedetails"
  *
@@ -14,6 +18,9 @@ import javax.persistence.*;
  *
  */
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name="favoritedetails", schema="dbo", catalog="HDWatch" )
 public class Favoritedetails implements Serializable {
 
@@ -44,65 +51,5 @@ public class Favoritedetails implements Serializable {
     @ManyToOne
     @JoinColumn(name="favorite_id", referencedColumnName="id", insertable=false, updatable=false)
     private Favorites  favorites ; 
-
-
-    /**
-     * Constructor
-     */
-    public Favoritedetails() {
-		super();
-    }
-    
-    //--- GETTERS & SETTERS FOR FIELDS
-    public void setId( Integer id ) {
-        this.id = id ;
-    }
-    public Integer getId() {
-        return this.id;
-    }
-
-    public void setFavoriteId( Integer favoriteId ) {
-        this.favoriteId = favoriteId ;
-    }
-    public Integer getFavoriteId() {
-        return this.favoriteId;
-    }
-
-    public void setProductId( Integer productId ) {
-        this.productId = productId ;
-    }
-    public Integer getProductId() {
-        return this.productId;
-    }
-
-    public void setAvailable( Boolean available ) {
-        this.available = available ;
-    }
-    public Boolean getAvailable() {
-        return this.available;
-    }
-
-    //--- GETTERS FOR LINKS
-    public Products getProducts() {
-        return this.products;
-    } 
-
-    public Favorites getFavorites() {
-        return this.favorites;
-    } 
-
-    //--- toString specific method
-	@Override
-    public String toString() { 
-        StringBuilder sb = new StringBuilder(); 
-        sb.append(id);
-        sb.append("|");
-        sb.append(favoriteId);
-        sb.append("|");
-        sb.append(productId);
-        sb.append("|");
-        sb.append(available);
-        return sb.toString(); 
-    } 
 
 }
