@@ -1,248 +1,264 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="dynamic(main)">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:fragment="dynamic(main)">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-		<!-- Dynamic Title -->
-	<title th:if="${#strings.startsWith(pageTitle, 'HD Watch')} and ${!#strings.endsWith(pageTitle, 'HD Watch')}"
+<!-- Dynamic Title -->
+<title
+	th:if="${#strings.startsWith(pageTitle, 'HD Watch')} and ${!#strings.endsWith(pageTitle, 'HD Watch')}"
 	th:text="${pageTitle} - HD Watch"></title>
-	<title th:unless="${#strings.startsWith(pageTitle, 'HD Watch')} and ${#strings.endsWith(pageTitle, 'HD Watch')}"
+<title
+	th:unless="${#strings.startsWith(pageTitle, 'HD Watch')} and ${#strings.endsWith(pageTitle, 'HD Watch')}"
 	th:text="${pageTitle}"></title>
-	<!-- /Dynamic Title -->
-		
-		<style>
-      /* CSS for sticky header */
-      .sticky {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index: 999;
-      }
+<!-- /Dynamic Title -->
 
-      .sticky + .content {
-        padding-top: 70px; /* Adjust this value to match the height of your sticky header */
-      }
-    </style>
-		
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
-		
- 		<!-- Google font -->
- 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+<style>
+/* CSS for sticky header */
+.sticky {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 999;
+}
 
- 		<!-- Bootstrap -->
- 		<link type="text/css" rel="stylesheet" href="/customer/css/bootstrap.min.css"/>
+.sticky+.content {
+	padding-top: 70px;
+	/* Adjust this value to match the height of your sticky header */
+}
+</style>
 
- 		<!-- Slick -->
- 		<link type="text/css" rel="stylesheet" href="/customer/css/slick.css"/>
- 		<link type="text/css" rel="stylesheet" href="/customer/css/slick-theme.css"/>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
 
- 		<!-- nouislider -->
- 		<link type="text/css" rel="stylesheet" href="/customer/css/nouislider.min.css"/>
+<!-- Google font -->
+<link
+	href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700"
+	rel="stylesheet">
 
- 		<!-- Font Awesome Icon -->
- 		<link rel="stylesheet" href="/customer/css/font-awesome.min.css">
+<!-- Bootstrap -->
+<link type="text/css" rel="stylesheet"
+	href="/customer/css/bootstrap.min.css" />
 
- 		<!-- Custom stlylesheet -->
- 		<link type="text/css" rel="stylesheet" href="/customer/css/style.css"/>
+<!-- Slick -->
+<link type="text/css" rel="stylesheet" href="/customer/css/slick.css" />
+<link type="text/css" rel="stylesheet"
+	href="/customer/css/slick-theme.css" />
 
- 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
- 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
- 		<!--[if lt IE 9]>
+<!-- nouislider -->
+<link type="text/css" rel="stylesheet"
+	href="/customer/css/nouislider.min.css" />
+
+<!-- Font Awesome Icon -->
+<link rel="stylesheet" href="/customer/css/font-awesome.min.css">
+
+<!-- Custom stlylesheet -->
+<link type="text/css" rel="stylesheet" href="/customer/css/style.css" />
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
  		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
  		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
  		<![endif]-->
- 		<script src="customer/js/shopping-cart-app.js"></script>
+<script src="customer/js/shopping-cart-app.js"></script>
 
-    </head>
-	<body ng-app="my-app" ng-controller="shopping-cart-ctrl">
-		<!-- HEADER -->
-		<header>
-			<!-- TOP HEADER -->
-			<div id="top-header">
-				<div class="container">
-					<ul class="header-links pull-right">
-						<div class="dropdown show">
-							<a class="btn btn-danger dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							  <i class="fa fa-user-o"></i>Tài khoản
-							</a>
-							<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-							  <a class="dropdown-item" href="#"> Thông tin tài khoản</a>
-							  <a class="dropdown-item" href="#"> Lịch sử giao dịch</a><br>
-							  <a class="dropdown-item" href="#"> Đổi mật khẩu</a><br>
-							  <a class="dropdown-item" href="#"> Đăng xuất</a>
-							</div>
-						  </div>
-					</ul>
-				</div>
-			</div>
-			<!-- /TOP HEADER -->
-
-			<!-- MAIN HEADER -->
-			<div id="header" >
-				<!-- container -->
-				<div class="container">
-					<!-- row -->
-					<div class="row">
-						<!-- LOGO -->
-						<div class="col-md-3">
-							<div class="header-logo">
-								<a href="/" class="logo">
-									<img src="/img/logo.png" alt="">
-								</a>
-							</div>
-						</div>
-						<!-- /LOGO -->
-
-						<!-- SEARCH BAR -->
-						<div class="col-md-6">
-							<div class="header-search">
-								<form>
-									<input class="input" placeholder="Tìm kiếm">
-									<button class="search-btn">Tìm kiếm</button>
-								</form>
-							</div>
-						</div>
-						<!-- /SEARCH BAR -->
-
-						<!-- ACCOUNT -->
-						<div class="col-md-3 clearfix">
-							<div class="header-ctn">
-								<!-- Wishlist -->
-								<div>
-									<a href="#">
-										<i class="fa fa-heart-o"></i>
-										<span>Yêu thích</span>
-										<div class="qty">2</div>
-									</a>
-								</div>
-								<!-- /Wishlist -->
-
-								<!-- Cart -->
-								<div>
-									<a th:href="@{/cart-view}">
-										<i class="fa fa-shopping-cart"></i>
-										<span>Giỏ hàng</span>
-										<div class="qty">{{cart.count}}</div>
-									</a>
-								</div>
-								<!-- /Cart -->
-
-								<!-- Menu Toogle -->
-								<div class="menu-toggle">
-									<a href="#">
-										<i class="fa fa-bars"></i>
-										<span>Menu</span>
-									</a>
-								</div>
-								<!-- /Menu Toogle -->
-							</div>
-						</div>
-						<!-- /ACCOUNT -->
+</head>
+<body ng-app="my-app" ng-controller="shopping-cart-ctrl">
+	<!-- HEADER -->
+	<header>
+		<!-- TOP HEADER -->
+		<div id="top-header">
+			<div class="container">
+				<ul class="header-links pull-right">
+					<div class="btn" th:if="${not #authorization.expression('isAuthenticated()')}">
+						<a class="btn btn-danger " th:href="@{/security/login/form}"> <i class="fa fa-user-o"></i>Đăng Nhập
+						</a>
+						<a class="btn btn-danger " th:href="@{/register}"> <i class="fa fa-user-o"></i>Đăng Ký
+						</a>
+						
 					</div>
-					<!-- row -->
-				</div>
-				<!-- container -->
+					<div class="dropdown show"th:if="${#authorization.expression('isAuthenticated()')}">
+						<a class="btn btn-danger dropdown-toggle" href="#"
+							id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+							aria-expanded="false"> <i class="fa fa-user-o"></i>Tài khoản
+						</a>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+							<a class="dropdown-item" href="#"> Thông tin tài khoản</a> <a
+								class="dropdown-item" href="#"> Lịch sử giao dịch</a><br> <a
+								class="dropdown-item" href="#"> Đổi mật khẩu</a><br> <a
+								class="dropdown-item" href="#"> Đăng xuất</a>
+						</div>
+					</div>
+				</ul>
 			</div>
-			<!-- /MAIN HEADER -->
-		</header>
-		<!-- /HEADER -->
+		</div>
+		<!-- /TOP HEADER -->
 
-		<!-- NAVIGATION -->
-		<nav id="navigation">
+		<!-- MAIN HEADER -->
+		<div id="header">
 			<!-- container -->
 			<div class="container">
-				<!-- responsive-nav -->
-				<div id="responsive-nav">
-					<!-- NAV -->
-					<ul class="main-nav nav navbar-nav">
-						<li><a href="/home">Trang chủ</a></li>
-						<li><a href="/category">Danh mục</a></li>
-						<li><a href="/brand">Thương hiệu</a></li>
-						<li><a href="/about">Giới thiệu</a></li>
-						<li><a href="/contact">Liên lạc</a></li>
-					</ul>
-					<!-- /NAV -->
+				<!-- row -->
+				<div class="row">
+					<!-- LOGO -->
+					<div class="col-md-3">
+						<div class="header-logo">
+							<a href="/" class="logo"> <img src="/img/logo.png" alt="">
+							</a>
+						</div>
+					</div>
+					<!-- /LOGO -->
+
+					<!-- SEARCH BAR -->
+					<div class="col-md-6">
+						<div class="header-search">
+							<form>
+								<input class="input" placeholder="Tìm kiếm">
+								<button class="search-btn">Tìm kiếm</button>
+							</form>
+						</div>
+					</div>
+					<!-- /SEARCH BAR -->
+
+					<!-- ACCOUNT -->
+					<div class="col-md-3 clearfix">
+						<div class="header-ctn">
+							<!-- Wishlist -->
+							<div>
+								<a href="#"> <i class="fa fa-heart-o"></i> <span>Yêu
+										thích</span>
+									<div class="qty">2</div>
+								</a>
+							</div>
+							<!-- /Wishlist -->
+
+							<!-- Cart -->
+							<div>
+								<a th:href="@{/cart-view}"> <i class="fa fa-shopping-cart"></i>
+									<span>Giỏ hàng</span>
+									<div class="qty">{{cart.count}}</div>
+								</a>
+							</div>
+							<!-- /Cart -->
+
+							<!-- Menu Toogle -->
+							<div class="menu-toggle">
+								<a href="#"> <i class="fa fa-bars"></i> <span>Menu</span>
+								</a>
+							</div>
+							<!-- /Menu Toogle -->
+						</div>
+					</div>
+					<!-- /ACCOUNT -->
 				</div>
-				<!-- /responsive-nav -->
+				<!-- row -->
+			</div>
+			<!-- container -->
+		</div>
+		<!-- /MAIN HEADER -->
+	</header>
+	<!-- /HEADER -->
+
+	<!-- NAVIGATION -->
+	<nav id="navigation">
+		<!-- container -->
+		<div class="container">
+			<!-- responsive-nav -->
+			<div id="responsive-nav">
+				<!-- NAV -->
+				<ul class="main-nav nav navbar-nav">
+					<li><a href="/home">Trang chủ</a></li>
+					<li><a href="/category">Danh mục</a></li>
+					<li><a href="/brand">Thương hiệu</a></li>
+					<li><a href="/about">Giới thiệu</a></li>
+					<li><a href="/contact">Liên lạc</a></li>
+				</ul>
+				<!-- /NAV -->
+			</div>
+			<!-- /responsive-nav -->
+		</div>
+		<!-- /container -->
+	</nav>
+	<!-- /NAVIGATION -->
+
+	<div th:replace="${main}"></div>
+
+	<!-- FOOTER -->
+	<footer id="footer">
+		<!-- top footer -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+
+					<div class="clearfix visible-xs"></div>
+
+					<div class="col-md-3 col-xs-6">
+						<div class="footer">
+							<h3 class="footer-title">Thông tin về chúng tôi</h3>
+							<ul class="footer-links">
+								<li><i class="fa fa-map-marker"></i><a href="/about">Giới
+										thiệu</a></li>
+								<li><i class="fa fa-phone"></i><a href="/contact">Liên
+										lạc</a></li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="col-md-3 col-xs-6">
+						<div class="footer">
+							<h3 class="footer-title">Dịch vụ</h3>
+							<ul class="footer-links">
+								<li><a href="#"><i class="fa fa-user-o"></i>Tài khoản</a></li>
+								<li><a href="#"><i class="fa fa-shopping-cart"></i>Giỏ
+										hàng</a></li>
+								<li><a href="#"><i class="fa fa-heart-o"></i>Yêu thích</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!-- /row -->
 			</div>
 			<!-- /container -->
-		</nav>
-		<!-- /NAVIGATION -->
+		</div>
+		<!-- /top footer -->
 
-		<div th:replace="${main}"></div>
+		<!-- bottom footer -->
+		<div id="bottom-footer" class="section">
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<span class="copyright"> <a target="_blank"
+							href="https://www.templateshub.net">HDWATCH.COM</a>
+						</span>
 
-		<!-- FOOTER -->
-		<footer id="footer">
-			<!-- top footer -->
-			<div class="section">
-				<!-- container -->
-				<div class="container">
-					<!-- row -->
-					<div class="row">
 
-						<div class="clearfix visible-xs"></div>
-
-						<div class="col-md-3 col-xs-6">
-							<div class="footer">
-								<h3 class="footer-title">Thông tin về chúng tôi</h3>
-								<ul class="footer-links">
-									<li><i class="fa fa-map-marker"></i><a href="/about">Giới thiệu</a></li>
-									<li><i class="fa fa-phone"></i><a href="/contact">Liên lạc</a></li>
-								</ul>
-							</div>
-						</div>
-
-						<div class="col-md-3 col-xs-6">
-							<div class="footer">
-								<h3 class="footer-title">Dịch vụ</h3>
-								<ul class="footer-links">
-									<li><a href="#"><i class="fa fa-user-o"></i>Tài khoản</a></li>
-									<li><a href="#"><i class="fa fa-shopping-cart"></i>Giỏ hàng</a></li>
-									<li><a href="#"><i class="fa fa-heart-o"></i>Yêu thích</a></li>
-								</ul>
-							</div>
-						</div>
 					</div>
-					<!-- /row -->
 				</div>
-				<!-- /container -->
+				<!-- /row -->
 			</div>
-			<!-- /top footer -->
+			<!-- /container -->
+		</div>
+		<!-- /bottom footer -->
+	</footer>
+	<!-- /FOOTER -->
 
-			<!-- bottom footer -->
-			<div id="bottom-footer" class="section">
-				<div class="container">
-					<!-- row -->
-					<div class="row">
-						<div class="col-md-12 text-center">
-							<span class="copyright">
-								 <a target="_blank" href="https://www.templateshub.net">HDWATCH.COM</a>
-							</span>
+	<!-- jQuery Plugins -->
+	<script src="/customer/js/jquery.min.js"></script>
+	<script src="/customer/js/bootstrap.min.js"></script>
+	<script src="/customer/js/slick.min.js"></script>
+	<script src="/customer/js/nouislider.min.js"></script>
+	<script src="/customer/js/jquery.zoom.min.js"></script>
+	<script src="/customer/js/main.js"></script>
 
+	<!--Custom JS-->
+	<script src="/customer/js/shopping-cart-app.js"></script>
 
-						</div>
-					</div>
-						<!-- /row -->
-				</div>
-				<!-- /container -->
-			</div>
-			<!-- /bottom footer -->
-		</footer>
-		<!-- /FOOTER -->
-
-		<!-- jQuery Plugins -->
-		<script src="/customer/js/jquery.min.js"></script>
-		<script src="/customer/js/bootstrap.min.js"></script>
-		<script src="/customer/js/slick.min.js"></script>
-		<script src="/customer/js/nouislider.min.js"></script>
-		<script src="/customer/js/jquery.zoom.min.js"></script>
-		<script src="/customer/js/main.js"></script>
-		
-		<!--Custom JS-->
-		<script src="/customer/js/shopping-cart-app.js"></script>
-
-	</body>
+</body>
 </html>
