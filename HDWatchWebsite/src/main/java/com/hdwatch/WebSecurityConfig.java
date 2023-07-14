@@ -44,7 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				Accounts user = accountService.findByUsername(username);
 				String password = pe.encode(user.getPassword());
 				String[] roles = user.getListOfRoledetails().stream()
-						.map(er -> er.getRoles().getId())
+						.map(er -> er.getRoles().getRole())
 						.collect(Collectors.toList())
 						.toArray(new String[0]);
 				

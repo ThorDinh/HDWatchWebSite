@@ -16,6 +16,7 @@ public class AccountController {
 	@RequestMapping("/security/login/form")
 	public String getAccounts(Model model) {
 		//model.addAttribute("message","Vui lòng đăng nhập");
+		model.addAttribute("pageTitle", "Đăng nhập");
 		return "account/login";
 	}
 	
