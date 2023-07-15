@@ -2,7 +2,10 @@ package com.hdwatch.service;
 
 import java.util.List;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import com.hdwatch.entity.Accounts;
+
 
 public interface AccountsService {
 	
@@ -16,5 +19,10 @@ public interface AccountsService {
 	
 	Accounts findByUsername(String username);
 	
+	
+	
 	void deleteById(Integer id);
+
+	Accounts loadUserByUsername(String username);
+
 }

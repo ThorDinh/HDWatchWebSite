@@ -7,6 +7,9 @@ package com.hdwatch.entity;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
+import javax.transaction.Transactional;
+
+import org.springframework.data.mapping.AccessOptions.SetOptions.Propagation;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -61,7 +64,7 @@ public class Accounts implements Serializable {
     private List<Orders> listOfOrders ; 
     
     @JsonIgnore
-    @OneToMany(mappedBy="accounts")
+    @OneToMany(mappedBy="accounts",fetch = FetchType.EAGER)
     private List<Roledetails> listOfRoledetails ; 
 
     @JsonIgnore

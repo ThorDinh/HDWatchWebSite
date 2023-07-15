@@ -37,29 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	HttpSession session;
 	
 	// Cung cấp nguồn dữ liệu đăng nhập
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(username -> {
-			try {
-				Accounts user = accountService.findByUsername(username);
-				String password = pe.encode(user.getPassword());
-				String[] roles = user.getListOfRoledetails().stream()
-						.map(er -> er.getRoles().getId())
-						.collect(Collectors.toList())
-						.toArray(new String[0]);
-				
-				Map<String, Object> authentication = new HashMap<>();
-				authentication.put("user", user);
-				byte[] token = (username + ":" + user.getPassword()).getBytes();
-				authentication.put("token", "Basic " + Base64.getEncoder().encodeToString(token));
-				session.setAttribute("authentication", authentication);
-				
-				return User.withUsername(username).password(password).roles(roles).build();
-			} catch (NoSuchElementException e) {
-				throw new UsernameNotFoundException(username + " not found!");
-			}
-		});
-	}
+	
 	
 	// Phân quyền sử dụng
 	@Override
@@ -71,11 +49,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //			.antMatchers("/rest/authorities").hasRole("DIRE")
 			.anyRequest().permitAll();
 		
-		http.formLogin()
-		.loginPage("/security/login/form")
-		.loginProcessingUrl("/security/login")
-		.defaultSuccessUrl("/security/login/success", false)                // false: đăng nhập thành công không nhất thiết phải quay về success
-		.failureUrl("/security/login/error");
+		http.formLogin();
+		
 
 		http.rememberMe()
 			.tokenValiditySeconds(86400);

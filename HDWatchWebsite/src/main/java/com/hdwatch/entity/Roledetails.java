@@ -91,6 +91,8 @@ public class Roledetails implements Serializable {
         sb.append("|");
         sb.append(roleid);
         return sb.toString(); 
-    } 
+    }
+
+
 
 }
