@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class SecurityController {
+	//Trang đăng nhập
 	@RequestMapping("/login/form")
 	public String loginForm(Model model) {
 		//Tiêu đề trang
@@ -15,6 +16,7 @@ public class SecurityController {
 		return "account/login";
 	}
 	
+	//Đăng nhập thành công
 	@RequestMapping("/login/success")
 	public String loginSuccess(Model model) {
 		//Tiêu đề trang
@@ -24,6 +26,8 @@ public class SecurityController {
 		return "redirect:/home";
 	}
 	
+	
+	//Đăng nhập thất bại 
 	@RequestMapping("/login/error")
 	public String loginError(Model model) {
 		//Tiêu đề trang
@@ -33,6 +37,8 @@ public class SecurityController {
 		return "account/login";
 	}
 	
+	
+	//Không có quyền truy xuất
 	@RequestMapping("/unauthoried")
 	public String unauthoried(Model model) {
 		//Thông báo
@@ -40,6 +46,7 @@ public class SecurityController {
 		return "account/login";
 	}
 	
+	//Đăng xuất
 	@RequestMapping("/logoff/success")
 	public String logoffSuccess(Model model) {
 		//Tiêu đề trang

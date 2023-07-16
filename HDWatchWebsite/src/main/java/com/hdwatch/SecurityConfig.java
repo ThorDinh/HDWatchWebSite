@@ -35,10 +35,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			try {
 				Accounts user = accountService.findById(username);
 				String password = pe.encode(user.getPassword());
-				List<String> roles = user.getListOfRoledetails().stream()
+				String[] roles = user.getListOfRoledetails().stream()
 						.map(er -> er.getRoles().getId())
-						.collect(Collectors.toList());
-				return User.withUsername(username).password(password).roles(roles.toArray(new String[0])).build();
+						.collect(Collectors.toList()).toArray(new String[0]);
+				return User.withUsername(username).password(password).roles(roles).build();
 			} catch(NoSuchElementException e) {
 				throw new UsernameNotFoundException(username + " not found");
 			}

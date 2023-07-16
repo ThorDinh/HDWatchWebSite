@@ -22,6 +22,7 @@ public class BrandController {
 	@Autowired
 	ProductsService productsService;
 	
+	//Thương hiệu
 	@RequestMapping("/brand")
 	public String index(Model model, @RequestParam("bid") Optional<Integer> bid) {
 		//tiêu đề trang

@@ -22,6 +22,7 @@ public class CategoryController {
 	@Autowired
 	ProductsService productsService;
 	
+	//Danh mục
 	@RequestMapping("/category")
 	public String index(Model model, @RequestParam("cid") Optional<Integer> cid) {
 		//tiêu đề trang

@@ -17,6 +17,7 @@ public class ProductsController {
 	@Autowired
 	ProductsService productsService;
 	
+	//Trang chủ
 	@RequestMapping(value = {"/", "/home", "/index"})
 	public String index(Model model) {
 		//Tiêu đề trang
@@ -29,6 +30,7 @@ public class ProductsController {
 		return "home";
 	}
 	
+	//Giới thiệu
 	@RequestMapping("/about")
 	public String about(Model model) {
 		//Tiêu đề trang
@@ -36,6 +38,7 @@ public class ProductsController {
 		return "about";
 	}
 	
+	//Liên hệ
 	@RequestMapping("/contact")
 	public String contact(Model model) {
 		//Tiêu đề trang
@@ -43,6 +46,7 @@ public class ProductsController {
 		return "contact";
 	}
 	
+	//Sản phẩm chi tiết
 	@RequestMapping("/product/detail/{id}")
 	public String detail(Model model, @PathVariable("id") Integer id) {
 		//hiển thị 1 sản phẩm

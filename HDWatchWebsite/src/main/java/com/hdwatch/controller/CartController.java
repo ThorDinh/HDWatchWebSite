@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class CartController {
+	//Xem giỏ hàng
 	@RequestMapping("/cart/view")
 	public String cart(Model model) {
 		model.addAttribute("pageTitle", "Giỏ hàng");
