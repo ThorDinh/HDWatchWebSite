@@ -61,30 +61,7 @@
 		<!-- HEADER -->
 		<header>
 			<!-- TOP HEADER -->
-			<div id="top-header">
-				<div class="container">
-					<ul class="header-links pull-right">
-						<th:block th:unless="${#request.remoteUser}">
-						<a class="btn btn-danger" href="/login/form">
-							  <i class="fa fa-user-o"></i>Đăng nhập
-							</a>
-						</th:block>
-						<th:block th:if="${#request.remoteUser}">
-						<div class="dropdown show">
-							<a class="btn btn-danger dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							  <i class="fa fa-user-o"></i>Tài khoản
-							</a>
-							<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-							  <a class="dropdown-item" href="#"> Thông tin tài khoản</a>
-							  <a class="dropdown-item" href="#"> Lịch sử giao dịch</a><br>
-							  <a class="dropdown-item" href="#"> Đổi mật khẩu</a><br>
-							  <a class="dropdown-item" href="/logoff"> Đăng xuất</a>
-							</div>
-						  </div>
-						  </th:block>
-					</ul>
-				</div>
-			</div>
+			<div th:replace="~{/layout/_header-login}"></div>
 			<!-- /TOP HEADER -->
 
 			<!-- MAIN HEADER -->
@@ -94,59 +71,15 @@
 					<!-- row -->
 					<div class="row">
 						<!-- LOGO -->
-						<div class="col-md-3">
-							<div class="header-logo">
-								<a href="/" class="logo">
-									<img src="/img/logo.png" alt="">
-								</a>
-							</div>
-						</div>
+						<div th:replace="~{/layout/_logo}"></div>
 						<!-- /LOGO -->
 
 						<!-- SEARCH BAR -->
-						<div class="col-md-6">
-							<div class="header-search">
-								<form>
-									<input class="input" placeholder="Tìm kiếm">
-									<button class="search-btn">Tìm kiếm</button>
-								</form>
-							</div>
-						</div>
+						<div th:replace="~{/layout/_search-bar}"></div>
 						<!-- /SEARCH BAR -->
 
 						<!-- ACCOUNT -->
-						<div class="col-md-3 clearfix">
-							<div class="header-ctn">
-								<!-- Wishlist -->
-								<div>
-									<a href="#">
-										<i class="fa fa-heart-o"></i>
-										<span>Yêu thích</span>
-										<div class="qty">2</div>
-									</a>
-								</div>
-								<!-- /Wishlist -->
-
-								<!-- Cart -->
-								<div>
-									<a th:href="@{/cart/view}">
-										<i class="fa fa-shopping-cart"></i>
-										<span>Giỏ hàng</span>
-										<div class="qty">{{cart.count}}</div>
-									</a>
-								</div>
-								<!-- /Cart -->
-
-								<!-- Menu Toogle -->
-								<div class="menu-toggle">
-									<a href="#">
-										<i class="fa fa-bars"></i>
-										<span>Menu</span>
-									</a>
-								</div>
-								<!-- /Menu Toogle -->
-							</div>
-						</div>
+						<div th:replace="~{/layout/_cart-favorite}"></div>
 						<!-- /ACCOUNT -->
 					</div>
 					<!-- row -->
@@ -158,25 +91,7 @@
 		<!-- /HEADER -->
 
 		<!-- NAVIGATION -->
-		<nav id="navigation">
-			<!-- container -->
-			<div class="container">
-				<!-- responsive-nav -->
-				<div id="responsive-nav">
-					<!-- NAV -->
-					<ul class="main-nav nav navbar-nav">
-						<li><a href="/home">Trang chủ</a></li>
-						<li><a href="/category?cid=1">Danh mục</a></li>
-						<li><a href="/brand?bid=1">Thương hiệu</a></li>
-						<li><a href="/about">Giới thiệu</a></li>
-						<li><a href="/contact">Liên lạc</a></li>
-					</ul>
-					<!-- /NAV -->
-				</div>
-				<!-- /responsive-nav -->
-			</div>
-			<!-- /container -->
-		</nav>
+		<nav th:replace="~{/layout/_menu}"></nav>
 		<!-- /NAVIGATION -->
 
 		<div th:replace="${main}"></div>

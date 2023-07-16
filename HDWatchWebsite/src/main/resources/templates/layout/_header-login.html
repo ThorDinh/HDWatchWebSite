@@ -1,0 +1,26 @@
+<!-- TOP HEADER -->
+			<div id="top-header">
+				<div class="container">
+					<ul class="header-links pull-right">
+						<th:block th:unless="${#request.remoteUser}">
+						<a class="btn btn-danger" href="/login/form">
+							  <i class="fa fa-user-o"></i>Đăng nhập
+							</a>
+						</th:block>
+						<th:block th:if="${#request.remoteUser}">
+						<div class="dropdown show">
+							<a class="btn btn-danger dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							  <i class="fa fa-user-o"></i>Tài khoản
+							</a>
+							<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+							  <a class="dropdown-item" href="#"> Thông tin tài khoản</a>
+							  <a class="dropdown-item" href="#"> Lịch sử giao dịch</a><br>
+							  <a class="dropdown-item" href="#"> Đổi mật khẩu</a><br>
+							  <a class="dropdown-item" href="/logoff"> Đăng xuất</a>
+							</div>
+						  </div>
+						  </th:block>
+					</ul>
+				</div>
+			</div>
+<!-- /TOP HEADER -->
