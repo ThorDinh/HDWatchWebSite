@@ -8,7 +8,7 @@ public interface AccountsService {
 	
 //	List<Accounts> findAll();
 //	
-//	Accounts findById(Integer id);
+	Accounts findById(String id);
 //	
 //	Accounts create(Accounts accounts);
 //	

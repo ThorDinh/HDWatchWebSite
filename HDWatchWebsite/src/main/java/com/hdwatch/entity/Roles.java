@@ -31,9 +31,8 @@ public class Roles implements Serializable {
 
     //--- ENTITY PRIMARY KEY 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name="id", nullable=false)
-    private Integer    id ;
+    @Column(name="id", nullable=false, length= 3)
+    private String    id ;
 
     //--- ENTITY DATA FIELDS 
     @Column(name="role", nullable=false, length=50)

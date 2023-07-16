@@ -21,32 +21,25 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="roledetails", schema="dbo", catalog="HDWatch" )
+@Table(name="roledetails", schema="dbo", catalog="HDWatch" ,uniqueConstraints = 
+@UniqueConstraint(columnNames = {"account_id","role_id"}))
 public class Roledetails implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     //--- ENTITY PRIMARY KEY 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id", nullable=false)
     private Integer    id ;
 
-    //--- ENTITY DATA FIELDS 
-    @Column(name="account_id", nullable=false)
-    private Integer    accountId ;
-
-    @Column(name="roleId", nullable=false)
-    private Integer    roleid ;
-
-
     //--- ENTITY LINKS ( RELATIONSHIP )
     @ManyToOne
-    @JoinColumn(name="account_id", referencedColumnName="id", insertable=false, updatable=false)
+    @JoinColumn(name="account_id")
     private Accounts   accounts ; 
 
     @ManyToOne
-    @JoinColumn(name="roleId", referencedColumnName="id", insertable=false, updatable=false)
+    @JoinColumn(name="role_id")
     private Roles      roles ; 
 
 }

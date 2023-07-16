@@ -31,14 +31,10 @@ public class Accounts implements Serializable {
 
     //--- ENTITY PRIMARY KEY 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name="id", nullable=false)
-    private Integer    id ;
-
-    //--- ENTITY DATA FIELDS 
     @Column(name="username", nullable=false, length=50)
     private String     username ;
 
+    //--- ENTITY DATA FIELDS 
     @Column(name="activated", nullable=false)
     private Boolean    activated ;
 
@@ -68,7 +64,7 @@ public class Accounts implements Serializable {
     private List<Orders> listOfOrders ; 
     
     @JsonIgnore
-    @OneToMany(mappedBy="accounts")
+    @OneToMany(mappedBy="accounts", fetch = FetchType.EAGER)
     private List<Roledetails> listOfRoledetails ; 
 
     @JsonIgnore

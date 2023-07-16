@@ -36,13 +36,13 @@ public class Carts implements Serializable {
     private Integer    id ;
 
     //--- ENTITY DATA FIELDS 
-    @Column(name="account_id", nullable=false)
-    private Integer    accountId ;
+    @Column(name="account_id", nullable=false, length=50)
+    private String    accountId ;
 
 
     //--- ENTITY LINKS ( RELATIONSHIP )
     @ManyToOne
-    @JoinColumn(name="account_id", referencedColumnName="id", insertable=false, updatable=false)
+    @JoinColumn(name="account_id", referencedColumnName="username", insertable=false, updatable=false)
     private Accounts   accounts ; 
     
     @JsonIgnore
