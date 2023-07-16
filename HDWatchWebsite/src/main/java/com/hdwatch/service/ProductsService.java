@@ -24,4 +24,6 @@ public interface ProductsService {
 	List<Products> findAllByCategoryId(Integer id);
 
 	List<Products> getProductsOrderedByOrderCount();
+
+	List<Products> searchProductsByKeyword(String keyword);
 }

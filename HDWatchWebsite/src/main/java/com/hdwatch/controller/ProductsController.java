@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hdwatch.entity.Products;
 import com.hdwatch.service.ProductsService;
@@ -61,4 +62,24 @@ public class ProductsController {
 		return "product/detail";
 	}
 	
+	//Tìm kiếm sản phẩm
+	@RequestMapping("/product/search")
+	public String search(@RequestParam(name = "keyword", required = false) String keyword, Model model) {
+		//Tiêu đề trang
+		model.addAttribute("pageTitle","Tìm kiếm sản phẩm: " + keyword);
+		//tìm kiếm sản phẩm theo keyword
+		List<Products> filteredProducts;
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            filteredProducts = productsService.searchProductsByKeyword(keyword);
+        } else {
+            filteredProducts = productsService.findAll();
+        }
+        //Nếu danh sách sản phẩm tìm kiếm trả về null thì hiện thông báo và ngược lại
+        if (filteredProducts.isEmpty()) {
+            model.addAttribute("message", "Không có kết quả trả về cho từ khóa: " + keyword);
+        } else {
+            model.addAttribute("items", filteredProducts);
+        }
+		return "product/search";
+	}
 }

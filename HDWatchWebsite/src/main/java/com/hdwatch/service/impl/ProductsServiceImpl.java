@@ -76,4 +76,9 @@ public class  ProductsServiceImpl implements ProductsService  {
 	public List<Products> getProductsOrderedByOrderCount() {
         return pdao.getProductsOrderedByOrderCount();
     }
+	
+	@Override
+	public List<Products> searchProductsByKeyword(String keyword){
+		return pdao.searchProductsByKeyword(keyword.toLowerCase());
+	}
 }

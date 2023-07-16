@@ -1,8 +1,8 @@
 <!-- SEARCH BAR -->
 <div class="col-md-6">
 		<div class="header-search">
-			<form>
-				<input class="input" placeholder="Tìm kiếm">
+			<form th:action="@{/product/search}" th:method="get">
+				<input type="text" class="input" name="keyword" th:value="${param.keyword}" placeholder="Tìm kiếm">
 				<button class="search-btn">Tìm kiếm</button>
 			</form>
 		</div>
