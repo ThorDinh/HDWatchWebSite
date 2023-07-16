@@ -26,7 +26,8 @@ public class ProductsController {
 		List<Products> list = productsService.findProductByCreateDateDESC();
 		model.addAttribute("items", list);
 		//sản phẩm bán chạy
-		model.addAttribute("list", list);
+		List<Products> list1 = productsService.getProductsOrderedByOrderCount();
+		model.addAttribute("list", list1);
 		return "home";
 	}
 	

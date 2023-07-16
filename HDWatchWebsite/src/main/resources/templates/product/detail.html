@@ -35,8 +35,8 @@
 							<p class="product-category" th:text="${item.brands.name}"></p>
 							<h2 class="product-name" th:text="${item.name}"></h2>
 							<div>
-								<h3 class="product-price"><p th:text="${item.price}"></p> 
-									<del class="product-old-price"><p th:text="${item.oldprice}"></p></del></h3><br>
+								<h3 class="product-price"> <p th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}"></p> <del
+													class="product-old-price"><p th:text="${#numbers.formatDecimal(item.oldprice, 0, 'COMMA', 2, 'POINT')}"></p></del></h3><br>
 								<span class="product-available" th:if="${item.available}">Còn hàng</span>
 							</div>
 							<p th:text="${item.description}"></p>

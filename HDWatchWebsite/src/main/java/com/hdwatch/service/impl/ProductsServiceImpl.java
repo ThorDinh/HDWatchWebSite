@@ -71,4 +71,9 @@ public class  ProductsServiceImpl implements ProductsService  {
 	public List<Products> findAllByCategoryId(Integer id){
 		return pdao.findByCategoryid(id);
 	}
+	
+	@Override
+	public List<Products> getProductsOrderedByOrderCount() {
+        return pdao.getProductsOrderedByOrderCount();
+    }
 }

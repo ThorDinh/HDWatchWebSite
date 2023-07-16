@@ -22,4 +22,6 @@ public interface ProductsService {
 	List<Products> findAllByBrandId(Integer integer);
 
 	List<Products> findAllByCategoryId(Integer id);
+
+	List<Products> getProductsOrderedByOrderCount();
 }
