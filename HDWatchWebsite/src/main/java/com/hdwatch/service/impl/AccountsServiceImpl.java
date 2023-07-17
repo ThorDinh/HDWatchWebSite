@@ -30,10 +30,10 @@ public class AccountsServiceImpl implements AccountsService {
 //	}
 //
 //	@Override
-//	public Accounts save(Integer id, Accounts accounts) {
+//	public Accounts save(String id, Accounts accounts) {
 //		Accounts existingAccounts = accountsDAO.findById(id).orElse(null);
 //		if(existingAccounts != null) {
-//			existingAccounts.setId(accounts.getId());
+//			existingAccounts.setUsername(accounts.getUsername());
 //			existingAccounts.setActivated(accounts.getActivated());
 //			existingAccounts.setFullname(accounts.getFullname());
 //			existingAccounts.setEmail(accounts.getEmail());

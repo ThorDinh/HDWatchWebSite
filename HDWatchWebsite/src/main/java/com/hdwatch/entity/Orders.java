@@ -32,7 +32,7 @@ public class Orders implements Serializable {
 
     //--- ENTITY PRIMARY KEY 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id", nullable=false)
     private Integer    id ;
 
@@ -54,7 +54,7 @@ public class Orders implements Serializable {
     //--- ENTITY LINKS ( RELATIONSHIP )
     @JsonIgnore
     @OneToMany(mappedBy="orders")
-    private List<Orderdetails> listOfOrderdetails ; 
+    private List<Orderdetails> orderDetails ; 
 
     @ManyToOne
     @JoinColumn(name="account_id", referencedColumnName="username", insertable=false, updatable=false)

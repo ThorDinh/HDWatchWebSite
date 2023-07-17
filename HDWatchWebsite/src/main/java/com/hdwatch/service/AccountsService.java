@@ -12,7 +12,7 @@ public interface AccountsService {
 //	
 //	Accounts create(Accounts accounts);
 //	
-//	Accounts save(Integer id,Accounts accounts);
+//	Accounts save(String id,Accounts accounts);
 //	
 //	void deleteById(Integer id);
 }

@@ -3,16 +3,16 @@ package com.hdwatch.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import com.hdwatch.dao.OrderdetailsDAO;
 import com.hdwatch.dao.OrdersDAO;
 import com.hdwatch.entity.Orders;
 import com.hdwatch.service.OrdersService;
 
-
+@Service
 public class OrdersServiceImpl implements OrdersService {
-//	@Autowired
-//	OrdersDAO ordersDAO;
+	@Autowired
+	OrdersDAO ordersDAO;
 //	
 //	public OrdersServiceImpl(OrdersDAO ordersDAO) {
 //        this.ordersDAO = ordersDAO;
@@ -22,10 +22,10 @@ public class OrdersServiceImpl implements OrdersService {
 ////	OrderdetailsDAO o2Dao;
 //	
 //
-//	@Override
-//	public Orders findById(Integer id) {
-//		return ordersDAO.findById(id).get();
-//	}
+	@Override
+	public Orders findById(Integer id) {
+		return ordersDAO.findById(id).get();
+	}
 //
 //
 //	@Override
@@ -95,4 +95,9 @@ public class OrdersServiceImpl implements OrdersService {
 //			return order;
 //		
 //	}
+	
+	@Override
+	public List<Orders> findByUsername(String username) {
+		return ordersDAO.findByUsername(username);
+	}
 }
