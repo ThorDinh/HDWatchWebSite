@@ -52,7 +52,7 @@ public class Accounts implements Serializable {
 
     @Column(name="facebook", length=2147483647)
     private String     facebook ;
-    
+
 
     //--- ENTITY LINKS ( RELATIONSHIP )
     @JsonIgnore

@@ -6,9 +6,4 @@ import com.hdwatch.entity.Accounts;
 
 public interface AccountsDAO extends JpaRepository<Accounts, String>{
 
-	Accounts findByUsername(String username);
-
-//	Accounts findByEmail(String email);
-	
-
 }

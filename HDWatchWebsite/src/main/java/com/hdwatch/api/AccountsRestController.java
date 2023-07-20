@@ -20,31 +20,31 @@ import com.hdwatch.service.AccountsService;
 @RestController
 @RequestMapping("/rest/accounts")
 public class AccountsRestController {
-	@Autowired
-	AccountsService accountsService;
-	
-	@GetMapping
-	public List<Accounts> getAll(){
-		return accountsService.findAll();
-	}
-	
-	@GetMapping("{id}")
-	public Accounts getOne(@PathVariable("id")String id) {
-		return accountsService.findById(id);
-	}
-	
-	@PostMapping
-	public Accounts createAccounts(@RequestBody Accounts accounts) {
-		return accountsService.create(accounts);
-	}
-	
-	@PutMapping("{id}")
-	public Accounts updateAccounts(@PathVariable("id")String id,@RequestBody Accounts accounts) {
-		return accountsService.save(id, accounts);
-	}
-	
-	@DeleteMapping("{id}")
-	public void deleteById(@PathVariable("id")String id) {
-		accountsService.deleteById(id);
-	}
+//	@Autowired
+//	AccountsService accountsService;
+//	
+//	@GetMapping
+//	public List<Accounts> getAll(){
+//		return accountsService.findAll();
+//	}
+//	
+//	@GetMapping("{id}")
+//	public Accounts getOne(@PathVariable("id")Integer id) {
+//		return accountsService.findById(id);
+//	}
+//	
+//	@PostMapping
+//	public Accounts createAccounts(@RequestBody Accounts accounts) {
+//		return accountsService.create(accounts);
+//	}
+//	
+//	@PutMapping("{id}")
+//	public Accounts updateAccounts(@PathVariable("id")Integer id,@RequestBody Accounts accounts) {
+//		return accountsService.save(id, accounts);
+//	}
+//	
+//	@DeleteMapping("{id}")
+//	public void deleteById(@PathVariable("id")Integer id) {
+//		accountsService.deleteById(id);
+//	}
 }
