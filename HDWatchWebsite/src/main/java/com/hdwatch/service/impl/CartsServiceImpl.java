@@ -3,8 +3,6 @@ package com.hdwatch.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-
 import com.hdwatch.dao.CartsDAO;
 import com.hdwatch.entity.Carts;
 import com.hdwatch.service.CartsService;

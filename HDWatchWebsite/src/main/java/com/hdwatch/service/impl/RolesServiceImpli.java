@@ -1,11 +1,5 @@
 package com.hdwatch.service.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.hdwatch.dao.RolesDAO;
-import com.hdwatch.entity.Roles;
 import com.hdwatch.service.RolesService;
 
 public class RolesServiceImpli implements RolesService {

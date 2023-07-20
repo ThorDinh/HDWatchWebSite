@@ -1,6 +1,5 @@
 package com.hdwatch;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 

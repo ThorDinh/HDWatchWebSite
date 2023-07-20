@@ -1,15 +1,11 @@
 package com.hdwatch.controller;
 
-import java.util.List;
-
-import org.apache.commons.lang3.RandomStringUtils;
+//import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,11 +43,11 @@ public class AccountController {
 		return "account/changepassword";
 	}
 	
-	  private String generateResetCode() {
-	        
-	        String code = RandomStringUtils.randomAlphanumeric(6);
-	        return code;
-	    }
+//	  private String generateResetCode() {
+//	        
+//	        String code = RandomStringUtils.randomAlphanumeric(6);
+//	        return code;
+//	    }
 	@RequestMapping("/forgot-password")
 	public String forgotPassword(@RequestParam(name = "email", required = false) String email,Model model) {
 		//Tiêu đề trang

@@ -1,8 +1,6 @@
 package com.hdwatch.service;
 
 import java.util.List;
-import java.util.Optional;
-
 import com.hdwatch.entity.Products;
 
 public interface ProductsService {

@@ -1,11 +1,5 @@
 package com.hdwatch.service.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.hdwatch.dao.SaleEventsDAO;
-import com.hdwatch.entity.SaleEvents;
 import com.hdwatch.service.SaleEventsService;
 
 public class SaleEventsServiceImpl implements SaleEventsService {

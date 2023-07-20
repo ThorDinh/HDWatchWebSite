@@ -1,12 +1,5 @@
 package com.hdwatch.service.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.hdwatch.dao.FavoritedetailsDAO;
-import com.hdwatch.dao.FavoritesDAO;
-import com.hdwatch.entity.Favorites;
 import com.hdwatch.service.FavoritesService;
 
 public class FavoritesServiceImpl implements FavoritesService {
