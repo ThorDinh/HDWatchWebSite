@@ -25,5 +25,5 @@ public interface ProductsService {
 
 	List<Products> getProductsOrderedByOrderCount();
 
-	List<Products> searchProductsByKeyword(String keyword);
+	List<Products> searchProductsByKeyword(String keyword, Integer category, Integer brand);
 }

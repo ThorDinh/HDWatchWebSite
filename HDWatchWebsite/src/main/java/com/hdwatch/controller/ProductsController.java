@@ -1,15 +1,20 @@
 package com.hdwatch.controller;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.hdwatch.entity.Brands;
 import com.hdwatch.entity.Products;
+import com.hdwatch.service.BrandsService;
+import com.hdwatch.service.CategoriesService;
 import com.hdwatch.service.ProductsService;
 
 
@@ -17,6 +22,12 @@ import com.hdwatch.service.ProductsService;
 public class ProductsController {
 	@Autowired
 	ProductsService productsService;
+	
+	@Autowired
+	CategoriesService categoriesService;
+	
+	@Autowired
+	BrandsService brandsService;
 	
 	//Trang chủ
 	@RequestMapping(value = {"/", "/home", "/index"})
@@ -63,14 +74,26 @@ public class ProductsController {
 	}
 	
 	//Tìm kiếm sản phẩm
-	@RequestMapping("/product/search")
-	public String search(@RequestParam(name = "keyword", required = false) String keyword, Model model) {
+	@GetMapping("/product/search")
+	public String search(@RequestParam(name = "keyword", required = false) String keyword,
+			@RequestParam(name = "category", required = false) Integer category,
+			@RequestParam(name = "brand", required = false) Integer brand,Model model) {
 		//Tiêu đề trang
 		model.addAttribute("pageTitle","Tìm kiếm sản phẩm: " + keyword);
+		
+		//Đổ danh mục
+		model.addAttribute("cates", categoriesService.findAll());
+		
+		//Đổ thương hiệu
+		List<Brands> brands = brandsService.findAll();
+		Collections.reverse(brands);
+		model.addAttribute("brands", brands);
+		
 		//tìm kiếm sản phẩm theo keyword
 		List<Products> filteredProducts;
-        if (keyword != null && !keyword.trim().isEmpty()) {
-            filteredProducts = productsService.searchProductsByKeyword(keyword);
+        if (keyword != null && !keyword.trim().isEmpty() || category != null) {
+        	model.addAttribute("message", "Kết quả trả về cho từ khóa: " + keyword);
+            filteredProducts = productsService.searchProductsByKeyword(keyword, category, brand);
         } else {
             filteredProducts = productsService.findAll();
         }
@@ -80,6 +103,11 @@ public class ProductsController {
         } else {
             model.addAttribute("items", filteredProducts);
         }
+        
+     // Set the category and brand values for radio buttons
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("category", category);
+        model.addAttribute("brand", brand);
 		return "product/search";
 	}
 }

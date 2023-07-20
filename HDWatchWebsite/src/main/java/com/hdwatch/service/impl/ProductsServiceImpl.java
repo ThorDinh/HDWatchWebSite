@@ -78,7 +78,7 @@ public class  ProductsServiceImpl implements ProductsService  {
     }
 	
 	@Override
-	public List<Products> searchProductsByKeyword(String keyword){
-		return pdao.searchProductsByKeyword(keyword.toLowerCase());
+	public List<Products> searchProductsByKeyword(String keyword, Integer category, Integer brand){
+		return pdao.searchProductsByKeyword(keyword.toLowerCase(), category, brand);
 	}
 }

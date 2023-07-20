@@ -12,76 +12,26 @@
 					<div id="aside" class="col-md-3">
 						<!-- aside Widget -->
 						<div class="aside">
-							<h3 class="aside-title">Danh mục</h3>
-							<div class="checkbox-filter">
-
-								<div class="input-checkbox">
-									<input type="checkbox" id="category-1">
-									<label for="category-1">
+							<form action="#" class="checkbox-filter" th:action="@{/product/search}" th:method="get">
+								<h3 class="aside-title">Danh mục</h3>
+								<input type="hidden" name="keyword" th:value="${param.keyword}">
+								<div class="input-radio" th:each="c:${cates}">
+									<input type="radio" th:id="'category-' + ${c.id}" name="category" th:value="${c.id}" th:checked="${c.id == category}">
+									<label th:for="'category-' + ${c.id}">
 										<span></span>
-										Cho Nam
+										[[${c.name}]]
 									</label>
 								</div>
-
-								<div class="input-checkbox">
-									<input type="checkbox" id="category-2">
-									<label for="category-2">
+								<h3 class="aside-title">Thương hiệu</h3>
+								<div class="input-radio" th:each="b:${brands}">
+									<input type="radio" th:id="'brand-' + ${b.id}" name="brand" th:value="${b.id}" th:checked="${b.id == brand}">
+									<label th:for="'brand-' + ${b.id}">
 										<span></span>
-										Cho Nữ
+										[[${b.name}]]
 									</label>
 								</div>
-
-								<div class="input-checkbox">
-									<input type="checkbox" id="category-3">
-									<label for="category-3">
-										<span></span>
-										Unisex
-									</label>
-								</div>
-							</div>
-						</div>
-						<!-- /aside Widget -->
-
-						<!-- aside Widget -->
-						<div class="aside">
-							<h3 class="aside-title">Thương hiệu</h3>
-							<div class="checkbox-filter">
-								<div class="input-checkbox">
-									<input type="checkbox" id="brand-1">
-									<label for="brand-1">
-										<span></span>
-										Rolex
-									</label>
-								</div>
-								<div class="input-checkbox">
-									<input type="checkbox" id="brand-2">
-									<label for="brand-2">
-										<span></span>
-										Omega
-									</label>
-								</div>
-								<div class="input-checkbox">
-									<input type="checkbox" id="brand-3">
-									<label for="brand-3">
-										<span></span>
-										Seiko
-									</label>
-								</div>
-								<div class="input-checkbox">
-									<input type="checkbox" id="brand-4">
-									<label for="brand-4">
-										<span></span>
-										Tissot
-									</label>
-								</div>
-								<div class="input-checkbox">
-									<input type="checkbox" id="brand-5">
-									<label for="brand-5">
-										<span></span>
-										Calvin Klein
-									</label>
-								</div>
-							</div>
+								<button type="submit">Apply Filters</button>
+							</form>
 						</div>
 						<!-- /aside Widget -->
 					</div>
@@ -105,7 +55,7 @@
 
 						<!-- store products -->
 						<div class="row">
-							<p th:unless="${items}" th:text="${message}"></p>
+							<h4 th:text="${message}"></h4>
 							<!-- product -->
 							<div class="col-md-4 col-xs-6" th:each="p: ${items}">
 								<div class="product">
@@ -155,5 +105,6 @@
 		</div>
 		<!-- /SECTION -->
 </main>
+
 </body>
 </html>
