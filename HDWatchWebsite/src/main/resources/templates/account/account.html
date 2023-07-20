@@ -10,7 +10,7 @@
 				<div class="form-container">
 					 <h3 class="text-danger" th:text="${message}"></h3>
 					<form action="./save" method="POST" th:object="${user}">
-						<h3 class="text-danger">Thông tin tài khoản - <a class="text-danger" th:text="${user.username}"></a></h3>
+						<h3>Thông tin tài khoản - [[${user.username}]]</h3>
 						<div class="col-md-6">
 							<div class="form-group">
 							  <label for="fullname">Tài khoản:</label>

@@ -52,8 +52,10 @@ public class AccountController {
 	        String code = RandomStringUtils.randomAlphanumeric(6);
 	        return code;
 	    }
-//	@PostMapping("/account/forgot-password")
-//	public String forgotPassword(@RequestParam("email") String email,Model model) {
+	@RequestMapping("/forgot-password")
+	public String forgotPassword(@RequestParam(name = "email", required = false) String email,Model model) {
+		//Tiêu đề trang
+		model.addAttribute("pageTitle","Quên mật khẩu");
 //		Accounts account = new Accounts();
 //		Accounts accounts = accountService.findByEmai(email);
 //		
@@ -72,27 +74,43 @@ public class AccountController {
 //			accounts.setResetCode(resetCode);
 //			
 //			sendResetPasswordEmail(accounts.getEmail(),resetCode);
-//			
-//			return "redirect:/reset-password";
-//		
-//	}
-	  @PostMapping("/changepassword")
+			
+			return "account/forgotpassword";
+		
+	}
+	  @PostMapping("/account/changepassword")
 	  public String changePassword(@RequestParam("username") String username,
 	                               @RequestParam("oldPassword") String oldPassword,
 	                               @RequestParam("newPassword") String newPassword,
+	                               @RequestParam("confirmNewPassword") String confirmNewPassword,
 	                               Model model) {
-	      // Kiểm tra xem username và oldPassword có khớp với thông tin trong cơ sở dữ liệu hay không
-	      if (accountService.authenticate(username, oldPassword)) {
+		  	//Hiện thị thông tin khách hàng
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			username = authentication.getName();
+			Accounts user = accountService.findById(username);
+			model.addAttribute("user", user);
+			// Kiểm tra xem username và oldPassword có khớp với thông tin trong cơ sở dữ liệu hay không
+			if (accountService.authenticate(username, oldPassword)) {
 	          // Kiểm tra tính hợp lệ của mật khẩu mới
-	          if (PasswordUtils.isPasswordValid(oldPassword, newPassword)) {
-	              // Thực hiện thay đổi mật khẩu
-	              accountService.changePassword(username, newPassword);
-	              model.addAttribute("successMessage", "Thay đổi mật khẩu thành công!");
+	          if (PasswordUtils.isPasswordValid(oldPassword, newPassword) && newPassword.equals(confirmNewPassword)) {
+	        		// Thực hiện thay đổi mật khẩu
+		              accountService.changePassword(username, newPassword);
+		              //Tiêu đề trang
+		              model.addAttribute("pageTitle","Đổi mật khẩu thành công");
+		              model.addAttribute("message", "Thay đổi mật khẩu thành công!");
+	          } else if(!newPassword.equals(confirmNewPassword)){
+	        	  //Tiêu đề trang
+	      			model.addAttribute("pageTitle","Đổi mật khẩu thất bại");
+	              model.addAttribute("message", "Xác nhận mật khẩu mới sai!");
 	          } else {
-	              model.addAttribute("errorMessage", "Mật khẩu mới không hợp lệ! Vui lòng nhập mật khẩu mới hợp lệ.");
+	        	  //Tiêu đề trang
+	      			model.addAttribute("pageTitle","Đổi mật khẩu thất bại");
+	              model.addAttribute("message", "Mật khẩu mới không hợp lệ! Vui lòng nhập mật khẩu mới hợp lệ!");
 	          }
 	      } else {
-	          model.addAttribute("errorMessage", "Tên đăng nhập hoặc mật khẩu cũ không đúng!");
+	    	  	//Tiêu đề trang
+	  			model.addAttribute("pageTitle","Sai mật khẩu");
+	  			model.addAttribute("message", "Mật khẩu cũ không đúng!");
 	      }
 	      
 	      return "account/changepassword";
