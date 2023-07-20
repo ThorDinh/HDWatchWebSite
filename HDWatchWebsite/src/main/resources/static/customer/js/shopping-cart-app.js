@@ -1,5 +1,16 @@
 const app = angular.module("my-app",[]);
-app.controller("shopping-cart-ctrl",function($scope,$http){
+app.controller("shopping-cart-ctrl",['$scope', '$http', 'AuthService', function($scope,$http, AuthService) {
+	$scope.loggedIn = false; // Default state
+
+    // Check authentication status on page load or when needed
+    AuthService.checkAuthentication()
+        .then(function(response) {
+            $scope.loggedIn = response.data.authenticated;
+        })
+        .catch(function(error) {
+            console.error('Error checking authentication:', error);
+        });
+
 	//Quản lí giỏ hàng
 	$scope.cart = {
 		items:[],
@@ -10,6 +21,7 @@ app.controller("shopping-cart-ctrl",function($scope,$http){
 			if(item){
 				item.qty++;
 				this.saveToLocalStorage();
+				alert($scope.loggedIn);
 			//nếu không có sản phẩm
 			} else {
 				$http.get(`/rest/products/${id}`).then(resp =>{
@@ -57,7 +69,7 @@ app.controller("shopping-cart-ctrl",function($scope,$http){
 	}
 	
 	$scope.cart.loadFromLocalStorage();
-
+	
 	$scope.order = {
 		createDate : new Date(),
 		address:"",
@@ -85,6 +97,7 @@ app.controller("shopping-cart-ctrl",function($scope,$http){
 		}
 	}
 	
+	//Thành tiền
 	$scope.getTotalPrice = function() {
         var total = 0;
         angular.forEach($scope.cart.items, function(item) {
@@ -93,10 +106,11 @@ app.controller("shopping-cart-ctrl",function($scope,$http){
         return total;
     };
     
+    //Lấy hình ảnh ở giỏ hàng
     $scope.getImageName = function(productImages) {
   		var images = productImages.split(',');
   		var imageName = images[0].replace(/"/g, '').replace('[','').replace(']','');
   		return imageName;
 	};
 
-})
+}]);

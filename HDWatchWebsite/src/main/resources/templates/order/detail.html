@@ -7,54 +7,56 @@
 			<!-- container -->
 			<div class="container">
 				<!-- Order Detail -->
-            <div class="panel panel-primary">
-            <div class="panel-heading">ORDER INFORMATION</div>
-            <div class="panel-body">
-            	<div class="row">
+        		<div class="form-container">
+						<h3 class="text-danger">HÓA ĐƠN [[${order.id}]] - NGÀY [[${#dates.format(order.createDate, 'dd/MM/yyyy')}]]</h3>
+						<div class="row">
 	            	<div class="form-group col-sm-4">
-	                    <div>Order Number:</div>
+	                    <div>Số hóa đơn:</div>
 	                    <input th:field="*{id}" class="form-control" readonly>
 	                </div>
 	                <div class="form-group col-sm-4">
-	                    <div>Purchaser:</div>
-	                    <input th:field="*{accounts.username}" class="form-control" readonly>
+	                    <div>Người đặt hàng:</div>
+	                    <input th:field="*{accounts.fullname}" class="form-control" readonly>
 	                </div>
 	                <div class="form-group col-sm-4">
-	                    <div>Purchased Date:</div>
+	                    <div>Ngày đặt hàng:</div>
 	                    <input th:field="*{createDate}" class="form-control" readonly>
 	                </div>
                 </div>
                 <div class="row">
 	                <div class="form-group col-sm-12">
-	                    <div>Shipping Address:</div>
+	                    <div>Địa chỉ:</div>
 	                    <textarea th:field="*{address}" class="form-control" readonly></textarea>
 	                </div>
                 </div>
+				</div>
+          		
+          <div class="col-md-12 order-details" >
+                <div class="section-title text-center">
+                    <h3 class="title">CHI TIẾT HÓA ĐƠN</h3>
+                </div>
+                
+                <table class="table order-summary">
+                    <thead>
+                        <tr>
+                            <th>Mã sản phẩm</th>
+							<th>Tên sản phẩm</th>
+							<th>Giá</th>
+							<th>Số lượng</th>
+							<th>Thành tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="detail: *{orderDetails}" th:object="${detail}">
+							<td>[[*{products.id}]]</td>
+							<td>[[*{products.name}]]</td>
+							<td>[[*{#numbers.formatDecimal(price, 0, 'COMMA', 0, 'POINT')}]] VNĐ</td>
+							<td>[[*{quantity}]]</td>
+							<td>[[*{#numbers.formatDecimal(price*quantity, 0, 'COMMA', 0, 'POINT')}]] VNĐ</td>
+						</tr>
+                    </tbody>
+                </table>
             </div>
-        </div>
-        <div class="panel panel-primary">
-            <div class="panel-heading">ORDER LINES</div>
-            <table class="table">
-				<thead>
-					<tr>
-						<th>Id</th>
-						<th>Name</th>
-						<th>Price</th>
-						<th>Quantity</th>
-						<th>Amount</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="detail: *{orderDetails}" th:object="${detail}">
-						<td>[[*{products.id}]]</td>
-						<td>[[*{products.name}]]</td>
-						<td>$[[*{#numbers.formatDecimal(price, 0, 'COMMA', 2, 'POINT')}]]</td>
-						<td>[[*{quantity}]]</td>
-						<td>$[[*{#numbers.formatDecimal(price*quantity, 0, 'COMMA', 2, 'POINT')}]]</td>
-					</tr>
-				</tbody>
-			</table>
-          </div>
             <!-- /Order Detail -->
 				
 			</div>

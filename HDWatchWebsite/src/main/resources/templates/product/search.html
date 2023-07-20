@@ -117,8 +117,8 @@
 										<div class="product-body">
 											<p class="product-category"><a class="product-category" th:text="${p.brands.name}"></a> - <a class="product-category" th:text="${p.categories.name}"></a></p>
 											<h3 class="product-name"><a th:href="@{|/product/detail/${p.id}|}" th:text="${p.name}"></a></h3>
-											<h4 class="product-price"> <p th:text="${#numbers.formatDecimal(p.price, 0, 'COMMA', 2, 'POINT')}"></p> <del
-													class="product-old-price"><p th:text="${#numbers.formatDecimal(p.oldprice, 0, 'COMMA', 2, 'POINT')}"></p></del></h4>
+											<h4 class="product-price"> <p>[[${#numbers.formatDecimal(p.price, 0, 'COMMA', 0, 'POINT')}]] VNĐ</p> <del
+													class="product-old-price"><p>[[${#numbers.formatDecimal(p.oldprice, 0, 'COMMA', 0, 'POINT')}]] VNĐ</p></del></h4>
 											<div class="product-btns">
 												<button class="add-to-wishlist"><i class="fa fa-heart-o"></i></button>
 												<button class="quick-view"><a th:href="@{|/product/detail/${p.id}|}"><i class="fa fa-eye"></i></a></button>
