@@ -1,5 +1,7 @@
 package com.hdwatch.controller;
 
+import java.security.Principal;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,32 +10,51 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class SecurityController {
 	//Trang đăng nhập
 	@RequestMapping("/login/form")
-	public String loginForm(Model model) {
+	public String loginForm(Model model,Principal principal) {
 		//Tiêu đề trang
 		model.addAttribute("pageTitle", "Đăng nhập");
-		//Thông báo
-		model.addAttribute("message", "Vui lòng đăng nhập");
+		// Kiểm tra xem người dùng đã đăng nhập chưa
+	    if (principal != null) {
+	        // Nếu đã đăng nhập, hiển thị thông báo khác
+	        model.addAttribute("message", "Bạn đã đăng nhập");
+	    } else {
+	        // Nếu chưa đăng nhập, hiển thị thông báo mặc định
+	        model.addAttribute("message", "Vui lòng đăng nhập");
+	    }
+
 		return "account/login";
 	}
 	
 	//Đăng nhập thành công
 	@RequestMapping("/login/success")
-	public String loginSuccess(Model model) {
+	public String loginSuccess(Model model,Principal principal) {
 		//Tiêu đề trang
 		model.addAttribute("pageTitle", "Đăng nhập thành công!");
-		//Thông báo
-		model.addAttribute("message", "Đăng nhập thành công!");
+		// Kiểm tra xem người dùng đã đăng nhập chưa
+	    if (principal != null) {
+	        // Nếu đã đăng nhập, hiển thị thông báo khác
+	        model.addAttribute("message", "Bạn đã đăng nhập!");
+	    } else {
+	        // Nếu chưa đăng nhập, hiển thị thông báo mặc định
+	        model.addAttribute("message", "Đăng nhập thành công!");
+	    }
 		return "redirect:/home";
 	}
 	
 	
 	//Đăng nhập thất bại 
 	@RequestMapping("/login/error")
-	public String loginError(Model model) {
+	public String loginError(Model model, Principal principal) {
 		//Tiêu đề trang
 		model.addAttribute("pageTitle", "Đăng nhập thất bại!");
-		//Thông báo
-		model.addAttribute("message", "Đăng nhập thất bại!");
+		// Kiểm tra xem người dùng đã đăng nhập chưa
+	    if (principal != null) {
+	        // Nếu đã đăng nhập, hiển thị thông báo khác
+	        model.addAttribute("message", "Bạn đã đăng nhập!");
+	    } else {
+	        // Nếu chưa đăng nhập, hiển thị thông báo mặc định
+	        model.addAttribute("message", "Đăng nhập thất bại!");
+	    }
 		return "account/login";
 	}
 	

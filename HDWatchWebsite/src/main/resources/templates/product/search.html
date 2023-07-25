@@ -85,29 +85,19 @@
 							
 						</div>
 						<!-- /store products -->
-
+							
 						<!-- pagination -->
+						<div style="margin-top: 60px">
 							<span class="store-qty">Có [[${items.numberOfElements}]] trên [[${items.totalElements}]] sản phẩm</span>
-							<div class="store-pagination">
-							    <a th:class="${items.number > 0} ? '' : 'disabled'" th:href="@{/product/search(keyword=${keyword}, category=${category}, brand=${brand}, p=0)}">First</a>
-							    <a th:class="${items.hasPrevious()} ? '' : 'disabled'" th:href="@{/product/search(keyword=${keyword}, category=${category}, brand=${brand}, p=${items.number - 1})}">Previous</a>
-							    <a th:class="${items.hasNext()} ? '' : 'disabled'" th:href="@{/product/search(keyword=${keyword}, category=${category}, brand=${brand}, p=${items.number + 1})}">Next</a>
-							    <a th:class="${items.number + 1 < items.totalPages} ? '' : 'disabled'"  th:href="@{/product/search(keyword=${keyword}, category=${category}, brand=${brand}, p=${items.totalPages - 1})}">Last</a>
+							<div class="pager">
+							    <a th:class="${items.number > 0} ? '' : 'disabled'" th:href="@{/product/search(keyword=${keyword}, category=${category}, brand=${brand}, p=0)}"><button><<</button></a>
+							    <a th:class="${items.hasPrevious()} ? '' : 'disabled'" th:href="@{/product/search(keyword=${keyword}, category=${category}, brand=${brand}, p=${items.number - 1})}"><button><</button></a>
+							    <button class="disabled">[[${items.number}+1]]</button>
+							    <a th:class="${items.hasNext()} ? '' : 'disabled'" th:href="@{/product/search(keyword=${keyword}, category=${category}, brand=${brand}, p=${items.number + 1})}"><button>></button></a>
+							    <a th:class="${items.number + 1 < items.totalPages} ? '' : 'disabled'"  th:href="@{/product/search(keyword=${keyword}, category=${category}, brand=${brand}, p=${items.totalPages - 1})}"><button>>></button></a>
 							</div>
+						</div>
 						<!-- /pagination -->
-
-						<!-- store bottom filter -->
-<!-- 						<div class="store-filter clearfix"> -->
-<!-- 							<span class="store-qty">Showing 20-100 products</span> -->
-<!-- 							<ul class="store-pagination"> -->
-<!-- 								<li class="active">1</li> -->
-<!-- 								<li><a href="#">2</a></li> -->
-<!-- 								<li><a href="#">3</a></li> -->
-<!-- 								<li><a href="#">4</a></li> -->
-<!-- 								<li><a href="#"><i class="fa fa-angle-right"></i></a></li> -->
-<!-- 							</ul> -->
-<!-- 						</div> -->
-						<!-- /store bottom filter -->
 					</div>
 					<!-- /STORE -->
 				</div>
