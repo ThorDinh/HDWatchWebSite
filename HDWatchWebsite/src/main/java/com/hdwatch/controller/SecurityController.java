@@ -16,7 +16,7 @@ public class SecurityController {
 		// Kiểm tra xem người dùng đã đăng nhập chưa
 	    if (principal != null) {
 	        // Nếu đã đăng nhập, hiển thị thông báo khác
-	        model.addAttribute("message", "Bạn đã đăng nhập");
+	        return "redirect:/home";
 	    } else {
 	        // Nếu chưa đăng nhập, hiển thị thông báo mặc định
 	        model.addAttribute("message", "Vui lòng đăng nhập");
@@ -33,7 +33,7 @@ public class SecurityController {
 		// Kiểm tra xem người dùng đã đăng nhập chưa
 	    if (principal != null) {
 	        // Nếu đã đăng nhập, hiển thị thông báo khác
-	        model.addAttribute("message", "Bạn đã đăng nhập!");
+	        return "redirect:/home";
 	    } else {
 	        // Nếu chưa đăng nhập, hiển thị thông báo mặc định
 	        model.addAttribute("message", "Đăng nhập thành công!");
@@ -50,7 +50,7 @@ public class SecurityController {
 		// Kiểm tra xem người dùng đã đăng nhập chưa
 	    if (principal != null) {
 	        // Nếu đã đăng nhập, hiển thị thông báo khác
-	        model.addAttribute("message", "Bạn đã đăng nhập!");
+	        return "redirect:/home";
 	    } else {
 	        // Nếu chưa đăng nhập, hiển thị thông báo mặc định
 	        model.addAttribute("message", "Đăng nhập thất bại!");
@@ -69,10 +69,16 @@ public class SecurityController {
 	
 	//Đăng xuất
 	@RequestMapping("/logoff/success")
-	public String logoffSuccess(Model model) {
+	public String logoffSuccess(Model model, Principal principal) {
 		//Tiêu đề trang
 		model.addAttribute("pageTitle", "Đăng xuất thành công!");
-		model.addAttribute("message", "Bạn đã đăng xuất!");
+		if (principal != null) {
+	        // Nếu đã đăng nhập, hiển thị thông báo khác
+	        return "redirect:/home";
+	    } else {
+	        // Nếu chưa đăng nhập, hiển thị thông báo mặc định
+	    	model.addAttribute("message", "Bạn đã đăng xuất!");
+	    }
 		return "account/login";
 	}
 }
