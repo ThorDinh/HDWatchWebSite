@@ -42,6 +42,7 @@ public class BrandController {
 		//Ngược lại thì đổ sản phẩm theo số bid 
 		else {
 			List<Products> list = productsService.findAllByBrandId(bid.get());
+			model.addAttribute("message", brandsService.findById(bid.get()).getName() );
 			model.addAttribute("items", list);
 		}
 		return "brand";

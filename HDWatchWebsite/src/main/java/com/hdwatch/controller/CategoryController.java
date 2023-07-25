@@ -38,6 +38,7 @@ public class CategoryController {
 		// ngược lại thì đổ dữ liệu theo số cid 
 		else {
 			List<Products> list = productsService.findAllByCategoryId(cid.get());
+			model.addAttribute("message", categoriesService.findById(cid.get()).getName() );
 			model.addAttribute("items", list);
 		}
 		return "category";

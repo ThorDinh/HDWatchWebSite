@@ -21,7 +21,6 @@ app.controller("shopping-cart-ctrl",['$scope', '$http', 'AuthService', function(
 			if(item){
 				item.qty++;
 				this.saveToLocalStorage();
-				alert($scope.loggedIn);
 			//nếu không có sản phẩm
 			} else {
 				$http.get(`/rest/products/${id}`).then(resp =>{
