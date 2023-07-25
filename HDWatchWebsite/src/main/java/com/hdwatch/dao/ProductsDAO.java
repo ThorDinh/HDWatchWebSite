@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.hdwatch.entity.Products;
 
@@ -20,14 +22,35 @@ public interface ProductsDAO extends JpaRepository<Products, Integer>{
             "ORDER BY ISNULL(od.order_count, 0) DESC", nativeQuery = true)
 	List<Products> getProductsOrderedByOrderCount();
 	
+//	@Query(value = "SELECT p.* FROM products p "
+//			+ "INNER JOIN categories c ON p.category_id = c.id "
+//			+ "INNER JOIN brands b ON p.brand_id = b.id " 
+//			+ "WHERE (LOWER(p.name) LIKE %:keyword% "
+//			+ "OR LOWER(p.description) LIKE %:keyword% "
+//			+ "OR LOWER(c.name) LIKE %:keyword% "
+//			+ "OR LOWER(b.name) LIKE %:keyword%) "
+//			+ "AND (:category IS NULL OR p.category_id = :category) "
+//			+ "AND (:brand IS NULL OR p.brand_id = :brand) ", nativeQuery = true)
+//    Page<Products> searchProductsByKeyword(String keyword, Integer category, Integer brand);
+	
 	@Query(value = "SELECT p.* FROM products p "
-			+ "INNER JOIN categories c ON p.category_id = c.id "
-			+ "INNER JOIN brands b ON p.brand_id = b.id " 
-			+ "WHERE (LOWER(p.name) LIKE %:keyword% "
-			+ "OR LOWER(p.description) LIKE %:keyword% "
-			+ "OR LOWER(c.name) LIKE %:keyword% "
-			+ "OR LOWER(b.name) LIKE %:keyword%) "
-			+ "AND (:category IS NULL OR p.category_id = :category) "
-			+ "AND (:brand IS NULL OR p.brand_id = :brand) ", nativeQuery = true)
-    List<Products> searchProductsByKeyword(String keyword, Integer category, Integer brand);
+	        + "INNER JOIN categories c ON p.category_id = c.id "
+	        + "INNER JOIN brands b ON p.brand_id = b.id " 
+	        + "WHERE (LOWER(p.name) LIKE %:keyword% "
+	        + "OR LOWER(p.description) LIKE %:keyword% "
+	        + "OR LOWER(c.name) LIKE %:keyword% "
+	        + "OR LOWER(b.name) LIKE %:keyword%) "
+	        + "AND (:category IS NULL OR p.category_id = :category) "
+	        + "AND (:brand IS NULL OR p.brand_id = :brand)",
+	        countQuery = "SELECT count(*) FROM products p "
+	        + "INNER JOIN categories c ON p.category_id = c.id "
+	        + "INNER JOIN brands b ON p.brand_id = b.id " 
+	        + "WHERE (LOWER(p.name) LIKE %:keyword% "
+	        + "OR LOWER(p.description) LIKE %:keyword% "
+	        + "OR LOWER(c.name) LIKE %:keyword% "
+	        + "OR LOWER(b.name) LIKE %:keyword%) "
+	        + "AND (:category IS NULL OR p.category_id = :category) "
+	        + "AND (:brand IS NULL OR p.brand_id = :brand)",
+	        nativeQuery = true)
+	Page<Products> searchProductsByKeyword(String keyword, Integer category, Integer brand, Pageable pageable);
 }

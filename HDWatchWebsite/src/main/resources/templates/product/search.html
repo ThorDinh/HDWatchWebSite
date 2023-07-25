@@ -58,7 +58,7 @@
 						<div class="row">
 							<h4 th:text="${message}"></h4>
 							<!-- product -->
-							<div class="col-md-4 col-xs-6" th:each="p: ${items}">
+							<div class="col-md-4 col-xs-6" th:each="p: ${items.content}">
 								<div class="product">
 									<div class="product-img">
 											<img th:src="@{/images/__${#strings.arraySplit(p.productimages, ',')[0].replace('&quot;', '').replace('[','').replace(']','')}__}" alt="">											
@@ -82,8 +82,19 @@
 								</div>
 							</div>
 							<!-- /product -->
+							
 						</div>
 						<!-- /store products -->
+
+						<!-- pagination -->
+							<span class="store-qty">Có [[${items.numberOfElements}]] trên [[${items.totalElements}]] sản phẩm</span>
+							<div class="store-pagination">
+							    <a th:class="${items.number > 0} ? '' : 'disabled'" th:href="@{/product/search(keyword=${keyword}, category=${category}, brand=${brand}, p=0)}">First</a>
+							    <a th:class="${items.hasPrevious()} ? '' : 'disabled'" th:href="@{/product/search(keyword=${keyword}, category=${category}, brand=${brand}, p=${items.number - 1})}">Previous</a>
+							    <a th:class="${items.hasNext()} ? '' : 'disabled'" th:href="@{/product/search(keyword=${keyword}, category=${category}, brand=${brand}, p=${items.number + 1})}">Next</a>
+							    <a th:class="${items.number + 1 < items.totalPages} ? '' : 'disabled'"  th:href="@{/product/search(keyword=${keyword}, category=${category}, brand=${brand}, p=${items.totalPages - 1})}">Last</a>
+							</div>
+						<!-- /pagination -->
 
 						<!-- store bottom filter -->
 <!-- 						<div class="store-filter clearfix"> -->

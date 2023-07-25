@@ -2,8 +2,12 @@ package com.hdwatch.controller;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -77,7 +81,8 @@ public class ProductsController {
 	@GetMapping("/product/search")
 	public String search(@RequestParam(name = "keyword", required = false) String keyword,
 			@RequestParam(name = "category", required = false) Integer category,
-			@RequestParam(name = "brand", required = false) Integer brand,Model model) {
+			@RequestParam(name = "brand", required = false) Integer brand,
+			@RequestParam("p") Optional<Integer> p, Model model) {
 		//Tiêu đề trang
 		model.addAttribute("pageTitle","Tìm kiếm sản phẩm: " + keyword);
 		
@@ -89,13 +94,14 @@ public class ProductsController {
 		Collections.reverse(brands);
 		model.addAttribute("brands", brands);
 		
+		
 		//tìm kiếm sản phẩm theo keyword
-		List<Products> filteredProducts;
+		Page<Products> filteredProducts;
         if (keyword != null && !keyword.trim().isEmpty() || category != null) {
-        	model.addAttribute("message", "Kết quả trả về cho từ khóa: " + keyword);
-            filteredProducts = productsService.searchProductsByKeyword(keyword, category, brand);
+        	filteredProducts = productsService.searchProductsByKeyword(keyword, category, brand, p);
+        	model.addAttribute("message", "Có "+ filteredProducts.getTotalElements() +" kết quả trả về cho từ khóa: " + keyword);
         } else {
-            filteredProducts = productsService.findAll();
+        	filteredProducts = productsService.findAllPagination(p);
         }
         //Nếu danh sách sản phẩm tìm kiếm trả về null thì hiện thông báo và ngược lại
         if (filteredProducts.isEmpty()) {
@@ -103,7 +109,6 @@ public class ProductsController {
         } else {
             model.addAttribute("items", filteredProducts);
         }
-        
      // Set the category and brand values for radio buttons
         model.addAttribute("keyword", keyword);
         model.addAttribute("category", category);

@@ -1,6 +1,10 @@
 package com.hdwatch.service;
 
 import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.domain.Page;
+
 import com.hdwatch.entity.Products;
 
 public interface ProductsService {
@@ -23,5 +27,7 @@ public interface ProductsService {
 
 	List<Products> getProductsOrderedByOrderCount();
 
-	List<Products> searchProductsByKeyword(String keyword, Integer category, Integer brand);
+	Page<Products> findAllPagination(Optional<Integer> p);
+
+	Page<Products> searchProductsByKeyword(String keyword, Integer category, Integer brand, Optional<Integer> p);
 }

@@ -1,8 +1,12 @@
 package com.hdwatch.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
@@ -19,6 +23,13 @@ public class  ProductsServiceImpl implements ProductsService  {
 	@Override
 	public List<Products> findAll(){
 		return pdao.findAll();
+	}
+	
+	@Override
+	public Page<Products> findAllPagination(Optional<Integer> p){
+		//Phân trang
+		Pageable pageable = PageRequest.of(p.orElse(0), 9);
+		return pdao.findAll(pageable);
 	}
 	
 	@Override
@@ -77,7 +88,9 @@ public class  ProductsServiceImpl implements ProductsService  {
     }
 	
 	@Override
-	public List<Products> searchProductsByKeyword(String keyword, Integer category, Integer brand){
-		return pdao.searchProductsByKeyword(keyword.toLowerCase(), category, brand);
+	public Page<Products> searchProductsByKeyword(String keyword, Integer category, Integer brand, Optional<Integer> p){
+		//Phân trang
+		Pageable pageable = PageRequest.of(p.orElse(0), 9);
+		return pdao.searchProductsByKeyword(keyword.toLowerCase(), category, brand, pageable);
 	}
 }
