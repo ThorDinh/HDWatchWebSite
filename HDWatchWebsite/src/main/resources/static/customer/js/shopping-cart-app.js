@@ -118,21 +118,35 @@ app.controller("shopping-cart-ctrl", ['$scope', '$http', 'AuthService', function
 		items: [],
 		//Thêm sản phẩm vào yêu thích
 		add(id) {
-			var item = this.items.find(item => item.id == id);
-			// If the item is already in the list
-			if (item) {
-				item.favorite = !item.favorite; // Toggle the favorite status
-				var index = this.items.findIndex(item => item.id == id);
-				this.items.splice(index, 1);
-				this.saveToLocalStorage();
-			} else {
-				// If the item is not in the list
-				$http.get(`/rest/products/${id}`).then(resp => {
-					resp.data.favorite = true;
-					this.items.push(resp.data);
-					this.saveToLocalStorage();
-				});
-			}
+			// Check if the user is logged in
+        AuthService.checkAuthentication()
+            .then(response => {
+                const loggedIn = response.data.authenticated;
+                if (!loggedIn) {
+                    // Redirect to the login form if not logged in
+                    // Assuming your login page URL is '/login'
+                    window.location.href = '/login/form';
+                } else {
+                    var item = this.items.find(item => item.id == id);
+	                // If the item is already in the list
+					if (item) {
+						item.favorite = !item.favorite; // Toggle the favorite status
+						var index = this.items.findIndex(item => item.id == id);
+						this.items.splice(index, 1);
+						this.saveToLocalStorage();
+					} else {
+						// If the item is not in the list
+						$http.get(`/rest/products/${id}`).then(resp => {
+							resp.data.favorite = true;
+							this.items.push(resp.data);
+							this.saveToLocalStorage();
+						});
+					}
+                }
+            })
+            .catch(error => {
+                console.error('Error checking authentication:', error);
+            });
 		},
 		//Xóa sản phẩm ra danh sách yêu thích
 		remove(id) {
