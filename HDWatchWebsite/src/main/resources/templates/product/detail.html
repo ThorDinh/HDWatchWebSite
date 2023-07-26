@@ -53,7 +53,9 @@
 							</div>
 
 							<ul class="product-btns">
-								<li><a href="#"><i class="fa fa-heart-o"></i> Yêu thích</a></li>
+								<li><a href="#" th:attr="ng-click=@{|favorite.add(${item.id})|}">
+									<i class="fa fa-heart-o"></i>	
+            						Yêu thích</a></li>
 							</ul>
 
 							<ul class="product-links">

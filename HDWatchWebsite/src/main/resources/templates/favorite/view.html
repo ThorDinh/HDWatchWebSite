@@ -1,0 +1,49 @@
+<div xmlns:th="http://www.thymeleaf.org" 
+	th:replace="~{/layout/index :: dynamic (~{::main})}">
+	<main>
+	
+	<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- Order Details -->
+            <div class="col-md-12 order-details" >
+                <div class="section-title text-center">
+                    <h3 class="title">Danh sách yêu thích</h3>
+                </div>
+                
+                <table class="table order-summary" ng-show="favorite.items.length > 0">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th style="width: 10%;"></th>
+                            <th>SẢN PHẨM</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in favorite.items">
+                            <td style="padding-top: 30px;"><button ng-click="favorite.remove(item.id)" class="btn btn-default btn-danger">x</button></td>
+                            <td><img ng-src="/images/{{getImageName(item.productimages)}}" alt="" style="width:100%;"></td>
+                            <td style="padding-top: 30px;"> <a href="/product/detail/{{item.id}}">{{item.name}}</a> </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <a href="/home" class="text-danger" style="font-size: 20px" ng-show="favorite.items.length === 0">Danh sách yêu thích của bạn đang trống.</a>
+                
+            </div>
+            
+            
+            <!-- /Order Details -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
+	
+</main>
+</div>
