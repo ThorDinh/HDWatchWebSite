@@ -21,6 +21,7 @@ public interface AccountsService {
 	boolean authenticate(String username, String password);
 
 	void changePassword(String username, String newPassword);
-
+	
+	Accounts findByUserName(String username);
 	
 }

@@ -76,5 +76,11 @@ public class AccountsServiceImpl implements AccountsService {
             throw new RuntimeException("Không tìm thấy tài khoản với username: " + username);
         }
     }
+
+	@Override
+	public Accounts findByUserName(String username) {
+		
+		return accountsDAO.findByUsername(username);
+	}
 	
 }

@@ -11,4 +11,8 @@ import com.hdwatch.entity.Orders;
 public interface OrdersDAO extends JpaRepository<Orders, Integer>{
 	@Query(value="SELECT * FROM orders o WHERE o.account_id LIKE %?1% ORDER BY o.create_date DESC", nativeQuery = true)
 	List<Orders> findByUsername(String username);
+
+	Integer countOrderInMonth(Integer createdate);
+
+	List<Orders> findOrderInMonth(Integer createdate);
 }
