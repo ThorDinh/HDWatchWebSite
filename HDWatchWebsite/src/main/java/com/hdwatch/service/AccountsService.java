@@ -6,6 +6,8 @@ import com.hdwatch.entity.Accounts;
 
 public interface AccountsService {
 	
+	Accounts findbyUsername(String username);
+	
 	List<Accounts> findAll();
 	
 	Accounts findById(String id);

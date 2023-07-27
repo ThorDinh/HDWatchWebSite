@@ -31,8 +31,8 @@ public class Brands implements Serializable {
 
     //--- ENTITY PRIMARY KEY 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name="id", nullable=false)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name="id")
     private Integer    id ;
 
     //--- ENTITY DATA FIELDS 

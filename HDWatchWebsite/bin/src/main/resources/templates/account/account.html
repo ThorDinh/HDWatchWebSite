@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+<body>
+<main>
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="form-container">
+					 <h3 class="text-danger" th:text="${message}"></h3>
+					<form action="./save" method="POST" th:object="${user}">
+						<h3>Thông tin tài khoản - [[${user.username}]]</h3>
+						<div class="col-md-6">
+							<div class="form-group">
+							  <label for="fullname">Tài khoản:</label>
+							  <input type="text" class="form-control" th:value="${user.username}" disabled>
+							</div>
+							<div class="form-group">
+							  <label for="email">Email:</label>
+							  <input type="email" class="form-control" th:value="${user.email}" disabled>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								 <label for="phone">Họ và tên:</label>
+								 <input type="tel" class="form-control" th:value="${user.fullname}" disabled>
+							</div>
+								
+						</div>
+<!-- 						<button type="submit" class="btn btn-primary" name="save">Lưu thông tin</button> -->
+					  </form>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+</main>
+</body>
+</html>

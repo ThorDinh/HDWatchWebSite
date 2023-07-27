@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="dynamic(main)">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+	<!-- Dynamic Title -->
+		<title th:if="${#strings.startsWith(pageTitle, 'HD Watch')} and ${!#strings.endsWith(pageTitle, 'HD Watch')}"
+		th:text="${pageTitle} - HD Watch"></title>
+		<title th:unless="${#strings.startsWith(pageTitle, 'HD Watch')} and ${#strings.endsWith(pageTitle, 'HD Watch')}"
+		th:text="${pageTitle}"></title>
+	<!-- /Dynamic Title -->
+		
+		<style>
+      /* CSS for sticky header */
+      .sticky {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 999;
+      }
+
+      .sticky + .content {
+        padding-top: 70px; /* Adjust this value to match the height of your sticky header */
+      }
+    </style>
+    
+    <style>
+    /* CSS for disable pagination */
+        .disabled {
+            pointer-events: none;
+            color: #999;
+            text-decoration: none;
+            cursor: default;
+        }
+    </style>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+		
+ 		<!-- Google font -->
+ 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+ 		<!-- Bootstrap -->
+ 		<link type="text/css" rel="stylesheet" href="/customer/css/bootstrap.min.css"/>
+
+ 		<!-- Slick -->
+ 		<link type="text/css" rel="stylesheet" href="/customer/css/slick.css"/>
+ 		<link type="text/css" rel="stylesheet" href="/customer/css/slick-theme.css"/>
+
+ 		<!-- nouislider -->
+ 		<link type="text/css" rel="stylesheet" href="/customer/css/nouislider.min.css"/>
+
+ 		<!-- Font Awesome Icon -->
+ 		<link rel="stylesheet" href="/customer/css/font-awesome.min.css">
+
+ 		<!-- Custom stlylesheet -->
+ 		<link type="text/css" rel="stylesheet" href="/customer/css/style.css"/>
+
+ 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+ 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+ 		<!--[if lt IE 9]>
+ 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+ 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+ 		<![endif]-->
+ 		<script src="customer/js/shopping-cart-app.js"></script>
+ 		<script src="customer/js/AuthService.js"></script>
+
+    </head>
+	<body ng-app="my-app" ng-controller="shopping-cart-ctrl">
+		<!-- HEADER -->
+		<header>
+			<!-- TOP HEADER -->
+			<div th:replace="~{/layout/_header-login}"></div>
+			<!-- /TOP HEADER -->
+
+			<!-- MAIN HEADER -->
+			<div id="header" >
+				<!-- container -->
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<!-- LOGO -->
+						<div th:replace="~{/layout/_logo}"></div>
+						<!-- /LOGO -->
+
+						<!-- SEARCH BAR -->
+						<div th:replace="~{/layout/_search-bar}"></div>
+						<!-- /SEARCH BAR -->
+
+						<!-- ACCOUNT -->
+						<div th:replace="~{/layout/_cart-favorite}"></div>
+						<!-- /ACCOUNT -->
+					</div>
+					<!-- row -->
+				</div>
+				<!-- container -->
+			</div>
+			<!-- /MAIN HEADER -->
+		</header>
+		<!-- /HEADER -->
+
+		<!-- NAVIGATION -->
+		<nav th:replace="~{/layout/_menu}"></nav>
+		<!-- /NAVIGATION -->
+
+		<div th:replace="${main}"></div>
+
+		<!-- FOOTER -->
+		<footer id="footer">
+			<!-- top footer -->
+			<div class="section">
+				<!-- container -->
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+
+						<div class="clearfix visible-xs"></div>
+
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">Thông tin về chúng tôi</h3>
+								<ul class="footer-links">
+									<li><i class="fa fa-map-marker"></i><a href="/about">Giới thiệu</a></li>
+									<li><i class="fa fa-phone"></i><a href="/contact">Liên lạc</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">Dịch vụ</h3>
+								<ul class="footer-links">
+									<li><a href="#"><i class="fa fa-user-o"></i>Tài khoản</a></li>
+									<li><a th:href="@{/cart/view}"><i class="fa fa-shopping-cart"></i>Giỏ hàng</a></li>
+									<li><a href="#"><i class="fa fa-heart-o"></i>Yêu thích</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- /row -->
+				</div>
+				<!-- /container -->
+			</div>
+			<!-- /top footer -->
+
+			<!-- bottom footer -->
+			<div id="bottom-footer" class="section">
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<span class="copyright">
+								 <a target="_blank" href="https://www.templateshub.net">HDWATCH.COM</a>
+							</span>
+
+
+						</div>
+					</div>
+						<!-- /row -->
+				</div>
+				<!-- /container -->
+			</div>
+			<!-- /bottom footer -->
+		</footer>
+		<!-- /FOOTER -->
+
+		<!-- jQuery Plugins -->
+		<script src="/customer/js/jquery.min.js"></script>
+		<script src="/customer/js/bootstrap.min.js"></script>
+		<script src="/customer/js/slick.min.js"></script>
+		<script src="/customer/js/nouislider.min.js"></script>
+		<script src="/customer/js/jquery.zoom.min.js"></script>
+		<script src="/customer/js/main.js"></script>
+		
+		<!--Custom JS-->
+		<script src="/customer/js/shopping-cart-app.js"></script>
+		<script src="/customer/js/AuthService.js"></script>
+
+	</body>
+</html>

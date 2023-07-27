@@ -9,6 +9,7 @@ public class SecurityController {
 	//Trang đăng nhập
 	@RequestMapping("/login/form")
 	public String loginForm(Model model) {
+		
 		//Tiêu đề trang
 		model.addAttribute("pageTitle", "Đăng nhập");
 		//Thông báo

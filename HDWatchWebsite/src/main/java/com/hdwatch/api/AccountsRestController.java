@@ -3,6 +3,7 @@ package com.hdwatch.api;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hdwatch.dao.AccountsDAO;
 import com.hdwatch.entity.Accounts;
 import com.hdwatch.service.AccountsService;
 
@@ -23,28 +25,52 @@ public class AccountsRestController {
 	@Autowired
 	AccountsService accountsService;
 	
+	@Autowired
+	AccountsDAO aDao;
+	
 	@GetMapping
 	public List<Accounts> getAll(){
 		return accountsService.findAll();
 	}
 	
-	@GetMapping("{id}")
-	public Accounts getOne(@PathVariable("id")String id) {
-		return accountsService.findById(id);
+	@GetMapping("/{username}")
+	public ResponseEntity<Accounts> getAccount(@PathVariable("username") String username) {
+		if (!aDao.existsById(username)) {
+			return ResponseEntity.notFound().build();
+		} else {
+			return ResponseEntity.ok(accountsService.findbyUsername(username));
+		}
 	}
 	
-	@PostMapping
-	public Accounts createAccounts(@RequestBody Accounts accounts) {
-		return accountsService.create(accounts);
+	@PostMapping("")
+	public ResponseEntity<Accounts> postAccount(@RequestBody Accounts Account){
+		if(aDao.existsById(Account.getUsername())) {
+			return ResponseEntity.badRequest().build();
+		}else {
+			
+			return ResponseEntity.ok(accountsService.create(Account));
+		}
 	}
 	
-	@PutMapping("{id}")
-	public Accounts updateAccounts(@PathVariable("id")String id,@RequestBody Accounts accounts) {
-		return accountsService.save(id, accounts);
+	@PutMapping("/{username}")
+	public ResponseEntity<Accounts> putAccount(@PathVariable("username") String username, @RequestBody Accounts Account){
+		if(!aDao.existsById(username)) {
+			return ResponseEntity.notFound().build();
+		}else {
+//			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//			String encodedPassword = passwordEncoder.encode(Account.getPassword());
+//			Account.setPassword(encodedPassword);
+			return ResponseEntity.ok(accountsService.save(username,Account));
+		}
 	}
 	
-	@DeleteMapping("{id}")
-	public void deleteById(@PathVariable("id")String id) {
-		accountsService.deleteById(id);
+	@DeleteMapping("/{username}")
+	public ResponseEntity<Void> deleteAccount(@PathVariable("username") String username){
+		if(!aDao.existsById(username)) {
+			return ResponseEntity.notFound().build();
+		}else {
+			accountsService.deleteById(username);
+			return ResponseEntity.ok().build();
+		}
 	}
 }

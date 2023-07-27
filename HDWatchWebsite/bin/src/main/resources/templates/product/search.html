@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+<body>
+<main>
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<!-- ASIDE -->
+					<div id="aside" class="col-md-3">
+						<!-- aside Widget -->
+						<div class="aside">
+							<form action="#" class="checkbox-filter" th:action="@{/product/search}" th:method="get">
+								<h3 class="aside-title">Danh mục</h3>
+								<input type="hidden" name="keyword" th:value="${param.keyword}">
+								<div class="input-radio" th:each="c:${cates}">
+									<input type="radio" th:id="'category-' + ${c.id}" name="category" th:value="${c.id}" th:checked="${c.id == category}">
+									<label th:for="'category-' + ${c.id}">
+										<span></span>
+										[[${c.name}]]
+									</label>
+								</div>
+								<h3 class="aside-title">Thương hiệu</h3>
+								<div class="input-radio" th:each="b:${brands}">
+									<input type="radio" th:id="'brand-' + ${b.id}" name="brand" th:value="${b.id}" th:checked="${b.id == brand}">
+									<label th:for="'brand-' + ${b.id}">
+										<span></span>
+										[[${b.name}]]
+									</label>
+								</div>
+								<button type="submit">Apply Filters</button>
+								<button type="button" onclick="resetFilters()">Reset Filters</button>
+							</form>
+						</div>
+						<!-- /aside Widget -->
+					</div>
+					<!-- /ASIDE -->
+
+					<!-- STORE -->
+					<div id="store" class="col-md-9">
+						<!-- store top filter -->
+<!-- 						<div class="store-filter clearfix"> -->
+<!-- 							<div class="store-sort"> -->
+<!-- 								<label> -->
+<!-- 									Sort By: -->
+<!-- 									<select class="input-select"> -->
+<!-- 										<option value="0">Popular</option> -->
+<!-- 										<option value="1">Position</option> -->
+<!-- 									</select> -->
+<!-- 								</label> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+						<!-- /store top filter -->
+
+						<!-- store products -->
+						<div class="row">
+							<h4 th:text="${message}"></h4>
+							<!-- product -->
+							<div class="col-md-4 col-xs-6" th:each="p: ${items.content}">
+								<div class="product">
+									<div class="product-img">
+											<img th:src="@{/images/__${#strings.arraySplit(p.productimages, ',')[0].replace('&quot;', '').replace('[','').replace(']','')}__}" alt="">											
+											<div class="product-label">
+											</div>
+										</div>
+										<div class="product-body">
+											<p class="product-category"><a class="product-category" th:text="${p.brands.name}"></a> - <a class="product-category" th:text="${p.categories.name}"></a></p>
+											<h3 class="product-name"><a th:href="@{|/product/detail/${p.id}|}" th:text="${p.name}"></a></h3>
+											<h4 class="product-price"> <p>[[${#numbers.formatDecimal(p.price, 0, 'COMMA', 0, 'POINT')}]] VNĐ</p> <del
+													class="product-old-price"><p>[[${#numbers.formatDecimal(p.oldprice, 0, 'COMMA', 0, 'POINT')}]] VNĐ</p></del></h4>
+											<div class="product-btns">
+												<button class="add-to-wishlist"><i class="fa fa-heart-o"></i></button>
+												<button class="quick-view"><a th:href="@{|/product/detail/${p.id}|}"><i class="fa fa-eye"></i></a></button>
+											</div>
+										</div>
+										<div class="add-to-cart">
+											<button class="add-to-cart-btn" th:attr="ng-click=@{|cart.add(${p.id})|}"><i class="fa fa-shopping-cart"></i>
+												Thêm vào giỏ</button>
+										</div>
+								</div>
+							</div>
+							<!-- /product -->
+							
+						</div>
+						<!-- /store products -->
+
+						<!-- pagination -->
+							<span class="store-qty">Có [[${items.numberOfElements}]] trên [[${items.totalElements}]] sản phẩm</span>
+							<div class="store-pagination">
+							    <a th:class="${items.number > 0} ? '' : 'disabled'" th:href="@{/product/search(keyword=${keyword}, category=${category}, brand=${brand}, p=0)}">First</a>
+							    <a th:class="${items.hasPrevious()} ? '' : 'disabled'" th:href="@{/product/search(keyword=${keyword}, category=${category}, brand=${brand}, p=${items.number - 1})}">Previous</a>
+							    <a th:class="${items.hasNext()} ? '' : 'disabled'" th:href="@{/product/search(keyword=${keyword}, category=${category}, brand=${brand}, p=${items.number + 1})}">Next</a>
+							    <a th:class="${items.number + 1 < items.totalPages} ? '' : 'disabled'"  th:href="@{/product/search(keyword=${keyword}, category=${category}, brand=${brand}, p=${items.totalPages - 1})}">Last</a>
+							</div>
+						<!-- /pagination -->
+
+						<!-- store bottom filter -->
+<!-- 						<div class="store-filter clearfix"> -->
+<!-- 							<span class="store-qty">Showing 20-100 products</span> -->
+<!-- 							<ul class="store-pagination"> -->
+<!-- 								<li class="active">1</li> -->
+<!-- 								<li><a href="#">2</a></li> -->
+<!-- 								<li><a href="#">3</a></li> -->
+<!-- 								<li><a href="#">4</a></li> -->
+<!-- 								<li><a href="#"><i class="fa fa-angle-right"></i></a></li> -->
+<!-- 							</ul> -->
+<!-- 						</div> -->
+						<!-- /store bottom filter -->
+					</div>
+					<!-- /STORE -->
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+		
+		<!-- Reset Filter -->
+		<script>
+		    function resetFilters() {
+		        // Reset the radio buttons for category and brand
+		        document.querySelectorAll('input[name="category"]').forEach(radio => radio.checked = false);
+		        document.querySelectorAll('input[name="brand"]').forEach(radio => radio.checked = false);
+		        // Optionally, you can reset other form elements as well, such as input fields, checkboxes, etc.
+		        // For example: document.getElementById("someInputId").value = "";
+		        // Submit the form after resetting the filters
+		        document.querySelector('.checkbox-filter').submit();
+		    }
+		</script>
+</main>
+</body>
+</html>

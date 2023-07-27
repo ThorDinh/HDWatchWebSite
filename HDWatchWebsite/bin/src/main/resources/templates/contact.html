@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+	
+<body>
+<main>
+<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container-contact">
+				<h1 style="text-align: center;">Liên hệ</h1>
+				<!-- row -->
+				<div class="row-contact"style="text-align: center;">
+					<div class="col-contact">
+						<h3 >Thông tin liên hệ</h3>
+						<p>Nếu bạn có bất kỳ câu hỏi, góp ý hoặc yêu cầu hỗ trợ, hãy liên hệ với chúng tôi bằng cách sử dụng thông tin dưới đây:</p>
+						<ul>
+							<li><i class="fa fa-map-marker"></i> Địa chỉ: 778/B1 đường Nguyễn Kiệm, phường 4, quận Phú Nhuận. Toà nhà Innovation, lô 24, Công viên phần mềm Quang Trung, quận 12.</li>
+							<li><i class="fa fa-envelope"></i> Email: nkhadinh@gmail.com</li>
+							<li><i class="fa fa-phone"></i> Điện thoại: 0942990106</li>
+						</ul>
+					</div>
+					<div class="col-contact"><br>
+						<h3>Gửi tin nhắn</h3>
+						<form action="/gui-tin-nhan" method="post" >
+							<input type="text" name="name" placeholder="Họ và tên" required>
+							<input type="email" name="email" placeholder="Email" required><br><br>
+							<textarea name="message" placeholder="Nội dung tin nhắn" required rows="6" style="height: 150px;width: 300px;"></textarea><br>
+							<button type="button" class="btn btn-danger">Gửi</button>
+						</form>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+</main>
+</body>
+</html>

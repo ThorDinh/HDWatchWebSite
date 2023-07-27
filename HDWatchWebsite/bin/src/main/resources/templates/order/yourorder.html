@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+<body>
+<main>
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- Order History -->
+            <div class="col-md-12 order-details" >
+                <div class="section-title text-center">
+                    <h3 class="title">LỊCH SỬ MUA HÀNG</h3>
+                </div>
+                
+                <table class="table order-summary">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>SỐ HÓA ĐƠN</th>
+                            <th>NGÀY ĐẶT HÀNG</th>
+                            <th>ĐỊA CHỈ</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="order, state: ${orders}">
+							<td>[[${state.index +1 }]]</td>
+							<td>[[${order.id}]]</td>
+							<td th:text="${#dates.format(order.createDate, 'dd/MM/yyyy')}"></td>
+							<td>[[${order.address}]]</td>
+							<td>
+								<a th:href="@{|/order/detail/${order.id}|}" class="btn btn-default">
+									<i class="fa fa-eye"></i>
+								</a>
+							</td>
+						</tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /Order History -->
+				
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+</main>
+</body>
+</html>
