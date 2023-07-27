@@ -22,5 +22,5 @@ public interface AccountsService {
 
 	void changePassword(String username, String newPassword);
 
-	
+	Accounts findByUserName(String username);
 }

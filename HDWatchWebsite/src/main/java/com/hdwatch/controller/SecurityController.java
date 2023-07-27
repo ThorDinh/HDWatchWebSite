@@ -2,9 +2,13 @@ package com.hdwatch.controller;
 
 import java.security.Principal;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class SecurityController {
@@ -80,5 +84,13 @@ public class SecurityController {
 	    	model.addAttribute("message", "Bạn đã đăng xuất!");
 	    }
 		return "account/login";
+	}
+	
+	//API security 
+	@CrossOrigin("*")
+	@ResponseBody
+	@RequestMapping("/rest/security/authentication")
+	public Object getAuthentication(HttpSession session) {
+		return session.getAttribute("authentication");
 	}
 }

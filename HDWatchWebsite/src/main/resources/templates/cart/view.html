@@ -31,20 +31,20 @@
                             <td style="padding-top: 30px;">{{item.name}}</td>
                             <td style="padding-top: 30px;"><input ng-change="cart.saveToLocalStorage()" ng-model="item.qty" 
                             type="number" min="1" class="form-control" style="width:50%;"/></td>
-                            <td style="padding-top: 30px;">${{item.qty*item.price | number : 2}}</td>
+                            <td style="padding-top: 30px;">{{item.qty*item.price | number : 0}} VNĐ</td>
                         </tr>
                     </tbody>
                     <tfoot>
                         <tr>
                             <td colspan="4"><strong>TỔNG TIỀN</strong></td>
-                            <td><strong class="order-total">{{ getTotalPrice() | number : 2}}</strong></td>
+                            <td><strong class="order-total">{{ getTotalPrice() | number : 0}} VNĐ</strong></td>
                         </tr>
                     </tfoot>
                 </table>
                 
                 <a href="/home" class="text-danger" style="font-size: 20px" ng-show="cart.items.length === 0">Giỏ hàng của bạn đang trống.</a>
                 
-                <a href="#" class="primary-btn order-submit" ng-show="cart.items.length > 0">Place order</a>
+                <a th:href="@{/order/checkout}" class="primary-btn order-submit" ng-show="cart.items.length > 0">Đặt hàng</a>
             </div>
             
             

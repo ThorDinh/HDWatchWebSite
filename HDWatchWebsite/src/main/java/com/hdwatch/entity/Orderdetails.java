@@ -24,35 +24,16 @@ import lombok.NoArgsConstructor;
 @Table(name="orderdetails", schema="dbo", catalog="HDWatch" )
 public class Orderdetails implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
-    //--- ENTITY PRIMARY KEY 
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id", nullable=false)
-    private Integer    id ;
-
-    //--- ENTITY DATA FIELDS 
-    @Column(name="order_id", nullable=false)
-    private Integer    orderId ;
-
-    @Column(name="product_id", nullable=false)
-    private Integer    productId ;
-
-    @Column(name="price", nullable=false)
-    private Double     price ;
-
-    @Column(name="quantity", nullable=false)
-    private Integer    quantity ;
-
-
-    //--- ENTITY LINKS ( RELATIONSHIP )
-    @ManyToOne
-    @JoinColumn(name="order_id", referencedColumnName="id", insertable=false, updatable=false)
-    private Orders     orders ; 
-
-    @ManyToOne
-    @JoinColumn(name="product_id", referencedColumnName="id", insertable=false, updatable=false)
-    private Products   products ; 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	Integer id;
+	Double price;
+	Integer quantity;
+	@ManyToOne
+	@JoinColumn(name = "product_id")
+	Products products;
+	@ManyToOne
+	@JoinColumn(name = "order_id")
+	Orders orders;
 
 }

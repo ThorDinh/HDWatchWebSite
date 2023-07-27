@@ -1,4 +1,5 @@
 const app = angular.module("my-app", []);
+
 app.controller("shopping-cart-ctrl", ['$scope', '$http', 'AuthService', function($scope, $http, AuthService) {
 	$scope.loggedIn = false; // Default state
 
@@ -71,13 +72,14 @@ app.controller("shopping-cart-ctrl", ['$scope', '$http', 'AuthService', function
 
 	//Thanh toán và xuất order
 	$scope.order = {
+		accounts: {username: $("#username").text()},
 		createDate: new Date(),
 		address: "",
-		account: { username: $("#username").text() },
-		get orderDetail() {
+		status: "Đang xác nhận",
+		get orderDetails() {
 			return $scope.cart.items.map(item => {
 				return {
-					product: { id: item.id },
+					products: { id: item.id },
 					price: item.price,
 					quantity: item.qty
 				}
@@ -91,7 +93,7 @@ app.controller("shopping-cart-ctrl", ['$scope', '$http', 'AuthService', function
 				$scope.cart.clear();
 				location.href = "/order/detail/" + resp.data.id;
 			}).catch(error => {
-				alert("Đặt hàng lỗi!")
+				alert(order);
 				console.log(error)
 			})
 		}
@@ -119,7 +121,7 @@ app.controller("shopping-cart-ctrl", ['$scope', '$http', 'AuthService', function
 		//Thêm sản phẩm vào yêu thích
 		add(id) {
 			// Check if the user is logged in
-        AuthService.checkAuthentication()
+        	AuthService.checkAuthentication()
             .then(response => {
                 const loggedIn = response.data.authenticated;
                 if (!loggedIn) {

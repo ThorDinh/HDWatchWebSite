@@ -77,4 +77,9 @@ public class AccountsServiceImpl implements AccountsService {
         }
     }
 	
+	@Override
+	public Accounts findByUserName(String username) {
+
+		return accountsDAO.findByUsername(username);
+	}
 }

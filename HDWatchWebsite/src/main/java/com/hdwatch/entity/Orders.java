@@ -28,36 +28,20 @@ import lombok.NoArgsConstructor;
 @Table(name="orders", schema="dbo", catalog="HDWatch" )
 public class Orders implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
-    //--- ENTITY PRIMARY KEY 
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id", nullable=false)
-    private Integer    id ;
-
-    //--- ENTITY DATA FIELDS 
-    @Column(name="account_id", nullable=false, length=50)
-    private String    accountId ;
-
-    @Column(name="address", nullable=false, length=50)
-    private String     address ;
-
-    @Temporal(TemporalType.DATE)
-    @Column(name="create_date", nullable=false)
-    private Date       createDate ;
-
-    @Column(name="status", nullable=false, length=50)
-    private String     status ;
-
-
-    //--- ENTITY LINKS ( RELATIONSHIP )
-    @JsonIgnore
-    @OneToMany(mappedBy="orders")
-    private List<Orderdetails> orderDetails ; 
-
-    @ManyToOne
-    @JoinColumn(name="account_id", referencedColumnName="username", insertable=false, updatable=false)
-    private Accounts   accounts ; 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	Integer id;
+	String address;
+	String status;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "create_date")
+	Date createDate = new Date();
+	@ManyToOne
+	@JoinColumn(name = "account_id")
+	Accounts accounts;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "orders")
+	List<Orderdetails> orderDetails;
 
 }
