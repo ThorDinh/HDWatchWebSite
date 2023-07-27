@@ -1,6 +1,8 @@
 package com.hdwatch.api;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hdwatch.dao.AccountsDAO;
+import com.hdwatch.dao.RoledetailsDAO;
+import com.hdwatch.dao.RolesDAO;
 import com.hdwatch.entity.Accounts;
+import com.hdwatch.entity.Roledetails;
 import com.hdwatch.service.AccountsService;
 
 @CrossOrigin("*")
@@ -28,6 +33,11 @@ public class AccountsRestController {
 	@Autowired
 	AccountsDAO aDao;
 	
+	@Autowired
+	RolesDAO rDao;
+	
+	@Autowired
+	RoledetailsDAO rdDao;
 	@GetMapping
 	public List<Accounts> getAll(){
 		return accountsService.findAll();
@@ -72,5 +82,21 @@ public class AccountsRestController {
 			accountsService.deleteById(username);
 			return ResponseEntity.ok().build();
 		}
+	}
+	@GetMapping("/authorities")
+	public Map<String, Object> getAuthority(){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("accounts",accountsService.findAll());
+		map.put("roles", rDao.findAll());
+		map.put("authorities",rdDao.findAll());
+		return map;
+	}
+	@PostMapping("/authorities")
+	public Roledetails postAuthorities(@RequestBody Roledetails authority) {
+		return rdDao.save(authority);
+	}
+	@DeleteMapping("/authorities/{id}")
+	public void deleteAuthorities(@PathVariable("id") Integer id) {
+		accountsService.deleteRoleDetail(id);
 	}
 }

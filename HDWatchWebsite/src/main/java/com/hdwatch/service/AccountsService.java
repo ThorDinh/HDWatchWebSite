@@ -25,4 +25,8 @@ public interface AccountsService {
 	void changePassword(String username, String newPassword);
 
 	
+
+	void deleteRoleDetail(Integer id);
+
+	
 }

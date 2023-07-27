@@ -30,12 +30,12 @@
                             <div class="form-group">
                                 <label>Category ID</label>
                                 <input name="id" ng-model="cate.id" required ng-maxlength="4" type="text" class="form-control">
-                                <div ng-show="frmCategory.id.$invalid" class="badge badge-danger m-2">Id not null & less than 4 character</div>
+                                <div ng-show="frmCategory.id.$invalid" class="badge badge-danger m-2">Id not null</div>
                             </div>
                             <div class="form-group">
                                 <label>Category Name</label>
                                 <input name="name" ng-model="cate.name" required type="text" class="form-control">
-                                <div ng-show="frmCategory.name.$invalid" class="badge badge-danger m-2">Id not null</div>
+                                <div ng-show="frmCategory.name.$invalid" class="badge badge-danger m-2">name not null</div>
                             </div>
                             <button ng-disabled="frmCategory.$invalid || chon == true" ng-click="create()" class="btn btn-primary">Create</button>
                             <button ng-disabled="frmCategory.$invalid || frmCategory.$pristine || chon == false" ng-click="update(cate.id)" class="btn btn-info">Update</button>

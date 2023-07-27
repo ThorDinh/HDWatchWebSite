@@ -28,11 +28,47 @@
                     
                     <div class="col-md-8">
                         <form name="frmAccount">
-                            <div class="form-group">
+                             <div class="form-group">
                                 <label>Username</label>
                                 <input name="username" ng-model="account.username" required type="text"
                                     class="form-control">
                                 <div ng-show="frmAccount.username.$invalid" class="badge badge-danger m-2">Id not null</div>
+                            </div>
+                            <div class="form-group">
+                                <label>Fullname</label>
+                                <input name="fullname" ng-model="account.fullname" required type="text"
+                                    class="form-control">
+                                <div ng-show="frmAccount.fullname.$invalid" class="badge badge-danger m-2">Id not null</div>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input name="email" ng-model="account.email" required type="email" class="form-control">
+                                <div ng-show="frmAccount.email.$invalid" class="badge badge-danger m-2">Id not null</div>
+                            </div>
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input name="password" ng-model="account.password" required type="password"
+                                    class="form-control">
+                                <div ng-show="frmAccount.password.$invalid" class="badge badge-danger m-2">Id not null</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="mr-2">Activate</label>
+                                <div class="form-check-inline">
+                                    <input ng-model="account.activated" class="form-check-input" type="radio"
+                                        name="activated" id="gridRadios1" ng-value="true"
+                                        ng-checked="account.activated">
+                                    <label class="form-check-label" for="gridRadios1">
+                                        True
+                                    </label>
+                                </div>
+                                <div class="form-check-inline">
+                                    <input ng-model="account.activated" class="form-check-input" type="radio"
+                                        name="activated" id="gridRadios2" ng-value="false"
+                                        ng-checked="account.activated">
+                                    <label class="form-check-label" for="gridRadios2">
+                                        False
+                                    </label>
+                                </div>
                             </div>
                             
                             

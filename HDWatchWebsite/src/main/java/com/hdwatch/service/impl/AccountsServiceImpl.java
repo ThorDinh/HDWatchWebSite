@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hdwatch.dao.AccountsDAO;
+import com.hdwatch.dao.RoledetailsDAO;
 import com.hdwatch.entity.Accounts;
 import com.hdwatch.service.AccountsService;
 
@@ -82,6 +83,17 @@ public class AccountsServiceImpl implements AccountsService {
 		
 		return accountsDAO.findByUsername(username);
 	}
+	
+	@Autowired
+	RoledetailsDAO rdDao;
+	
+	@Override
+	public void deleteRoleDetail(Integer id) {
+		// TODO Auto-generated method stub
+		 rdDao.deleteById(id);
+	}
+
+	
 	
 	
 }

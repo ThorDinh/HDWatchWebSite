@@ -59,7 +59,7 @@ app.controller("dashboard-ctrl", function ($scope, $http) {
         label: 'Cost in '+date,
         data: $scope.costData,
         fill: false,
-        borderColor: 'rgb(75, 192, 192)',
+        borderColor: 'rgb(145, 15, 6)',
         tension: 0.1
       }
     ]
@@ -74,37 +74,7 @@ app.controller("dashboard-ctrl", function ($scope, $http) {
       config
     );
   }
-  $scope.reportProduct = function(){
-    let date = (new Date()).toLocaleString('default', { month: 'short' });
-    const data = {
-      labels: $scope.productName,
-      datasets: [
-        {
-        label: 'Best seller in '+date,
-        data: $scope.productCount,
-        fill: false,
-        backgroundColor: [
-          'rgb(255, 99, 132)',
-          'rgb(54, 162, 235)',
-          'rgb(255, 205, 86)',
-          'rgb(4, 76, 153 )',
-          'rgb(181, 216, 253 )',
-        ],
-        hoverOffset: 4
-      }
-    ]
-    };
-
-    const config = {
-      type: 'pie',
-      data: data,
-    };
-    const bestSeller = new Chart(
-      document.getElementById('bestSeller'),
-      config
-    );
-  }
-  $scope.reportProduct();
+  
    $scope.reportCost();
 });
 

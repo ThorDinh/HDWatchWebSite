@@ -51,3 +51,14 @@
 	text-overflow: ellipsis;
 	max-width: 600px;
 }
+/* Add height and overflow properties to enable scrolling */
+.app-main {
+  height: 100vh; /* Adjust the height as needed */
+  overflow-y: auto;
+}
+
+/* Remove the position property from thead and tbody */
+.table-scroll thead,
+.table-scroll tbody {
+  position: static; /* Remove this line */
+}

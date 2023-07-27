@@ -1,4 +1,4 @@
-let urlCategory = "/admin/rest/categories";
+let urlCategory = '/rest/categories';
 app.controller("category-ctrl",function($scope, $http){
     $scope.cates = [];
     $scope.cate = {};

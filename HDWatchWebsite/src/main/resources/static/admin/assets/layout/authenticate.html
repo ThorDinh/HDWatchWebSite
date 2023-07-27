@@ -49,7 +49,7 @@
                                 <th>{{acc.username}}</th>
                                 <th ng-repeat="role in db.roles">
                                     <input type="checkbox" ng-checked="index_of(acc.username, role.role) >= 0"
-                                    ng-click="update(acc.username, role.role)"/>
+                                    ng-click="update(acc, role)"/>
                                 </th>
                             </tr>
                         </tbody>
