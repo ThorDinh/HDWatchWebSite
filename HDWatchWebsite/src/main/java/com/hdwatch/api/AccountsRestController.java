@@ -48,7 +48,7 @@ public class AccountsRestController {
 		if (!aDao.existsById(username)) {
 			return ResponseEntity.notFound().build();
 		} else {
-			return ResponseEntity.ok(accountsService.findbyUsername(username));
+			return ResponseEntity.ok(accountsService.findByUserName(username));
 		}
 	}
 	
