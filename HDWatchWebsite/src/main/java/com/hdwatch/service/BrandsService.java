@@ -12,11 +12,11 @@ public interface BrandsService {
 	Brands findById(Integer id);
 
 	boolean existsById(Integer id);
-	
+	boolean exitsByName(String name);
 	Brands create(Brands brand);
 
 	Brands save(Brands brand,Integer id);
 
 	void deleteById(Integer id);
-
+	
 }

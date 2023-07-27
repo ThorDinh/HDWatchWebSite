@@ -6,5 +6,5 @@ import com.hdwatch.entity.Brands;
 
 
 public interface BrandsDAO extends JpaRepository<Brands, Integer>{
-	
+	Brands findByName(String name);
 }

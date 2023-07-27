@@ -1,0 +1,22 @@
+.custom-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+  }
+.custom-form {
+    max-width: 300px;
+    width: 150%;
+    margin: 0 auto; /* Thêm thuộc tính margin để căng giữa theo chiều ngang */
+    position: relative; /* Thêm thuộc tính position để sử dụng thuộc tính top */
+    top: 50%; /* Đưa form lên 50% chiều cao của custom-container */
+  }
+  .login-form,
+  .register-form {
+    max-width: 400px;
+    width: 100%;
+  }
+
+  .register-form {
+    display: none; /* Ẩn form đăng ký ban đầu */
+  }

@@ -51,5 +51,18 @@ public class BrandsServiceImpl implements BrandsService {
 	public Brands create(Brands brand) {
 		return bDao.save(brand);
 	}
+
+	@Override
+	public boolean exitsByName(String name) {
+		try {
+			Brands brand = bDao.findByName(name);
+			if(brand.getName().equals(name)) {
+				
+			}
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
+	}
 	
 }

@@ -1,0 +1,60 @@
+<div xmlns:th="http://www.thymeleaf.org" 
+	th:replace="~{/layout/index :: dynamic (~{::main})}">
+	<main>
+	
+	<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- Order Details -->
+            <div class="col-md-12 order-details" >
+                <div class="section-title text-center">
+                    <h3 class="title">GIỎ HÀNG</h3>
+                </div>
+                
+                <table class="table order-summary" ng-show="cart.items.length > 0">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th style="width: 10%;"></th>
+                            <th>SẢN PHẨM</th>
+                            <th>SỐ LƯỢNG</th>
+                            <th>GIÁ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in cart.items">
+                            <td style="padding-top: 30px;"><button ng-click="cart.remove(item.id)" class="btn btn-default btn-danger">x</button></td>
+                            <td><img ng-src="/images/{{getImageName(item.productimages)}}" alt="" style="width:100%;"></td>
+                            <td style="padding-top: 30px;">{{item.name}}</td>
+                            <td style="padding-top: 30px;"><input ng-change="cart.saveToLocalStorage()" ng-model="item.qty" 
+                            type="number" min="1" class="form-control" style="width:50%;"/></td>
+                            <td style="padding-top: 30px;">${{item.qty*item.price | number : 2}}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4"><strong>TỔNG TIỀN</strong></td>
+                            <td><strong class="order-total">{{ getTotalPrice() | number : 2}}</strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
+                
+                <a href="/home" class="text-danger" style="font-size: 20px" ng-show="cart.items.length === 0">Giỏ hàng của bạn đang trống.</a>
+                
+                <a href="#" class="primary-btn order-submit" ng-show="cart.items.length > 0">Place order</a>
+            </div>
+            
+            
+            <!-- /Order Details -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
+	
+</main>
+</div>
