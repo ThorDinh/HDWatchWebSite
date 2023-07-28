@@ -54,6 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.csrf().disable();
 		http.authorizeRequests()
 			.antMatchers("/account/**","/order/**").authenticated()
+			.antMatchers("/admin/**").hasAnyRole("STA", "DIR")
 			.anyRequest().permitAll();
 		
 		http.formLogin()
@@ -66,11 +67,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.tokenValiditySeconds(86400);
 		
 		http.exceptionHandling()
-			.accessDeniedPage("/unauthoried");
+			.accessDeniedPage("/unauthorized");
 		
 		http.logout()
-			.logoutUrl("/logoff")
-			.logoutSuccessUrl("/logoff/success");
+			.logoutUrl("/logout")
+			.logoutSuccessUrl("/logout/success");
 	}
 	
 	//Cơ chế mã hóa mật khẩu

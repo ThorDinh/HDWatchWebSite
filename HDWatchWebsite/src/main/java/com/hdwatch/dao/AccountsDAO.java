@@ -11,6 +11,7 @@ public interface AccountsDAO extends JpaRepository<Accounts, String>{
 	Accounts findByUsername(String username);
 
 //	Accounts findByEmail(String email);
+	
 	@Query("SELECT COUNT(a) FROM Accounts a, Roledetails rd WHERE a.username = rd.accounts.username AND rd.roles.role = :role")
 	Long countCustomer(@Param("role") String role);
 

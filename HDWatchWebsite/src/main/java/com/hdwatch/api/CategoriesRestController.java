@@ -44,11 +44,12 @@ public class CategoriesRestController {
 	}
 	@PostMapping("")
 	public ResponseEntity<Categories> postCategory(@RequestBody Categories cate){
-		if(cateDAO.existsById(cate.getId())) {
+		if(cateDAO.existsById(cate.getId()) && cate.getId() != null) {
 			return ResponseEntity.badRequest().build();
-		}else {
-			return ResponseEntity.ok(cateDAO.save(cate));
 		}
+			cateDAO.save(cate);
+
+		return ResponseEntity.ok(cate);
 	}
 	
 	@PutMapping("{id}")

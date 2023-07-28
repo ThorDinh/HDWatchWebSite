@@ -64,15 +64,17 @@ public class SecurityController {
 	
 	
 	//Không có quyền truy xuất
-	@RequestMapping("/unauthoried")
-	public String unauthoried(Model model) {
+	@RequestMapping("/unauthorized")
+	public String unauthorized(Model model) {
+		//Tiêu đề trang
+		model.addAttribute("pageTitle", "Không có quyền truy xuất!");
 		//Thông báo
 		model.addAttribute("message", "Không có quyền truy xuất!");
-		return "account/login";
+		return "account/unauthorized";
 	}
 	
 	//Đăng xuất
-	@RequestMapping("/logoff/success")
+	@RequestMapping("/logout/success")
 	public String logoffSuccess(Model model, Principal principal) {
 		//Tiêu đề trang
 		model.addAttribute("pageTitle", "Đăng xuất thành công!");

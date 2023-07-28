@@ -3,7 +3,7 @@
 		<!-- begin page title -->
 		<div class="d-block d-lg-flex flex-nowrap align-items-center">
 			<div class="page-title mr-4 pr-4 border-right">
-				<h1>Dashboard</h1>
+				<h1>Trang chủ</h1>
 			</div>
 
 			<div
@@ -23,10 +23,8 @@
 				<div class="col-xxl-3 col-lg-6">
 					<div class="p-20 border-lg-right border-bottom border-xxl-bottom-0">
 						<div class="d-flex m-b-10">
-							<p class="mb-0 font-regular text-muted font-weight-bold">Total
-								customers</p>
-							<a class="mb-0 ml-auto font-weight-bold" href="#"><i
-								class="ti ti-more-alt"></i> </a>
+							<p class="mb-0 font-regular text-muted font-weight-bold">Số lượng khách hàng</p>
+							
 						</div>
 						<div class="d-block d-sm-flex h-100 align-items-center">
 							<div
@@ -34,7 +32,7 @@
 								<h3 class="mb-0">
 									<i class="icon-arrow-up-circle"></i> {{total.totalCustomer}}
 								</h3>
-								<p>Customers</p>
+								<p>Khách hàng</p>
 							</div>
 						</div>
 					</div>
@@ -43,10 +41,8 @@
 					<div
 						class="p-20 border-xxl-right border-bottom border-xxl-bottom-0">
 						<div class="d-flex m-b-10">
-							<p class="mb-0 font-regular text-muted font-weight-bold">Total
-								Cost</p>
-							<a class="mb-0 ml-auto font-weight-bold" href="#"><i
-								class="ti ti-more-alt"></i> </a>
+							<p class="mb-0 font-regular text-muted font-weight-bold">Tổng doanh thu</p>
+							
 						</div>
 						<div class="d-block d-sm-flex h-100 align-items-center">
 							<div
@@ -55,7 +51,7 @@
 									<i class="icon-arrow-up-circle"></i> {{total.totalCost |
 									number: 0}}
 								</h3>
-								<p>This month</p>
+								<p>Tháng này</p>
 							</div>
 						</div>
 					</div>
@@ -63,10 +59,8 @@
 				<div class="col-xxl-3 col-lg-6">
 					<div class="p-20 border-lg-right border-bottom border-lg-bottom-0">
 						<div class="d-flex m-b-10">
-							<p class="mb-0 font-regular text-muted font-weight-bold">Total
-								Orders</p>
-							<a class="mb-0 ml-auto font-weight-bold" href="#"><i
-								class="ti ti-more-alt"></i> </a>
+							<p class="mb-0 font-regular text-muted font-weight-bold">Tổng đơn hàng</p>
+							
 						</div>
 						<div class="d-block d-sm-flex h-100 align-items-center">
 							<div
@@ -74,7 +68,7 @@
 								<h3 class="mb-0">
 									<i class="icon-arrow-up-circle"></i>{{total.totalOrder}}
 								</h3>
-								<p>This month</p>
+								<p>Tháng này</p>
 							</div>
 						</div>
 					</div>
@@ -88,7 +82,7 @@
 		<div class="card card-statistics h-100 mb-0 apexchart-tool-force-top">
 			<div class="card-header d-flex justify-content-between">
 				<div class="card-heading">
-					<h4 class="card-title">Cost Report This Month</h4>
+					<h4 class="card-title">Báo cáo doanh thu trong ngày</h4>
 				</div>
 			</div>
 			<div class="card-body">
@@ -96,7 +90,7 @@
 					<div class="col-6 col-xs-6 col-lg-3">
 						<div class="row mb-2 pb-3 align-items-end">
 							<div class="col">
-								<p>Costs Today</p>
+								<p>Doanh thu hôm nay</p>
 								<h3 class="tex-dark mb-0">{{costToday | number : 0}}</h3>
 							</div>
 						</div>
@@ -105,7 +99,7 @@
 					<div class="col-6 col-xs-6 col-lg-3">
 						<div class="row mb-2 pb-3 align-items-end">
 							<div class="col">
-								<p>Orders Today</p>
+								<p>Số lượng đơn hàng hôm nay</p>
 								<h3 class="tex-dark mb-0">{{orderToday}}</h3>
 							</div>
 						</div>
