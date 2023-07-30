@@ -58,8 +58,7 @@ CREATE TABLE categories(
 
 CREATE TABLE brands(
 	id int identity primary key not null,
-	name nvarchar(50) not null unique,
-	images nvarchar(50) not null
+	name nvarchar(50) not null unique
 );
 
 CREATE TABLE orders(
@@ -168,9 +167,9 @@ INSERT INTO accounts VALUES ('hienbt',1,'hienbt@gmail.com','Bui The Hien','12345
 ('quynt',1,'quynt@gmail.com','Ngo Thanh Quy','123456','','');
 
 -- roles
-INSERT INTO roles VALUES ('CUS','Customer'),
-('DIR','Director'),
-('STA','Staff');
+INSERT INTO roles VALUES ('CUS',N'Khách hàng'),
+('DIR',N'Quản lý'),
+('STA',N'Nhân viên');
 
 -- roledetails
 INSERT INTO roledetails VALUES ('hienbt','DIR'),
@@ -180,16 +179,16 @@ INSERT INTO roledetails VALUES ('hienbt','DIR'),
 ('quynt','CUS');
 
 -- categories
-INSERT INTO categories VALUES (N'Cho nam'),
-(N'Cho nữ'),
+INSERT INTO categories VALUES (N'Nam'),
+(N'Nữ'),
 ('Unisex');
 
 -- brands
-INSERT INTO brands VALUES ('TISSOT','tissotBrand.png'),
-('SEIKO','seikoBrand.png'),
-('ROLEX','rolexBrand.png'),
-('OMEGA','omegaBrand.png'),
-('CALVIN KLEIN','calvinKleinBrand.png');
+INSERT INTO brands VALUES ('TISSOT'),
+('SEIKO'),
+('ROLEX'),
+('OMEGA'),
+('CALVIN KLEIN');
 
 -- products
 -- tissot 1

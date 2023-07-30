@@ -25,7 +25,7 @@ import com.hdwatch.service.AccountsService;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/rest/accounts")
+@RequestMapping("/admin/rest/accounts")
 public class AccountsRestController {
 	@Autowired
 	AccountsService accountsService;

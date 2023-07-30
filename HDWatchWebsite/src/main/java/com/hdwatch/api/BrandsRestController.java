@@ -15,15 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hdwatch.dao.BrandsDAO;
-import com.hdwatch.entity.Accounts;
 import com.hdwatch.entity.Brands;
 import com.hdwatch.service.BrandsService;
 
-
-
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/rest/brands")
+@RequestMapping("/admin/rest/brands")
 public class BrandsRestController {
 	@Autowired
 	BrandsService brandsService;
@@ -37,7 +34,7 @@ public class BrandsRestController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Brands> getAccount(@PathVariable("id") Integer id) {
+	public ResponseEntity<Brands> getBrand(@PathVariable("id") Integer id) {
 		if (!bDao.existsById(id)) {
 			return ResponseEntity.notFound().build();
 		} else {
@@ -46,12 +43,12 @@ public class BrandsRestController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Brands> createBrands(@RequestBody Brands brands) {
-		if(brandsService.exitsByName(brands.getName())) {
-			return ResponseEntity.notFound().build();
-		}else {
-			return ResponseEntity.ok(brandsService.create(brands));
+	public ResponseEntity<Brands> createBrand(@RequestBody Brands brands) {
+		if(brands != null) {
+			brandsService.create(brands);
+			return ResponseEntity.ok(brands);
 		}
+		return ResponseEntity.badRequest().build();
 	}
 	
 	

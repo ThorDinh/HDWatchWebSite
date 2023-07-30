@@ -36,7 +36,6 @@ public class BrandsServiceImpl implements BrandsService {
 		   Brands existingBrand = bDao.findById(id).orElse(null);
 	        if (existingBrand != null) {
 	            existingBrand.setName(brand.getName());
-	            existingBrand.setImages(brand.getImages());
 	            return bDao.save(existingBrand);
 	        }
 		return bDao.save(brand);

@@ -3,6 +3,7 @@ package com.hdwatch.api;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,7 @@ import com.hdwatch.service.ProductsService;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/rest/products")
+@RequestMapping("/admin/rest/products")
 public class ProductsRestController {
 	@Autowired
 	ProductsService productsService;
@@ -36,9 +37,12 @@ public class ProductsRestController {
 	}
 	
 	@PostMapping
-	public Products createProducts(@RequestBody Products products) {
-		productsService.create(products);
-		return products;
+	public ResponseEntity<Products> createProducts(@RequestBody Products products) {
+		if(products != null) {
+			productsService.create(products);
+			return ResponseEntity.ok(products);
+		}
+		return ResponseEntity.badRequest().build();
 	}
 	
 	@PutMapping("{id}")

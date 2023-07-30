@@ -49,7 +49,7 @@
 								class="statistics mt-3 mt-sm-0 ml-sm-auto text-center text-sm-right">
 								<h3 class="mb-0">
 									<i class="icon-arrow-up-circle"></i> {{total.totalCost |
-									number: 0}}
+									number: 0}} VNĐ
 								</h3>
 								<p>Tháng này</p>
 							</div>
@@ -66,7 +66,7 @@
 							<div
 								class="statistics mt-3 mt-sm-0 ml-sm-auto text-center text-sm-right">
 								<h3 class="mb-0">
-									<i class="icon-arrow-up-circle"></i>{{total.totalOrder}}
+									<i class="icon-arrow-up-circle"></i>{{total.totalOrder}} Đơn
 								</h3>
 								<p>Tháng này</p>
 							</div>
@@ -91,7 +91,7 @@
 						<div class="row mb-2 pb-3 align-items-end">
 							<div class="col">
 								<p>Doanh thu hôm nay</p>
-								<h3 class="tex-dark mb-0">{{costToday | number : 0}}</h3>
+								<h3 class="tex-dark mb-0">{{costToday | number : 0}} VNĐ</h3>
 							</div>
 						</div>
 					</div>
@@ -100,7 +100,7 @@
 						<div class="row mb-2 pb-3 align-items-end">
 							<div class="col">
 								<p>Số lượng đơn hàng hôm nay</p>
-								<h3 class="tex-dark mb-0">{{orderToday}}</h3>
+								<h3 class="tex-dark mb-0">{{orderToday}} Đơn</h3>
 							</div>
 						</div>
 					</div>
@@ -108,7 +108,7 @@
 				<div class="row">
 					<div class="col-12 px-0">
 						<div class="apexchart-wrapper p-inherit">
-							<canvas id="costChart"></canvas>
+							<canvas id="costChart" hidden></canvas>
 						</div>
 					</div>
 				</div>

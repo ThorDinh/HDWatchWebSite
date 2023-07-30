@@ -39,9 +39,6 @@ public class Brands implements Serializable {
     @Column(name="name", nullable=false, length=50)
     private String     name ;
 
-    @Column(name="images", nullable=false, length=50)
-    private String     images ;
-
 
     //--- ENTITY LINKS ( RELATIONSHIP )
     @JsonIgnore

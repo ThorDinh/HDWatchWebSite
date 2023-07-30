@@ -113,6 +113,7 @@ public class ProductsController {
         model.addAttribute("brand", brand);
 		return "product/search";
 	}
+	
 	@RequestMapping("/admin")
 	public String admin() {
 		return "admin/index";

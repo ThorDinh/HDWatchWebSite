@@ -1,6 +1,5 @@
 package com.hdwatch.api;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -20,8 +19,6 @@ import com.hdwatch.report.ReportCost;
 import com.hdwatch.service.AccountsService;
 import com.hdwatch.service.OrdersService;
 import com.hdwatch.service.ReportService;
-
-
 
 @RestController
 @CrossOrigin("*")
@@ -43,7 +40,7 @@ public class ReportRestController {
 	public Map<String, Object> total() {
 		Integer month = this.monthCurrent();
 		Map<String, Object> db = new HashMap<String, Object>();
-		db.put("totalCustomer", aDao.countCustomer("Customer"));
+		db.put("totalCustomer", aDao.countCustomer("Khách hàng"));
 		
 		List<Orders> orders = oDAO.findOrderInMonth(month);
 		Double totalCost = 0.0;

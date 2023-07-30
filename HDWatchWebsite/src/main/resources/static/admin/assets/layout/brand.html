@@ -26,28 +26,19 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-md-4 text-center">
-                                                <label>
-                                                    <img ng-src="/images/brand/{{brand.image}}" class="logo" alt="">
-                                                </label>
-                                            </div>
-                                            <div class="col-md-8">
+                                        	<div class="col-md-12">
                                                 <form name="frmBrand">
                                                     <div class="form-group">
                                                         <label>Tên thương hiệu</label>
-                                                        <input name="name" ng-model="brand.name" required type="text" class="form-control">
-                                                        <div ng-show="frmBrand.name.$invalid" class="badge badge-danger m-2">Id not null</div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Logo</label>                                                        
-                                                        <input type="file" accept="image/*" onchange="angular.element(this).scope().imageChanged(this.files)">
+                                                        <input name="name" ng-model="brand.name" ng-pattern="/^[^0-9]*$/" required type="text" class="form-control">
+                                                        <div ng-show="frmBrand.name.$dirty && frmBrand.name.$error.required" class="badge badge-danger m-2">Tên thương hiệu không được để trống</div>
+                                						<div ng-show="frmBrand.name.$dirty && frmBrand.name.$error.pattern && !frmBrand.name.$error.required" class="badge badge-danger m-2">Tên thương hiệu phải là chữ</div>
                                                     </div>
                                                     <button ng-disabled="frmBrand.$invalid || chon == true" ng-click="create()" class="btn btn-primary">Tạo mới</button>
                                                     <button ng-disabled="frmBrand.$invalid || frmBrand.$pristine || chon == false" ng-click="update(brand.id)" class="btn btn-info">Cập nhật</button>
                                                     <button ng-click="reset()" class="btn btn-secondary">Làm mới</button>
-                                                    <button ng-disabled="chon == false" ng-click="delete(brand.id)" class="btn btn-dark">Xóa</button>
                                                 </form>
-                                            </div>
+                                        	</div>
                                         </div>
                                     </div>
                                 </div>
@@ -71,21 +62,17 @@
                                                 <thead class="thead-light">
                                                   <tr>
                                                     <th scope="col">#</th>
-                                                    <th scope="col">Mã thương hiệu</th>
                                                     <th scope="col">Tên thương hiệu</th>
-                                                    <th scope="col">Logo</th>
                                                     <th scope="col"></th>
                                                   </tr>
                                                 </thead>
                                                 <tbody>
                                                   <tr ng-repeat="brand in brands">
                                                     <th scope="row">{{$index+1}}</th>
-                                                    <td>{{brand.id}}</td>
                                                     <td>{{brand.name}}</td>
-                                                    <td>{{brand.image}}</td>
                                                     <td class="text-right">
                                                         <button ng-click="edit(brand.id)" class="btn btn-primary">Edit</button>
-                                                        <button ng-click="delete(brand.id)" class="btn btn-dark">Delete</button>
+                                                        <button ng-click="showDeleteModal(brand.id)" class="btn btn-dark">Delete</button>
                                                         
                                                     </td>
                                                   </tr>                                                  
@@ -95,4 +82,23 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>                        
+                        </div>
+                        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h5 class="modal-title" id="confirmDeleteModalLabel">Cảnh báo</h5>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+						      </div>
+						      <div class="modal-body">
+						        Bạn có chắc là muốn xóa thương hiệu này?
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+						        <button type="button" class="btn btn-danger" ng-click="delete(brandToDeleteId)">Delete</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>                    

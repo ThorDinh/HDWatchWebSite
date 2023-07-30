@@ -20,7 +20,7 @@ import com.hdwatch.service.CategoriesService;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/rest/categories")
+@RequestMapping("/admin/rest/categories")
 public class CategoriesRestController {
 	@Autowired
 	CategoriesService categoriesService;
@@ -42,14 +42,14 @@ public class CategoriesRestController {
 			return ResponseEntity.ok(cateDAO.findById(id).get());
 		}
 	}
+	
 	@PostMapping("")
-	public ResponseEntity<Categories> postCategory(@RequestBody Categories cate){
-		if(cateDAO.existsById(cate.getId()) && cate.getId() != null) {
-			return ResponseEntity.badRequest().build();
+	public ResponseEntity<Categories> createCategory(@RequestBody Categories cate){
+		if(cate != null) {
+			categoriesService.create(cate);
+			return ResponseEntity.ok(cate);
 		}
-			cateDAO.save(cate);
-
-		return ResponseEntity.ok(cate);
+		return ResponseEntity.badRequest().build();
 	}
 	
 	@PutMapping("{id}")

@@ -1,4 +1,4 @@
-let urlAccount = "/rest/accounts";
+let urlAccount = "/admin/rest/accounts";
 app.controller("user-ctrl",function($scope, $http){
     $scope.accounts = [];
     $scope.account = {};
@@ -15,7 +15,7 @@ app.controller("user-ctrl",function($scope, $http){
             $scope.chon = true;
         }).catch(error => {
             if(error.status == 404){
-                alert("Not Exist accounts "+username);
+                alert("Không tồn tại tài khoản "+username);
             }
         });
     };
@@ -28,11 +28,12 @@ app.controller("user-ctrl",function($scope, $http){
         var index = $scope.accounts.findIndex(a => a.username == username);
         $http.put(url, data).then(resp => {
             $scope.accounts[index] = resp.data;
-            alert("Update Account Success")
+            alert("Cập nhật tài khoản thành công!")
         }).catch(error => {
             if(error.status == 404){
-                alert("Not Exist Account "+username);
+                alert("Không có tài khoản "+username);
             }
+            alert("Cập nhật tài khoản thất bại!")
         });
     };
     //tao account
@@ -40,20 +41,20 @@ app.controller("user-ctrl",function($scope, $http){
         var data = angular.copy($scope.account);
         $http.post(urlAccount, data).then(resp => {
             $scope.accounts.push(resp.data);
-            alert("Create Account Success")
+            alert("Tạo tài khoản thành công!")
             $scope.reset();
         }).catch(error => {   
             if(error.status == 400){
-                alert("Existed Account "+data.username);
+                alert("Tài khoản đã tồn tại "+data.username);
             }
             console.log("error ",error);
+            alert("Tạo tài khoản thất bại!")
         });
     };
     //Rest khi load, khi tao moi thanh cong, khi delete, khi click btn reset
     $scope.reset = function(){
         $scope.account = {
-            activated: true,
-            photo: "logo.jpg"
+            activated: true
         };
         $scope.chon = false;
     }
@@ -63,11 +64,11 @@ app.controller("user-ctrl",function($scope, $http){
         $http.delete(url).then(resp => {
             var index = $scope.accounts.findIndex(a => a.username == username);
             $scope.accounts.splice(index, 1);
-            alert("Delete Success");
+            alert("Xóa tài khoản thành công");
             $scope.reset();
         }).catch(error => {
             if(error.status == 404){
-                alert("Not Exist Account "+username);
+                alert("Không tồn tại tài khoản "+username);
             }
         });
     };

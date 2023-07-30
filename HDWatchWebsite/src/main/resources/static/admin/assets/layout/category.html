@@ -27,13 +27,11 @@
                 <div class="row">
                     <div class="col-md-12">
                         <form name="frmCategory">
-
-                                <input name="id" ng-model="cate.id" ng-init="cate.id = ''" required ng-maxlength="4" type="text" class="form-control" hidden>
-
                             <div class="form-group">
                                 <label>Tên danh mục</label>
-                                <input name="name" ng-model="cate.name" required type="text" class="form-control">
-                                <div ng-show="frmCategory.name.$invalid" class="badge badge-danger m-2">Tên danh mục không được để trống</div>
+                                <input name="name" ng-model="cate.name" required ng-pattern="/^[^0-9]*$/" type="text" class="form-control">
+                                <div ng-show="frmCategory.name.$dirty && frmCategory.name.$error.required" class="badge badge-danger m-2">Tên danh mục không được để trống</div>
+                                <div ng-show="frmCategory.name.$dirty && frmCategory.name.$error.pattern && !frmCategory.name.$error.required" class="badge badge-danger m-2">Tên danh mục phải là chữ</div>
                             </div>
                             <button ng-disabled="frmCategory.$invalid || chon == true" ng-click="create()" class="btn btn-primary">Tạo mới</button>
                             <button ng-disabled="frmCategory.$invalid || frmCategory.$pristine || chon == false" ng-click="update(cate.id)" class="btn btn-info">Cập nhật</button>
@@ -54,6 +52,14 @@
                         <div class="col-md-6 text-left">
                             <h4 class="card-title">Category Table</h4>
                         </div>
+                        <div class="col-md-6">
+                            <form class="justify-content-end">
+                                <div class="form-group">
+                                    <input oninput="search(kw)" type="text"
+                                        class="form-control" placeholder="Tìm kiếm">
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -73,7 +79,7 @@
                             <td>{{c.name}}</td>
                             <td class="text-right">
                                 <button ng-click="edit(c.id)" class="btn btn-primary">Edit</button>
-                                <button ng-click="delete(c.id)" class="btn btn-dark">Delete</button>
+                                <button ng-click="showDeleteModal(c.id)" class="btn btn-dark">Delete</button>
                             </td>
                           </tr>                                                  
                         </tbody>
@@ -82,4 +88,23 @@
             </div>
         </div>
     </div>
+</div>
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmDeleteModalLabel">Cảnh báo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Bạn có chắc là muốn xóa danh mục này?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger" ng-click="delete(categoryToDeleteId)">Delete</button>
+      </div>
+    </div>
+  </div>
 </div>

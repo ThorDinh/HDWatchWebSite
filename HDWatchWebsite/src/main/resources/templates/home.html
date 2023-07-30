@@ -81,11 +81,11 @@
 							<div id="tab1" class="tab-pane active">
 								<div class="products-slick" data-nav="#slick-nav-1">
 									<!-- product -->
-									<div class="product" th:each="p, iterStat:${items}" th:if="${iterStat.count <= 15}">
+									<div class="product" th:each="p, iterStat:${items}" th:if="${iterStat.count <= 10}">
 										<div class="product-img">
 											<img th:src="@{/images/__${#strings.arraySplit(p.productimages, ',')[0].replace('&quot;', '').replace('[','').replace(']','')}__}" alt="">											
 											<div class="product-label">
-											<span th:if="${iterStat.index < 5}" class="new">Mới nhất</span>
+											<span class="new">Mới nhất</span>
 											</div>
 										</div>
 										<div class="product-body">
@@ -143,11 +143,11 @@
 							<div id="tab2" class="tab-pane fade in active">
 								<div class="products-slick" data-nav="#slick-nav-2">
 									<!-- product -->
-									<div class="product" th:each="p, iterStat:${list}" th:if="${iterStat.count <= 15}">
+									<div class="product" th:each="p, iterStat:${list}" th:if="${iterStat.count <= 10}">
 										<div class="product-img">
 											<img th:src="@{/images/__${#strings.arraySplit(p.productimages, ',')[0].replace('&quot;', '').replace('[','').replace(']','')}__}" alt="">											
 											<div class="product-label">
-											<span th:if="${iterStat.index < 5}" class="new">Bán chạy</span>
+											<span class="new">Bán chạy</span>
 											</div>
 										</div>
 										<div class="product-body">
