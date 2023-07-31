@@ -1,4 +1,4 @@
-let urlProduct = "/admin/rest/products";
+let urlProduct = "/rest/products";
 app.controller("product-ctrl", function ($scope, $http) {
     $scope.products = [];
     $scope.brands = [];
@@ -6,6 +6,7 @@ app.controller("product-ctrl", function ($scope, $http) {
     $scope.product = {};
     $scope.chon = false;
     $scope.pageSize = 10;
+    $scope.start = 0;
     
     //Phân trang
      $scope.next = function(){
@@ -65,7 +66,7 @@ app.controller("product-ctrl", function ($scope, $http) {
     //Cập nhật sản phẩm
     $scope.update = function(id){
         var url = `${urlProduct}/${id}`;
-        var data = angular.copy($scope.cate);
+        var data = angular.copy($scope.product);
         var index = $scope.products.findIndex(c => c.id == id);
         $http.put(url, data).then(resp => {
             $scope.products[index] = resp.data;
