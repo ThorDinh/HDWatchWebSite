@@ -92,13 +92,14 @@ app.controller("shopping-cart-ctrl", ['$scope', '$http', 'AuthService', function
 				alert("Vui lòng chọn phương thức thanh toán!");
 				return;
 			}
+			//Thanh toán bằng tiền mặt
 			$http.post("/rest/orders", order).then(resp => {
 				 if (resp.data.paymentMethod === "cod") {
                     $scope.cart.clear();
                     alert("Đặt hàng thành công! Vui lòng thanh toán khi nhận hàng.");
                     location.href = "/order/detail/" + resp.data.id;
-              }else
-               if(resp.data.paymentMethod === "online"){
+            //Thanh toán online bằng credit card
+              }else if(resp.data.paymentMethod === "online"){
 				  var prices = $scope.getTotalPrice()
 				  $scope.cart.clear();
 				  location.href = "/submitOrder?amount=" + prices + "&id=" + resp.data.id;

@@ -44,7 +44,7 @@ public class Orders implements Serializable {
 	@OneToMany(mappedBy = "orders")
 	List<Orderdetails> orderDetails;
 	
-	 private String paymentMethod;
+	private String paymentMethod;
 
 	    public String getPaymentMethod() {
 	        return paymentMethod;
