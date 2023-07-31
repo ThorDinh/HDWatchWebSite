@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		auth.userDetailsService(username -> {
 			try {
 				Accounts user = accountService.findById(username);
-				String password = pe.encode(user.getPassword());
+				String password = user.getPassword();
 				String[] roles = user.getListOfRoledetails().stream()
 						.map(er -> er.getRoles().getId())
 						.collect(Collectors.toList()).toArray(new String[0]);
