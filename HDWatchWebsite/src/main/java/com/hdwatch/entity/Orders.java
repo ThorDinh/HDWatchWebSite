@@ -43,5 +43,15 @@ public class Orders implements Serializable {
 	@JsonIgnore
 	@OneToMany(mappedBy = "orders")
 	List<Orderdetails> orderDetails;
+	
+	 private String paymentMethod;
+
+	    public String getPaymentMethod() {
+	        return paymentMethod;
+	    }
+
+	    public void setPaymentMethod(String paymentMethod) {
+	        this.paymentMethod = paymentMethod;
+	    }
 
 }

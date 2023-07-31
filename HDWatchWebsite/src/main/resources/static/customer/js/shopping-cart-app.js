@@ -72,7 +72,7 @@ app.controller("shopping-cart-ctrl", ['$scope', '$http', 'AuthService', function
 
 	//Thanh toán và xuất order
 	$scope.order = {
-		accounts: {username: $("#username").text()},
+		accounts: { username: $("#username").text() },
 		createDate: new Date(),
 		address: "",
 		status: "Đang xác nhận",
@@ -88,13 +88,28 @@ app.controller("shopping-cart-ctrl", ['$scope', '$http', 'AuthService', function
 		purchase() {
 			var order = angular.copy(this);
 			//Thực hiện đặt hàng
+			if (!order.paymentMethod) {
+				alert("Vui lòng chọn phương thức thanh toán!");
+				return;
+			}
 			$http.post("/rest/orders", order).then(resp => {
-				alert("Đặt hàng thành công!");
-				$scope.cart.clear();
-				location.href = "/order/detail/" + resp.data.id;
+				 if (resp.data.paymentMethod === "cod") {
+                    $scope.cart.clear();
+                    alert("Đặt hàng thành công! Vui lòng thanh toán khi nhận hàng.");
+                    location.href = "/order/detail/" + resp.data.id;
+              }else
+               if(resp.data.paymentMethod === "online"){
+				   
+				  alert("Duy lol")
+				  var prices = $scope.getTotalPrice()
+				  $scope.cart.clear();
+				  location.href = "/cc/detail?amount=" + prices + "&id=" + resp.data.id;
+				  
+			  }
 			}).catch(error => {
 				alert(order);
 				console.log(error)
+				
 			})
 		}
 	}
@@ -114,41 +129,41 @@ app.controller("shopping-cart-ctrl", ['$scope', '$http', 'AuthService', function
 		var imageName = images[0].replace(/"/g, '').replace('[', '').replace(']', '');
 		return imageName;
 	};
-	
+
 	//Quản lí yêu thích
 	$scope.favorite = {
 		items: [],
 		//Thêm sản phẩm vào yêu thích
 		add(id) {
 			// Check if the user is logged in
-        	AuthService.checkAuthentication()
-            .then(response => {
-                const loggedIn = response.data.authenticated;
-                if (!loggedIn) {
-                    // Redirect to the login form if not logged in
-                    // Assuming your login page URL is '/login'
-                    window.location.href = '/login/form';
-                } else {
-                    var item = this.items.find(item => item.id == id);
-	                // If the item is already in the list
-					if (item) {
-						item.favorite = !item.favorite; // Toggle the favorite status
-						var index = this.items.findIndex(item => item.id == id);
-						this.items.splice(index, 1);
-						this.saveToLocalStorage();
+			AuthService.checkAuthentication()
+				.then(response => {
+					const loggedIn = response.data.authenticated;
+					if (!loggedIn) {
+						// Redirect to the login form if not logged in
+						// Assuming your login page URL is '/login'
+						window.location.href = '/login/form';
 					} else {
-						// If the item is not in the list
-						$http.get(`/rest/products/${id}`).then(resp => {
-							resp.data.favorite = true;
-							this.items.push(resp.data);
+						var item = this.items.find(item => item.id == id);
+						// If the item is already in the list
+						if (item) {
+							item.favorite = !item.favorite; // Toggle the favorite status
+							var index = this.items.findIndex(item => item.id == id);
+							this.items.splice(index, 1);
 							this.saveToLocalStorage();
-						});
+						} else {
+							// If the item is not in the list
+							$http.get(`/rest/products/${id}`).then(resp => {
+								resp.data.favorite = true;
+								this.items.push(resp.data);
+								this.saveToLocalStorage();
+							});
+						}
 					}
-                }
-            })
-            .catch(error => {
-                console.error('Error checking authentication:', error);
-            });
+				})
+				.catch(error => {
+					console.error('Error checking authentication:', error);
+				});
 		},
 		//Xóa sản phẩm ra danh sách yêu thích
 		remove(id) {
@@ -179,5 +194,5 @@ app.controller("shopping-cart-ctrl", ['$scope', '$http', 'AuthService', function
 		}
 	}
 
-	$scope.favorite.loadFromLocalStorage(); 
+	$scope.favorite.loadFromLocalStorage();
 }]);
