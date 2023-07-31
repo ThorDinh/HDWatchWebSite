@@ -23,19 +23,19 @@
                 <tbody>
                 <tr>
                     <td>Thông tin đơn hàng:</td>
-                    <td><span th:text="${orderId}">[order ID]</span></td>
+                    <td><span th:text="${param.orderId}">[order ID]</span></td>
                 </tr>
                 <tr>
                     <td>Tổng tiền:</td>
-                    <td><span th:text="${totalPrice}">[total price]</span></td>
+                    <td><span th:text="${param.totalPrice}">[total price]</span></td>
                 </tr>
                 <tr>
                     <td>Thời gian thanh toán:</td>
-                    <td><span th:text="${paymentTime}">[payment time]</span></td>
+                    <td><span th:text="${param.paymentTime}">[payment time]</span></td>
                 </tr>
                 <tr>
                     <td>Mã giao dịch:</td>
-                    <td><span th:text="${transactionId}">[transaction ID]</span></td>
+                    <td><span th:text="${param.transactionId}">[transaction ID]</span></td>
                 </tr>
                 </tbody>
             </table>

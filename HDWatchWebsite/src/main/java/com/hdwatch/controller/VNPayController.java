@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hdwatch.dao.OrdersDAO;
 import com.hdwatch.entity.Orders;
@@ -43,7 +44,7 @@ public class VNPayController {
 	    }
 
 	    @GetMapping("/vnpay-payment")
-	    public String GetMapping(HttpServletRequest request, Model model){
+	    public String GetMapping(HttpServletRequest request,RedirectAttributes params){
 	        int paymentStatus =vnPayService.orderReturn(request);
 	        int id = Integer.parseInt(request.getParameter("vnp_TxnRef"));
 	        String orderInfo = request.getParameter("vnp_OrderInfo");
@@ -53,16 +54,27 @@ public class VNPayController {
 	        
 	        String formattedDateTimeString = convertDateTimeString(paymentTime);
 	        
-	        model.addAttribute("orderId", orderInfo);
-	        model.addAttribute("totalPrice", totalPrice);
-	        model.addAttribute("paymentTime", formattedDateTimeString);
-	        model.addAttribute("transactionId", transactionId);
+	        params.addAttribute("orderId", orderInfo);
+	        params.addAttribute("totalPrice", totalPrice);
+	        params.addAttribute("paymentTime", formattedDateTimeString);
+	        params.addAttribute("transactionId", transactionId);
 	        if(paymentStatus == 1) {
 	        	Orders order = oDao.findById(id).get();
 	        	order.setStatus("Đã hoàn thành");
 	        	oDao.save(order);
 	        }
-	        return paymentStatus == 1 ? "vnpay/ordersuccess" : "vnpay/orderfail";
+	        
+	        return paymentStatus == 1? "redirect:/paysucces" : "redirect:/payfalse";
+	    }
+	    @GetMapping("/paysucces")
+	    public String paysucces() {
+	        
+	    	return "vnpay/ordersuccess";
+	    }
+	    @GetMapping("/payfalse")
+	    public String payfalse() {
+	        
+	    	return "vnpay/orderfail";
 	    }
 	    public static String convertDateTimeString(String inputDateTimeString) {
 	        String formattedDateTimeString = "";
