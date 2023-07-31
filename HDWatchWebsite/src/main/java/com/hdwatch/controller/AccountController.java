@@ -10,14 +10,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.hdwatch.dao.AccountsDAO;
 import com.hdwatch.entity.Accounts;
 import com.hdwatch.service.AccountsService;
+import com.hdwatch.service.MailerService;
 import com.hdwatch.utils.PasswordUtils;
+
+
 
 @Controller
 public class AccountController {
 	@Autowired
 	AccountsService accountService;
+	@Autowired
+	MailerService mailerService;
+	@Autowired
+	AccountsDAO accountsDAO;
 	
 	@RequestMapping("/account/info")
 	public String showAccountInfomation(Model model) {
@@ -49,30 +57,40 @@ public class AccountController {
 //	        return code;
 //	    }
 	@RequestMapping("/forgot-password")
-	public String forgotPassword(@RequestParam(name = "email", required = false) String email,Model model) {
-		//Tiêu đề trang
+	public String forgotPassword(@RequestParam(name = "email", required = false) String username,Model model) {
+		
 		model.addAttribute("pageTitle","Quên mật khẩu");
-//		Accounts account = new Accounts();
-//		Accounts accounts = accountService.findByEmai(email);
-//		
-//		if(accounts != null) {
-//			model.addAttribute("error","Email không tồn tại!!!");
-//			return "forgot-passwrod";
-//		}
-//			String resetCode = generateResetCode();
-//			
-//			accounts.setResetCode(resetCode);
-//			
-//			
-//			accountService.save(resetCode, accounts);
-//			
-//			
-//			accounts.setResetCode(resetCode);
-//			
-//			sendResetPasswordEmail(accounts.getEmail(),resetCode);
-			
 			return "account/forgotpassword";
 		
+	}
+	@PostMapping("/forgot-password")
+	public String doPostfogotPassword(@RequestParam("email") String username,Model model) {
+		model.addAttribute("pageTitle","Quên mật khẩu");
+		try {
+			Accounts account = accountService.findByUserName(username);
+			String to = account.getEmail();
+			String email = to.substring(0, 2);
+			
+			double randomDouble = Math.random();
+            randomDouble = randomDouble * 1000000 + 1;
+            int randomInt = (int) randomDouble;
+            System.out.println("Duy chuoi quai ");
+			
+			String subject = "Lấy lại mật khẩu";
+			String body = "Mật khẩu của bạn là:"+randomInt;
+			mailerService.send(to, subject, body);
+//			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//			String encodedPassword = passwordEncoder.encode(String.valueOf(randomInt));
+			account.setPassword(String.valueOf(randomInt));
+			accountsDAO.save(account);
+			
+			model.addAttribute("message", "Mật khẩu mới đã được gửi đến mail "+email+"***");
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			model.addAttribute("message", "Sai tài khoảng hoặc để trống");
+		}
+		return "account/forgotpassword";
 	}
 	  @PostMapping("/account/changepassword")
 	  public String changePassword(@RequestParam("username") String username,

@@ -1,19 +1,32 @@
 package com.hdwatch.controller;
 
+import java.security.Principal;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.hdwatch.dao.AccountsDAO;
+import com.hdwatch.dao.OrdersDAO;
+import com.hdwatch.entity.Accounts;
+import com.hdwatch.entity.Orders;
 import com.hdwatch.service.OrdersService;
 
 @Controller
 public class OrderController {
 	@Autowired
 	OrdersService orderService;
+	@Autowired
+	AccountsDAO accountsDAO;
+	@Autowired
+	OrdersDAO ordersDAO;
 
 	@RequestMapping("/order/checkout")
 	public String checkout(Model model, HttpServletRequest request) {

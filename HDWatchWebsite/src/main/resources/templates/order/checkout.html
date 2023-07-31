@@ -1,4 +1,4 @@
-<div xmlns:th="http://www.thymeleaf.org" 
+<div xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{/layout/index :: dynamic (~{::main})}">
 	<main>
 		<!-- SECTION -->
@@ -18,17 +18,19 @@
 								<div class="form-control" id="username">[[${#request.remoteUser}]]</div>
 							</div>
 							<div class="form-group">
-								<div class="form-control">{{order.createDate | date:'dd-MM-yyyy'}}</div>
+								<div class="form-control">{{order.createDate |
+									date:'dd-MM-yyyy'}}</div>
 							</div>
 							<div class="form-group">
-								<input class="input" type="text" placeholder="Địa chỉ" ng-model="order.address">
+								<input class="input" type="text" placeholder="Địa chỉ"
+									ng-model="order.address">
 							</div>
-<!-- 							<div class="form-group"> -->
-<!-- 								<input class="input" type="email" placeholder="Email"> -->
-<!-- 							</div> -->
-<!-- 							<div class="form-group"> -->
-<!-- 								<input class="input" type="tel" placeholder="Số điện thoại"> -->
-<!-- 							</div> -->
+							<!-- 							<div class="form-group"> -->
+							<!-- 								<input class="input" type="email" placeholder="Email"> -->
+							<!-- 							</div> -->
+							<!-- 							<div class="form-group"> -->
+							<!-- 								<input class="input" type="tel" placeholder="Số điện thoại"> -->
+							<!-- 							</div> -->
 						</div>
 						<!-- /Billing Details -->
 
@@ -41,8 +43,12 @@
 						</div>
 						<div class="order-summary">
 							<div class="order-col">
-								<div><strong>Sản phẩm</strong></div>
-								<div><strong>Giá</strong></div>
+								<div>
+									<strong>Sản phẩm</strong>
+								</div>
+								<div>
+									<strong>Giá</strong>
+								</div>
 							</div>
 							<div class="order-products">
 								<div class="order-col" ng-repeat="item in cart.items">
@@ -52,38 +58,37 @@
 							</div>
 							<div class="order-col">
 								<div>Phí giao hàng</div>
-								<div><strong>FREE</strong></div>
+								<div>
+									<strong>FREE</strong>
+								</div>
 							</div>
 							<div class="order-col">
-								<div><strong>Tổng tiền</strong></div>
-								<div><strong class="order-total">{{ getTotalPrice() | number : 0}} VNĐ</strong></div>
+								<div>
+									<strong>Tổng tiền</strong>
+								</div>
+								<div>
+									<strong class="order-total">{{ getTotalPrice() |
+										number : 0}} VNĐ</strong>
+								</div>
 							</div>
 						</div>
-<!-- 						<div class="payment-method"> -->
-<!-- 							<div class="input-radio"> -->
-<!-- 								<input type="radio" name="payment" id="payment-1"> -->
-<!-- 								<label for="payment-1"> -->
-<!-- 									<span></span> -->
-<!-- 									Thanh toán khi nhân hàng -->
-<!-- 								</label> -->
-<!-- 							</div> -->
-<!-- 							<div class="input-radio"> -->
-<!-- 								<input type="radio" name="payment" id="payment-2"> -->
-<!-- 								<label for="payment-2"> -->
-<!-- 									<span></span> -->
-<!-- 									Thanh toán bằng ví điện tử -->
-<!-- 								</label> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
+						<div class="input-radio">
+							<input type="radio" name="cod" id="payment-1"
+								ng-model="order.paymentMethod" value="cod"> <label
+								for="payment-1"> <span></span> Thanh toán khi nhận hàng
+							</label>
+						</div>
+						<div class="input-radio">
+							<input type="radio" name="payme" id="payment-2"
+								ng-model="order.paymentMethod" value="online"> <label
+								for="payment-2"> <span></span> Thanh toán bằng ví điện
+								tử
+							</label>
+						</div>
 
-<!-- 						<div class="input-checkbox"> -->
-<!-- 							<input type="checkbox" id="terms"> -->
-<!-- 							<label for="terms"> -->
-<!-- 								<span></span> -->
-<!-- 								Tôi đã đọc kỹ điều khoản <a href="#">và chấp thuận</a> -->
-<!-- 							</label> -->
-<!-- 						</div> -->
-						<a ng-click="order.purchase()" class="primary-btn order-submit">Thanh toán</a>
+
+						<a ng-click="order.purchase()" class="primary-btn order-submit">Thanh
+							toán</a>
 					</div>
 					<!-- /Order Details -->
 				</div>
@@ -92,5 +97,5 @@
 			<!-- /container -->
 		</div>
 		<!-- /SECTION -->
-</main>
+	</main>
 </div>
