@@ -44,7 +44,7 @@ public class Accounts implements Serializable {
     @Column(name="fullname", nullable=false, length=50)
     private String     fullname ;
 
-    @Column(name="password", nullable=false, length=50)
+    @Column(name="password", nullable=false)
     private String     password ;
 
     @Column(name="google", length=2147483647)

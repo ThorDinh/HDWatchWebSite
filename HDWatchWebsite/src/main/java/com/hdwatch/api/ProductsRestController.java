@@ -17,11 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hdwatch.entity.Products;
 import com.hdwatch.service.ProductsService;
 
-
-
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/admin/rest/products")
+@RequestMapping("/rest/products")
 public class ProductsRestController {
 	@Autowired
 	ProductsService productsService;

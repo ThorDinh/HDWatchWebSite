@@ -99,11 +99,9 @@ app.controller("shopping-cart-ctrl", ['$scope', '$http', 'AuthService', function
                     location.href = "/order/detail/" + resp.data.id;
               }else
                if(resp.data.paymentMethod === "online"){
-				   
-				  alert("Duy lol")
 				  var prices = $scope.getTotalPrice()
 				  $scope.cart.clear();
-				  location.href = "/cc/detail?amount=" + prices + "&id=" + resp.data.id;
+				  location.href = "/submitOrder?amount=" + prices + "&id=" + resp.data.id;
 				  
 			  }
 			}).catch(error => {

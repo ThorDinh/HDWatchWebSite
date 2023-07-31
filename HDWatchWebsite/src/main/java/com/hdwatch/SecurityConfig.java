@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		auth.userDetailsService(username -> {
 			try {
 				Accounts user = accountService.findById(username);
-				String password = pe.encode(user.getPassword());
+				String password = user.getPassword();
 				String[] roles = user.getListOfRoledetails().stream()
 						.map(er -> er.getRoles().getId())
 						.collect(Collectors.toList()).toArray(new String[0]);
@@ -53,8 +53,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
 		http.authorizeRequests()
-			.antMatchers("/account/**","/order/**").authenticated()
-			.antMatchers("/admin/**").hasAnyRole("STA", "DIR")
+//			.antMatchers("/account/**","/order/**").authenticated()
+//			.antMatchers("/admin/**").hasAnyRole("STA", "DIR")
 			.anyRequest().permitAll();
 		
 		http.formLogin()
