@@ -33,7 +33,7 @@ public class VNPayController {
 	        return "vnpay/index";
 	    }
 
-	    @PostMapping("/submitOrder")
+	    @GetMapping("/submitOrder")
 	    public String submidOrder(@RequestParam("amount") int orderTotal,
 	                            
 	                            @RequestParam("id") String id,
