@@ -1,5 +1,5 @@
 app.controller ("authenticate-ctrl", function($scope, $http){
-    $http.get(`/admin/rest/accounts/authorities`).then(resp =>{
+    $http.get(`/rest/accounts/authorities`).then(resp =>{
     	$scope.db = resp.data;
     })
     $scope.index_of = function(username, role){
@@ -19,7 +19,7 @@ app.controller ("authenticate-ctrl", function($scope, $http){
     			accounts:username,
     			roles:role
     		}
-    		$http.post(`/admin/rest/accounts/authorities`,authority).then(resp => {
+    		$http.post(`/rest/accounts/authorities`,authority).then(resp => {
     			$scope.db.authorities.push(resp.data);
     		})
     	}

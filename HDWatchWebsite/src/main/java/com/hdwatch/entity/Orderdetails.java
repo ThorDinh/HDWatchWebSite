@@ -23,15 +23,22 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Table(name="orderdetails", schema="dbo", catalog="HDWatch" )
 public class Orderdetails implements Serializable {
-
+	
+	//--- ENTITY PRIMARY KEY 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
+	
+	//--- ENTITY DATA FIELDS 
 	Double price;
+	
 	Integer quantity;
+	
+	//--- ENTITY LINKS ( RELATIONSHIP )
 	@ManyToOne
 	@JoinColumn(name = "product_id")
 	Products products;
+	
 	@ManyToOne
 	@JoinColumn(name = "order_id")
 	Orders orders;

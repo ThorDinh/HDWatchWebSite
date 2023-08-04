@@ -10,19 +10,33 @@
         		<div class="form-container">
 						<h3 class="text-danger">HÓA ĐƠN [[${order.id}]] - NGÀY [[${#dates.format(order.createDate, 'dd/MM/yyyy')}]]</h3>
 						<div class="row">
-	            	<div class="form-group col-sm-4">
-	                    <div>Số hóa đơn:</div>
-	                    <input th:field="*{id}" class="form-control" readonly>
-	                </div>
-	                <div class="form-group col-sm-4">
-	                    <div>Người đặt hàng:</div>
-	                    <input th:field="*{accounts.fullname}" class="form-control" readonly>
-	                </div>
-	                <div class="form-group col-sm-4">
-	                    <div>Ngày đặt hàng:</div>
-	                    <input th:field="*{createDate}" class="form-control" readonly>
-	                </div>
-                </div>
+			            	<div class="form-group col-sm-4">
+			                    <div>Số hóa đơn:</div>
+			                    <input th:field="*{id}" class="form-control" readonly>
+			                </div>
+			                <div class="form-group col-sm-4">
+			                    <div>Người đặt hàng:</div>
+			                    <input th:field="*{accounts.fullname}" class="form-control" readonly>
+			                </div>
+			                <div class="form-group col-sm-4">
+			                    <div>Ngày đặt hàng:</div>
+			                    <input th:field="*{createDate}" class="form-control" readonly>
+			                </div>
+                		</div>
+                		<div class="row">
+			            	<div class="form-group col-sm-4">
+			                    <div>Phương thức thanh toán:</div>
+			                    <input th:field="*{paymentMethod}" class="form-control" readonly>
+			                </div>
+			                <div class="form-group col-sm-4">
+			                    <div>Số điện thoại:</div>
+			                    <input th:field="*{phoneNumber}" class="form-control" readonly>
+			                </div>
+			                <div class="form-group col-sm-4">
+			                    <div>Email(Nếu có):</div>
+			                    <input th:field="*{email}" class="form-control" readonly>
+			                </div>
+                		</div>
                 <div class="row">
 	                <div class="form-group col-sm-12">
 	                    <div>Địa chỉ:</div>

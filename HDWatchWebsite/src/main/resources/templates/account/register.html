@@ -9,28 +9,33 @@
 				<!-- row -->
 				<div class="row">
 					<!--Register-->
-				<form class="register-form" id="register-form">
+				<form class="register-form" id="register-form" th:action="@{/register}" th:object="${user}" method="post">
 					<h2>Đăng ký</h2> <h3 class="text-danger" th:text="${message}"></h3>
 					<!-- Các trường nhập liệu của form đăng ký -->
 					<div class="form-group">
 					  <label for="username">Tài khoản:</label>
-					  <input type="text" class="form-control" id="username" placeholder="Nhập tên người dùng">
+					  <input type="text" class="form-control" th:field="*{username}" placeholder="Nhập tên người dùng" />
+					  <strong><span class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span></strong>
 					</div>
 					<div class="form-group">
 					  <label for="fullname">Họ và tên:</label>
-					  <input type="text" class="form-control" id="fullname" placeholder="Nhập họ và tên">
+					  <input type="text" class="form-control" th:field="*{fullname}" id="fullname" placeholder="Nhập họ và tên">
+					  <strong><span class="text-danger" th:if="${#fields.hasErrors('fullname')}" th:errors="*{fullname}"></span></strong>
 					</div>
 					<div class="form-group">
 					  <label for="email">Email:</label>
-					  <input type="email" class="form-control" id="email" placeholder="Nhập địa chỉ email">
+					  <input type="text" class="form-control" th:field="*{email}" id="email" placeholder="Nhập địa chỉ email">
+					  <strong><span class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span></strong>
 					</div>
 					<div class="form-group">
 					  <label for="password">Mật khẩu:</label>
-					  <input type="password" class="form-control" id="password" placeholder="Nhập mật khẩu">
+					  <input type="password" class="form-control" th:field="*{password}" id="password" placeholder="Nhập mật khẩu" />
+					  <strong><span class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span></strong>
 					</div>
 					<div class="form-group">
 					  <label for="confirm-password">Xác nhận mật khẩu:</label>
-					  <input type="password" class="form-control" id="confirm-password" placeholder="Xác nhận mật khẩu">
+					  <input type="password" class="form-control" name="confirmPassword" id="confirm-password" placeholder="Xác nhận mật khẩu">
+					  <strong><span class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span></strong>
 					</div>
 					<button type="submit" class="btn btn-primary">Đăng ký</button>
 					<label for="login-link">Đã có tài khoản? <a href="/login/form" >Đăng nhập</a></label>

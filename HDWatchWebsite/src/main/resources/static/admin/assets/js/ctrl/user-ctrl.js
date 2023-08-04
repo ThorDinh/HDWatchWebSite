@@ -1,4 +1,4 @@
-let urlAccount = "/admin/rest/accounts";
+let urlAccount = "/rest/accounts";
 app.controller("user-ctrl",function($scope, $http){
     $scope.accounts = [];
     $scope.account = {};

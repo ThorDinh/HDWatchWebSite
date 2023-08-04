@@ -3,9 +3,12 @@
 				<div class="container">
 					<ul class="header-links pull-right">
 						<th:block th:unless="${#request.remoteUser}">
-						<a class="btn btn-danger" href="/login/form">
-							  <i class="fa fa-user-o"></i>Đăng nhập
-							</a>
+							<a class="btn btn-danger" href="/login/form">
+								  <i class="fa fa-user-o"></i> Đăng nhập
+								</a>
+							<a class="btn btn-danger" href="/register">
+								  <i class="fa fa-plus-square-o"></i> Đăng kí
+								</a>
 						</th:block>
 						<th:block th:if="${#request.remoteUser}">
 						<div class="dropdown show">
@@ -14,12 +17,7 @@
 							</a>
 							<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 							  <a class="dropdown-item" href="/account/info"> Thông tin tài khoản</a>
-							  <a class="dropdown-item" href="/order/list"> Lịch sử mua hàng</a><br>
-							  <a class="dropdown-item" href="/account/changepassword"> Đổi mật khẩu</a><br>
 							  <a class="dropdown-item" href="/logout"> Đăng xuất</a>
-							  <a class="dropdown-item" th:if="${#request.isUserInRole('DIR') or #request.isUserInRole('STA')}" 
-							  th:href="@{/admin}">
-							  Administration</a>
 							</div>
 						  </div>
 						  </th:block>

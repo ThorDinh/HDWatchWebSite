@@ -16,7 +16,8 @@
 							<h3 class="aside-title">Thương hiệu</h3>
 							<div class="checkbox-filter">
 								<div class="input-checkbox" th:each="b:${brands}">
-									<a  class="text-center" th:href="@{|/brand?bid=${b.id}|}">
+									<span></span>
+									<a class="text-center" th:href="@{|/brand?bid=${b.id}|}">
 										<span th:text="${b.name}"></span>
 									</a>
 								</div>

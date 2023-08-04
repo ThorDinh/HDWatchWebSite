@@ -103,10 +103,9 @@ app.controller("shopping-cart-ctrl", ['$scope', '$http', 'AuthService', function
 				  var prices = $scope.getTotalPrice()
 				  $scope.cart.clear();
 				  location.href = "/submitOrder?amount=" + prices + "&id=" + resp.data.id;
-				  
 			  }
 			}).catch(error => {
-				alert(order);
+				alert("Đặt hàng thất bại!");
 				console.log(error)
 				
 			})

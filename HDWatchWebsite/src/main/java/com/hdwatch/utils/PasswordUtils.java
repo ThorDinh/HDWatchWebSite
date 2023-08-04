@@ -9,7 +9,6 @@ public class PasswordUtils {
 	    }
 
 	 public static boolean isPasswordValid(String oldPassword, String newPassword) {
-		   
 		 // Kiểm tra nếu mật khẩu cũ và mật khẩu mới giống nhau thì trả về false
 		    if (oldPassword.equals(newPassword)) {
 		        return false;

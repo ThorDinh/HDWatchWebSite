@@ -26,7 +26,7 @@ import com.hdwatch.service.AccountsService;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/admin/rest/accounts")
+@RequestMapping("/rest/accounts")
 public class AccountsRestController {
 	@Autowired
 	AccountsService accountsService;
@@ -39,6 +39,7 @@ public class AccountsRestController {
 	
 	@Autowired
 	RoledetailsDAO rdDao;
+	
 	@GetMapping
 	public List<Accounts> getAll(){
 		return accountsService.findAll();

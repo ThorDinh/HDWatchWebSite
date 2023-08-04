@@ -29,8 +29,8 @@ public interface ProductsDAO extends JpaRepository<Products, Integer>{
 //			+ "OR LOWER(p.description) LIKE %:keyword% "
 //			+ "OR LOWER(c.name) LIKE %:keyword% "
 //			+ "OR LOWER(b.name) LIKE %:keyword%) "
-//			+ "AND (:category IS NULL OR p.category_id = :category) "
-//			+ "AND (:brand IS NULL OR p.brand_id = :brand) ", nativeQuery = true)
+//			+ "OR (:category IS NULL OR p.category_id = :category) "
+//			+ "OR (:brand IS NULL OR p.brand_id = :brand) ", nativeQuery = true)
 //    Page<Products> searchProductsByKeyword(String keyword, Integer category, Integer brand);
 	
 	@Query(value = "SELECT p.* FROM products p "

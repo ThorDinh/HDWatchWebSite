@@ -59,7 +59,6 @@ public class AccountController {
 //	    }
 	@RequestMapping("/forgot-password")
 	public String forgotPassword(@RequestParam(name = "email", required = false) String username,Model model) {
-		
 		model.addAttribute("pageTitle","Quên mật khẩu");
 			return "account/forgotpassword";
 		
@@ -99,6 +98,7 @@ public class AccountController {
 	                               @RequestParam("newPassword") String newPassword,
 	                               @RequestParam("confirmNewPassword") String confirmNewPassword,
 	                               Model model) {
+		  	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		  	//Hiện thị thông tin khách hàng
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 			username = authentication.getName();
@@ -124,10 +124,10 @@ public class AccountController {
 	          }
 	      } else {
 	    	  	//Tiêu đề trang
-	  			model.addAttribute("pageTitle","Sai mật khẩu");
+	  			model.addAttribute("pageTitle","Sai mật khẩu cũ");
 	  			model.addAttribute("message", "Mật khẩu cũ không đúng!");
 	      }
 	      
-	      return "account/changepassword";
+	      return "account/account";
 	  }
 }

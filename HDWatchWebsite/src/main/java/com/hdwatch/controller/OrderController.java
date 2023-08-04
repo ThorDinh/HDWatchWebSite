@@ -36,16 +36,6 @@ public class OrderController {
 		return "order/checkout";
 	}
 
-	@RequestMapping("/order/list")
-	public String orderList(Model model, HttpServletRequest request) {
-
-		String username = request.getRemoteUser();
-		model.addAttribute("orders", orderService.findByUsername(username));
-		//Tiêu đề trang
-        model.addAttribute("pageTitle", "Lịch sử mua hàng - " + username);
-		return "order/yourorder";
-	}
-
 	@RequestMapping("/order/detail/{id}")
 	public String detail(Model model, @PathVariable("id") Integer id) {
 		model.addAttribute("order", orderService.findById(id));
