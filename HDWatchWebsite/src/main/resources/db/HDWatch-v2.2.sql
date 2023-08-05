@@ -7,7 +7,7 @@ CREATE TABLE accounts(
 	activated bit not null,
 	email varchar(50) not null,
 	fullname varchar(50) not null,
-	password varchar(50) not null,
+	password varchar(max) not null,
 	google varchar(max) null,
 	facebook varchar(max) null
 );
@@ -66,7 +66,10 @@ CREATE TABLE orders(
 	account_id varchar(50) not null,
 	address nvarchar(500) not null,
 	create_date date not null,
-	status nvarchar(50) null
+	status nvarchar(50) null,
+	payment_method varchar(255) not null,
+	phone_number varchar(11) not null,
+	email varchar(50) null
 );
 
 CREATE TABLE orderdetails(
@@ -160,11 +163,11 @@ FOREIGN KEY (product_id) REFERENCES products(id);
 
 -- Data
 -- accounts
-INSERT INTO accounts VALUES ('hienbt',1,'hienbt@gmail.com','Bui The Hien','123456','',''),
-('dinhnk',1,'dinhnk@gmail.com','Nguyen Kha Dinh','123456','',''),
-('haonx',1,'haonx@gmail.com','Ngo Xuan Hao','123456','',''),
-('duyntd',1,'duyntd@gmail.com','Nguyen Thanh Duc Duy','123456','',''),
-('quynt',1,'quynt@gmail.com','Ngo Thanh Quy','123456','','');
+INSERT INTO accounts VALUES ('hienbt',1,'hienbt@gmail.com','Bui The Hien','$2a$10$TeydjHxMrF8Oaucet.QEB.9lcQRHqOQVh37hnftWflFIJ1vGV7qpC','',''),
+('dinhnk',1,'dinhnk@gmail.com','Nguyen Kha Dinh','$2a$10$w9MBN9t8gGe.UKoOKrKbnukxdt4ja3klDAWH4zplbf13Br.SjSom2','',''),
+('haonx',1,'haonx@gmail.com','Ngo Xuan Hao','$2a$10$rGvC8zlnI/Nukpmb2IorF.KsMos2wiShJhBEZl9pnzUNPpM/uf1.e','',''),
+('duyntd',1,'duyntd@gmail.com','Nguyen Thanh Duc Duy','$2a$10$mP2yvgaEBVGSntQRQ0Qoxe8T4sWRddC8m6qtBcy9Irk95wCnetYlq','',''),
+('quynt',1,'quynt@gmail.com','Ngo Thanh Quy','$2a$10$/I.QXSN9C43TpzjukdofhO/pMZhjzkaZWWzFyfnqz2iLjjCSo0HAu','','');
 
 -- roles
 INSERT INTO roles VALUES ('CUS',N'Khách hàng'),
@@ -250,49 +253,37 @@ N'Vỏ thép không gỉ với dây đeo bằng da màu đen. Cố định bezel
 
 --orders
 -- Insert data for Account 1
-INSERT INTO orders (account_id, address, create_date, status)
+INSERT INTO orders (account_id, address, create_date, status, payment_method, phone_number, email)
 VALUES
-    ('hienbt', N'Số 10, Đường Trần Hưng Đạo, Quận Hoàn Kiếm, Thành phố Hà Nội', '2023-06-01', N'Đã hoàn thành'),
-    ('hienbt', N'Số 20, Đường Nguyễn Huệ, Quận 1, Thành phố Hồ Chí Minh', '2023-06-02', N'Đã hoàn thành'),
-    ('hienbt', N'Số 30, Đường Bạch Đằng, Quận Hải Châu, Thành phố Đà Nẵng', '2023-06-03', N'Đã hoàn thành'),
-    ('hienbt', N'Số 40, Đường Lạch Tray, Quận Ngô Quyền, Thành phố Hải Phòng', '2023-06-04', N'Đã hoàn thành'),
-    ('hienbt', N'Số 50, Đường Hưng Phú, Quận Ninh Kiều, Thành phố Cần Thơ', '2023-06-05', N'Đã hoàn thành');
+    ('hienbt', N'Số 10, Đường Trần Hưng Đạo, Quận Hoàn Kiếm, Thành phố Hà Nội', '2023-06-01', N'Đã hoàn thành', 'cod', '01234567894', ''),
+    ('hienbt', N'Số 20, Đường Nguyễn Huệ, Quận 1, Thành phố Hồ Chí Minh', '2023-06-02', N'Đã hoàn thành', 'cod', '01234567894', ''),
+    ('hienbt', N'Số 30, Đường Bạch Đằng, Quận Hải Châu, Thành phố Đà Nẵng', '2023-06-03', N'Đã hoàn thành', 'cod', '01234567894', ''),
+    ('hienbt', N'Số 40, Đường Lạch Tray, Quận Ngô Quyền, Thành phố Hải Phòng', '2023-06-04', N'Đã hoàn thành', 'cod', '01234567894', ''),
+    ('hienbt', N'Số 50, Đường Hưng Phú, Quận Ninh Kiều, Thành phố Cần Thơ', '2023-06-05', N'Đã hoàn thành', 'cod', '01234567894', ''),
 
--- Insert data for Account 2
-INSERT INTO orders (account_id, address, create_date, status)
-VALUES
-    ('dinhnk', N'Số 60, Đường Bình Gia, Quận Thủ Dầu Một, Tỉnh Bình Dương', '2023-06-01', N'Đã hoàn thành'),
-    ('dinhnk', N'Số 70, Đường Hùng Vương, Quận Văn Lâm, Tỉnh Hưng Yên', '2023-06-02', N'Đã hoàn thành'),
-    ('dinhnk', N'Số 80, Đường Hàm Nghi, Quận TP. Vinh, Tỉnh Nghệ An', '2023-06-03', N'Đã hoàn thành'),
-    ('dinhnk', N'Số 90, Đường Đồng Khởi, Quận Thành phố Vũng Tàu, Tỉnh Bà Rịa - Vũng Tàu', '2023-06-04', N'Đã hoàn thành'),
-    ('dinhnk', N'Số 100, Đường Nguyễn Văn Cừ, Quận TP. Hòa Bình, Tỉnh Hòa Bình', '2023-06-05', N'Đã hoàn thành');
-    
--- Insert data for Account 3
-INSERT INTO orders (account_id, address, create_date, status)
-VALUES
-    ('haonx', N'Số 110, Đường Hạ Long, Quận Hồng Gai, Tỉnh Quảng Ninh', '2023-06-01', N'Đã hoàn thành'),
-    ('haonx', N'Số 120, Đường Lý Thường Kiệt, Quận TP. Tân An, Tỉnh Long An', '2023-06-02', N'Đã hoàn thành'),
-    ('haonx', N'Số 130, Đường Y Ngông, Quận TP. Buôn Ma Thuột, Tỉnh Đắk Lắk', '2023-06-03', N'Đã hoàn thành'),
-    ('haonx', N'Số 140, Đường Trần Đại Nghĩa, Quận TP. Mỹ Tho, Tỉnh Tiền Giang', '2023-06-04', N'Đã hoàn thành'),
-    ('haonx', N'Số 150, Đường Nguyễn Khuyến, Quận TP. Phủ Lý, Tỉnh Hà Nam', '2023-06-05', N'Đã hoàn thành');
-    
--- Insert data for Account 4
-INSERT INTO orders (account_id, address, create_date, status)
-VALUES
-    ('duyntd', N'Số 160, Đường Đường Thúy An, Quận TP. Vĩnh Yên, Tỉnh Vĩnh Phúc', '2023-06-01', N'Đã hoàn thành'),
-    ('duyntd', N'Số 170, Đường Hội Đồng, Quận TP. Đồng Xoài, Tỉnh Bình Phước', '2023-06-02', N'Đã hoàn thành'),
-    ('duyntd', N'Số 180, Đường Bế Văn Đàn, Quận TP. Bắc Ninh, Tỉnh Bắc Ninh', '2023-06-03', N'Đã hoàn thành'),
-    ('duyntd', N'Số 190, Đường Nguyễn Lương Bằng, Quận TP. Chí Linh, Tỉnh Hải Dương', '2023-06-04', N'Đã hoàn thành'),
-    ('duyntd', N'Số 200, Đường Hùng Vương, Quận TP. Tuy Hòa, Tỉnh Phú Yên', '2023-06-05', N'Đã hoàn thành');
+    ('dinhnk', N'Số 60, Đường Bình Gia, Quận Thủ Dầu Một, Tỉnh Bình Dương', '2023-06-01', N'Đã hoàn thành', 'cod', '01234567894', ''),
+    ('dinhnk', N'Số 70, Đường Hùng Vương, Quận Văn Lâm, Tỉnh Hưng Yên', '2023-06-02', N'Đã hoàn thành', 'cod', '01234567894', ''),
+    ('dinhnk', N'Số 80, Đường Hàm Nghi, Quận TP. Vinh, Tỉnh Nghệ An', '2023-06-03', N'Đã hoàn thành', 'cod', '01234567894', ''),
+    ('dinhnk', N'Số 90, Đường Đồng Khởi, Quận Thành phố Vũng Tàu, Tỉnh Bà Rịa - Vũng Tàu', '2023-06-04', N'Đã hoàn thành', 'cod', '01234567894', ''),
+    ('dinhnk', N'Số 100, Đường Nguyễn Văn Cừ, Quận TP. Hòa Bình, Tỉnh Hòa Bình', '2023-06-05', N'Đã hoàn thành', 'cod', '01234567894', ''),
 
--- Insert data for Account 5
-INSERT INTO orders (account_id, address, create_date, status)
-VALUES
-    ('quynt', N'Số 210, Đường Nguyễn Đình Chiểu, Quận TP. Quy Nhơn, Tỉnh Bình Định', '2023-06-01', N'Đã hoàn thành'),
-    ('quynt', N'Số 220, Đường Nguyễn Huệ, Quận TP. Kon Tum, Tỉnh Kon Tum', '2023-06-02', N'Đã hoàn thành'),
-    ('quynt', N'Số 230, Đường Võ Thị Sáu, Quận TP. Bạc Liêu, Tỉnh Bạc Liêu', '2023-06-03', N'Đã hoàn thành'),
-    ('quynt', N'Số 240, Đường Trần Hưng Đạo, Quận TP. Yên Bái, Tỉnh Yên Bái', '2023-06-04', N'Đã hoàn thành'),
-    ('quynt', N'Số 250, Đường Nguyễn Huệ, Quận TP. Lạng Sơn, Tỉnh Lạng Sơn', '2023-06-05', N'Đã hoàn thành');
+    ('haonx', N'Số 110, Đường Hạ Long, Quận Hồng Gai, Tỉnh Quảng Ninh', '2023-06-01', N'Đã hoàn thành', 'cod', '01234567894', ''),
+    ('haonx', N'Số 120, Đường Lý Thường Kiệt, Quận TP. Tân An, Tỉnh Long An', '2023-06-02', N'Đã hoàn thành', 'cod', '01234567894', ''),
+    ('haonx', N'Số 130, Đường Y Ngông, Quận TP. Buôn Ma Thuột, Tỉnh Đắk Lắk', '2023-06-03', N'Đã hoàn thành', 'cod', '01234567894', ''),
+    ('haonx', N'Số 140, Đường Trần Đại Nghĩa, Quận TP. Mỹ Tho, Tỉnh Tiền Giang', '2023-06-04', N'Đã hoàn thành', 'cod', '01234567894', ''),
+    ('haonx', N'Số 150, Đường Nguyễn Khuyến, Quận TP. Phủ Lý, Tỉnh Hà Nam', '2023-06-05', N'Đã hoàn thành', 'cod', '01234567894', ''),
+
+    ('duyntd', N'Số 160, Đường Đường Thúy An, Quận TP. Vĩnh Yên, Tỉnh Vĩnh Phúc', '2023-06-01', N'Đã hoàn thành', 'cod', '01234567894', ''),
+    ('duyntd', N'Số 170, Đường Hội Đồng, Quận TP. Đồng Xoài, Tỉnh Bình Phước', '2023-06-02', N'Đã hoàn thành', 'cod', '01234567894', ''),
+    ('duyntd', N'Số 180, Đường Bế Văn Đàn, Quận TP. Bắc Ninh, Tỉnh Bắc Ninh', '2023-06-03', N'Đã hoàn thành', 'cod', '01234567894', ''),
+    ('duyntd', N'Số 190, Đường Nguyễn Lương Bằng, Quận TP. Chí Linh, Tỉnh Hải Dương', '2023-06-04', N'Đã hoàn thành', 'cod', '01234567894', ''),
+    ('duyntd', N'Số 200, Đường Hùng Vương, Quận TP. Tuy Hòa, Tỉnh Phú Yên', '2023-06-05', N'Đã hoàn thành', 'cod', '01234567894', ''),
+
+    ('quynt', N'Số 210, Đường Nguyễn Đình Chiểu, Quận TP. Quy Nhơn, Tỉnh Bình Định', '2023-06-01', N'Đã hoàn thành', 'cod', '01234567894', ''),
+    ('quynt', N'Số 220, Đường Nguyễn Huệ, Quận TP. Kon Tum, Tỉnh Kon Tum', '2023-06-02', N'Đã hoàn thành', 'cod', '01234567894', ''),
+    ('quynt', N'Số 230, Đường Võ Thị Sáu, Quận TP. Bạc Liêu, Tỉnh Bạc Liêu', '2023-06-03', N'Đã hoàn thành', 'cod', '01234567894', ''),
+    ('quynt', N'Số 240, Đường Trần Hưng Đạo, Quận TP. Yên Bái, Tỉnh Yên Bái', '2023-06-04', N'Đã hoàn thành', 'cod', '01234567894', ''),
+    ('quynt', N'Số 250, Đường Nguyễn Huệ, Quận TP. Lạng Sơn, Tỉnh Lạng Sơn', '2023-06-05', N'Đã hoàn thành', 'cod', '01234567894', '');
 
 -- orderdetails
 INSERT INTO orderdetails (order_id, product_id, price, quantity)
