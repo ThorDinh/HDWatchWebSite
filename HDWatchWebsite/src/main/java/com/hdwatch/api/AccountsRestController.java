@@ -22,7 +22,10 @@ import com.hdwatch.dao.RoledetailsDAO;
 import com.hdwatch.dao.RolesDAO;
 import com.hdwatch.entity.Accounts;
 import com.hdwatch.entity.Roledetails;
+import com.hdwatch.entity.Roles;
 import com.hdwatch.service.AccountsService;
+import com.hdwatch.service.RoledetailService;
+import com.hdwatch.service.RolesService;
 
 @CrossOrigin("*")
 @RestController
@@ -39,6 +42,12 @@ public class AccountsRestController {
 	
 	@Autowired
 	RoledetailsDAO rdDao;
+	
+	@Autowired
+	RolesService roleService;
+	
+	@Autowired
+	RoledetailService roledetailService;
 	
 	@GetMapping
 	public List<Accounts> getAll(){
@@ -59,6 +68,7 @@ public class AccountsRestController {
 		if(aDao.existsById(Account.getUsername())) {
 			return ResponseEntity.badRequest().build();
 		}else {
+			//Mã hóa mật khẩu khi tạo mới
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 			String encodedPassword = passwordEncoder.encode(Account.getPassword());
 			Account.setPassword(encodedPassword);

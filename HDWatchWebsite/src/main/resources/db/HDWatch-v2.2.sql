@@ -6,7 +6,7 @@ CREATE TABLE accounts(
 	username varchar(50) primary key not null,
 	activated bit not null,
 	email varchar(50) not null,
-	fullname varchar(50) not null,
+	fullname nvarchar(50) not null,
 	password varchar(max) not null,
 	google varchar(max) null,
 	facebook varchar(max) null
@@ -47,7 +47,6 @@ CREATE TABLE products(
 	category_id int not null,
 	stock int not null,
 	description nvarchar(MAX),
-	detail nvarchar(MAX),
 	product_images nvarchar(MAX) 
 );
 

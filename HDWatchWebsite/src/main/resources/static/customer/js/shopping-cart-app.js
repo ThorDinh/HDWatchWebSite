@@ -101,8 +101,8 @@ app.controller("shopping-cart-ctrl", ['$scope', '$http', 'AuthService', function
             //Thanh toán online bằng credit card
               }else if(resp.data.paymentMethod === "online"){
 				  var prices = $scope.getTotalPrice()
-				  $scope.cart.clear();
 				  location.href = "/submitOrder?amount=" + prices + "&id=" + resp.data.id;
+				  $scope.cart.clear();
 			  }
 			}).catch(error => {
 				alert("Đặt hàng thất bại!");

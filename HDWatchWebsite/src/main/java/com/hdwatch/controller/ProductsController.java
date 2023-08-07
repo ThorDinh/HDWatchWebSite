@@ -97,8 +97,16 @@ public class ProductsController {
 		Page<Products> filteredProducts;
         if (keyword != null && !keyword.trim().isEmpty() || category != null) {
         	filteredProducts = productsService.searchProductsByKeyword(keyword, category, brand, p);
-        	model.addAttribute("message", "Có "+ filteredProducts.getTotalElements() +" kết quả trả về cho từ khóa: " + keyword);
+        	if(keyword.equalsIgnoreCase("")) {
+        		//Tiêu đề trang
+        		model.addAttribute("pageTitle","Tất cả sản phẩm");
+        		model.addAttribute("message", "Có "+ filteredProducts.getTotalElements() +" kết quả trả về");
+        	} else {
+        		model.addAttribute("message", "Có "+ filteredProducts.getTotalElements() +" kết quả trả về cho từ khóa: " + keyword);
+        	}
         } else {
+        	//Tiêu đề trang
+    		model.addAttribute("pageTitle","Tất cả sản phẩm");
         	filteredProducts = productsService.findAllPagination(p);
         }
         //Nếu danh sách sản phẩm tìm kiếm trả về null thì hiện thông báo và ngược lại
@@ -107,7 +115,8 @@ public class ProductsController {
         } else {
             model.addAttribute("items", filteredProducts);
         }
-     // Set the category and brand values for radio buttons
+     	
+        //Đặt giá trị category và brand vào radio
         model.addAttribute("keyword", keyword);
         model.addAttribute("category", category);
         model.addAttribute("brand", brand);

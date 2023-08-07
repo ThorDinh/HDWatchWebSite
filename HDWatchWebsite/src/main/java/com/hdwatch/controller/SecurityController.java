@@ -14,12 +14,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -57,17 +55,15 @@ public class SecurityController {
 	        return "redirect:/home";
 	    } else {
 	        // Nếu chưa đăng nhập, hiển thị thông báo mặc định
-	        model.addAttribute("message", "Vui lòng đăng nhập");
+			return "account/login";
 	    }
-
-		return "account/login";
 	}
 	
 	//Đăng nhập thành công
 	@RequestMapping("/login/success")
 	public String loginSuccess(Model model, Authentication authentication) {
 		//Tiêu đề trang
-		model.addAttribute("pageTitle", "Đăng nhập thành công!");
+		model.addAttribute("pageTitle", "Đăng nhập thành công");
 		// Kiểm tra xem người dùng đã đăng nhập chưa
 	    if (authentication != null && authentication.isAuthenticated()) {
 	        // Lấy danh sách các quyền của người dùng
@@ -99,14 +95,14 @@ public class SecurityController {
 	@RequestMapping("/login/error")
 	public String loginError(Model model, Principal principal) {
 		//Tiêu đề trang
-		model.addAttribute("pageTitle", "Đăng nhập thất bại!");
+		model.addAttribute("pageTitle", "Đăng nhập thất bại");
 		// Kiểm tra xem người dùng đã đăng nhập chưa
 	    if (principal != null) {
 	        // Nếu đã đăng nhập, hiển thị thông báo khác
 	        return "redirect:/home";
 	    } else {
 	        // Nếu chưa đăng nhập, hiển thị thông báo mặc định
-	        model.addAttribute("message", "Đăng nhập thất bại!");
+	        model.addAttribute("message", "Đăng nhập thất bại");
 	    }
 		return "account/login";
 	}
@@ -116,7 +112,7 @@ public class SecurityController {
 	@RequestMapping("/unauthorized")
 	public String unauthorized(Model model) {
 		//Tiêu đề trang
-		model.addAttribute("pageTitle", "Không có quyền truy xuất!");
+		model.addAttribute("pageTitle", "Không có quyền truy xuất");
 		//Thông báo
 		model.addAttribute("message", "Không có quyền truy xuất!");
 		return "account/unauthorized";
@@ -126,13 +122,13 @@ public class SecurityController {
 	@RequestMapping("/logout/success")
 	public String logoffSuccess(Model model, Principal principal) {
 		//Tiêu đề trang
-		model.addAttribute("pageTitle", "Đăng xuất thành công!");
+		model.addAttribute("pageTitle", "Đăng xuất thành công");
 		if (principal != null) {
 	        // Nếu đã đăng nhập, hiển thị thông báo khác
 	        return "redirect:/home";
 	    } else {
 	        // Nếu chưa đăng nhập, hiển thị thông báo mặc định
-	    	model.addAttribute("message", "Bạn đã đăng xuất!");
+	    	model.addAttribute("message", "Bạn đã đăng xuất");
 	    }
 		return "account/login";
 	}
@@ -141,7 +137,7 @@ public class SecurityController {
 	@GetMapping("/register")
 	public String register(Model model, Principal principal) {
 		//Tiêu đề trang
-		model.addAttribute("pageTitle", "Đăng kí tài khoản!");
+		model.addAttribute("pageTitle", "Đăng kí tài khoản");
 		if (principal != null) {
 	        // Nếu đã đăng nhập, hiển thị thông báo khác
 	        return "redirect:/home";
@@ -156,24 +152,34 @@ public class SecurityController {
 	@PostMapping("/register")
     public String processRegistrationForm(Model model,@ModelAttribute("user") @Valid Accounts user, 
     		BindingResult result, @RequestParam("confirmPassword") String confirmPassword) {
+		//Bắt lỗi trùng 
+        List<Accounts> list = accountService.findAll();
+        for(int i =0; i < list.size();i++) {
+        	if(user.getUsername().equals(list.get(i).getUsername())) {
+        		result.rejectValue("username", "error.user", "Tên tài khoản đã tồn tại");
+        		//Tiêu đề trang
+        		model.addAttribute("pageTitle", "Đăng kí thất bại");
+                return "account/register";
+        	}
+        }
 		//Bắt lỗi khi nhập sai
         if (result.hasErrors() || !user.isPasswordConfirmed(confirmPassword)) {
             if (!user.isPasswordConfirmed(confirmPassword)) {
                 result.rejectValue("password", "error.user", "Mật khẩu xác nhận không trùng khớp");
             }
             //Tiêu đề trang
-    		model.addAttribute("pageTitle", "Đăng kí thất bại!");
+    		model.addAttribute("pageTitle", "Đăng kí thất bại");
             return "account/register";
         }
+
 		// Tạo tài khoản
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
         user.setActivated(true);
-        user.setListOfRoledetails(null);
         accountService.create(user);
         //Phân quyền cho tài khoản
-        Roles defaultRole = roleService.findById("CUS"); // You can customize the role name as needed
+        Roles defaultRole = roleService.findById("CUS");
 
         Roledetails roledetails = new Roledetails();
         roledetails.setAccounts(user);
@@ -181,9 +187,9 @@ public class SecurityController {
 
         roledetailService.create(roledetails);
         
-        // Nếu chưa đăng nhập, hiển thị thông báo mặc định
-        model.addAttribute("message", "Đăng kí thành công!");
-        return "redirect:/login/form";
+        // Đăng kí thành công hiển thị message
+        model.addAttribute("message", "Đăng kí thành công");
+        return "account/login";
     }
 	
 	//API security 

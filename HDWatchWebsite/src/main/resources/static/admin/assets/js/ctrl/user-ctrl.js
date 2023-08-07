@@ -70,6 +70,7 @@ app.controller("user-ctrl",function($scope, $http){
             if(error.status == 404){
                 alert("Không tồn tại tài khoản "+username);
             }
+            alert("Xóa tài khoản thất bại");
         });
     };
     $scope.search = function(kw){
