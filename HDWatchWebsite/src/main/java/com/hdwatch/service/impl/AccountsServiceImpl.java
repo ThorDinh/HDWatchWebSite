@@ -3,6 +3,7 @@ package com.hdwatch.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.hdwatch.dao.AccountsDAO;
@@ -71,7 +72,9 @@ public class AccountsServiceImpl implements AccountsService {
     public void changePassword(String username, String newPassword) {
         Accounts account = accountsDAO.findByUsername(username);
         if (account != null) {
-            account.setPassword(newPassword);
+        	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        	String password = passwordEncoder.encode(newPassword);
+            account.setPassword(password);
             accountsDAO.save(account);
         } else {
             throw new RuntimeException("Không tìm thấy tài khoản với username: " + username);

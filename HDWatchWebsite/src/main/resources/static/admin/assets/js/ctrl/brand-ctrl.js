@@ -1,13 +1,18 @@
+// Biến lưu đường dẫn API của thương hiệu
 let urlBrand = "/admin/rest/brands";
+
 app.controller("brand-ctrl",function($scope, $http){
+	// Khởi tạo các biến và mảng dữ liệu
     $scope.brands = [];
     $scope.brand = {};
     $scope.chon = false;
-    //Lấy danh sách thương hiệu
+    
+    // Lấy danh sách thương hiệu từ API
     $http.get(urlBrand).then(resp => {
         $scope.brands = resp.data;
     });
-    //Lấy 1 thương hiệu
+    
+    // Hàm edit để lấy thông tin một thương hiệu theo id
     $scope.edit = function(id){
         var url = `${urlBrand}/${id}`;
         $http.get(url).then(resp => {
@@ -19,7 +24,8 @@ app.controller("brand-ctrl",function($scope, $http){
             }
         });
     };
-    //Cập nhật thương hiệu
+    
+    // Hàm update để cập nhật thông tin thương hiệu theo id
     $scope.update = function(id){
         var url = `${urlBrand}/${id}`;
         var data = angular.copy($scope.brand);
@@ -35,7 +41,8 @@ app.controller("brand-ctrl",function($scope, $http){
 			alert("Cập nhật thương hiệu "+ data.name+" thất bại")
         });
     };
-    //Thêm mới thương hiệu
+    
+    // Hàm create để thêm mới thương hiệu
     $scope.create = function(){
         var data = angular.copy($scope.brand);
         $http.post(urlBrand, data).then(resp => {
@@ -50,16 +57,20 @@ app.controller("brand-ctrl",function($scope, $http){
             alert("Thêm mới thương hiệu "+ data.name+" thất bại!")
         });
     };
-    //Làm mới thương hiệu
+    
+    // Hàm reset để làm mới dữ liệu thương hiệu
     $scope.reset = function(){
         $scope.brand = {};
         $scope.chon = false;
     }
-    //Xóa thương hiệu
+    
+    // Hàm showDeleteModal để hiển thị modal xác nhận xóa thương hiệu
     $scope.showDeleteModal = function (brandId) {
 	    $scope.brandToDeleteId = brandId;
 	    $('#confirmDeleteModal').modal('show');
 	};
+	
+	// Hàm delete để xóa thương hiệu theo id
     $scope.delete = function(id){
         var url = `${urlBrand}/${id}`;
         $http.delete(url).then(resp => {
@@ -75,7 +86,8 @@ app.controller("brand-ctrl",function($scope, $http){
             alert("Xóa thương hiệu thất bại")
         });
     };
-    //Tìm kiếm thương hiệu
+    
+    // Hàm search để tìm kiếm thương hiệu dựa vào từ khóa (kw)
     $scope.search = function(kw){
         if(kw != null){
             var url = `${urlBrand}/search?kw=${kw}`;
@@ -85,5 +97,6 @@ app.controller("brand-ctrl",function($scope, $http){
         }
     };
     
+    // Khởi tạo dữ liệu ban đầu
     $scope.reset();
 });

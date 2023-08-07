@@ -49,20 +49,25 @@ public class AccountsRestController {
 	@Autowired
 	RoledetailService roledetailService;
 	
+	// Lấy danh sách tất cả tài khoản
 	@GetMapping
 	public List<Accounts> getAll(){
 		return accountsService.findAll();
 	}
 	
+	// Lấy thông tin tài khoản theo tên đăng nhập (username)
 	@GetMapping("/{username}")
 	public ResponseEntity<Accounts> getAccount(@PathVariable("username") String username) {
 		if (!aDao.existsById(username)) {
 			return ResponseEntity.notFound().build();
 		} else {
+			Accounts accounts = accountsService.findByUserName(username);
+			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 			return ResponseEntity.ok(accountsService.findByUserName(username));
 		}
 	}
 	
+	// Tạo mới tài khoản
 	@PostMapping("")
 	public ResponseEntity<Accounts> postAccount(@RequestBody Accounts Account){
 		if(aDao.existsById(Account.getUsername())) {
@@ -76,27 +81,17 @@ public class AccountsRestController {
 		}
 	}
 	
+	// Cập nhật thông tin tài khoản
 	@PutMapping("/{username}")
 	public ResponseEntity<Accounts> putAccount(@PathVariable("username") String username, @RequestBody Accounts Account){
 		if(!aDao.existsById(username)) {
 			return ResponseEntity.notFound().build();
 		}else {
-			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-			String encodedPassword = passwordEncoder.encode(Account.getPassword());
-			Account.setPassword(encodedPassword);
 			return ResponseEntity.ok(accountsService.save(username,Account));
 		}
 	}
 	
-	@DeleteMapping("/{username}")
-	public ResponseEntity<Void> deleteAccount(@PathVariable("username") String username){
-		if(!aDao.existsById(username)) {
-			return ResponseEntity.notFound().build();
-		}else {
-			accountsService.deleteById(username);
-			return ResponseEntity.ok().build();
-		}
-	}
+	// Lấy danh sách tất cả các quyền (authorities) của tài khoản
 	@GetMapping("/authorities")
 	public Map<String, Object> getAuthority(){
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -105,10 +100,14 @@ public class AccountsRestController {
 		map.put("authorities",rdDao.findAll());
 		return map;
 	}
+	
+	// Tạo mới một quyền (authority) cho tài khoản
 	@PostMapping("/authorities")
 	public Roledetails postAuthorities(@RequestBody Roledetails authority) {
 		return rdDao.save(authority);
 	}
+	
+	// Xóa một quyền (authority) khỏi tài khoản theo ID
 	@DeleteMapping("/authorities/{id}")
 	public void deleteAuthorities(@PathVariable("id") Integer id) {
 		accountsService.deleteRoleDetail(id);

@@ -1,18 +1,29 @@
+// Biến lưu đường dẫn API của tài khoản
 let urlAccount = "/rest/accounts";
 app.controller("user-ctrl",function($scope, $http){
     $scope.accounts = [];
     $scope.account = {};
     $scope.chon = false;
-    //get danh sach accounts
+    $scope.editing = false;
+	
+
+    // Lấy danh sách tài khoản từ API
     $http.get(urlAccount).then(resp => {
         $scope.accounts = resp.data;
     });
-    //get 1 Account
+    
+    // Kích hoạt chế độ ẩn sửa tài khoản, mật khẩu khi cập nhật tài khoản
+	$scope.enableEditing = function() {
+	    $scope.editing = true;
+	};
+	
+    // Lấy thông tin của một tài khoản
     $scope.edit = function(username){
         var url = `${urlAccount}/${username}`;
         $http.get(url).then(resp => {
             $scope.account = resp.data;
             $scope.chon = true;
+            $scope.editing = true;
         }).catch(error => {
             if(error.status == 404){
                 alert("Không tồn tại tài khoản "+username);
@@ -21,14 +32,14 @@ app.controller("user-ctrl",function($scope, $http){
     };
     //upload img
     
-    //update account
+    // Cập nhật thông tin tài khoản
     $scope.update = function(username){
         var url = `${urlAccount}/${username}`;
         var data = angular.copy($scope.account);
         var index = $scope.accounts.findIndex(a => a.username == username);
         $http.put(url, data).then(resp => {
             $scope.accounts[index] = resp.data;
-            alert("Cập nhật tài khoản thành công!")
+            alert("Cập nhật tài khoản thành công!");
         }).catch(error => {
             if(error.status == 404){
                 alert("Không có tài khoản "+username);
@@ -36,7 +47,8 @@ app.controller("user-ctrl",function($scope, $http){
             alert("Cập nhật tài khoản thất bại!")
         });
     };
-    //tao account
+    
+    // Tạo mới tài khoản
     $scope.create = function(){
         var data = angular.copy($scope.account);
         $http.post(urlAccount, data).then(resp => {
@@ -51,28 +63,18 @@ app.controller("user-ctrl",function($scope, $http){
             alert("Tạo tài khoản thất bại!")
         });
     };
-    //Rest khi load, khi tao moi thanh cong, khi delete, khi click btn reset
+    
+    // Reset thông tin tài khoản
     $scope.reset = function(){
         $scope.account = {
             activated: true
         };
         $scope.chon = false;
+        $scope.editing = false;
+        
     }
-    //Xoa account
-    $scope.delete = function(username){
-        var url = `${urlAccount}/${username}`;
-        $http.delete(url).then(resp => {
-            var index = $scope.accounts.findIndex(a => a.username == username);
-            $scope.accounts.splice(index, 1);
-            alert("Xóa tài khoản thành công");
-            $scope.reset();
-        }).catch(error => {
-            if(error.status == 404){
-                alert("Không tồn tại tài khoản "+username);
-            }
-            alert("Xóa tài khoản thất bại");
-        });
-    };
+    
+	//Tìm kiếm tài khoản
     $scope.search = function(kw){
         if(kw != null){
             var url = `${urlAccount}/search?kw=${kw}`;
@@ -81,5 +83,6 @@ app.controller("user-ctrl",function($scope, $http){
             });
         }
     };
+    
     $scope.reset();
 });

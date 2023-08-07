@@ -1,15 +1,15 @@
 const app = angular.module("my-app", []);
 
 app.controller("shopping-cart-ctrl", ['$scope', '$http', 'AuthService', function($scope, $http, AuthService) {
-	$scope.loggedIn = false; // Default state
+	$scope.loggedIn = false; // Trạng thái đăng nhập mặc định
 
-	// Check authentication status on page load or when needed
+	// Kiểm tra trạng thái xác thực khi trang được tải hoặc khi cần thiết
 	AuthService.checkAuthentication()
 		.then(function(response) {
 			$scope.loggedIn = response.data.authenticated;
 		})
 		.catch(function(error) {
-			console.error('Error checking authentication:', error);
+			console.error('Lỗi khi kiểm tra xác thực: ', error);
 		});
 
 	//Quản lí giỏ hàng
@@ -22,8 +22,8 @@ app.controller("shopping-cart-ctrl", ['$scope', '$http', 'AuthService', function
 			if (item) {
 				item.qty++;
 				this.saveToLocalStorage();
-				//nếu không có sản phẩm
 			} else {
+				// Nếu chưa có sản phẩm trong giỏ hàng
 				$http.get(`/rest/products/${id}`).then(resp => {
 					resp.data.qty = 1;
 					this.items.push(resp.data);
@@ -31,13 +31,13 @@ app.controller("shopping-cart-ctrl", ['$scope', '$http', 'AuthService', function
 				})
 			}
 		},
-		//Xóa sản phẩm ra giỏ hàng
+		// Xóa sản phẩm khỏi giỏ hàng
 		remove(id) {
 			var index = this.items.findIndex(item => item.id == id);
 			this.items.splice(index, 1);
 			this.saveToLocalStorage();
 		},
-		//Xóa toàn bộ sản phẩm ra giỏ hàng
+		// Xóa toàn bộ sản phẩm trong giỏ hàng
 		clear() {
 			this.items = [];
 			this.saveToLocalStorage();
@@ -50,7 +50,7 @@ app.controller("shopping-cart-ctrl", ['$scope', '$http', 'AuthService', function
 				.map(item => item.qty)
 				.reduce((total, qty) => total += qty, 0);
 		},
-		//Tổng thành tiền các mặt hàng trong giỏ
+		// Tổng thành tiền các mặt hàng trong giỏ hàng
 		get amount() {
 			return this.items
 				.map(item => item.qty * item.price)
@@ -70,7 +70,7 @@ app.controller("shopping-cart-ctrl", ['$scope', '$http', 'AuthService', function
 
 	$scope.cart.loadFromLocalStorage();
 
-	//Thanh toán và xuất order
+	// Thanh toán và tạo đơn hàng
 	$scope.order = {
 		accounts: { username: $("#username").text() },
 		createDate: new Date(),
@@ -94,20 +94,20 @@ app.controller("shopping-cart-ctrl", ['$scope', '$http', 'AuthService', function
 			}
 			//Thanh toán bằng tiền mặt
 			$http.post("/rest/orders", order).then(resp => {
-				 if (resp.data.paymentMethod === "cod") {
-                    $scope.cart.clear();
-                    alert("Đặt hàng thành công! Vui lòng thanh toán khi nhận hàng.");
-                    location.href = "/order/detail/" + resp.data.id;
-            //Thanh toán online bằng credit card
-              }else if(resp.data.paymentMethod === "online"){
-				  var prices = $scope.getTotalPrice()
-				  location.href = "/submitOrder?amount=" + prices + "&id=" + resp.data.id;
-				  $scope.cart.clear();
-			  }
+				if (resp.data.paymentMethod === "cod") {
+					$scope.cart.clear();
+					alert("Đặt hàng thành công! Vui lòng thanh toán khi nhận hàng.");
+					location.href = "/order/detail/" + resp.data.id;
+					// Thanh toán online bằng thẻ tín dụng
+				} else if (resp.data.paymentMethod === "online") {
+					var prices = $scope.getTotalPrice()
+					location.href = "/submitOrder?amount=" + prices + "&id=" + resp.data.id;
+					$scope.cart.clear();
+				}
 			}).catch(error => {
 				alert("Đặt hàng thất bại!");
 				console.log(error)
-				
+
 			})
 		}
 	}
@@ -133,24 +133,23 @@ app.controller("shopping-cart-ctrl", ['$scope', '$http', 'AuthService', function
 		items: [],
 		//Thêm sản phẩm vào yêu thích
 		add(id) {
-			// Check if the user is logged in
+			// Kiểm tra xem người dùng đã đăng nhập chưa
 			AuthService.checkAuthentication()
 				.then(response => {
 					const loggedIn = response.data.authenticated;
 					if (!loggedIn) {
-						// Redirect to the login form if not logged in
-						// Assuming your login page URL is '/login'
+						// Chuyển hướng đến trang đăng nhập nếu chưa đăng nhập
 						window.location.href = '/login/form';
 					} else {
 						var item = this.items.find(item => item.id == id);
-						// If the item is already in the list
+						// Nếu sản phẩm đã có trong danh sách yêu thích
 						if (item) {
-							item.favorite = !item.favorite; // Toggle the favorite status
+							item.favorite = !item.favorite; // Toggle trạng thái yêu thích
 							var index = this.items.findIndex(item => item.id == id);
 							this.items.splice(index, 1);
 							this.saveToLocalStorage();
 						} else {
-							// If the item is not in the list
+							// Nếu sản phẩm chưa có trong danh sách yêu thích
 							$http.get(`/rest/products/${id}`).then(resp => {
 								resp.data.favorite = true;
 								this.items.push(resp.data);
@@ -160,32 +159,27 @@ app.controller("shopping-cart-ctrl", ['$scope', '$http', 'AuthService', function
 					}
 				})
 				.catch(error => {
-					console.error('Error checking authentication:', error);
+					console.error('Lỗi khi kiểm tra xác thực: ', error);
 				});
 		},
-		//Xóa sản phẩm ra danh sách yêu thích
+		// Xóa sản phẩm khỏi danh sách yêu thích
 		remove(id) {
 			var index = this.items.findIndex(item => item.id == id);
 			this.items.splice(index, 1);
 			this.saveToLocalStorage();
 		},
-		//Tính tổng các mặt hàng trong giỏ hàng
+		// Tính tổng số mặt hàng trong danh sách yêu thích
 		get count() {
 			return this.items
 				.map(item => item.favorite)
 				.reduce((total, favorite) => total += favorite, 0);
 		},
-		//Xóa toàn bộ sản phẩm ra giỏ hàng
-		clear() {
-			this.items = [];
-			this.saveToLocalStorage();
-		},
-		//Lưu giỏ hàng vào Local Storage
+		// Lưu danh sách yêu thích vào Local Storage
 		saveToLocalStorage() {
 			var json = JSON.stringify(angular.copy(this.items));
 			localStorage.setItem("favorite", json);
 		},
-		//Đọc giỏ hàng từ Local Storage
+		// Đọc danh sách yêu thích từ Local Storage
 		loadFromLocalStorage() {
 			var json = localStorage.getItem("favorite");
 			this.items = json ? JSON.parse(json) : [];

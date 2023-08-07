@@ -59,29 +59,54 @@ public class SecurityController {
 	    }
 	}
 	
+	//Trang đăng nhập
+	@RequestMapping("/login")
+	public String checkLogin(Model model,Principal principal, @RequestParam("username") String username) {
+		//Tiêu đề trang
+		model.addAttribute("pageTitle", "Đăng nhập");
+		if(accountService.findById(username).getActivated() == false) {
+			// Nếu tài khoản không còn hoạt động
+			model.addAttribute("message", "Tài khoản không còn hoạt động");
+			return "account/login";
+		}
+		return "redirect:/login";
+	}
+	
 	//Đăng nhập thành công
 	@RequestMapping("/login/success")
 	public String loginSuccess(Model model, Authentication authentication) {
-		//Tiêu đề trang
-		model.addAttribute("pageTitle", "Đăng nhập thành công");
-		// Kiểm tra xem người dùng đã đăng nhập chưa
+	    //Tiêu đề trang
+	    model.addAttribute("pageTitle", "Đăng nhập thành công");
+	    // Kiểm tra xem người dùng đã đăng nhập chưa
 	    if (authentication != null && authentication.isAuthenticated()) {
-	        // Lấy danh sách các quyền của người dùng
-	        List<String> roles = authentication.getAuthorities().stream()
-	                .map(GrantedAuthority::getAuthority)
-	                .collect(Collectors.toList());
+	        // Lấy tên người dùng đã đăng nhập
+	        String username = authentication.getName();
+	        // Lấy tài khoản từ service bằng username
+	        Accounts user = accountService.findById(username);
 
-	        // Kiểm tra các quyền và thực hiện redirect tương ứng
-	        if (roles.contains("ROLE_CUS")) {
-	            // Nếu người dùng có quyền CUS, chuyển hướng đến /home
-	            return "redirect:/home";
-	        } else if (roles.contains("ROLE_STA") || roles.contains("ROLE_DIR")) {
-	            // Nếu người dùng có quyền STA hoặc DIR, chuyển hướng đến /admin
-	            return "redirect:/admin";
+	        if (user != null && user.getActivated()) {
+	            // Người dùng đã đăng nhập và tài khoản được kích hoạt (activated = true)
+	            // Lấy danh sách các quyền của người dùng
+	            List<String> roles = authentication.getAuthorities().stream()
+	                    .map(GrantedAuthority::getAuthority)
+	                    .collect(Collectors.toList());
+
+	            // Kiểm tra các quyền và thực hiện redirect tương ứng
+	            if (roles.contains("ROLE_CUS")) {
+	                // Nếu người dùng có quyền CUS, chuyển hướng đến /home
+	                return "redirect:/home";
+	            } else if (roles.contains("ROLE_STA") || roles.contains("ROLE_DIR")) {
+	                // Nếu người dùng có quyền STA hoặc DIR, chuyển hướng đến /admin
+	                return "redirect:/admin";
+	            } else {
+	                // Trường hợp người dùng có các quyền khác, xử lý theo ý muốn
+	                // Ví dụ: chuyển hướng đến một trang lỗi hoặc trang chính
+	                return "redirect:/some-other-page";
+	            }
 	        } else {
-	            // Trường hợp người dùng có các quyền khác, xử lý theo ý muốn
-	            // Ví dụ: chuyển hướng đến một trang lỗi hoặc trang chính
-	            return "redirect:/some-other-page";
+	            // Tài khoản không còn hoạt động (activated = false)
+	            model.addAttribute("message", "Tài khoản không còn hoạt động");
+	            return "account/login";
 	        }
 	    } else {
 	        // Nếu chưa đăng nhập, hiển thị thông báo mặc định
@@ -89,6 +114,7 @@ public class SecurityController {
 	        return "redirect:/login";
 	    }
 	}
+
 	
 	
 	//Đăng nhập thất bại 

@@ -71,8 +71,8 @@
                                                     <th scope="row">{{$index+1}}</th>
                                                     <td>{{brand.name}}</td>
                                                     <td class="text-right">
-                                                        <button ng-click="edit(brand.id)" class="btn btn-primary">Edit</button>
-                                                        <button ng-click="showDeleteModal(brand.id)" class="btn btn-dark">Delete</button>
+                                                        <button ng-click="edit(brand.id)" class="btn btn-primary">Sửa</button>
+                                                        <button ng-click="showDeleteModal(brand.id)" class="btn btn-dark">Xóa</button>
                                                         
                                                     </td>
                                                   </tr>                                                  
@@ -96,8 +96,8 @@
 						        Bạn có chắc là muốn xóa thương hiệu này?
 						      </div>
 						      <div class="modal-footer">
-						        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-						        <button type="button" class="btn btn-danger" ng-click="delete(brandToDeleteId)">Delete</button>
+						        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+						        <button type="button" class="btn btn-danger" ng-click="delete(brandToDeleteId)">Xóa</button>
 						      </div>
 						    </div>
 						  </div>

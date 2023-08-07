@@ -17,7 +17,8 @@ import com.hdwatch.service.OrdersService;
 public class OrdersRestController {
 	@Autowired
 	OrdersService ordersService;
-
+	
+	// Phương thức POST để tạo mới đơn hàng (Orders) từ dữ liệu đầu vào dạng JSON
 	@PostMapping()
 	public Orders create(@RequestBody JsonNode orderData) {
 		return ordersService.create(orderData);

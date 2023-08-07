@@ -23,11 +23,14 @@ import com.hdwatch.utils.PasswordUtils;
 public class AccountController {
 	@Autowired
 	AccountsService accountService;
+	
 	@Autowired
 	MailerService mailerService;
+	
 	@Autowired
 	AccountsDAO accountsDAO;
 	
+	//Hiện thị thông tin khách hàng
 	@RequestMapping("/account/info")
 	public String showAccountInfomation(Model model) {
 		//Hiện thị thông tin khách hàng
@@ -40,29 +43,14 @@ public class AccountController {
 		return "account/account";
 	}
 	
-	@RequestMapping("/account/changepassword")
-	public String changePassword(Model model) {
-		//Hiện thị thông tin khách hàng
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String username = authentication.getName();
-		Accounts user = accountService.findById(username);
-		model.addAttribute("user", user);
-        //Tiêu đề trang
-        model.addAttribute("pageTitle", "Đổi mật khẩu - " + user.getUsername());
-		return "account/changepassword";
-	}
-	
-//	  private String generateResetCode() {
-//	        
-//	        String code = RandomStringUtils.randomAlphanumeric(6);
-//	        return code;
-//	    }
+	//--Quên mật khẩu
 	@RequestMapping("/forgot-password")
 	public String forgotPassword(@RequestParam(name = "email", required = false) String username,Model model) {
 		model.addAttribute("pageTitle","Quên mật khẩu");
 			return "account/forgotpassword";
 		
 	}
+	
 	@PostMapping("/forgot-password")
 	public String doPostfogotPassword(@RequestParam("email") String username,Model model) {
 		model.addAttribute("pageTitle","Quên mật khẩu");
@@ -74,7 +62,6 @@ public class AccountController {
 			double randomDouble = Math.random();
             randomDouble = randomDouble * 1000000 + 1;
             int randomInt = (int) randomDouble;
-            System.out.println("Duy chuoi quai ");
 			
 			String subject = "Lấy lại mật khẩu";
 			String body = "Mật khẩu của bạn là:"+randomInt;
@@ -88,12 +75,27 @@ public class AccountController {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			model.addAttribute("message", "Sai tài khoảng hoặc để trống");
+			model.addAttribute("message", "Sai tài khoản hoặc để trống");
 		}
 		return "account/forgotpassword";
 	}
-	  @PostMapping("/account/changepassword")
-	  public String changePassword(@RequestParam("username") String username,
+	//Quên mật khẩu--
+	
+	//--Đổi mật khẩu
+	@RequestMapping("/account/changepassword")
+	public String changePassword(Model model) {
+		//Hiện thị thông tin khách hàng
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		Accounts user = accountService.findById(username);
+		model.addAttribute("user", user);
+        //Tiêu đề trang
+        model.addAttribute("pageTitle", "Đổi mật khẩu - " + user.getUsername());
+		return "account/changepassword";
+	}
+	
+	@PostMapping("/account/changepassword")
+	public String changePassword(@RequestParam("username") String username,
 	                               @RequestParam("oldPassword") String oldPassword,
 	                               @RequestParam("newPassword") String newPassword,
 	                               @RequestParam("confirmNewPassword") String confirmNewPassword,
@@ -105,7 +107,7 @@ public class AccountController {
 			Accounts user = accountService.findById(username);
 			model.addAttribute("user", user);
 			// Kiểm tra xem username và oldPassword có khớp với thông tin trong cơ sở dữ liệu hay không
-			if (accountService.authenticate(username, oldPassword)) {
+			if (passwordEncoder.matches(oldPassword, user.getPassword())) {
 	          // Kiểm tra tính hợp lệ của mật khẩu mới
 	          if (PasswordUtils.isPasswordValid(oldPassword, newPassword) && newPassword.equals(confirmNewPassword)) {
 	        		// Thực hiện thay đổi mật khẩu
@@ -130,4 +132,5 @@ public class AccountController {
 	      
 	      return "account/account";
 	  }
+	//Đổi mật khẩu--
 }

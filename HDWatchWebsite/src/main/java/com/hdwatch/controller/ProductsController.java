@@ -31,36 +31,6 @@ public class ProductsController {
 	@Autowired
 	BrandsService brandsService;
 	
-	//Trang chủ
-	@RequestMapping(value = {"/", "/home", "/index"})
-	public String index(Model model) {
-		//Tiêu đề trang
-		model.addAttribute("pageTitle", "Trang chủ");
-		//sản phẩm mới nhất
-		List<Products> list = productsService.findProductByCreateDateDESC();
-		model.addAttribute("items", list);
-		//sản phẩm bán chạy
-		List<Products> list1 = productsService.getProductsOrderedByOrderCount();
-		model.addAttribute("list", list1);
-		return "home";
-	}
-	
-	//Giới thiệu
-	@RequestMapping("/about")
-	public String about(Model model) {
-		//Tiêu đề trang
-		model.addAttribute("pageTitle", "Giới thiệu");
-		return "about";
-	}
-	
-	//Liên hệ
-	@RequestMapping("/contact")
-	public String contact(Model model) {
-		//Tiêu đề trang
-		model.addAttribute("pageTitle", "Liên lạc");
-		return "contact";
-	}
-	
 	//Sản phẩm chi tiết
 	@RequestMapping("/product/detail/{id}")
 	public String detail(Model model, @PathVariable("id") Integer id) {
@@ -121,10 +91,5 @@ public class ProductsController {
         model.addAttribute("category", category);
         model.addAttribute("brand", brand);
 		return "product/search";
-	}
-	
-	@RequestMapping("/admin")
-	public String admin() {
-		return "admin/index";
 	}
 }

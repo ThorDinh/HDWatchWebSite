@@ -24,16 +24,19 @@ public class ProductsRestController {
 	@Autowired
 	ProductsService productsService;
 	
+	// Lấy danh sách tất cả các sản phẩm (product)
 	@GetMapping
 	public List<Products> getAll() {
 		return productsService.findAll();
 	}
 	
+	// Lấy thông tin sản phẩm (product) theo ID
 	@GetMapping("{id}")
 	public Products getOne(@PathVariable("id") Integer id) {
 		return productsService.findById(id);
 	}
 	
+	// Tạo mới sản phẩm (product)
 	@PostMapping
 	public ResponseEntity<Products> createProducts(@RequestBody Products products) {
 		if(products != null) {
@@ -43,11 +46,13 @@ public class ProductsRestController {
 		return ResponseEntity.badRequest().build();
 	}
 	
+	// Lưu thông tin sản phẩm (product) đã chỉnh sửa
 	@PutMapping("{id}")
 	public Products saveProducts(@PathVariable("id")Integer id,@RequestBody Products products) {
 		return productsService.save(products, id);
 	}
 	
+	// Xóa sản phẩm (product) theo ID
 	@DeleteMapping("{id}")
 	public void deleteProduct(@PathVariable("id")Integer id) {
 		productsService.deleteByid(id);

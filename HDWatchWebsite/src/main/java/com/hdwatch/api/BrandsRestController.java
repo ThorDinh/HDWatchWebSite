@@ -28,11 +28,13 @@ public class BrandsRestController {
 	@Autowired
 	BrandsDAO bDao;
 	
+	// Lấy danh sách tất cả các thương hiệu (brands)
 	@GetMapping
 	public List<Brands> getAll() {
 		return brandsService.findAll();
 	}
 	
+	// Lấy thông tin thương hiệu theo ID
 	@GetMapping("/{id}")
 	public ResponseEntity<Brands> getBrand(@PathVariable("id") Integer id) {
 		if (!bDao.existsById(id)) {
@@ -42,6 +44,7 @@ public class BrandsRestController {
 		}
 	}
 	
+	// Tạo mới thương hiệu
 	@PostMapping
 	public ResponseEntity<Brands> createBrand(@RequestBody Brands brands) {
 		if(brands != null) {
@@ -51,12 +54,13 @@ public class BrandsRestController {
 		return ResponseEntity.badRequest().build();
 	}
 	
-	
+	// Lưu thông tin thương hiệu đã chỉnh sửa
 	@PutMapping("{id}")
 	public Brands saveBrands(@PathVariable("id")Integer id,@RequestBody Brands brands) {
 		return brandsService.save(brands, id);
 	}
 	
+	// Xóa thương hiệu theo ID
 	@DeleteMapping("{id}")
 	public void deleteBrand(@PathVariable("id")Integer id) {
 		brandsService.deleteById(id);

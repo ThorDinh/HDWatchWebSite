@@ -1,4 +1,6 @@
+// Khai báo ứng dụng Angular với tên "admin-app" và các module "ngRoute"
 const app = angular.module("admin-app",["ngRoute"]);
+// Cấu hình routing cho ứng dụng
 app.config(function($routeProvider){
     $routeProvider
         .when("/category",{

@@ -1,15 +1,17 @@
+// Biến lưu đường dẫn API của danh mục
 let urlCategory = '/admin/rest/categories';
 app.controller("category-ctrl",function($scope, $http){
+	// Khởi tạo các biến và mảng dữ liệu
     $scope.cates = [];
     $scope.cate = {};
     $scope.chon = false;
     
-    //Lấy toàn bộ danh mục
+    // Lấy toàn bộ danh mục từ API
     $http.get(urlCategory).then(resp => {
         $scope.cates = resp.data;
     });
     
-    //Lấy 1 danh mục
+    // Hàm edit để lấy thông tin một danh mục theo id
     $scope.edit = function(id){
         var url = `${urlCategory}/${id}`;
         $http.get(url).then(resp => {
@@ -22,7 +24,7 @@ app.controller("category-ctrl",function($scope, $http){
         });
     };
     
-    //Cập nhật danh mục
+    // Hàm update để cập nhật thông tin danh mục theo id
     $scope.update = function(id){
         var url = `${urlCategory}/${id}`;
         var data = angular.copy($scope.cate);
@@ -37,7 +39,7 @@ app.controller("category-ctrl",function($scope, $http){
         });
     };
     
-    //Tạo danh mục
+    // Hàm create để thêm mới danh mục
     $scope.create = function(){
         var data = angular.copy($scope.cate);
         $http.post(urlCategory, data).then(resp => {
@@ -52,17 +54,19 @@ app.controller("category-ctrl",function($scope, $http){
         });
     };
     
-    //Làm mới danh mục
+    // Hàm reset để làm mới dữ liệu danh mục
     $scope.reset = function(){
         $scope.cate = {};
         $scope.chon = false;
     }
     
-    //Xóa danh mục
+    // Hàm showDeleteModal để hiển thị modal xác nhận xóa danh mục
 	$scope.showDeleteModal = function (categoryId) {
 	    $scope.categoryToDeleteId = categoryId;
 	    $('#confirmDeleteModal').modal('show');
 	};
+	
+	// Hàm delete để xóa danh mục theo id
     $scope.delete = function(id){
         var url = `${urlCategory}/${id}`;
         $http.delete(url).then(resp => {
@@ -80,7 +84,7 @@ app.controller("category-ctrl",function($scope, $http){
         });
     };
     
-    //Tìm kiếm
+    // Hàm search để tìm kiếm danh mục dựa vào từ khóa (kw)
     $scope.search = function(kw){
         if(kw != null){
             var url = `${urlCategory}/search?kw=${kw}`;
@@ -90,5 +94,6 @@ app.controller("category-ctrl",function($scope, $http){
         }
     };
     
+    // Khởi tạo dữ liệu ban đầu
     $scope.reset();
 });

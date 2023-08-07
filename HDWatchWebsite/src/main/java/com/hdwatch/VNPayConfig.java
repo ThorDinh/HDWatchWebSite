@@ -20,11 +20,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class VNPayConfig {
     public static String vnp_PayUrl = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-    public static String vnp_Returnurl = "/vnpay-payment";
-    public static String vnp_TmnCode = "EDTBSAXV";
-    public static String vnp_HashSecret = "JCLYMNFLZCXNFVIGGXTNPRGADNWSIQJJ";
-    public static String vnp_apiUrl = "https://sandbox.vnpayment.vn/merchant_webapi/api/transaction";
-
+    public static String vnp_Returnurl = "/vnpay-payment"; // Đường dẫn trả về sau khi thanh toán thành công
+    public static String vnp_TmnCode = "EDTBSAXV"; // Mã cửa hàng thương mại (merchant)
+    public static String vnp_HashSecret = "JCLYMNFLZCXNFVIGGXTNPRGADNWSIQJJ"; // Khóa bí mật dùng để tạo chữ ký (hash)
+    public static String vnp_apiUrl = "https://sandbox.vnpayment.vn/merchant_webapi/api/transaction"; // URL API thanh toán của VNPay
+    
+    // Hàm tính toán giá trị hash MD5 của một chuỗi đầu vào
     public static String md5(String message) {
         String digest = null;
         try {
@@ -42,7 +43,8 @@ public class VNPayConfig {
         }
         return digest;
     }
-
+    
+    // Hàm tính toán giá trị hash SHA-256 của một chuỗi đầu vào
     public static String Sha256(String message) {
         String digest = null;
         try {
@@ -61,7 +63,7 @@ public class VNPayConfig {
         return digest;
     }
 
-    //Util for VNPAY
+    // Utility cho VNPay: Hàm tạo chữ ký (hash) cho tất cả các trường dữ liệu gửi tới VNPay
     public static String hashAllFields(Map fields) {
         List fieldNames = new ArrayList(fields.keySet());
         Collections.sort(fieldNames);
@@ -79,12 +81,12 @@ public class VNPayConfig {
                 sb.append("&");
             }
         }
-        return hmacSHA512(vnp_HashSecret,sb.toString());
+        return hmacSHA512(vnp_HashSecret, sb.toString());
     }
 
+    // Hàm tạo chữ ký HMAC-SHA512
     public static String hmacSHA512(final String key, final String data) {
         try {
-
             if (key == null || data == null) {
                 throw new NullPointerException();
             }
@@ -99,12 +101,12 @@ public class VNPayConfig {
                 sb.append(String.format("%02x", b & 0xff));
             }
             return sb.toString();
-
         } catch (Exception ex) {
             return "";
         }
     }
 
+    // Lấy địa chỉ IP của client từ request
     public static String getIpAddress(HttpServletRequest request) {
         String ipAdress;
         try {
@@ -113,11 +115,12 @@ public class VNPayConfig {
                 ipAdress = request.getLocalAddr();
             }
         } catch (Exception e) {
-            ipAdress = "Invalid IP:" + e.getMessage();
+            ipAdress = "Địa chỉ IP không hợp lệ: " + e.getMessage();
         }
         return ipAdress;
     }
 
+    // Hàm tạo số ngẫu nhiên có độ dài len
     public static String getRandomNumber(int len) {
         Random rnd = new Random();
         String chars = "0123456789";

@@ -28,12 +28,13 @@ public class CategoriesRestController {
 	@Autowired
 	CategoriesDAO cateDAO;
 	
+	// Lấy danh sách tất cả các danh mục (category)
 	@GetMapping 
 	public List<Categories> getAll(){
 		return categoriesService.findAll();
 	}
 	
-	
+	// Lấy thông tin danh mục (category) theo ID
 	@GetMapping("/{id}")
 	public ResponseEntity<Categories> getCategory(@PathVariable("id") Integer id) {
 		if (!cateDAO.existsById(id)) {
@@ -43,6 +44,7 @@ public class CategoriesRestController {
 		}
 	}
 	
+	// Tạo mới danh mục (category)
 	@PostMapping("")
 	public ResponseEntity<Categories> createCategory(@RequestBody Categories cate){
 		if(cate != null) {
@@ -52,10 +54,13 @@ public class CategoriesRestController {
 		return ResponseEntity.badRequest().build();
 	}
 	
+	// Lưu thông tin danh mục (category) đã chỉnh sửa
 	@PutMapping("{id}")
 	public Categories updateCategories(@PathVariable("id")Integer id,@RequestBody Categories upCategories) {
 		return categoriesService.save(upCategories, id);
 	}
+	
+	// Xóa danh mục (category) theo ID
 	@DeleteMapping("{id}")
 	public void deleteCategory(@PathVariable("id")Integer id) {
 		categoriesService.deleteById(id);
