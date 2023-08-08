@@ -27,7 +27,7 @@
                     <tbody>
                         <tr ng-repeat="item in cart.items">
                             <td style="padding-top: 30px;"><button ng-click="cart.remove(item.id)" class="btn btn-default btn-danger">x</button></td>
-                            <td><img ng-src="/images/{{getImageName(item.productimages)}}" alt="" style="width:100%;"></td>
+                            <td><img ng-src="/assets/images/{{getImageName(item.productimages)}}" alt="" style="width:100%;"></td>
                             <td style="padding-top: 30px;">{{item.name}}</td>
                             <td style="padding-top: 30px;"><input ng-change="cart.saveToLocalStorage()" ng-model="item.qty" 
                             type="number" min="1" class="form-control" style="width:50%;"/></td>

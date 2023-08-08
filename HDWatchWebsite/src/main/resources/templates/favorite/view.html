@@ -26,7 +26,7 @@
                     <tbody>
                         <tr ng-repeat="item in favorite.items">
                             <td style="padding-top: 30px;"><button ng-click="favorite.remove(item.id)" class="btn btn-default btn-danger">x</button></td>
-                            <td><img ng-src="/images/{{getImageName(item.productimages)}}" alt="" style="width:100%;"></td>
+                            <td><img ng-src="/assets/images/{{getImageName(item.productimages)}}" alt="" style="width:100%;"></td>
                             <td style="padding-top: 30px;"> <a href="/product/detail/{{item.id}}">{{item.name}}</a> </td>
                         </tr>
                     </tbody>

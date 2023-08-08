@@ -13,7 +13,7 @@
 					<div class="col-md-5 col-md-push-2">
 						<div id="product-main-img" >
 							<div class="product-preview" th:each="image : ${#strings.arraySplit(item.productimages, ',')}">
-								<img th:src="@{/images/__${image.replace('&quot;', '').replace('[','').replace(']','')}__}" alt="">
+								<img th:src="@{/assets/images/__${image.replace('&quot;', '').replace('[','').replace(']','')}__}" alt="">
 							</div>
 						</div>
 					</div>
@@ -23,7 +23,7 @@
 					<div class="col-md-2  col-md-pull-5">
 						<div id="product-imgs">
 							<div class="product-preview" th:each="image : ${#strings.arraySplit(item.productimages, ',')}">
-								<img th:src="@{/images/__${image.replace('&quot;', '').replace('[','').replace(']','')}__}" alt="">
+								<img th:src="@{/assets/images/__${image.replace('&quot;', '').replace('[','').replace(']','')}__}" alt="">
 							</div> 
 						</div>
 					</div>
@@ -136,7 +136,7 @@
 									<!-- product -->
 									<div class="product" th:each="p, iterStat:${list}" th:if="${iterStat.count <= 15}">
 										<div class="product-img">
-											<img th:src="@{/images/__${#strings.arraySplit(p.productimages, ',')[0].replace('&quot;', '').replace('[','').replace(']','')}__}" alt="">											
+											<img th:src="@{/assets/images/__${#strings.arraySplit(p.productimages, ',')[0].replace('&quot;', '').replace('[','').replace(']','')}__}" alt="">											
 											<div class="product-label">
 
 											</div>
