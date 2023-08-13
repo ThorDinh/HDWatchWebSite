@@ -20,14 +20,15 @@
                             <th></th>
                             <th style="width: 10%;"></th>
                             <th>SẢN PHẨM</th>
-
+							<th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-repeat="item in favorite.items">
-                            <td style="padding-top: 30px;"><button ng-click="favorite.remove(item.id)" class="btn btn-default btn-danger">x</button></td>
+                            <td style="padding-top: 30px;"><button ng-click="favorite.remove(item.id)" class="btn btn-default btn-danger"><i class="fa fa-heart"></i></button></td>
                             <td><img ng-src="/assets/images/{{getImageName(item.products.productimages)}}" alt="" style="width:100%;"></td>
                             <td style="padding-top: 30px;"> <a href="/product/detail/{{item.productId}}">{{item.products.name}}</a> </td>
+                            <td style="padding-top: 30px;"><button ng-click="cart.add(item.productId)" class="btn btn-default btn-success"><i class="fa fa-shopping-cart"></i></button></td>
                         </tr>
                     </tbody>
                 </table>

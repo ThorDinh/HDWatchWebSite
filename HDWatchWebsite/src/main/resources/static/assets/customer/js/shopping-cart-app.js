@@ -132,8 +132,8 @@ app.controller("shopping-cart-ctrl", ['$scope', '$http', 'AuthService', function
 	$scope.favorite = {
 		favoriteId: '',
 		items: [],
-
 		add(id) {
+
 			AuthService.checkAuthentication()
 				.then(response => {
 					const loggedIn = response.data;
@@ -150,19 +150,28 @@ app.controller("shopping-cart-ctrl", ['$scope', '$http', 'AuthService', function
 								productId: id
 							};
 							$http.post('/rest/favorites', favoritedetails).then(response => {
+								response.data.isLiked = true;
 								this.items.push(response.data);
 							});
 						}
 					}
+
 				})
 				.catch(error => {
 					console.error('Error checking authentication: ', error);
 				});
+			console.log(this.items)
 
 		},
 		get count() {
 			return this.items.length;
 		}
+	};
+	
+	//Tìm sản phẩm đã yêu thích theo productId
+	$scope.isProductLiked = function(productId) {
+		const item = $scope.favorite.items.find(item => item.productId === productId);
+		return item ? item.isLiked : false;
 	};
 
 	$scope.favorite.remove = function(id) {
@@ -183,9 +192,12 @@ app.controller("shopping-cart-ctrl", ['$scope', '$http', 'AuthService', function
 					$http.get(`/rest/favorites/user/${accountId}`).then(resp => {
 						if (resp.data.length > 0) {
 							this.favoriteId = resp.data[0].id;
-
 							$http.get(`/rest/favorites/details/${this.favoriteId}`).then(resp => {
-								this.items = resp.data;
+								const itemsWithIsLiked = resp.data.map(item => ({
+									...item,
+									isLiked: true // Set isLiked to true for each product
+								}));
+								this.items = itemsWithIsLiked;
 							});
 						}
 					});
