@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hdwatch.dao.AccountsDAO;
+import com.hdwatch.dao.FavoritesDAO;
 import com.hdwatch.dao.RoledetailsDAO;
 import com.hdwatch.dao.RolesDAO;
 import com.hdwatch.entity.Accounts;
+import com.hdwatch.entity.Favorites;
 import com.hdwatch.entity.Roledetails;
 import com.hdwatch.entity.Roles;
 import com.hdwatch.service.AccountsService;
@@ -48,6 +50,9 @@ public class AccountsRestController {
 	
 	@Autowired
 	RoledetailService roledetailService;
+	
+	@Autowired
+	FavoritesDAO favoriteDAO;
 	
 	// Lấy danh sách tất cả tài khoản
 	@GetMapping
@@ -77,7 +82,17 @@ public class AccountsRestController {
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 			String encodedPassword = passwordEncoder.encode(Account.getPassword());
 			Account.setPassword(encodedPassword);
-			return ResponseEntity.ok(accountsService.create(Account));
+			
+			accountsService.create(Account);
+			
+	        //Tạo danh sách yêu thích cho tài khoản
+	        Favorites favorite = new Favorites();
+	        
+	        favorite.setAccountId(Account.getUsername());
+	        
+	        favoriteDAO.save(favorite);
+			
+			return ResponseEntity.ok(Account);
 		}
 	}
 	

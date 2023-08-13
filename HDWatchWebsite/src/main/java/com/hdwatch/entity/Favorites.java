@@ -44,7 +44,8 @@ public class Favorites implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy="favorites")
     private List<Favoritedetails> listOfFavoritedetails ; 
-
+    
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="account_id", referencedColumnName="username", insertable=false, updatable=false)
     private Accounts   accounts ; 

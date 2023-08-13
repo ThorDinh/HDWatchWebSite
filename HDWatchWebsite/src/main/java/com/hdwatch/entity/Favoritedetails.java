@@ -7,6 +7,8 @@ package com.hdwatch.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -39,15 +41,13 @@ public class Favoritedetails implements Serializable {
     @Column(name="product_id", nullable=false)
     private Integer    productId ;
 
-    @Column(name="available")
-    private Boolean    available ;
-
 
     //--- ENTITY LINKS ( RELATIONSHIP )
     @ManyToOne
     @JoinColumn(name="product_id", referencedColumnName="id", insertable=false, updatable=false)
     private Products   products ; 
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="favorite_id", referencedColumnName="id", insertable=false, updatable=false)
     private Favorites  favorites ; 

@@ -23,7 +23,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hdwatch.dao.AccountsDAO;
+import com.hdwatch.dao.FavoritesDAO;
 import com.hdwatch.entity.Accounts;
+import com.hdwatch.entity.Favorites;
 import com.hdwatch.entity.Roledetails;
 import com.hdwatch.entity.Roles;
 import com.hdwatch.service.AccountsService;
@@ -43,6 +45,9 @@ public class SecurityController {
 	
 	@Autowired
 	RoledetailService roledetailService;
+	
+	@Autowired
+	FavoritesDAO favoriteDAO;
 	
 	//Trang đăng nhập
 	@RequestMapping("/login/form")
@@ -212,7 +217,14 @@ public class SecurityController {
         roledetails.setRoles(defaultRole);
 
         roledetailService.create(roledetails);
+        //Tạo danh sách yêu thích cho tài khoản
+        Favorites favorite = new Favorites();
         
+        favorite.setAccountId(user.getUsername());
+        
+        favoriteDAO.save(favorite);
+        //Tiêu đề trang
+      	model.addAttribute("pageTitle", "Đăng kí tài khoản thành công");
         // Đăng kí thành công hiển thị message
         model.addAttribute("message", "Đăng kí thành công");
         return "account/login";

@@ -4,7 +4,10 @@ app.controller("product-ctrl", function($scope, $http) {
 	$scope.products = [];
 	$scope.brands = [];
 	$scope.categories = [];
-	$scope.product = {};
+	$scope.product = {
+		productimages: ["cloud-upload.jpg"]
+	};
+	
 	$scope.chon = false;
 	$scope.pageSize = 10;
 	$scope.start = 0;
@@ -48,6 +51,8 @@ app.controller("product-ctrl", function($scope, $http) {
 		var url = `${urlProduct}/${id}`;
 		$http.get(url).then(resp => {
 			$scope.product = resp.data;
+			$scope.product.productimages = JSON.parse($scope.product.productimages);
+			$scope.selectedImage = $scope.product.productimages[0];
 			$scope.chon = true;
 		}).catch(error => {
 			if (error.status == 404) {
@@ -56,13 +61,27 @@ app.controller("product-ctrl", function($scope, $http) {
 		});
 		$scope.start = 0;
 	};
-
-	// Lấy tên hình ảnh
-	$scope.getImageName = function(productImages) {
-		var images = productImages.split(',');
-		var imageName = images[0].replace(/"/g, '').replace('[', '').replace(']', '');
-		return imageName;
-	};
+	
+	//Đổi hình ảnh
+	$scope.selectedImage = $scope.product.productimages[0];
+	$scope.changeImage = function(image) {
+        $scope.selectedImage = image;
+    };
+    
+    //Sửa hình ảnh
+	$scope.imageChanged = function(files){
+		var data = new FormData();
+		data.append('file', files[0]);
+		$http.post('/rest/upload/images', data, {
+			transformRequest: angular.identity,
+			headers: {'Content-Type': undefined}
+        }).then(resp => {
+			$scope.selectedImage = resp.data.name;
+		}).catch(error => {
+			alert("Lỗi upload hình ảnh");
+			console.log("Error", error);
+		})
+	}
 
 	// Cập nhật thông tin sản phẩm
 	$scope.update = function(id) {
@@ -99,6 +118,7 @@ app.controller("product-ctrl", function($scope, $http) {
 	// Làm mới thông tin sản phẩm
 	$scope.reset = function() {
 		$scope.product = {};
+		$scope.product.productimages = ["cloud-upload.jpg"];
 		$scope.chon = false;
 	}
 
@@ -134,6 +154,8 @@ app.controller("product-ctrl", function($scope, $http) {
 			});
 		}
 	};
+	
+	
 
 	$scope.reset();
 });

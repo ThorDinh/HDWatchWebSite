@@ -87,8 +87,7 @@ CREATE TABLE favorites(
 CREATE TABLE favoritedetails(
 	id int identity primary key not null,
 	favorite_id int not null,
-	product_id int not null,
-	available bit
+	product_id int not null
 );
 
 CREATE TABLE sale_events (
@@ -305,3 +304,61 @@ CROSS JOIN
 WHERE
     p.row_num <= 3;
 
+-- favorite
+INSERT INTO favorites (account_id)
+VALUES ('hienbt'),
+('dinhnk'),
+('haonx'),
+('duyntd'),
+('quynt');
+
+-- favoritedetails
+-- For favorite with account_id 'hienbt'
+DECLARE @hienbtFavoriteId INT;
+SELECT @hienbtFavoriteId = id FROM favorites WHERE account_id = 'hienbt';
+
+INSERT INTO favoritedetails (favorite_id, product_id)
+VALUES
+    (@hienbtFavoriteId, (SELECT TOP 1 id FROM products ORDER BY NEWID())),
+    (@hienbtFavoriteId, (SELECT TOP 1 id FROM products ORDER BY NEWID())),
+    (@hienbtFavoriteId, (SELECT TOP 1 id FROM products ORDER BY NEWID()));
+
+-- For favorite with account_id 'dinhnk'
+DECLARE @dinhnkFavoriteId INT;
+SELECT @dinhnkFavoriteId = id FROM favorites WHERE account_id = 'dinhnk';
+
+INSERT INTO favoritedetails (favorite_id, product_id)
+VALUES
+    (@dinhnkFavoriteId, (SELECT TOP 1 id FROM products ORDER BY NEWID())),
+    (@dinhnkFavoriteId, (SELECT TOP 1 id FROM products ORDER BY NEWID())),
+    (@dinhnkFavoriteId, (SELECT TOP 1 id FROM products ORDER BY NEWID()));
+
+-- For favorite with account_id 'haonx'
+DECLARE @haonxFavoriteId INT;
+SELECT @haonxFavoriteId = id FROM favorites WHERE account_id = 'haonx';
+
+INSERT INTO favoritedetails (favorite_id, product_id)
+VALUES
+    (@haonxFavoriteId, (SELECT TOP 1 id FROM products ORDER BY NEWID())),
+    (@haonxFavoriteId, (SELECT TOP 1 id FROM products ORDER BY NEWID())),
+    (@haonxFavoriteId, (SELECT TOP 1 id FROM products ORDER BY NEWID()));
+
+-- For favorite with account_id 'duyntd'
+DECLARE @duyntdFavoriteId INT;
+SELECT @duyntdFavoriteId = id FROM favorites WHERE account_id = 'duyntd';
+
+INSERT INTO favoritedetails (favorite_id, product_id)
+VALUES
+    (@duyntdFavoriteId, (SELECT TOP 1 id FROM products ORDER BY NEWID())),
+    (@duyntdFavoriteId, (SELECT TOP 1 id FROM products ORDER BY NEWID())),
+    (@duyntdFavoriteId, (SELECT TOP 1 id FROM products ORDER BY NEWID()));
+
+-- For favorite with account_id 'quynt'
+DECLARE @quyntFavoriteId INT;
+SELECT @quyntFavoriteId = id FROM favorites WHERE account_id = 'quynt';
+
+INSERT INTO favoritedetails (favorite_id, product_id)
+VALUES
+    (@quyntFavoriteId, (SELECT TOP 1 id FROM products ORDER BY NEWID())),
+    (@quyntFavoriteId, (SELECT TOP 1 id FROM products ORDER BY NEWID())),
+    (@quyntFavoriteId, (SELECT TOP 1 id FROM products ORDER BY NEWID()));

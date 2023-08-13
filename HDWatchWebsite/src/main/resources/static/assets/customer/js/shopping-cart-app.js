@@ -128,63 +128,75 @@ app.controller("shopping-cart-ctrl", ['$scope', '$http', 'AuthService', function
 		return imageName;
 	};
 
-	//Quản lí yêu thích
+	// Yêu thích
 	$scope.favorite = {
+		favoriteId: '',
 		items: [],
-		//Thêm sản phẩm vào yêu thích
+
 		add(id) {
-			// Kiểm tra xem người dùng đã đăng nhập chưa
 			AuthService.checkAuthentication()
 				.then(response => {
-					const loggedIn = response.data.authenticated;
-					if (!loggedIn) {
-						// Chuyển hướng đến trang đăng nhập nếu chưa đăng nhập
+					const loggedIn = response.data;
+					if (loggedIn.authenticated == false) {
 						window.location.href = '/login/form';
 					} else {
-						var item = this.items.find(item => item.id == id);
-						// Nếu sản phẩm đã có trong danh sách yêu thích
+						var item = this.items.find(item => item.productId == id);
 						if (item) {
-							item.favorite = !item.favorite; // Toggle trạng thái yêu thích
-							var index = this.items.findIndex(item => item.id == id);
-							this.items.splice(index, 1);
-							this.saveToLocalStorage();
+							const favoritedetailId = item.id; // Assuming the ID of the Favoritedetails
+							this.remove(favoritedetailId);
 						} else {
-							// Nếu sản phẩm chưa có trong danh sách yêu thích
-							$http.get(`/rest/products/${id}`).then(resp => {
-								resp.data.favorite = true;
-								this.items.push(resp.data);
-								this.saveToLocalStorage();
+							const favoritedetails = {
+								favoriteId: this.favoriteId, // Assuming you have favoriteId set
+								productId: id
+							};
+							$http.post('/rest/favorites', favoritedetails).then(response => {
+								this.items.push(response.data);
 							});
 						}
 					}
 				})
 				.catch(error => {
-					console.error('Lỗi khi kiểm tra xác thực: ', error);
+					console.error('Error checking authentication: ', error);
 				});
+
 		},
-		// Xóa sản phẩm khỏi danh sách yêu thích
-		remove(id) {
+		get count() {
+			return this.items.length;
+		}
+	};
+
+	$scope.favorite.remove = function(id) {
+		$http.delete(`/rest/favorites/${id}`).then(() => {
 			var index = this.items.findIndex(item => item.id == id);
 			this.items.splice(index, 1);
-			this.saveToLocalStorage();
-		},
-		// Tính tổng số mặt hàng trong danh sách yêu thích
-		get count() {
-			return this.items
-				.map(item => item.favorite)
-				.reduce((total, favorite) => total += favorite, 0);
-		},
-		// Lưu danh sách yêu thích vào Local Storage
-		saveToLocalStorage() {
-			var json = JSON.stringify(angular.copy(this.items));
-			localStorage.setItem("favorite", json);
-		},
-		// Đọc danh sách yêu thích từ Local Storage
-		loadFromLocalStorage() {
-			var json = localStorage.getItem("favorite");
-			this.items = json ? JSON.parse(json) : [];
-		}
+		});
 	}
 
-	$scope.favorite.loadFromLocalStorage();
+	// Load favorites from the server
+	$scope.favorite.loadFromDatabase = function() { // Changed the method name
+		AuthService.checkAuthentication()
+			.then(response => {
+				const loggedIn = response.data;
+				if (loggedIn) {
+					const accountId = loggedIn.username;
+
+					$http.get(`/rest/favorites/user/${accountId}`).then(resp => {
+						if (resp.data.length > 0) {
+							this.favoriteId = resp.data[0].id;
+
+							$http.get(`/rest/favorites/details/${this.favoriteId}`).then(resp => {
+								this.items = resp.data;
+							});
+						}
+					});
+				}
+			})
+			.catch(error => {
+				console.error('Error checking authentication: ', error);
+			});
+	};
+
+	// Load favorites from local storage
+	$scope.favorite.loadFromDatabase(); // Calling the correct method
+
 }]);

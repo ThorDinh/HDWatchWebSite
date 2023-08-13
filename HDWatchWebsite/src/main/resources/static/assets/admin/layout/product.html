@@ -35,8 +35,14 @@
                                 <div class="col-md-4">
                                     <div class="container">
                                         <div class="row">
-                                            <img ng-src="/images/{{getImageUrl(p.productimages)}}" class="imgProduct mt-2"
+                                            <img ng-src="{{'/assets/images/'+ selectedImage}}" class="imgProduct mt-2"
                                                 alt="">
+                                        </div>
+                                        <div class="row mt-2">
+                                            <fieldset ng-repeat="i in product.productimages">
+                                                <a href="" ng-click="changeImage(i)"><img src="/assets/images/{{i}}" alt=""
+                                                        class="img-thumbnail"></a>
+                                            </fieldset>
                                         </div>
                                     </div>
                                 </div>
@@ -112,8 +118,8 @@
                                             <div class="form-group">
                                                 <label>Hình ảnh</label>
                                                 <input type="file" accept="image/*" multiple
-                                                    onchange="angular.element(this).scope().imageChanged(this.files)" hidden>
-                                 				<input class="form-control" text ng-model="product.productimages" disabled>
+                                                    onchange="angular.element(this).scope().selectedImage" hidden>
+                                 				<input class="form-control" text ng-model="selectedImage" disabled>
                                             </div>
                                             <div class="form-group">
                                                 <label>Mô tả sản phẩm</label>

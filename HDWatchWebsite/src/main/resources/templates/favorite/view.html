@@ -8,7 +8,7 @@
     <div class="container">
         <!-- row -->
         <div class="row">
-            <!-- Order Details -->
+            <!-- Favorites -->
             <div class="col-md-12 order-details" >
                 <div class="section-title text-center">
                     <h3 class="title">Danh sách yêu thích</h3>
@@ -26,8 +26,8 @@
                     <tbody>
                         <tr ng-repeat="item in favorite.items">
                             <td style="padding-top: 30px;"><button ng-click="favorite.remove(item.id)" class="btn btn-default btn-danger">x</button></td>
-                            <td><img ng-src="/assets/images/{{getImageName(item.productimages)}}" alt="" style="width:100%;"></td>
-                            <td style="padding-top: 30px;"> <a href="/product/detail/{{item.id}}">{{item.name}}</a> </td>
+                            <td><img ng-src="/assets/images/{{getImageName(item.products.productimages)}}" alt="" style="width:100%;"></td>
+                            <td style="padding-top: 30px;"> <a href="/product/detail/{{item.productId}}">{{item.products.name}}</a> </td>
                         </tr>
                     </tbody>
                 </table>
@@ -37,7 +37,7 @@
             </div>
             
             
-            <!-- /Order Details -->
+            <!-- /Favorites -->
         </div>
         <!-- /row -->
     </div>

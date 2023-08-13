@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hdwatch.dao.AccountsDAO;
-import com.hdwatch.dao.OrdersDAO;
 import com.hdwatch.service.OrdersService;
 
 @Controller
@@ -18,8 +17,6 @@ public class OrderController {
 	OrdersService orderService;
 	@Autowired
 	AccountsDAO accountsDAO;
-	@Autowired
-	OrdersDAO ordersDAO;
 	
 	// Trang thanh toán đơn hàng
 	@RequestMapping("/order/checkout")
