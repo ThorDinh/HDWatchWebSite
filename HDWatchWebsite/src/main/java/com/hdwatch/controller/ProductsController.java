@@ -65,7 +65,7 @@ public class ProductsController {
 		
 		//tìm kiếm sản phẩm theo keyword
 		Page<Products> filteredProducts;
-        if (keyword != null && !keyword.trim().isEmpty() || category != null) {
+        if (keyword != null && !keyword.trim().isEmpty() || category != null || brand != null) {
         	filteredProducts = productsService.searchProductsByKeyword(keyword, category, brand, p);
         	if(keyword.equalsIgnoreCase("")) {
         		//Tiêu đề trang
