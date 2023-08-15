@@ -10,6 +10,9 @@ app.controller("dashboard-ctrl", function($scope, $http) {
 	$scope.costDate = [];
 	$scope.costData = [];
 	$scope.orderData = [];
+	
+	$scope.reports = [];
+	$scope.report = {};
 
 	$scope.productInMonth = [];
 	$scope.productName = [];
@@ -39,49 +42,61 @@ app.controller("dashboard-ctrl", function($scope, $http) {
 				$scope.orderToday = 0;
 			}
 		}
-		console.log((new Date()).getDate())
+		//console.log((new Date()).getDate())
 	}).catch(error => {
 		alert("Load cost data fail");
 		console.log(error);
 	});
 	
-	// Lấy dữ liệu sản phẩm bán chạy trong tháng (bestSellerInMonth) từ API
-	$http.get('/admin/rest/report/bestSellerInMonth').then(resp => {
-		$scope.productInMonth = resp.data;
-		for (var i = 0; i < 5; i++) {
-			$scope.productName.push($scope.productInMonth[i].name);
-			$scope.productCount.push($scope.productInMonth[i].count);
-		}
-	});
-	
-	// Hàm reportCost để vẽ biểu đồ chi phí trong tháng
-	$scope.reportCost = function() {
-		let date = (new Date()).toLocaleString('default', { month: 'short' });
+		// Lấy danh sách thống kê từ API
+	$http.get(urlReport).then(resp => {
+		const dataArray = resp.data; // Giả sử phản hồi từ API là một mảng các mảng con
+		
+		// Ánh xạ dữ liệu từ phản hồi API vào mảng reports
+		$scope.reports = dataArray.map(innerArray => {
+			const month = innerArray[0];
+			const year = innerArray[1];
+			const totalCost = innerArray[2];
+			
+			// Tạo đối tượng biểu diễn thông tin báo cáo
+			return {
+				month: month,
+				year: year,
+				totalCost: totalCost
+			};
+		});
 
-		const data = {
-			labels: $scope.costDate,
-			datasets: [
-				{
-					label: 'Cost in ' + date,
-					data: $scope.costData,
-					fill: false,
-					borderColor: 'rgb(145, 15, 6)',
-					tension: 0.1
+		// Tạo biểu đồ cột
+		const ctx = document.getElementById('columnChart').getContext('2d');
+		const months = $scope.reports.map(report => `Tháng ${report.month} , ${report.year}`);
+		const totalCosts = $scope.reports.map(report => report.totalCost);
+
+		const columnChart = new Chart(ctx, {
+			type: 'bar',
+			data: {
+				labels: months,
+				datasets: [{
+					label: 'Tổng doanh thu theo tháng',
+					data: totalCosts,
+					backgroundColor: 'rgba(75, 192, 192, 0.6)', // Tùy chỉnh màu sắc
+					borderWidth: 1
+				}]
+			},
+			options: {
+				scales: {
+					y: {
+						beginAtZero: true,
+						ticks: {
+							callback: function(value) {
+								return value.toLocaleString('vi-VN');
+							}
+						}
+					}
 				}
-			]
-		};
+			}
+		});
 
-		const config = {
-			type: 'line',
-			data: data,
-		};
-		const myChart = new Chart(
-			document.getElementById('costChart'),
-			config
-		);
-	}
-	
-	// Gọi hàm vẽ biểu đồ chi phí trong tháng
-	$scope.reportCost();
+		console.log($scope.reports);
+	});
 });
 

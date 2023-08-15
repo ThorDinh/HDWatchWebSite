@@ -18,4 +18,8 @@ public interface OrdersDAO extends JpaRepository<Orders, Integer>{
 	
 	@Query("SELECT COUNT(o) FROM Orders o WHERE MONTH(o.createDate) = :month")
 	Integer countOrderInMonth(@Param("month") Integer month);
+	
+	@Query("SELECT MONTH(o.createDate), YEAR(o.createDate), SUM(od.price * od.quantity)  " +
+	           "FROM Orders o LEFT JOIN Orderdetails od on o.id = od.orders GROUP BY MONTH(o.createDate), YEAR(o.createDate)")
+	List<Object> getOrdersWithMonthAndTotalCost();
 }

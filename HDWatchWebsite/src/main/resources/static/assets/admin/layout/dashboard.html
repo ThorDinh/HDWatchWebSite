@@ -91,7 +91,7 @@
 						<div class="row mb-2 pb-3 align-items-end">
 							<div class="col">
 								<p>Doanh thu hôm nay</p>
-								<h3 class="tex-dark mb-0">{{costToday | number : 0}} VNĐ</h3>
+								<h3 class="tex-dark mb-0">{{ costToday ? (costToday | number : 0) + ' VNĐ' : '0 VNĐ' }}</h3>
 							</div>
 						</div>
 					</div>
@@ -100,20 +100,28 @@
 						<div class="row mb-2 pb-3 align-items-end">
 							<div class="col">
 								<p>Số lượng đơn hàng hôm nay</p>
-								<h3 class="tex-dark mb-0">{{orderToday}} Đơn</h3>
+								<h3 class="tex-dark mb-0">{{orderToday || '0'}} Đơn</h3>
 							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-12 px-0">
-						<div class="apexchart-wrapper p-inherit">
-							<canvas id="costChart" hidden></canvas>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+</div>
+<div class="row">
+	<div class="col-xxl-12 m-b-30">
+		<div class="card card-statistics h-100 mb-0 apexchart-tool-force-top">
+			<div class="card-header d-flex justify-content-between">
+				<div class="card-heading">
+					<h4 class="card-title">Báo cáo doanh thu theo tháng</h4>
+				</div>
+			</div>
+			<div class="card-body">
+				<div class="row">
+					<canvas id="columnChart"></canvas>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

@@ -10,6 +10,7 @@ app.controller("brand-ctrl",function($scope, $http){
     // Lấy danh sách thương hiệu từ API
     $http.get(urlBrand).then(resp => {
         $scope.brands = resp.data;
+        
     });
     
     // Hàm edit để lấy thông tin một thương hiệu theo id

@@ -72,6 +72,13 @@ public class ReportRestController {
 		return lst;
 	}
 	
+	// Phương thức để lấy danh sách báo cáo chi tiết về chi phí trong tháng hiện tại
+	@GetMapping("/reportcosteachmonth")
+	public List<Object> reportCostEachMonth(){
+		List<Object> lst = rpService.getOrdersWithMonthAndTotalCost();
+		return lst;
+	}
+	
 //	@GetMapping("/bestSellerInMonth")
 //	public List<ReportProduct> reportProductInMonth(){
 //		List<ReportProduct> lst = rpService.reportProductInMonth(this.monthCurrent());

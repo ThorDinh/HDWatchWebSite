@@ -8,4 +8,6 @@ import com.hdwatch.report.ReportCost;
 public interface ReportService {
 	List<ReportCost> reportCostInMonth(Integer month);
 //	List<ReportProduct> reportProductInMonth(Integer month);
+	
+	List<Object> getOrdersWithMonthAndTotalCost();
 }
