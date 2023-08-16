@@ -1,225 +1,226 @@
-<head>
-	    <!-- Datetimepicker CSS -->
-    <link rel="stylesheet" href="/assets/admin/css/bootstrap-datetimepicker.min.css">
-    
-    <!-- Datetimepicker JS -->
-    <script src="/assets/admin/js/moment.min.js"></script>
-    <script src="/assets/admin/js/bootstrap-datetimepicker.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    
-</head>
-
 <div class="row">
-    <div class="col-md-12 m-b-30">
-        <!-- begin page title -->
-        <div class="d-block d-lg-flex flex-nowrap align-items-center">
-            <div class="page-title mr-4 pr-4 border-right">
-                <h1>Quản lí sản phẩm</h1>
-            </div>
+	<div class="col-md-12 m-b-30">
+		<!-- begin page title -->
+		<div class="d-block d-lg-flex flex-nowrap align-items-center">
+			<div class="page-title mr-4 pr-4 border-right">
+				<h1>Quản lí sản phẩm</h1>
+			</div>
 
-            <div class="ml-auto d-flex align-items-center secondary-menu text-center">
+			<div
+				class="ml-auto d-flex align-items-center secondary-menu text-center">
 
-            </div>
-        </div>
-        <!-- end page title -->
-    </div>
+			</div>
+		</div>
+		<!-- end page title -->
+	</div>
 </div>
 <!-- end row -->
 <!-- begin row -->
 <div class="row">
-    <div class="col-md-12">
-        <div class="card card-statistics">
-            <div class="card-header">
-                <div class="card-heading">
-                    <div class="row">
-                        <div class="col-md-9">
-                            <h4 class="card-title">Sản phẩm</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <form name="frmProduct">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="container">
-                                        <div class="row">
-                                            <img ng-src="{{'/assets/images/'+ selectedImage}}" class="imgProduct mt-2"
-                                                alt="">
-                                        </div>
-                                        <div class="row mt-2">
-                                            <fieldset ng-repeat="i in product.productimages">
-                                                <a href="" ng-click="changeImage(i)"><img src="/assets/images/{{i}}" alt=""
-                                                        class="img-thumbnail"></a>
-                                            </fieldset>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Tên sản phẩm</label>
-                                                <input name="name" ng-model="product.name" required type="text"
-                                                    class="form-control">
-                                                <div ng-show="frmProduct.name.$invalid" class="badge badge-danger m-2">
-                                                    Tên không được để trống</div>
-                                            </div>
-                                            <div class="form-group ">
-                                                <label>Giá sản phẩm</label>
-                                                <input name="price" ng-model="product.price" required ng-min="0"
-                                                    type="number" class="form-control">
-                                                <div ng-show="frmProduct.price.$invalid" class="badge badge-danger m-2">
-                                                    Giá không được để trống</div>
-                                            </div>
-                                            <div class="form-group ">
-                                                <label>Giá cũ sản phẩm</label>
-                                                <input name="price" ng-model="product.oldprice" required ng-min="0"
-                                                    type="number" class="form-control">
-                                                <div ng-show="frmProduct.price.$invalid" class="badge badge-danger m-2">
-                                                    Giá cũ không được để trống</div>
-                                            </div>
-                                            <div class="form-group ">
-                                                <label>Ngày tạo sản phẩm</label>
-                                                <input ng-model="product.createdate" type="text"
-                                                    class="form-control">
-                                            </div>
-                                            <div class="form-group ">
-                                                <label>Thương hiệu</label>
-                                                <select ng-model="product.brandid" class="form-control">
-                                                    <option ng-repeat="b in brands" ng-value="b.id">{{b.name}}
-                                                    </option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group ">
-                                                <label>Danh mục</label>
-                                                <select ng-model="product.categoryid" class="form-control">
-                                                    <option ng-repeat="c in categories" ng-value="c.id">{{c.name}}
-                                                    </option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group ">
-                                                <label>Số lượng sản phẩm</label>
-                                                <input name="price" ng-model="product.stock" required ng-min="0"
-                                                    type="number" class="form-control">
-                                                <div ng-show="frmProduct.price.$invalid" class="badge badge-danger m-2">
-                                                    Số lượng không được để trống</div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="mr-2">Còn hàng</label>
-                                                <div class="form-check-inline">
-                                                    <input ng-model="product.available" class="form-check-input"
-                                                        type="radio" name="available" id="gridRadios1" ng-value="true"
-                                                        ng-checked="product.available">
-                                                    <label class="form-check-label" for="gridRadios1">
-                                                        Còn hàng
-                                                    </label>
-                                                </div>
-                                                <div class="form-check-inline">
-                                                    <input ng-model="product.available" class="form-check-input"
-                                                        type="radio" name="available" id="gridRadios2" ng-value="false"
-                                                        ng-checked="product.available">
-                                                    <label class="form-check-label" for="gridRadios2">
-                                                        Hết hàng
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Hình ảnh</label>
-                                                <input type="file" accept="image/*" multiple
-                                                    onchange="angular.element(this).scope().selectedImage" hidden>
-                                 				<input class="form-control" text ng-model="selectedImage" disabled>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Mô tả sản phẩm</label>
-                                                <textarea ng-model="product.description"
-                                                    class="form-control" style="width: 700px; height: 150px;"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mt-3">
-                                        <button ng-disabled="frmProduct.$invalid || chon == true" ng-click="create()"
-                                            class="btn btn-primary">Tạo mới</button>
-                                        <button
-                                            ng-disabled="frmProduct.$invalid || frmProduct.$pristine || chon == false"
-                                            ng-click="update(product.id)" class="btn btn-info">Cập nhật</button>
-                                        <button ng-click="reset()" class="btn btn-secondary">Làm mới</button>
-                                    </div>
+	<div class="col-md-12">
+		<div class="card card-statistics">
+			<div class="card-header">
+				<div class="card-heading">
+					<div class="row">
+						<div class="col-md-9">
+							<h4 class="card-title">Sản phẩm</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-md-12">
+						<form name="frmProduct">
+							<div class="row">
+								<div class="col-md-4">
+									<div class="container">
+										<div class="row">
+											<img ng-src="{{'/assets/images/'+ selectedImage}}"
+												class="imgProduct mt-2" alt="">
+										</div>
+										<div class="row mt-2">
+											<fieldset ng-repeat="i in product.productimages">
+												<a href="" ng-click="changeImage(i)"><img
+													src="/assets/images/{{i}}" alt="" class="img-thumbnail"></a>
+											</fieldset>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-8">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<label>Tên sản phẩm</label> <input name="name"
+													ng-model="product.name" required type="text"
+													class="form-control">
+												<div ng-show="frmProduct.name.$invalid"
+													class="badge badge-danger m-2">Tên không được để
+													trống</div>
+											</div>
+											<div class="form-group ">
+												<label>Giá sản phẩm</label> <input name="price"
+													ng-model="product.price" required ng-min="0" type="number"
+													class="form-control">
+												<div ng-show="frmProduct.price.$invalid"
+													class="badge badge-danger m-2">Giá không được để
+													trống</div>
+											</div>
+											<div class="form-group ">
+												<label>Giá cũ sản phẩm</label> <input name="price"
+													ng-model="product.oldprice" required ng-min="0"
+													type="number" class="form-control">
+												<div ng-show="frmProduct.price.$invalid"
+													class="badge badge-danger m-2">Giá cũ không được để
+													trống</div>
+											</div>
+											<div class="form-group ">
+												<label>Ngày tạo sản phẩm</label> <input
+													ng-model="product.createdate" type="text"
+													class="form-control">
+											</div>
+											<div class="form-group ">
+												<label>Thương hiệu</label> <select
+													ng-model="product.brandid" class="form-control">
+													<option ng-repeat="b in brands" ng-value="b.id">{{b.name}}
+													</option>
+												</select>
+											</div>
+											<div class="form-group ">
+												<label>Danh mục</label> <select
+													ng-model="product.categoryid" class="form-control">
+													<option ng-repeat="c in categories" ng-value="c.id">{{c.name}}
+													</option>
+												</select>
+											</div>
+											<div class="form-group ">
+												<label>Số lượng sản phẩm</label> <input name="price"
+													ng-model="product.stock" required ng-min="0" type="number"
+													class="form-control">
+												<div ng-show="frmProduct.price.$invalid"
+													class="badge badge-danger m-2">Số lượng không được để
+													trống</div>
+											</div>
+											<div class="form-group">
+												<label class="mr-2">Còn hàng</label>
+												<div class="form-check-inline">
+													<input ng-model="product.available"
+														class="form-check-input" type="radio" name="available"
+														id="gridRadios1" ng-value="true"
+														ng-checked="product.available"> <label
+														class="form-check-label" for="gridRadios1"> Còn
+														hàng </label>
+												</div>
+												<div class="form-check-inline">
+													<input ng-model="product.available"
+														class="form-check-input" type="radio" name="available"
+														id="gridRadios2" ng-value="false"
+														ng-checked="product.available"> <label
+														class="form-check-label" for="gridRadios2"> Hết
+														hàng </label>
+												</div>
+											</div>
+											<div class="form-group">
+												<label>Hình ảnh</label> <input type="file" accept="image/*"
+													multiple
+													onchange="angular.element(this).scope().selectedImage"
+													hidden> <input class="form-control"
+													ng-model="product.productimages" disabled>
+											</div>
+											<div class="form-group">
+												<label>Mô tả sản phẩm</label>
+												<textarea ng-model="product.description"
+													class="form-control" style="width: 700px; height: 150px;"></textarea>
+											</div>
+										</div>
+									</div>
+									<div class="mt-3">
+										<button ng-disabled="frmProduct.$invalid || chon == true"
+											ng-click="create()" class="btn btn-primary">Tạo mới</button>
+										<button
+											ng-disabled="frmProduct.$invalid || frmProduct.$pristine || chon == false"
+											ng-click="update(product.id)" class="btn btn-info">Cập
+											nhật</button>
+										<button ng-click="reset()" class="btn btn-secondary">Làm
+											mới</button>
+									</div>
 
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <div class="row">
-    <div class="col-md-12 ">
-        <div class="card card-statistics">
-            <div class="card-header">
-                <div class="card-heading">
-                    <div class="row">
-                        <div class="col-md-6 text-left">
-                            <h4 class="card-title">Danh sách sản phẩm</h4>
-                        </div>
-                        <div class="col-md-6">
-                            <form class="justify-content-end">
-                                <div class="form-group">
-                                    <input oninput="angular.element(this).scope().search(this.value)" type="text"
-                                        class="form-control" placeholder="Tìm kiếm">
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-hover table-bordered ">
-                        <thead class="thead-light">
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Tên</th>
-                                <th scope="col">Giá</th>
-                                <th scope="col">Ngày tạo</th>
-                                <th scope="col">Tình trạng</th>
-                                <th scope="col">Thương hiệu</th>
-                                <th scope="col">Danh mục</th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="p in products | orderBy: p.id | limitTo : pageSize : start">
-                                <th scope="row">{{p.id}}</th>
-                                <td>{{p.name}}</td>
-                                <td>{{p.price | number: 0}} VNĐ</td>
-                                <td>{{p.createdate | date: 'dd/MM/yyyy'}}</td>
-                                <td>{{p.available?'Còn hàng':'Hết hàng'}}</td>
-                                <td>{{p.brands.name}}</td>
-                                <td>{{p.categories.name}}</td>
-                                <td class="text-right">
-                                    <button ng-click="edit(p.id)" class="btn btn-primary">Sửa</button>
-                                    <button ng-click="delete(p.id)" class="btn btn-dark">Xóa</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination mt-3 justify-content-center">
-                        <li  ng-click="first()" class="page-item "><a class="page-link" href="">Trang đầu</a></li>
-                        <li  ng-click="prev()"  class="page-item ">
-                            <a class="page-link" href="">Trước</a>
-                        </li>
-                        <li  ng-click="next()"  class="page-item"><a class="page-link" href="">Sau</a></li>
-                        <li  ng-click="last()"  class="page-item"><a class="page-link" href="">Trang cuối</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </div>
+	<div class="col-md-12 ">
+		<div class="card card-statistics">
+			<div class="card-header">
+				<div class="card-heading">
+					<div class="row">
+						<div class="col-md-6 text-left">
+							<h4 class="card-title">Danh sách sản phẩm</h4>
+						</div>
+						<div class="col-md-6">
+							<form class="justify-content-end">
+								<div class="form-group">
+									<input
+										oninput="angular.element(this).scope().search(this.value)"
+										type="text" class="form-control" placeholder="Tìm kiếm">
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-hover table-bordered ">
+						<thead class="thead-light">
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Tên</th>
+								<th scope="col">Giá</th>
+								<th scope="col">Ngày tạo</th>
+								<th scope="col">Tình trạng</th>
+								<th scope="col">Thương hiệu</th>
+								<th scope="col">Danh mục</th>
+								<th scope="col"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr
+								ng-repeat="p in products | orderBy: p.id | limitTo : pageSize : start">
+								<th scope="row">{{p.id}}</th>
+								<td>{{p.name}}</td>
+								<td>{{p.price | number: 0}} VNĐ</td>
+								<td>{{p.createdate | date: 'yyyy-MM-dd'}}</td>
+								<td>{{p.available?'Còn hàng':'Hết hàng'}}</td>
+								<td>{{getBrandName(p.brandid)}}</td>
+								<td>{{getCategoryName(p.categoryid)}}</td>
+								<td class="text-right">
+									<button ng-click="edit(p.id)" class="btn btn-primary">Sửa</button>
+									<button ng-click="delete(p.id)" class="btn btn-dark">Xóa</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<nav aria-label="Page navigation example">
+					<ul class="pagination mt-3 justify-content-center">
+						<li ng-click="first()" class="page-item "><a
+							class="page-link" href="">Trang đầu</a></li>
+						<li ng-click="prev()" class="page-item "><a class="page-link"
+							href="">Trước</a></li>
+						<li ng-click="next()" class="page-item"><a class="page-link"
+							href="">Sau</a></li>
+						<li ng-click="last()" class="page-item"><a class="page-link"
+							href="">Trang cuối</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
 </div>
