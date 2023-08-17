@@ -5,6 +5,7 @@
 package com.hdwatch.entity;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
@@ -89,4 +90,14 @@ public class Products implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy="products")
     private List<Orderdetails> listOfOrderdetails ; 
+    
+    public void deleteImage(String imageToDelete) {
+        if (productimages != null) {
+            List<String> imagesList = Arrays.asList(productimages.split(","));
+            if (imagesList.contains(imageToDelete)) {
+                imagesList.remove(imageToDelete);
+                productimages = String.join(",", imagesList);
+            }
+        }
+    }
 }

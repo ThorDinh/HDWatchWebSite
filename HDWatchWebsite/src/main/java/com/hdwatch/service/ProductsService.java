@@ -32,4 +32,6 @@ public interface ProductsService {
 	Page<Products> searchProductsByKeyword(String keyword, Integer category, Integer brand, Optional<Integer> p);
 
 	List<Products> findByName(String name);
+
+	void deleteImage(Integer productId, String imageToDelete);
 }

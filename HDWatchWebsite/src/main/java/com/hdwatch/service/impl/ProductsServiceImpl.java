@@ -98,4 +98,16 @@ public class  ProductsServiceImpl implements ProductsService  {
 	public List<Products> findByName(String name) {
 		return pdao.findByName(name);
 	}
+	
+	@Override
+	public void deleteImage(Integer productId, String imageToDelete) {
+        Optional<Products> optionalProduct = pdao.findById(productId);
+        if (optionalProduct.isPresent()) {
+            Products product = optionalProduct.get();
+            product.deleteImage(imageToDelete);
+            pdao.save(product); // Update the product in the database
+        } else {
+            throw new RuntimeException("Product not found");
+        }
+    }
 }

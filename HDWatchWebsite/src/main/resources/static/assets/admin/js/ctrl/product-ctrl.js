@@ -86,7 +86,8 @@ app.controller("product-ctrl", function($scope, $http) {
 		var data = angular.copy($scope.product);
 		var index = $scope.products.findIndex(c => c.id == id);
 		// Revert parsed JSON string back to a regular string
-		//data.productimages = JSON.stringify(data.productimages);
+		data.productimages = JSON.stringify(data.productimages);
+
 		$http.put(url, data).then(resp => {
 			$scope.products[index] = resp.data;
 			alert("Cập nhật sản phẩm thành công!");
@@ -114,6 +115,44 @@ app.controller("product-ctrl", function($scope, $http) {
 			console.log("error ", error);
 		});
 	};
+
+	$scope.deleteImage = function(index) {
+		var imageToDelete = $scope.product.productimages[index];
+		console.log(imageToDelete);
+
+		var url = `${urlProduct}/deleteImage/${$scope.product.id}`;
+		var data = { image: imageToDelete };
+
+		$http.post(url, data).then(resp => {
+			// Image successfully deleted on the backend
+			$scope.product.productimages.splice(index, 1);
+			if ($scope.selectedImage === imageToDelete) {
+				$scope.selectedImage = $scope.product.productimages[0];
+			}
+
+			// Call the create function after image deletion
+			var createData = angular.copy($scope.product);
+			createData.productimages = JSON.stringify(createData.productimages); // Convert to JSON string
+
+			$http.post(urlProduct, createData).then(resp => {
+				$http.get(urlProduct).then(resp => {
+					$scope.products = resp.data;
+				});
+				alert("Cập nhật sản phẩm sau xóa thành công!");
+			}).catch(error => {
+				if (error.status == 400) {
+					alert("Đã tồn tại sản phẩm " + $scope.product.id);
+				}
+				alert("Cập nhật sản phẩm sau xóa thất bại!");
+				console.log("error ", error);
+			});
+
+		}).catch(error => {
+			console.error("Error deleting image:", error);
+			// Handle error
+		});
+	};
+
 
 	// Làm mới thông tin sản phẩm
 	$scope.reset = function() {
