@@ -54,25 +54,19 @@
 												<label>Tên sản phẩm</label> <input name="name"
 													ng-model="product.name" required type="text"
 													class="form-control">
-												<div ng-show="frmProduct.name.$invalid"
-													class="badge badge-danger m-2">Tên không được để
-													trống</div>
+												<div ng-show="frmProduct.name.$dirty && frmProduct.name.$error.required" class="badge badge-danger m-2">Tên sản phẩm không được để trống</div>
 											</div>
 											<div class="form-group ">
 												<label>Giá sản phẩm</label> <input name="price"
 													ng-model="product.price" required ng-min="0" type="number"
 													class="form-control">
-												<div ng-show="frmProduct.price.$invalid"
-													class="badge badge-danger m-2">Giá không được để
-													trống</div>
+												<div ng-show="frmProduct.price.$dirty && frmProduct.price.$error.required" class="badge badge-danger m-2">Giá không được để trống</div>
 											</div>
 											<div class="form-group ">
-												<label>Giá cũ sản phẩm</label> <input name="price"
+												<label>Giá cũ sản phẩm</label> <input name="oldprice"
 													ng-model="product.oldprice" required ng-min="0"
 													type="number" class="form-control">
-												<div ng-show="frmProduct.price.$invalid"
-													class="badge badge-danger m-2">Giá cũ không được để
-													trống</div>
+												<div ng-show="frmProduct.oldprice.$dirty && frmProduct.oldprice.$error.required" class="badge badge-danger m-2">Giá cũ không được để trống</div>
 											</div>
 											<div class="form-group ">
 												<label>Ngày tạo sản phẩm</label> <input
@@ -94,12 +88,10 @@
 												</select>
 											</div>
 											<div class="form-group ">
-												<label>Số lượng sản phẩm</label> <input name="price"
+												<label>Số lượng sản phẩm</label> <input name="stock"
 													ng-model="product.stock" required ng-min="0" type="number"
 													class="form-control">
-												<div ng-show="frmProduct.price.$invalid"
-													class="badge badge-danger m-2">Số lượng không được để
-													trống</div>
+												<div ng-show="frmProduct.stock.$dirty && frmProduct.stock.$error.required" class="badge badge-danger m-2">Số lượng không được để trống</div>
 											</div>
 											<div class="form-group">
 												<label class="mr-2">Còn hàng</label>
@@ -192,7 +184,7 @@
 						<tbody>
 							<tr
 								ng-repeat="p in products | orderBy: p.id | limitTo : pageSize : start">
-								<th scope="row">{{p.id}}</th>
+								<th scope="row">{{start + $index + 1}}</th>
 								<td>{{p.name}}</td>
 								<td>{{p.price | number: 0}} VNĐ</td>
 								<td>{{p.createdate | date: 'yyyy-MM-dd'}}</td>
@@ -201,7 +193,7 @@
 								<td>{{getCategoryName(p.categoryid)}}</td>
 								<td class="text-right">
 									<button ng-click="edit(p.id)" class="btn btn-primary">Sửa</button>
-									<button ng-click="delete(p.id)" class="btn btn-dark">Xóa</button>
+									<button ng-click="showDeleteModal(p.id)" class="btn btn-dark">Xóa</button>
 								</td>
 							</tr>
 						</tbody>
@@ -222,4 +214,23 @@
 			</div>
 		</div>
 	</div>
+</div>
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmDeleteModalLabel">Cảnh báo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Bạn có chắc là muốn xóa sản phẩm này?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+        <button type="button" class="btn btn-danger" ng-click="delete(productToDeleteId)">Xóa</button>
+      </div>
+    </div>
+  </div>
 </div>

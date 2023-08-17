@@ -183,7 +183,9 @@ app.controller("product-ctrl", function($scope, $http) {
 		$scope.product = {
 			productimages: [],
 			createdate: formattedDate,
-			available: true
+			available: true,
+			categoryid: 1,
+			brandid: 1
 		};
 		$scope.selectedImage = $scope.product.productimages[0];
 		$scope.chon = false;
