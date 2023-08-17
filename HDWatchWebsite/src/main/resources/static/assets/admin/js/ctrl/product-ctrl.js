@@ -45,19 +45,19 @@ app.controller("product-ctrl", function($scope, $http) {
 	$http.get(urlBrand).then(resp => {
 		$scope.brands = resp.data;
 	});
-	
+
 	//Lấy tên 1 thương hiệu
 	$scope.getBrandName = function(brandId) {
 		var brand = $scope.brands.find(b => b.id === brandId);
 		return brand ? brand.name : 'N/A';
 	};
-	
+
 	//Lấy tên 1 danh mục
 	$scope.getCategoryName = function(categoryId) {
 		var category = $scope.categories.find(c => c.id === categoryId);
 		return category ? category.name : 'N/A';
 	};
-	
+
 	// Lấy thông tin của một sản phẩm
 	$scope.edit = function(id) {
 		var url = `${urlProduct}/${id}`;
@@ -80,28 +80,13 @@ app.controller("product-ctrl", function($scope, $http) {
 		$scope.selectedImage = image;
 	};
 
-	//Sửa hình ảnh
-	$scope.imageChanged = function(files) {
-		var data = new FormData();
-		data.append('file', files[0]);
-		$http.post('/rest/upload/images', data, {
-			transformRequest: angular.identity,
-			headers: { 'Content-Type': undefined }
-		}).then(resp => {
-			$scope.selectedImage = resp.data.name;
-		}).catch(error => {
-			alert("Lỗi upload hình ảnh");
-			console.log("Error", error);
-		})
-	}
-
 	// Cập nhật thông tin sản phẩm
 	$scope.update = function(id) {
 		var url = `${urlProduct}/${id}`;
 		var data = angular.copy($scope.product);
 		var index = $scope.products.findIndex(c => c.id == id);
 		// Revert parsed JSON string back to a regular string
-		data.productimages = JSON.stringify(data.productimages);
+		//data.productimages = JSON.stringify(data.productimages);
 		$http.put(url, data).then(resp => {
 			$scope.products[index] = resp.data;
 			alert("Cập nhật sản phẩm thành công!");
@@ -140,7 +125,8 @@ app.controller("product-ctrl", function($scope, $http) {
 		var formattedDate = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
 		$scope.product = {
 			productimages: ["cloud-upload.jpg"],
-			createdate: formattedDate
+			createdate: formattedDate,
+			available: true
 		};
 		$scope.selectedImage = $scope.product.productimages[0];
 		$scope.chon = false;

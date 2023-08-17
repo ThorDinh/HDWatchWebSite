@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.hdwatch.dao.BrandsDAO;
 import com.hdwatch.entity.Brands;
+import com.hdwatch.entity.Categories;
 import com.hdwatch.service.BrandsService;
 @Service
 public class BrandsServiceImpl implements BrandsService {
@@ -62,6 +63,11 @@ public class BrandsServiceImpl implements BrandsService {
 			return false;
 		}
 		return true;
+	}
+	
+	@Override
+	public List<Brands> findByName(String name) {
+		return bDao.findByNameList(name);
 	}
 	
 }

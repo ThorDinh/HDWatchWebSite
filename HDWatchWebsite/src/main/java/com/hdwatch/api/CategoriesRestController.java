@@ -1,6 +1,7 @@
 package com.hdwatch.api;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,10 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hdwatch.dao.CategoriesDAO;
 import com.hdwatch.entity.Categories;
+import com.hdwatch.entity.Products;
 import com.hdwatch.service.CategoriesService;
 
 @CrossOrigin("*")
@@ -41,6 +44,17 @@ public class CategoriesRestController {
 			return ResponseEntity.notFound().build();
 		} else {
 			return ResponseEntity.ok(cateDAO.findById(id).get());
+		}
+	}
+	
+	//Tìm kiếm danh mục
+	@GetMapping("/search")
+	public List<Categories> searchCategory(@RequestParam("kw") Optional<String> kw){
+		String keyword = kw.orElse(null);		
+		if(keyword != null) {
+			return categoriesService.findByName(keyword);
+		}else {
+			return categoriesService.findAll();
 		}
 	}
 	

@@ -18,5 +18,7 @@ public interface BrandsService {
 	Brands save(Brands brand,Integer id);
 
 	void deleteById(Integer id);
+
+	List<Brands> findByName(String name);
 	
 }

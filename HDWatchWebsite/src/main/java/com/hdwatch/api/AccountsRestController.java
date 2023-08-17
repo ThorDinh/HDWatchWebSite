@@ -3,6 +3,7 @@ package com.hdwatch.api;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hdwatch.dao.AccountsDAO;
@@ -22,6 +24,7 @@ import com.hdwatch.dao.FavoritesDAO;
 import com.hdwatch.dao.RoledetailsDAO;
 import com.hdwatch.dao.RolesDAO;
 import com.hdwatch.entity.Accounts;
+import com.hdwatch.entity.Brands;
 import com.hdwatch.entity.Favorites;
 import com.hdwatch.entity.Roledetails;
 import com.hdwatch.entity.Roles;
@@ -69,6 +72,17 @@ public class AccountsRestController {
 			Accounts accounts = accountsService.findByUserName(username);
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 			return ResponseEntity.ok(accountsService.findByUserName(username));
+		}
+	}
+	
+	//Tìm kiếm danh mục
+	@GetMapping("/search")
+	public List<Accounts> searchCategory(@RequestParam("kw") Optional<String> kw){
+		String keyword = kw.orElse(null);		
+		if(keyword != null) {
+			return accountsService.findByName(keyword);
+		}else {
+			return accountsService.findAll();
 		}
 	}
 	

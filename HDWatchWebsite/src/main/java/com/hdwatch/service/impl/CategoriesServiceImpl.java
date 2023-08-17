@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.hdwatch.dao.CategoriesDAO;
 import com.hdwatch.entity.Categories;
+import com.hdwatch.entity.Products;
 import com.hdwatch.service.CategoriesService;
 
 @Service
@@ -49,5 +50,10 @@ public class CategoriesServiceImpl implements CategoriesService {
 	public Categories create(Categories cate) {
 		return cDao.save(cate);
 		
+	}
+	
+	@Override
+	public List<Categories> findByName(String name) {
+		return cDao.findByName(name);
 	}
 }

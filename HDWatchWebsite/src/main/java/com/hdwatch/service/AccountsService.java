@@ -28,5 +28,7 @@ public interface AccountsService {
 
 	Accounts findByUserName(String username);
 
+	List<Accounts> findByName(String name);
+
 	
 }

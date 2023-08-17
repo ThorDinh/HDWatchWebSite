@@ -93,4 +93,9 @@ public class  ProductsServiceImpl implements ProductsService  {
 		Pageable pageable = PageRequest.of(p.orElse(0), 9);
 		return pdao.searchProductsByKeyword(keyword.toLowerCase(), category, brand, pageable);
 	}
+	
+	@Override
+	public List<Products> findByName(String name) {
+		return pdao.findByName(name);
+	}
 }

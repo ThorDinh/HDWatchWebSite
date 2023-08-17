@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.hdwatch.dao.AccountsDAO;
 import com.hdwatch.dao.RoledetailsDAO;
 import com.hdwatch.entity.Accounts;
+import com.hdwatch.entity.Categories;
 import com.hdwatch.service.AccountsService;
 
 @Service
@@ -90,12 +91,14 @@ public class AccountsServiceImpl implements AccountsService {
 		 rdDao.deleteById(id);
 	}
 
-	
-	
-	
 	@Override
 	public Accounts findByUserName(String username) {
 
 		return accountsDAO.findByUsername(username);
+	}
+	
+	@Override
+	public List<Accounts> findByName(String name) {
+		return accountsDAO.findByName(name);
 	}
 }

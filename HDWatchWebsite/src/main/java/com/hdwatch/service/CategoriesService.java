@@ -18,4 +18,6 @@ public interface CategoriesService {
 	Categories create(Categories cate);
 		
 	void deleteById(Integer id);
+
+	List<Categories> findByName(String name);
 }

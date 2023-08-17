@@ -1,104 +1,130 @@
 
-                        <div class="row">
-                            <div class="col-md-12 m-b-30">
-                                <!-- begin page title -->
-                                <div class="d-block d-lg-flex flex-nowrap align-items-center">
-                                    <div class="page-title mr-4 pr-4 border-right">
-                                        <h1>Quản lí thương hiệu</h1>
-                                    </div>
+<div class="row">
+	<div class="col-md-12 m-b-30">
+		<!-- begin page title -->
+		<div class="d-block d-lg-flex flex-nowrap align-items-center">
+			<div class="page-title mr-4 pr-4 border-right">
+				<h1>Quản lí thương hiệu</h1>
+			</div>
 
-                                    <div class="ml-auto d-flex align-items-center secondary-menu text-center">
+			<div
+				class="ml-auto d-flex align-items-center secondary-menu text-center">
 
-                                    </div>
-                                </div>
-                                <!-- end page title -->
-                            </div>
-                        </div>
-                        <!-- end row -->
-                        <!-- begin row -->
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card card-statistics">
-                                    <div class="card-header">
-                                        <div class="card-heading">
-                                            <h4 class="card-title">Thương hiệu</h4>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="row">
-                                        	<div class="col-md-12">
-                                                <form name="frmBrand">
-                                                    <div class="form-group">
-                                                        <label>Tên thương hiệu</label>
-                                                        <input name="name" ng-model="brand.name" ng-pattern="/^[^0-9]*$/" required type="text" class="form-control">
-                                                        <div ng-show="frmBrand.name.$dirty && frmBrand.name.$error.required" class="badge badge-danger m-2">Tên thương hiệu không được để trống</div>
-                                						<div ng-show="frmBrand.name.$dirty && frmBrand.name.$error.pattern && !frmBrand.name.$error.required" class="badge badge-danger m-2">Tên thương hiệu phải là chữ</div>
-                                                    </div>
-                                                    <button ng-disabled="frmBrand.$invalid || chon == true" ng-click="create()" class="btn btn-primary">Tạo mới</button>
-                                                    <button ng-disabled="frmBrand.$invalid || frmBrand.$pristine || chon == false" ng-click="update(brand.id)" class="btn btn-info">Cập nhật</button>
-                                                    <button ng-click="reset()" class="btn btn-secondary">Làm mới</button>
-                                                </form>
-                                        	</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 ">
-                                <div class="card card-statistics">
-                                    <div class="card-header">
-                                        <div class="card-heading">
-                                            <div class="row">
-                                                <div class="col-md-6 text-left">
-                                                    <h4 class="card-title">Danh sách thương hiệu</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="table-responsive">
-                                            <table class="table table-hover table-bordered">
-                                                <thead class="thead-light">
-                                                  <tr>
-                                                    <th scope="col">#</th>
-                                                    <th scope="col">Tên thương hiệu</th>
-                                                    <th scope="col"></th>
-                                                  </tr>
-                                                </thead>
-                                                <tbody>
-                                                  <tr ng-repeat="brand in brands">
-                                                    <th scope="row">{{$index+1}}</th>
-                                                    <td>{{brand.name}}</td>
-                                                    <td class="text-right">
-                                                        <button ng-click="edit(brand.id)" class="btn btn-primary">Sửa</button>
-                                                        <button ng-click="showDeleteModal(brand.id)" class="btn btn-dark">Xóa</button>
-                                                        
-                                                    </td>
-                                                  </tr>                                                  
-                                                </tbody>
-                                              </table>                                                                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
-						  <div class="modal-dialog" role="document">
-						    <div class="modal-content">
-						      <div class="modal-header">
-						        <h5 class="modal-title" id="confirmDeleteModalLabel">Cảnh báo</h5>
-						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						          <span aria-hidden="true">&times;</span>
-						        </button>
-						      </div>
-						      <div class="modal-body">
-						        Bạn có chắc là muốn xóa thương hiệu này?
-						      </div>
-						      <div class="modal-footer">
-						        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-						        <button type="button" class="btn btn-danger" ng-click="delete(brandToDeleteId)">Xóa</button>
-						      </div>
-						    </div>
-						  </div>
-						</div>                    
+			</div>
+		</div>
+		<!-- end page title -->
+	</div>
+</div>
+<!-- end row -->
+<!-- begin row -->
+<div class="row">
+	<div class="col-md-12">
+		<div class="card card-statistics">
+			<div class="card-header">
+				<div class="card-heading">
+					<h4 class="card-title">Thương hiệu</h4>
+				</div>
+			</div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-md-12">
+						<form name="frmBrand">
+							<div class="form-group">
+								<label>Tên thương hiệu</label> <input name="name"
+									ng-model="brand.name" ng-pattern="/^[^0-9]*$/" required
+									type="text" class="form-control">
+								<div
+									ng-show="frmBrand.name.$dirty && frmBrand.name.$error.required"
+									class="badge badge-danger m-2">Tên thương hiệu không được
+									để trống</div>
+								<div
+									ng-show="frmBrand.name.$dirty && frmBrand.name.$error.pattern && !frmBrand.name.$error.required"
+									class="badge badge-danger m-2">Tên thương hiệu phải là
+									chữ</div>
+							</div>
+							<button ng-disabled="frmBrand.$invalid || chon == true"
+								ng-click="create()" class="btn btn-primary">Tạo mới</button>
+							<button
+								ng-disabled="frmBrand.$invalid || frmBrand.$pristine || chon == false"
+								ng-click="update(brand.id)" class="btn btn-info">Cập
+								nhật</button>
+							<button ng-click="reset()" class="btn btn-secondary">Làm
+								mới</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12 ">
+		<div class="card card-statistics">
+			<div class="card-header">
+				<div class="card-heading">
+					<div class="row">
+						<div class="col-md-6 text-left">
+							<h4 class="card-title">Danh sách thương hiệu</h4>
+						</div>
+						<div class="col-md-6">
+							<form class="justify-content-end">
+								<div class="form-group">
+									<input
+										oninput="angular.element(this).scope().search(this.value)"
+										type="text" class="form-control" placeholder="Tìm kiếm">
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-hover table-bordered">
+						<thead class="thead-light">
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Tên thương hiệu</th>
+								<th scope="col"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="brand in brands">
+								<th scope="row">{{$index+1}}</th>
+								<td>{{brand.name}}</td>
+								<td class="text-right">
+									<button ng-click="edit(brand.id)" class="btn btn-primary">Sửa</button>
+									<button ng-click="showDeleteModal(brand.id)"
+										class="btn btn-dark">Xóa</button>
+
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1"
+	role="dialog" aria-labelledby="confirmDeleteModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="confirmDeleteModalLabel">Cảnh báo</h5>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">Bạn có chắc là muốn xóa thương hiệu
+				này?</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+				<button type="button" class="btn btn-danger"
+					ng-click="delete(brandToDeleteId)">Xóa</button>
+			</div>
+		</div>
+	</div>
+</div>

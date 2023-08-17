@@ -1,6 +1,7 @@
 package com.hdwatch.api;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hdwatch.entity.Products;
@@ -34,6 +36,17 @@ public class ProductsRestController {
 	@GetMapping("{id}")
 	public Products getOne(@PathVariable("id") Integer id) {
 		return productsService.findById(id);
+	}
+	
+	//Tìm kiếm sản phẩm
+	@GetMapping("/search")
+	public List<Products> searchProduct(@RequestParam("kw") Optional<String> kw){
+		String keyword = kw.orElse(null);		
+		if(keyword != null) {
+			return productsService.findByName(keyword);
+		}else {
+			return productsService.findAll();
+		}
 	}
 	
 	// Tạo mới sản phẩm (product)
