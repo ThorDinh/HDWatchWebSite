@@ -5,7 +5,7 @@ app.controller("product-ctrl", function($scope, $http) {
 	$scope.brands = [];
 	$scope.categories = [];
 	$scope.product = {
-		productimages: ["cloud-upload.jpg"]
+		productimages: []
 	};
 
 	$scope.chon = false;
@@ -90,6 +90,7 @@ app.controller("product-ctrl", function($scope, $http) {
 
 		$http.put(url, data).then(resp => {
 			$scope.products[index] = resp.data;
+			$scope.edit($scope.product.id)
 			alert("Cập nhật sản phẩm thành công!");
 		}).catch(error => {
 			if (error.status == 404) {
@@ -116,6 +117,7 @@ app.controller("product-ctrl", function($scope, $http) {
 		});
 	};
 
+	//Xóa hình ảnh
 	$scope.deleteImage = function(index) {
 		var imageToDelete = $scope.product.productimages[index];
 		console.log(imageToDelete);
@@ -138,6 +140,7 @@ app.controller("product-ctrl", function($scope, $http) {
 				$http.get(urlProduct).then(resp => {
 					$scope.products = resp.data;
 				});
+				$scope.edit($scope.product.id)
 				alert("Cập nhật sản phẩm sau xóa thành công!");
 			}).catch(error => {
 				if (error.status == 400) {
@@ -153,6 +156,21 @@ app.controller("product-ctrl", function($scope, $http) {
 		});
 	};
 
+	//Thêm hình ảnh
+	$scope.imageChanged = function(files) {
+		var data = new FormData();
+		data.append('file', files[0]);
+		$http.post('/rest/upload/images', data, {
+			transformRequest: angular.identity,
+			headers: { 'Content-Type': undefined }
+		}).then(resp => {
+			$scope.product.productimages.push(resp.data.name);
+
+		}).catch(error => {
+			alert("Lỗi upload hình ảnh");
+			console.log("Error", error);
+		})
+	}
 
 	// Làm mới thông tin sản phẩm
 	$scope.reset = function() {
@@ -163,7 +181,7 @@ app.controller("product-ctrl", function($scope, $http) {
 
 		var formattedDate = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
 		$scope.product = {
-			productimages: ["cloud-upload.jpg"],
+			productimages: [],
 			createdate: formattedDate,
 			available: true
 		};
@@ -184,6 +202,7 @@ app.controller("product-ctrl", function($scope, $http) {
 			$scope.reset();
 			$('#confirmDeleteModal').modal('hide');
 			alert("Xóa sản phẩm thành công!");
+			
 		}).catch(error => {
 			if (error.status == 404) {
 				alert("Không tồn tại sản phẩm " + $scope.product.id);
@@ -192,6 +211,7 @@ app.controller("product-ctrl", function($scope, $http) {
 			}
 			alert("Xóa sản phẩm thất bại!");
 		});
+		
 	};
 
 	// Tìm kiếm sản phẩm
