@@ -71,7 +71,7 @@
 											<div class="form-group ">
 												<label>Ngày tạo sản phẩm</label> <input
 													ng-model="product.createdate" type="text"
-													class="form-control">
+													class="form-control" disabled>
 											</div>
 											<div class="form-group ">
 												<label>Thương hiệu</label> <select
@@ -116,7 +116,7 @@
 												<label hidden>Hình ảnh</label> 
 													<input type="file" class="form-control" ng-model="product.productimages"
 													onchange="angular.element(this).scope().imageChanged(this.files)">
-													<input class="form-control" ng-value="product.productimages" disabled>
+													<input class="form-control" ng-value="product.productimages" hidden>
 											</div>
 											<div class="form-group">
 												<label>Mô tả sản phẩm</label>

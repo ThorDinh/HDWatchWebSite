@@ -33,10 +33,10 @@ public class CategoriesServiceImpl implements CategoriesService {
 
 	@Override
 	public Categories save(Categories cate,Integer id) {
-		 Categories existingBrand = cDao.findById(id).orElse(null);
-	        if (existingBrand != null) {
-	            existingBrand.setName(cate.getName());
-	            return cDao.save(existingBrand);
+		 Categories existingCategory = cDao.findById(id).orElse(null);
+	        if (existingCategory != null) {
+	            existingCategory.setName(cate.getName());
+	            return cDao.save(existingCategory);
 	        }
 		return cDao.save(cate);
 	}
