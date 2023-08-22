@@ -88,6 +88,17 @@ app.controller("shopping-cart-ctrl", ['$scope', '$http', 'AuthService', function
 		purchase() {
 			var order = angular.copy(this);
 			//Thực hiện đặt hàng
+			// Validate address and phone number
+			if (!$scope.validateAddress(order.address)) {
+				alert("Vui lòng nhập địa chỉ hợp lệ!");
+				return;
+			}
+
+			if (!$scope.validatePhoneNumber(order.phoneNumber)) {
+				alert("Vui lòng nhập số điện thoại hợp lệ!");
+				return;
+			}
+
 			if (!order.paymentMethod) {
 				alert("Vui lòng chọn phương thức thanh toán!");
 				return;
@@ -111,6 +122,17 @@ app.controller("shopping-cart-ctrl", ['$scope', '$http', 'AuthService', function
 			})
 		}
 	}
+
+	// Validate address
+	$scope.validateAddress = function(address) {
+		return address.trim() !== '';
+	};
+
+	// Validate phone number
+	$scope.validatePhoneNumber = function(phoneNumber) {
+		const phonePattern = /^\d{10,}$/; // Modify the pattern as needed
+		return phonePattern.test(phoneNumber);
+	};
 
 	//Thành tiền
 	$scope.getTotalPrice = function() {

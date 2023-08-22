@@ -14,6 +14,7 @@
 							<div class="section-title">
 								<h3 class="title">Thông tin thanh toán</h3>
 							</div>
+							
 							<div class="form-group">
 								<div class="form-control" id="username">[[${#request.remoteUser}]]</div>
 							</div>
@@ -23,13 +24,14 @@
 							</div>
 							<div class="form-group">
 								<input class="input" type="text" placeholder="Địa chỉ*"
-									ng-model="order.address">
+									ng-model="order.address" required name="address">	
+
 							</div>
 							<div class="form-group">
 								<input class="input" type="email" placeholder="Email (Nếu có)" ng-model="order.email">
 							</div>
 							<div class="form-group">
-								<input class="input" type="tel" placeholder="Số điện thoại*" ng-model="order.phoneNumber">
+								<input class="input" type="tel" placeholder="Số điện thoại*" ng-model="order.phoneNumber" name="phoneNumber" required>
 							</div>
 						</div>
 						<!-- /Billing Details -->
@@ -99,3 +101,4 @@
 		<!-- /SECTION -->
 	</main>
 </div>
+

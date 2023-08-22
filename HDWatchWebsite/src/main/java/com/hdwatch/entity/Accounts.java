@@ -12,7 +12,6 @@ import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -86,9 +85,5 @@ public class Accounts implements Serializable {
 	@JsonIgnore
 	@OneToMany(mappedBy = "accounts", fetch = FetchType.EAGER)
 	private List<Roledetails> listOfRoledetails;
-
-	@JsonIgnore
-	@OneToMany(mappedBy = "accounts")
-	private List<Carts> listOfCarts;
 
 }

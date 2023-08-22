@@ -74,10 +74,6 @@ public class Products implements Serializable {
 	@JoinColumn(name = "brandId", referencedColumnName = "id", insertable = false, updatable = false)
 	private Brands brands;
 
-	@JsonIgnore
-	@OneToMany(mappedBy = "products")
-	private List<Cartdetails> listOfCartdetails;
-
 	@ManyToOne
 	@JoinColumn(name = "categoryId", referencedColumnName = "id", insertable = false, updatable = false)
 	private Categories categories;
