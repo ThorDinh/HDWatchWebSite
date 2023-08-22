@@ -24,29 +24,28 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="carts", schema="dbo", catalog="HDWatch" )
+@Table(name = "carts", schema = "dbo", catalog = "HDWatch")
 public class Carts implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    //--- ENTITY PRIMARY KEY 
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id", nullable=false)
-    private Integer    id ;
+	// --- ENTITY PRIMARY KEY
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", nullable = false)
+	private Integer id;
 
-    //--- ENTITY DATA FIELDS 
-    @Column(name="account_id", nullable=false, length=50)
-    private String    accountId ;
+	// --- ENTITY DATA FIELDS
+	@Column(name = "account_id", nullable = false, length = 50)
+	private String accountId;
 
+	// --- ENTITY LINKS ( RELATIONSHIP )
+	@ManyToOne
+	@JoinColumn(name = "account_id", referencedColumnName = "username", insertable = false, updatable = false)
+	private Accounts accounts;
 
-    //--- ENTITY LINKS ( RELATIONSHIP )
-    @ManyToOne
-    @JoinColumn(name="account_id", referencedColumnName="username", insertable=false, updatable=false)
-    private Accounts   accounts ; 
-    
-    @JsonIgnore
-    @OneToMany(mappedBy="carts")
-    private List<Cartdetails> listOfCartdetails ; 
+	@JsonIgnore
+	@OneToMany(mappedBy = "carts")
+	private List<Cartdetails> listOfCartdetails;
 
 }

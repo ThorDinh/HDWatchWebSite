@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.hdwatch.entity.Favorites;
 
-public interface FavoritesDAO extends JpaRepository<Favorites, Integer>{
+public interface FavoritesDAO extends JpaRepository<Favorites, Integer> {
 
 	List<Favorites> findByAccountId(String accountId);
 

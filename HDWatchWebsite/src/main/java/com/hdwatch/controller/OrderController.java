@@ -17,22 +17,22 @@ public class OrderController {
 	OrdersService orderService;
 	@Autowired
 	AccountsDAO accountsDAO;
-	
+
 	// Trang thanh toán đơn hàng
 	@RequestMapping("/order/checkout")
 	public String checkout(Model model, HttpServletRequest request) {
 		String username = request.getRemoteUser();
-		//Tiêu đề trang
-        model.addAttribute("pageTitle", "Đặt hàng - " + username);
+		// Tiêu đề trang
+		model.addAttribute("pageTitle", "Đặt hàng - " + username);
 		return "order/checkout";
 	}
-	
+
 	// Trang chi tiết đơn hàng theo ID
 	@RequestMapping("/order/detail/{id}")
 	public String detail(Model model, @PathVariable("id") Integer id) {
 		model.addAttribute("order", orderService.findById(id));
-		//Tiêu đề trang
-        model.addAttribute("pageTitle", "Lịch sử mua hàng - Ngày " + orderService.findById(id).getCreateDate());
+		// Tiêu đề trang
+		model.addAttribute("pageTitle", "Lịch sử mua hàng - Ngày " + orderService.findById(id).getCreateDate());
 		return "order/detail";
 	}
 }

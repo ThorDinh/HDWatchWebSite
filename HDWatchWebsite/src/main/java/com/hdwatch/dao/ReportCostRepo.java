@@ -11,10 +11,9 @@ import org.springframework.stereotype.Repository;
 import com.hdwatch.report.ReportCost;
 
 @Repository
-public interface ReportCostRepo extends JpaRepository<ReportCost, Date>{
+public interface ReportCostRepo extends JpaRepository<ReportCost, Date> {
 	@Query("SELECT NEW ReportCost(o.createDate, COUNT(DISTINCT o.id), SUM(od.quantity * od.price) ) "
-			+ "FROM Orders o, Orderdetails od "
-			+ "WHERE o.id = od.orders.id AND MONTH(o.createDate) = :month "
+			+ "FROM Orders o, Orderdetails od " + "WHERE o.id = od.orders.id AND MONTH(o.createDate) = :month "
 			+ "GROUP BY o.createDate")
 	List<ReportCost> reportCost(@Param("month") Integer month);
 }

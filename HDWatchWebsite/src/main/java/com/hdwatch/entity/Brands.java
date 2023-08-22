@@ -24,25 +24,24 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="brands", schema="dbo", catalog="HDWatch" )
+@Table(name = "brands", schema = "dbo", catalog = "HDWatch")
 public class Brands implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    //--- ENTITY PRIMARY KEY 
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id")
-    private Integer    id ;
+	// --- ENTITY PRIMARY KEY
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Integer id;
 
-    //--- ENTITY DATA FIELDS 
-    @Column(name="name", nullable=false, length=50)
-    private String     name ;
+	// --- ENTITY DATA FIELDS
+	@Column(name = "name", nullable = false, length = 50)
+	private String name;
 
-
-    //--- ENTITY LINKS ( RELATIONSHIP )
-    @JsonIgnore
-    @OneToMany(mappedBy="brands")
-    private List<Products> listOfProducts ; 
+	// --- ENTITY LINKS ( RELATIONSHIP )
+	@JsonIgnore
+	@OneToMany(mappedBy = "brands")
+	private List<Products> listOfProducts;
 
 }

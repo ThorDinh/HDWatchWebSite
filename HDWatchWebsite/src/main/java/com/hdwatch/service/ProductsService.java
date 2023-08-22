@@ -8,15 +8,15 @@ import org.springframework.data.domain.Page;
 import com.hdwatch.entity.Products;
 
 public interface ProductsService {
-	
+
 	List<Products> findAll();
-	
+
 	Products findById(Integer id);
 
 	Products create(Products products);
-	
-	Products save(Products products,Integer id);
-	
+
+	Products save(Products products, Integer id);
+
 	void deleteByid(Integer id);
 
 	List<Products> findProductByCreateDateDESC();

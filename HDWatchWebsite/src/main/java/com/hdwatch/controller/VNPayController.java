@@ -33,7 +33,7 @@ public class VNPayController {
 	public String home() {
 		return "vnpay/index";
 	}
-	
+
 	// Xử lý khi người dùng gửi yêu cầu thanh toán đơn hàng
 	@GetMapping("/submitOrder")
 	public String submidOrder(@RequestParam("amount") int orderTotal,
@@ -43,7 +43,7 @@ public class VNPayController {
 		String vnpayUrl = vnPayService.createOrder(orderTotal, String.valueOf(id), baseUrl);
 		return "redirect:" + vnpayUrl;
 	}
-	
+
 	// Xử lý khi VNPAY trả về kết quả thanh toán
 	@GetMapping("/vnpay-payment")
 	public String GetMapping(HttpServletRequest request, RedirectAttributes params) {
@@ -53,7 +53,7 @@ public class VNPayController {
 		String paymentTime = request.getParameter("vnp_PayDate");
 		String transactionId = request.getParameter("vnp_TransactionNo");
 		String totalPrice = request.getParameter("vnp_Amount");
-		
+
 		// Chuyển định dạng chuỗi thời gian
 		String formattedDateTimeString = convertDateTimeString(paymentTime);
 
@@ -61,32 +61,32 @@ public class VNPayController {
 		params.addAttribute("totalPrice", totalPrice);
 		params.addAttribute("paymentTime", formattedDateTimeString);
 		params.addAttribute("transactionId", transactionId);
-		
+
 		// Cập nhật trạng thái đơn hàng nếu thanh toán thành công
 		if (paymentStatus == 1) {
 			Orders order = oDao.findById(id).get();
 			order.setStatus("Đã hoàn thành");
 			oDao.save(order);
 		}
-		
-		 // Chuyển hướng đến trang thông báo kết quả thanh toán
+
+		// Chuyển hướng đến trang thông báo kết quả thanh toán
 		return paymentStatus == 1 ? "redirect:/paysucces" : "redirect:/payfalse";
 	}
-	
+
 	// Hiển thị trang thông báo thanh toán thành công
 	@GetMapping("/paysucces")
 	public String paysucces() {
 
 		return "vnpay/ordersuccess";
 	}
-	
+
 	// Hiển thị trang thông báo thanh toán thất bại
 	@GetMapping("/payfalse")
 	public String payfalse() {
 
 		return "vnpay/orderfail";
 	}
-	
+
 	// Phương thức để chuyển đổi định dạng chuỗi thời gian
 	public static String convertDateTimeString(String inputDateTimeString) {
 		String formattedDateTimeString = "";

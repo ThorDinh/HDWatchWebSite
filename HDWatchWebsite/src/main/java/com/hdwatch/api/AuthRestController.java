@@ -1,7 +1,5 @@
 package com.hdwatch.api;
 
-import java.security.Principal;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -18,30 +16,30 @@ import com.hdwatch.service.AccountsService;
 public class AuthRestController {
 	@Autowired
 	AccountsService accountsService;
-	
+
 	// Phương thức kiểm tra xem người dùng đã được đăng nhập hay chưa
 	@GetMapping("/check")
 	public ResponseEntity<?> checkAuthentication(Authentication authentication) {
-	    if (authentication != null && authentication.isAuthenticated()) {
-	        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-	        
-	        // Assuming your UserDetails has a method getUsername() to get the username
-	        String username = userDetails.getUsername();
-	        
-	        // Fetch account details based on the username
-	        // Replace the following line with your actual account retrieval logic
-	        Accounts account = accountsService.findByUserName(username);
-	        
-	        if (account != null) {
-	            // User is logged in and account details are available
-	            return ResponseEntity.ok(account);
-	        } else {
-	            // User is logged in but account details not found (unexpected)
-	            return ResponseEntity.badRequest().body("Account details not found.");
-	        }
-	    } else {
-	        // User is not authenticated
-	        return ResponseEntity.ok("{\"authenticated\": false}");
-	    }
+		if (authentication != null && authentication.isAuthenticated()) {
+			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+			// Assuming your UserDetails has a method getUsername() to get the username
+			String username = userDetails.getUsername();
+
+			// Fetch account details based on the username
+			// Replace the following line with your actual account retrieval logic
+			Accounts account = accountsService.findByUserName(username);
+
+			if (account != null) {
+				// User is logged in and account details are available
+				return ResponseEntity.ok(account);
+			} else {
+				// User is logged in but account details not found (unexpected)
+				return ResponseEntity.badRequest().body("Account details not found.");
+			}
+		} else {
+			// User is not authenticated
+			return ResponseEntity.ok("{\"authenticated\": false}");
+		}
 	}
 }

@@ -10,14 +10,14 @@ app.controller("dashboard-ctrl", function($scope, $http) {
 	$scope.costDate = [];
 	$scope.costData = [];
 	$scope.orderData = [];
-	
+
 	$scope.reports = [];
 	$scope.report = {};
 
 	$scope.productInMonth = [];
 	$scope.productName = [];
 	$scope.productCount = [];
-	
+
 	// Lấy dữ liệu tổng quan (total) từ API
 	$http.get('/admin/rest/report/total').then(resp => {
 		$scope.total = resp.data;
@@ -25,7 +25,7 @@ app.controller("dashboard-ctrl", function($scope, $http) {
 		alert("Load total data fail");
 		console.log(error);
 	});
-	
+
 	// Lấy dữ liệu chi phí trong tháng (reportcost) từ API
 	$http.get('/admin/rest/report/reportcost').then(resp => {
 		$scope.costInMonth = resp.data;
@@ -47,17 +47,17 @@ app.controller("dashboard-ctrl", function($scope, $http) {
 		alert("Load cost data fail");
 		console.log(error);
 	});
-	
-		// Lấy danh sách thống kê từ API
+
+	// Lấy danh sách thống kê từ API
 	$http.get(urlReport).then(resp => {
 		const dataArray = resp.data; // Giả sử phản hồi từ API là một mảng các mảng con
-		
+
 		// Ánh xạ dữ liệu từ phản hồi API vào mảng reports
 		$scope.reports = dataArray.map(innerArray => {
 			const month = innerArray[0];
 			const year = innerArray[1];
 			const totalCost = innerArray[2];
-			
+
 			// Tạo đối tượng biểu diễn thông tin báo cáo
 			return {
 				month: month,

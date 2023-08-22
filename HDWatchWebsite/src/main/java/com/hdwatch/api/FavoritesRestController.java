@@ -22,36 +22,33 @@ import com.hdwatch.entity.Favorites;
 @RestController
 @RequestMapping("/rest/favorites")
 public class FavoritesRestController {
-    @Autowired
-    private FavoritesDAO favoritesRepository;
+	@Autowired
+	private FavoritesDAO favoritesRepository;
 
-    @Autowired
-    private FavoritedetailsDAO favoriteDetailRepository;
+	@Autowired
+	private FavoritedetailsDAO favoriteDetailRepository;
 
-    @PostMapping
-    public ResponseEntity<Favoritedetails> addToFavorites(@RequestBody Favoritedetails favoritedetails) {
-        Favoritedetails savedFavoriteDetails = favoriteDetailRepository.save(favoritedetails);
-        return ResponseEntity.ok(savedFavoriteDetails);
-    }
+	@PostMapping
+	public ResponseEntity<Favoritedetails> addToFavorites(@RequestBody Favoritedetails favoritedetails) {
+		Favoritedetails savedFavoriteDetails = favoriteDetailRepository.save(favoritedetails);
+		return ResponseEntity.ok(savedFavoriteDetails);
+	}
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> removeFromFavorites(@PathVariable Integer id) {
-        favoriteDetailRepository.deleteById(id);
-        return ResponseEntity.noContent().build();
-    }
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> removeFromFavorites(@PathVariable Integer id) {
+		favoriteDetailRepository.deleteById(id);
+		return ResponseEntity.noContent().build();
+	}
 
-    @GetMapping("/user/{accountId}")
-    public ResponseEntity<List<Favorites>> getUserFavorites(@PathVariable String accountId) {
-        List<Favorites> favorites = favoritesRepository.findByAccountId(accountId);
-        return ResponseEntity.ok(favorites);
-    }
+	@GetMapping("/user/{accountId}")
+	public ResponseEntity<List<Favorites>> getUserFavorites(@PathVariable String accountId) {
+		List<Favorites> favorites = favoritesRepository.findByAccountId(accountId);
+		return ResponseEntity.ok(favorites);
+	}
 
-    @GetMapping("/details/{favoriteId}")
-    public ResponseEntity<List<Favoritedetails>> getFavoriteDetails(@PathVariable Integer favoriteId) {
-        List<Favoritedetails> favoriteDetails = favoriteDetailRepository.findByFavoriteId(favoriteId);
-        return ResponseEntity.ok(favoriteDetails);
-    }
+	@GetMapping("/details/{favoriteId}")
+	public ResponseEntity<List<Favoritedetails>> getFavoriteDetails(@PathVariable Integer favoriteId) {
+		List<Favoritedetails> favoriteDetails = favoriteDetailRepository.findByFavoriteId(favoriteId);
+		return ResponseEntity.ok(favoriteDetails);
+	}
 }
-
-	
-

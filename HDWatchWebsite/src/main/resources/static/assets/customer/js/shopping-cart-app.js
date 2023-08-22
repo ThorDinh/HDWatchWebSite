@@ -167,7 +167,7 @@ app.controller("shopping-cart-ctrl", ['$scope', '$http', 'AuthService', function
 			return this.items.length;
 		}
 	};
-	
+
 	//Tìm sản phẩm đã yêu thích theo productId
 	$scope.isProductLiked = function(productId) {
 		const item = $scope.favorite.items.find(item => item.productId === productId);

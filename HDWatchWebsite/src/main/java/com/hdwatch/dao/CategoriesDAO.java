@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.hdwatch.entity.Categories;
 
-public interface CategoriesDAO extends JpaRepository<Categories, Integer>{
+public interface CategoriesDAO extends JpaRepository<Categories, Integer> {
 	@Query(value = "SELECT c.* FROM categories c WHERE c.name LIKE %:name%", nativeQuery = true)
 	public List<Categories> findByName(String name);
 }

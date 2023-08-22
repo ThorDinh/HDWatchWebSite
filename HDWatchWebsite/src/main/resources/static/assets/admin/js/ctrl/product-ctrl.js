@@ -204,7 +204,7 @@ app.controller("product-ctrl", function($scope, $http) {
 			$scope.reset();
 			$('#confirmDeleteModal').modal('hide');
 			alert("Xóa sản phẩm thành công!");
-			
+
 		}).catch(error => {
 			if (error.status == 404) {
 				alert("Không tồn tại sản phẩm " + $scope.product.id);
@@ -213,7 +213,7 @@ app.controller("product-ctrl", function($scope, $http) {
 			}
 			alert("Xóa sản phẩm thất bại!");
 		});
-		
+
 	};
 
 	// Tìm kiếm sản phẩm

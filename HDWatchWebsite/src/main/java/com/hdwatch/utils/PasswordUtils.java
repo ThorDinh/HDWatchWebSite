@@ -9,7 +9,7 @@ public class PasswordUtils {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		return passwordEncoder.matches(oldPassword, hashedOldPassword);
 	}
-	
+
 	// Phương thức kiểm tra tính hợp lệ của mật khẩu mới
 	public static boolean isPasswordValid(String oldPassword, String newPassword) {
 		// Kiểm tra nếu mật khẩu cũ và mật khẩu mới giống nhau thì trả về false

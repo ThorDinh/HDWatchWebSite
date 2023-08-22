@@ -8,10 +8,10 @@ import com.hdwatch.entity.Roledetails;
 import com.hdwatch.service.RoledetailService;
 
 @Service
-public class RoledetailServiceImpl implements RoledetailService{
+public class RoledetailServiceImpl implements RoledetailService {
 	@Autowired
 	RoledetailsDAO roledetailDAO;
-	
+
 	@Override
 	public Roledetails create(Roledetails roledetail) {
 		return roledetailDAO.save(roledetail);

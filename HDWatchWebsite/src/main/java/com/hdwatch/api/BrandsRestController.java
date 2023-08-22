@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hdwatch.dao.BrandsDAO;
 import com.hdwatch.entity.Brands;
-import com.hdwatch.entity.Categories;
 import com.hdwatch.service.BrandsService;
 
 @CrossOrigin("*")
@@ -27,16 +26,16 @@ import com.hdwatch.service.BrandsService;
 public class BrandsRestController {
 	@Autowired
 	BrandsService brandsService;
-	
+
 	@Autowired
 	BrandsDAO bDao;
-	
+
 	// Lấy danh sách tất cả các thương hiệu (brands)
 	@GetMapping
 	public List<Brands> getAll() {
 		return brandsService.findAll();
 	}
-	
+
 	// Lấy thông tin thương hiệu theo ID
 	@GetMapping("/{id}")
 	public ResponseEntity<Brands> getBrand(@PathVariable("id") Integer id) {
@@ -46,37 +45,37 @@ public class BrandsRestController {
 			return ResponseEntity.ok(brandsService.findById(id));
 		}
 	}
-	
-	//Tìm kiếm thương hiệu
+
+	// Tìm kiếm thương hiệu
 	@GetMapping("/search")
-	public List<Brands> searchCategory(@RequestParam("kw") Optional<String> kw){
-		String keyword = kw.orElse(null);		
-		if(keyword != null) {
+	public List<Brands> searchCategory(@RequestParam("kw") Optional<String> kw) {
+		String keyword = kw.orElse(null);
+		if (keyword != null) {
 			return brandsService.findByName(keyword);
-		}else {
+		} else {
 			return brandsService.findAll();
 		}
 	}
-	
+
 	// Tạo mới thương hiệu
 	@PostMapping
 	public ResponseEntity<Brands> createBrand(@RequestBody Brands brands) {
-		if(brands != null) {
+		if (brands != null) {
 			brandsService.create(brands);
 			return ResponseEntity.ok(brands);
 		}
 		return ResponseEntity.badRequest().build();
 	}
-	
+
 	// Lưu thông tin thương hiệu đã chỉnh sửa
 	@PutMapping("{id}")
-	public Brands saveBrands(@PathVariable("id")Integer id,@RequestBody Brands brands) {
+	public Brands saveBrands(@PathVariable("id") Integer id, @RequestBody Brands brands) {
 		return brandsService.save(brands, id);
 	}
-	
+
 	// Xóa thương hiệu theo ID
 	@DeleteMapping("{id}")
-	public void deleteBrand(@PathVariable("id")Integer id) {
+	public void deleteBrand(@PathVariable("id") Integer id) {
 		brandsService.deleteById(id);
 	}
 }

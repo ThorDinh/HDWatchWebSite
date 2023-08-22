@@ -25,46 +25,44 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="orders", schema="dbo", catalog="HDWatch" )
+@Table(name = "orders", schema = "dbo", catalog = "HDWatch")
 public class Orders implements Serializable {
-	
-	//--- ENTITY PRIMARY KEY 
+
+	// --- ENTITY PRIMARY KEY
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
-	
-	//--- ENTITY DATA FIELDS
+
+	// --- ENTITY DATA FIELDS
 	String address;
-	
+
 	String status;
-	
+
 	@Temporal(TemporalType.DATE)
 	@Column(name = "create_date")
 	Date createDate = new Date();
-	
+
 	String paymentMethod;
 
-    public String getPaymentMethod() {
-        return paymentMethod;
-    }
+	public String getPaymentMethod() {
+		return paymentMethod;
+	}
 
-    public void setPaymentMethod(String paymentMethod) {
-        this.paymentMethod = paymentMethod;
-    }
-    
-    String phoneNumber;
-    
-    String email;
-    
-	//--- ENTITY LINKS ( RELATIONSHIP )
+	public void setPaymentMethod(String paymentMethod) {
+		this.paymentMethod = paymentMethod;
+	}
+
+	String phoneNumber;
+
+	String email;
+
+	// --- ENTITY LINKS ( RELATIONSHIP )
 	@ManyToOne
 	@JoinColumn(name = "account_id")
 	Accounts accounts;
-	
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "orders")
 	List<Orderdetails> orderDetails;
-	
-
 
 }

@@ -12,76 +12,61 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.session.SessionRegistry;
-import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
 import com.hdwatch.entity.Accounts;
 import com.hdwatch.service.AccountsService;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	AccountsService accountService;
 	@Autowired
 	BCryptPasswordEncoder pe;
-	
-	//Cung cấp nguồn dữ liệu đăng nhập
+
+	// Cung cấp nguồn dữ liệu đăng nhập
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(username -> {
 			try {
 				Accounts user = accountService.findById(username);
 				String password = user.getPassword();
-				String[] roles = user.getListOfRoledetails().stream()
-						.map(er -> er.getRoles().getId())
+				String[] roles = user.getListOfRoledetails().stream().map(er -> er.getRoles().getId())
 						.collect(Collectors.toList()).toArray(new String[0]);
 				return User.withUsername(username).password(password).roles(roles).build();
-			} catch(NoSuchElementException e) {
+			} catch (NoSuchElementException e) {
 				throw new UsernameNotFoundException(username + " not found");
 			}
 		});
 	}
-	
-	//Phân quyền sử dụng
+
+	// Phân quyền sử dụng
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
-		http.authorizeRequests()
-			.antMatchers("/account/**","/order/**").authenticated()
-			.antMatchers("/admin/**").hasAnyRole("STA", "DIR")
-			.antMatchers("/rest/accounts/**").hasRole("DIR")
-			.anyRequest().permitAll();
-		
-		http.formLogin()
-			.loginPage("/login/form")
-			.loginProcessingUrl("/login")
-			.defaultSuccessUrl("/login/success", false)
-			.failureUrl("/login/error");
-		
-		http.rememberMe()
-			.tokenValiditySeconds(86400);
-		
-		http.exceptionHandling()
-			.accessDeniedPage("/unauthorized");
-		
-		http.logout()
-			.logoutUrl("/logout")
-			.logoutSuccessUrl("/logout/success");
+		http.authorizeRequests().antMatchers("/account/**", "/order/**").authenticated().antMatchers("/admin/**")
+				.hasAnyRole("STA", "DIR").antMatchers("/rest/accounts/**").hasRole("DIR").anyRequest().permitAll();
+
+		http.formLogin().loginPage("/login/form").loginProcessingUrl("/login")
+				.defaultSuccessUrl("/login/success", false).failureUrl("/login/error");
+
+		http.rememberMe().tokenValiditySeconds(86400);
+
+		http.exceptionHandling().accessDeniedPage("/unauthorized");
+
+		http.logout().logoutUrl("/logout").logoutSuccessUrl("/logout/success");
 	}
-	
-	//Cơ chế mã hóa mật khẩu
+
+	// Cơ chế mã hóa mật khẩu
 	@Bean
 	public BCryptPasswordEncoder getPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
-	//Cho phép truy xuất REST API từ bên ngoài (Domain khác)
+
+	// Cho phép truy xuất REST API từ bên ngoài (Domain khác)
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**");

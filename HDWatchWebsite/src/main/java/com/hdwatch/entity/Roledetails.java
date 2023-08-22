@@ -21,25 +21,25 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="roledetails", schema="dbo", catalog="HDWatch" ,uniqueConstraints = 
-@UniqueConstraint(columnNames = {"account_id","role_id"}))
+@Table(name = "roledetails", schema = "dbo", catalog = "HDWatch", uniqueConstraints = @UniqueConstraint(columnNames = {
+		"account_id", "role_id" }))
 public class Roledetails implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    //--- ENTITY PRIMARY KEY 
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id", nullable=false)
-    private Integer    id ;
+	// --- ENTITY PRIMARY KEY
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", nullable = false)
+	private Integer id;
 
-    //--- ENTITY LINKS ( RELATIONSHIP )
-    @ManyToOne
-    @JoinColumn(name="account_id")
-    private Accounts   accounts ; 
+	// --- ENTITY LINKS ( RELATIONSHIP )
+	@ManyToOne
+	@JoinColumn(name = "account_id")
+	private Accounts accounts;
 
-    @ManyToOne
-    @JoinColumn(name="role_id")
-    private Roles      roles ; 
+	@ManyToOne
+	@JoinColumn(name = "role_id")
+	private Roles roles;
 
 }

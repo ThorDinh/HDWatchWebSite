@@ -33,17 +33,18 @@ public class OrdersServiceImpl implements OrdersService {
 		ObjectMapper mapper = new ObjectMapper();
 
 		Orders orders = mapper.convertValue(orderData, Orders.class);
-		
+
 		ordersDAO.save(orders);
 
-		TypeReference<List<Orderdetails>> type = new TypeReference<List<Orderdetails>>() {};
-		List<Orderdetails> details = mapper.convertValue(orderData.get("orderDetails"), type)
-				.stream().peek(d -> d.setOrders(orders)).collect(Collectors.toList());
+		TypeReference<List<Orderdetails>> type = new TypeReference<List<Orderdetails>>() {
+		};
+		List<Orderdetails> details = mapper.convertValue(orderData.get("orderDetails"), type).stream()
+				.peek(d -> d.setOrders(orders)).collect(Collectors.toList());
 		o2Dao.saveAll(details);
 
 		return orders;
 	}
-	
+
 	@Override
 	public List<Orders> findByUsername(String username) {
 		return ordersDAO.findByUsername(username);

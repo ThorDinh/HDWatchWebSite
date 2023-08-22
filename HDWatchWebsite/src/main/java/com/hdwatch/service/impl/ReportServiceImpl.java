@@ -13,22 +13,25 @@ import com.hdwatch.report.ReportCost;
 import com.hdwatch.service.ReportService;
 
 @Service
-public class ReportServiceImpl implements ReportService{
-	@Autowired ReportCostRepo rpcRepo;
-	@Autowired OrdersDAO oDAO;
-	
+public class ReportServiceImpl implements ReportService {
+	@Autowired
+	ReportCostRepo rpcRepo;
+	@Autowired
+	OrdersDAO oDAO;
+
 	@Override
 	public List<ReportCost> reportCostInMonth(Integer month) {
 		List<ReportCost> lst = rpcRepo.reportCost(month);
 		return lst;
 	}
+
 //	@Override
 //	public List<ReportProduct> reportProductInMonth(Integer month) {
 //		List<ReportProduct> lst = rprRepo.reportProduct(month);
 //		return lst;
 //	}
 	@Override
-	public List<Object> getOrdersWithMonthAndTotalCost(){
+	public List<Object> getOrdersWithMonthAndTotalCost() {
 		return oDAO.getOrdersWithMonthAndTotalCost();
 	}
 }

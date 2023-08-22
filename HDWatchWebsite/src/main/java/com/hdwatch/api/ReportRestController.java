@@ -24,39 +24,40 @@ import com.hdwatch.service.ReportService;
 @CrossOrigin("*")
 @RequestMapping("/admin/rest/report")
 public class ReportRestController {
-	@Autowired 
+	@Autowired
 	AccountsService aService;
-	
-	@Autowired 
+
+	@Autowired
 	OrdersService oService;
-	
-	@Autowired 
+
+	@Autowired
 	ReportService rpService;
-	
-	@Autowired 
+
+	@Autowired
 	OrdersDAO oDAO;
-	
-	@Autowired 
+
+	@Autowired
 	AccountsDAO aDao;
-	
+
 	// Phương thức để lấy tháng hiện tại
 	public Integer monthCurrent() {
 		Date date = new Date();
-		return date.getMonth()+1;
+		return date.getMonth() + 1;
 	}
-	
-	// Phương thức để tính tổng số liệu báo cáo (tổng số khách hàng, tổng doanh thu, tổng số đơn hàng) trong tháng hiện tại
+
+	// Phương thức để tính tổng số liệu báo cáo (tổng số khách hàng, tổng doanh thu,
+	// tổng số đơn hàng) trong tháng hiện tại
 	@GetMapping("/total")
 	public Map<String, Object> total() {
 		Integer month = this.monthCurrent();
 		Map<String, Object> db = new HashMap<String, Object>();
 		db.put("totalCustomer", aDao.countCustomer("Khách hàng"));
-		
+
 		List<Orders> orders = oDAO.findOrderInMonth(month);
 		Double totalCost = 0.0;
-		for(Orders order : orders ) {
+		for (Orders order : orders) {
 			List<Orderdetails> orderDetail = order.getOrderDetails();
-			for(Orderdetails od : orderDetail) {
+			for (Orderdetails od : orderDetail) {
 				totalCost += od.getPrice() * od.getQuantity();
 			}
 		}
@@ -64,21 +65,21 @@ public class ReportRestController {
 		db.put("totalOrder", oDAO.countOrderInMonth(month));
 		return db;
 	}
-	
+
 	// Phương thức để lấy danh sách báo cáo chi tiết về chi phí trong tháng hiện tại
 	@GetMapping("/reportcost")
-	public List<ReportCost> reportCostInMonth(){
+	public List<ReportCost> reportCostInMonth() {
 		List<ReportCost> lst = rpService.reportCostInMonth(this.monthCurrent());
 		return lst;
 	}
-	
+
 	// Phương thức để lấy danh sách báo cáo chi tiết về chi phí trong tháng hiện tại
 	@GetMapping("/reportcosteachmonth")
-	public List<Object> reportCostEachMonth(){
+	public List<Object> reportCostEachMonth() {
 		List<Object> lst = rpService.getOrdersWithMonthAndTotalCost();
 		return lst;
 	}
-	
+
 //	@GetMapping("/bestSellerInMonth")
 //	public List<ReportProduct> reportProductInMonth(){
 //		List<ReportProduct> lst = rpService.reportProductInMonth(this.monthCurrent());

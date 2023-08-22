@@ -23,33 +23,32 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="favoritedetails", schema="dbo", catalog="HDWatch" )
+@Table(name = "favoritedetails", schema = "dbo", catalog = "HDWatch")
 public class Favoritedetails implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    //--- ENTITY PRIMARY KEY 
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id", nullable=false)
-    private Integer    id ;
+	// --- ENTITY PRIMARY KEY
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", nullable = false)
+	private Integer id;
 
-    //--- ENTITY DATA FIELDS 
-    @Column(name="favorite_id", nullable=false)
-    private Integer    favoriteId ;
+	// --- ENTITY DATA FIELDS
+	@Column(name = "favorite_id", nullable = false)
+	private Integer favoriteId;
 
-    @Column(name="product_id", nullable=false)
-    private Integer    productId ;
+	@Column(name = "product_id", nullable = false)
+	private Integer productId;
 
+	// --- ENTITY LINKS ( RELATIONSHIP )
+	@ManyToOne
+	@JoinColumn(name = "product_id", referencedColumnName = "id", insertable = false, updatable = false)
+	private Products products;
 
-    //--- ENTITY LINKS ( RELATIONSHIP )
-    @ManyToOne
-    @JoinColumn(name="product_id", referencedColumnName="id", insertable=false, updatable=false)
-    private Products   products ; 
-
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name="favorite_id", referencedColumnName="id", insertable=false, updatable=false)
-    private Favorites  favorites ; 
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "favorite_id", referencedColumnName = "id", insertable = false, updatable = false)
+	private Favorites favorites;
 
 }

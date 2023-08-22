@@ -22,33 +22,32 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="sale_events", schema="dbo", catalog="HDWatch" )
+@Table(name = "sale_events", schema = "dbo", catalog = "HDWatch")
 public class SaleEvents implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    //--- ENTITY PRIMARY KEY 
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id", nullable=false)
-    private Integer    id ;
+	// --- ENTITY PRIMARY KEY
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", nullable = false)
+	private Integer id;
 
-    //--- ENTITY DATA FIELDS 
-    @Column(name="name", nullable=false, length=255)
-    private String     name ;
+	// --- ENTITY DATA FIELDS
+	@Column(name = "name", nullable = false, length = 255)
+	private String name;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name="start_date", nullable=false)
-    private Date       startDate ;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "start_date", nullable = false)
+	private Date startDate;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name="end_date", nullable=false)
-    private Date       endDate ;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "end_date", nullable = false)
+	private Date endDate;
 
-    @Column(name="price_sale", nullable=false)
-    private Integer    priceSale ;
+	@Column(name = "price_sale", nullable = false)
+	private Integer priceSale;
 
-
-    //--- ENTITY LINKS ( RELATIONSHIP )
+	// --- ENTITY LINKS ( RELATIONSHIP )
 
 }

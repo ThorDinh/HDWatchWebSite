@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class ReportCategory implements Serializable{
+public class ReportCategory implements Serializable {
 	@Id
 	public String id;
 	public String name;

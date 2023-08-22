@@ -36,201 +36,197 @@ import com.hdwatch.service.RolesService;
 public class SecurityController {
 	@Autowired
 	AccountsService accountService;
-	
+
 	@Autowired
 	AccountsDAO adao;
-	
+
 	@Autowired
 	RolesService roleService;
-	
+
 	@Autowired
 	RoledetailService roledetailService;
-	
+
 	@Autowired
 	FavoritesDAO favoriteDAO;
-	
-	//Trang đăng nhập
+
+	// Trang đăng nhập
 	@RequestMapping("/login/form")
-	public String loginForm(Model model,Principal principal) {
-		//Tiêu đề trang
+	public String loginForm(Model model, Principal principal) {
+		// Tiêu đề trang
 		model.addAttribute("pageTitle", "Đăng nhập");
 		// Kiểm tra xem người dùng đã đăng nhập chưa
-	    if (principal != null) {
-	        // Nếu đã đăng nhập, hiển thị thông báo khác
-	        return "redirect:/home";
-	    } else {
-	        // Nếu chưa đăng nhập, hiển thị thông báo mặc định
+		if (principal != null) {
+			// Nếu đã đăng nhập, hiển thị thông báo khác
+			return "redirect:/home";
+		} else {
+			// Nếu chưa đăng nhập, hiển thị thông báo mặc định
 			return "account/login";
-	    }
+		}
 	}
-	
-	//Trang đăng nhập
+
+	// Trang đăng nhập
 	@RequestMapping("/login")
-	public String checkLogin(Model model,Principal principal, @RequestParam("username") String username) {
-		//Tiêu đề trang
+	public String checkLogin(Model model, Principal principal, @RequestParam("username") String username) {
+		// Tiêu đề trang
 		model.addAttribute("pageTitle", "Đăng nhập");
-		if(accountService.findById(username).getActivated() == false) {
+		if (accountService.findById(username).getActivated() == false) {
 			// Nếu tài khoản không còn hoạt động
 			model.addAttribute("message", "Tài khoản không còn hoạt động");
 			return "account/login";
 		}
 		return "redirect:/login";
 	}
-	
-	//Đăng nhập thành công
+
+	// Đăng nhập thành công
 	@RequestMapping("/login/success")
 	public String loginSuccess(Model model, Authentication authentication) {
-	    //Tiêu đề trang
-	    model.addAttribute("pageTitle", "Đăng nhập thành công");
-	    // Kiểm tra xem người dùng đã đăng nhập chưa
-	    if (authentication != null && authentication.isAuthenticated()) {
-	        // Lấy tên người dùng đã đăng nhập
-	        String username = authentication.getName();
-	        // Lấy tài khoản từ service bằng username
-	        Accounts user = accountService.findById(username);
+		// Tiêu đề trang
+		model.addAttribute("pageTitle", "Đăng nhập thành công");
+		// Kiểm tra xem người dùng đã đăng nhập chưa
+		if (authentication != null && authentication.isAuthenticated()) {
+			// Lấy tên người dùng đã đăng nhập
+			String username = authentication.getName();
+			// Lấy tài khoản từ service bằng username
+			Accounts user = accountService.findById(username);
 
-	        if (user != null && user.getActivated()) {
-	            // Người dùng đã đăng nhập và tài khoản được kích hoạt (activated = true)
-	            // Lấy danh sách các quyền của người dùng
-	            List<String> roles = authentication.getAuthorities().stream()
-	                    .map(GrantedAuthority::getAuthority)
-	                    .collect(Collectors.toList());
+			if (user != null && user.getActivated()) {
+				// Người dùng đã đăng nhập và tài khoản được kích hoạt (activated = true)
+				// Lấy danh sách các quyền của người dùng
+				List<String> roles = authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority)
+						.collect(Collectors.toList());
 
-	            // Kiểm tra các quyền và thực hiện redirect tương ứng
-	            if (roles.contains("ROLE_CUS")) {
-	                // Nếu người dùng có quyền CUS, chuyển hướng đến /home
-	                return "redirect:/home";
-	            } else if (roles.contains("ROLE_STA") || roles.contains("ROLE_DIR")) {
-	                // Nếu người dùng có quyền STA hoặc DIR, chuyển hướng đến /admin
-	                return "redirect:/admin";
-	            } else {
-	                // Trường hợp người dùng có các quyền khác, xử lý theo ý muốn
-	                // Ví dụ: chuyển hướng đến một trang lỗi hoặc trang chính
-	                return "redirect:/some-other-page";
-	            }
-	        } else {
-	            // Tài khoản không còn hoạt động (activated = false)
-	            model.addAttribute("message", "Tài khoản không còn hoạt động");
-	            return "account/login";
-	        }
-	    } else {
-	        // Nếu chưa đăng nhập, hiển thị thông báo mặc định
-	        model.addAttribute("message", "Vui lòng đăng nhập!");
-	        return "redirect:/login";
-	    }
+				// Kiểm tra các quyền và thực hiện redirect tương ứng
+				if (roles.contains("ROLE_STA") || roles.contains("ROLE_DIR")) {
+					// Nếu người dùng có quyền STA hoặc DIR, chuyển hướng đến /admin
+					return "redirect:/admin";
+				} else if (roles.contains("ROLE_CUS")) {
+					// Nếu người dùng có quyền CUS, chuyển hướng đến /home
+					return "redirect:/home";
+				} else {
+					// Trường hợp người dùng có các quyền khác, xử lý theo ý muốn
+					// Ví dụ: chuyển hướng đến một trang lỗi hoặc trang chính
+					return "redirect:/some-other-page";
+				}
+			} else {
+				// Tài khoản không còn hoạt động (activated = false)
+				model.addAttribute("message", "Tài khoản không còn hoạt động");
+				return "account/login";
+			}
+		} else {
+			// Nếu chưa đăng nhập, hiển thị thông báo mặc định
+			model.addAttribute("message", "Vui lòng đăng nhập!");
+			return "redirect:/login";
+		}
 	}
 
-	
-	
-	//Đăng nhập thất bại 
+	// Đăng nhập thất bại
 	@RequestMapping("/login/error")
 	public String loginError(Model model, Principal principal) {
-		//Tiêu đề trang
+		// Tiêu đề trang
 		model.addAttribute("pageTitle", "Đăng nhập thất bại");
 		// Kiểm tra xem người dùng đã đăng nhập chưa
-	    if (principal != null) {
-	        // Nếu đã đăng nhập, hiển thị thông báo khác
-	        return "redirect:/home";
-	    } else {
-	        // Nếu chưa đăng nhập, hiển thị thông báo mặc định
-	        model.addAttribute("message", "Đăng nhập thất bại");
-	    }
+		if (principal != null) {
+			// Nếu đã đăng nhập, hiển thị thông báo khác
+			return "redirect:/home";
+		} else {
+			// Nếu chưa đăng nhập, hiển thị thông báo mặc định
+			model.addAttribute("message", "Đăng nhập thất bại");
+		}
 		return "account/login";
 	}
-	
-	
-	//Không có quyền truy xuất
+
+	// Không có quyền truy xuất
 	@RequestMapping("/unauthorized")
 	public String unauthorized(Model model) {
-		//Tiêu đề trang
+		// Tiêu đề trang
 		model.addAttribute("pageTitle", "Không có quyền truy xuất");
-		//Thông báo
+		// Thông báo
 		model.addAttribute("message", "Không có quyền truy xuất!");
 		return "account/unauthorized";
 	}
-	
-	//Đăng xuất
+
+	// Đăng xuất
 	@RequestMapping("/logout/success")
 	public String logoffSuccess(Model model, Principal principal) {
-		//Tiêu đề trang
+		// Tiêu đề trang
 		model.addAttribute("pageTitle", "Đăng xuất thành công");
 		if (principal != null) {
-	        // Nếu đã đăng nhập, hiển thị thông báo khác
-	        return "redirect:/home";
-	    } else {
-	        // Nếu chưa đăng nhập, hiển thị thông báo mặc định
-	    	model.addAttribute("message", "Bạn đã đăng xuất");
-	    }
+			// Nếu đã đăng nhập, hiển thị thông báo khác
+			return "redirect:/home";
+		} else {
+			// Nếu chưa đăng nhập, hiển thị thông báo mặc định
+			model.addAttribute("message", "Bạn đã đăng xuất");
+		}
 		return "account/login";
 	}
-	
-	//Đăng kí
+
+	// Đăng kí
 	@GetMapping("/register")
 	public String register(Model model, Principal principal) {
-		//Tiêu đề trang
+		// Tiêu đề trang
 		model.addAttribute("pageTitle", "Đăng kí tài khoản");
 		if (principal != null) {
-	        // Nếu đã đăng nhập, hiển thị thông báo khác
-	        return "redirect:/home";
-	    } else {
-	        // Nếu chưa đăng nhập, trả về trang đăng kí
-	    	model.addAttribute("user", new Accounts());
-	    	return "account/register";
+			// Nếu đã đăng nhập, hiển thị thông báo khác
+			return "redirect:/home";
+		} else {
+			// Nếu chưa đăng nhập, trả về trang đăng kí
+			model.addAttribute("user", new Accounts());
+			return "account/register";
 
-	    }
+		}
 	}
-	
+
 	@PostMapping("/register")
-    public String processRegistrationForm(Model model,@ModelAttribute("user") @Valid Accounts user, 
-    		BindingResult result, @RequestParam("confirmPassword") String confirmPassword) {
-		//Bắt lỗi trùng 
-        List<Accounts> list = accountService.findAll();
-        for(int i =0; i < list.size();i++) {
-        	if(user.getUsername().equals(list.get(i).getUsername())) {
-        		result.rejectValue("username", "error.user", "Tên tài khoản đã tồn tại");
-        		//Tiêu đề trang
-        		model.addAttribute("pageTitle", "Đăng kí thất bại");
-                return "account/register";
-        	}
-        }
-		//Bắt lỗi khi nhập sai
-        if (result.hasErrors() || !user.isPasswordConfirmed(confirmPassword)) {
-            if (!user.isPasswordConfirmed(confirmPassword)) {
-                result.rejectValue("password", "error.user", "Mật khẩu xác nhận không trùng khớp");
-            }
-            //Tiêu đề trang
-    		model.addAttribute("pageTitle", "Đăng kí thất bại");
-            return "account/register";
-        }
+	public String processRegistrationForm(Model model, @ModelAttribute("user") @Valid Accounts user,
+			BindingResult result, @RequestParam("confirmPassword") String confirmPassword) {
+		// Bắt lỗi trùng
+		List<Accounts> list = accountService.findAll();
+		for (int i = 0; i < list.size(); i++) {
+			if (user.getUsername().equals(list.get(i).getUsername())) {
+				result.rejectValue("username", "error.user", "Tên tài khoản đã tồn tại");
+				// Tiêu đề trang
+				model.addAttribute("pageTitle", "Đăng kí thất bại");
+				return "account/register";
+			}
+		}
+		// Bắt lỗi khi nhập sai
+		if (result.hasErrors() || !user.isPasswordConfirmed(confirmPassword)) {
+			if (!user.isPasswordConfirmed(confirmPassword)) {
+				result.rejectValue("password", "error.user", "Mật khẩu xác nhận không trùng khớp");
+			}
+			// Tiêu đề trang
+			model.addAttribute("pageTitle", "Đăng kí thất bại");
+			return "account/register";
+		}
 
 		// Tạo tài khoản
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String encodedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(encodedPassword);
-        user.setActivated(true);
-        accountService.create(user);
-        //Phân quyền cho tài khoản
-        Roles defaultRole = roleService.findById("CUS");
+		user.setPassword(encodedPassword);
+		user.setActivated(true);
+		accountService.create(user);
+		// Phân quyền cho tài khoản
+		Roles defaultRole = roleService.findById("CUS");
 
-        Roledetails roledetails = new Roledetails();
-        roledetails.setAccounts(user);
-        roledetails.setRoles(defaultRole);
+		Roledetails roledetails = new Roledetails();
+		roledetails.setAccounts(user);
+		roledetails.setRoles(defaultRole);
 
-        roledetailService.create(roledetails);
-        //Tạo danh sách yêu thích cho tài khoản
-        Favorites favorite = new Favorites();
-        
-        favorite.setAccountId(user.getUsername());
-        
-        favoriteDAO.save(favorite);
-        //Tiêu đề trang
-      	model.addAttribute("pageTitle", "Đăng kí tài khoản thành công");
-        // Đăng kí thành công hiển thị message
-        model.addAttribute("message", "Đăng kí thành công");
-        return "account/login";
-    }
-	
-	//API security 
+		roledetailService.create(roledetails);
+		// Tạo danh sách yêu thích cho tài khoản
+		Favorites favorite = new Favorites();
+
+		favorite.setAccountId(user.getUsername());
+
+		favoriteDAO.save(favorite);
+		// Tiêu đề trang
+		model.addAttribute("pageTitle", "Đăng kí tài khoản thành công");
+		// Đăng kí thành công hiển thị message
+		model.addAttribute("message", "Đăng kí thành công");
+		return "account/login";
+	}
+
+	// API security
 	@CrossOrigin("*")
 	@ResponseBody
 	@RequestMapping("/rest/security/authentication")

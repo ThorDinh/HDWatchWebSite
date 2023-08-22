@@ -13,13 +13,13 @@ import com.hdwatch.service.OrdersService;
 public class CartController {
 	@Autowired
 	OrdersService orderService;
-	
-	//Xem giỏ hàng
+
+	// Xem giỏ hàng
 	@RequestMapping("/cart/view")
 	public String cart(Model model, HttpServletRequest request) {
-		//Tiêu đề trang
+		// Tiêu đề trang
 		model.addAttribute("pageTitle", "Giỏ hàng");
-		
+
 		String username = request.getRemoteUser();
 		model.addAttribute("orders", orderService.findByUsername(username));
 		return "cart/view";

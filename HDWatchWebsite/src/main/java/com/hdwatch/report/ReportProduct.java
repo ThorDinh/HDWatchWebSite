@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class ReportProduct implements Serializable{
+public class ReportProduct implements Serializable {
 	@Id
 	public Long id;
 	public String name;

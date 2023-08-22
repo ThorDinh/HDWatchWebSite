@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.hdwatch.report.ReportProduct;
 
 @Repository
-public interface ReportProductRepo extends JpaRepository<ReportProduct, Long>{
+public interface ReportProductRepo extends JpaRepository<ReportProduct, Long> {
 //	@Query("SELECT NEW ReportProduct(p.id, p.name, COUNT(od.products.id)) "
 //			+ "FROM Products p, Orderdetails od "
 //			+ "WHERE p.id = od.products.id AND MONTH(p.createDate) = :month "

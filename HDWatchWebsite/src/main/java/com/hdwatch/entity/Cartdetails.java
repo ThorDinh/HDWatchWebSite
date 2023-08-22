@@ -21,38 +21,37 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="cartdetails", schema="dbo", catalog="HDWatch" )
+@Table(name = "cartdetails", schema = "dbo", catalog = "HDWatch")
 public class Cartdetails implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    //--- ENTITY PRIMARY KEY 
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id", nullable=false)
-    private Integer    id ;
+	// --- ENTITY PRIMARY KEY
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", nullable = false)
+	private Integer id;
 
-    //--- ENTITY DATA FIELDS 
-    @Column(name="cart_id", nullable=false)
-    private Integer    cartId ;
+	// --- ENTITY DATA FIELDS
+	@Column(name = "cart_id", nullable = false)
+	private Integer cartId;
 
-    @Column(name="product_id", nullable=false)
-    private Integer    productId ;
+	@Column(name = "product_id", nullable = false)
+	private Integer productId;
 
-    @Column(name="quantity", nullable=false)
-    private Integer    quantity ;
+	@Column(name = "quantity", nullable = false)
+	private Integer quantity;
 
-    @Column(name="price", nullable=false)
-    private Double     price ;
+	@Column(name = "price", nullable = false)
+	private Double price;
 
+	// --- ENTITY LINKS ( RELATIONSHIP )
+	@ManyToOne
+	@JoinColumn(name = "cart_id", referencedColumnName = "id", insertable = false, updatable = false)
+	private Carts carts;
 
-    //--- ENTITY LINKS ( RELATIONSHIP )
-    @ManyToOne
-    @JoinColumn(name="cart_id", referencedColumnName="id", insertable=false, updatable=false)
-    private Carts      carts ; 
-
-    @ManyToOne
-    @JoinColumn(name="product_id", referencedColumnName="id", insertable=false, updatable=false)
-    private Products   products ; 
+	@ManyToOne
+	@JoinColumn(name = "product_id", referencedColumnName = "id", insertable = false, updatable = false)
+	private Products products;
 
 }

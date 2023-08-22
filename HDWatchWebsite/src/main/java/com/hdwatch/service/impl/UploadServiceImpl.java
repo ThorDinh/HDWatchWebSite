@@ -11,13 +11,13 @@ import org.springframework.web.multipart.MultipartFile;
 import com.hdwatch.service.UploadService;
 
 @Service
-public class UploadServiceImpl implements UploadService{
+public class UploadServiceImpl implements UploadService {
 	@Autowired
 	ServletContext app;
 
 	public File save(MultipartFile file, String folder) {
 		File dir = new File(app.getRealPath("/assets/" + folder));
-		if(!dir.exists()) {
+		if (!dir.exists()) {
 			dir.mkdirs();
 		}
 		String s = System.currentTimeMillis() + file.getOriginalFilename();

@@ -30,69 +30,65 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="accounts", schema="dbo", catalog="HDWatch" )
+@Table(name = "accounts", schema = "dbo", catalog = "HDWatch")
 public class Accounts implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    //--- ENTITY PRIMARY KEY 
-    @NotBlank(message = "Vui lòng nhập tài khoản")
-    @Id
-    @Column(name="username", nullable=false, length=50)
-    private String     username ;
+	// --- ENTITY PRIMARY KEY
+	@NotBlank(message = "Vui lòng nhập tài khoản")
+	@Id
+	@Column(name = "username", nullable = false, length = 50)
+	private String username;
 
-    //--- ENTITY DATA FIELDS 
-    @Column(name="activated", nullable=false)
-    private Boolean    activated ;
-    
-    @NotBlank(message = "Vui lòng nhập Email")
-    @Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$", message = "Email không hợp lệ")
-    @Column(name="email", nullable=false, length=50)
-    private String     email ;
-    
-    @NotBlank(message = "Vui lòng nhập họ và tên")
-    @Column(name="fullname", nullable=false, length=50)
-    private String     fullname ;
-    
-    @NotBlank(message = "Vui lòng nhập mật khẩu")
-    @Column(name="password", nullable=false)
-    private String     password ;
+	// --- ENTITY DATA FIELDS
+	@Column(name = "activated", nullable = false)
+	private Boolean activated;
 
-    @Column(name="google", length=2147483647)
-    private String     google ;
+	@NotBlank(message = "Vui lòng nhập Email")
+	@Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$", message = "Email không hợp lệ")
+	@Column(name = "email", nullable = false, length = 50)
+	private String email;
 
-    @Column(name="facebook", length=2147483647)
-    private String     facebook ;
-    
-    // Xác nhận mật khẩu
-    @Transient
-    public boolean isPasswordConfirmed(String confirmPassword) {
-        return password != null && password.equals(confirmPassword);
-    }
-    
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-        name = "user_role",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private Set<Roles> roles = new HashSet<>();
+	@NotBlank(message = "Vui lòng nhập họ và tên")
+	@Column(name = "fullname", nullable = false, length = 50)
+	private String fullname;
 
-    //--- ENTITY LINKS ( RELATIONSHIP )
-    @JsonIgnore
-    @OneToMany(mappedBy="accounts")
-    private List<Favorites> listOfFavorites ; 
-    
-    @JsonIgnore
-    @OneToMany(mappedBy="accounts")
-    private List<Orders> listOfOrders ; 
-    
-    @JsonIgnore
-    @OneToMany(mappedBy="accounts", fetch = FetchType.EAGER)
-    private List<Roledetails> listOfRoledetails ; 
+	@NotBlank(message = "Vui lòng nhập mật khẩu")
+	@Column(name = "password", nullable = false)
+	private String password;
 
-    @JsonIgnore
-    @OneToMany(mappedBy="accounts")
-    private List<Carts> listOfCarts ; 
+	@Column(name = "google", length = 2147483647)
+	private String google;
+
+	@Column(name = "facebook", length = 2147483647)
+	private String facebook;
+
+	// Xác nhận mật khẩu
+	@Transient
+	public boolean isPasswordConfirmed(String confirmPassword) {
+		return password != null && password.equals(confirmPassword);
+	}
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private Set<Roles> roles = new HashSet<>();
+
+	// --- ENTITY LINKS ( RELATIONSHIP )
+	@JsonIgnore
+	@OneToMany(mappedBy = "accounts")
+	private List<Favorites> listOfFavorites;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "accounts")
+	private List<Orders> listOfOrders;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "accounts", fetch = FetchType.EAGER)
+	private List<Roledetails> listOfRoledetails;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "accounts")
+	private List<Carts> listOfCarts;
 
 }

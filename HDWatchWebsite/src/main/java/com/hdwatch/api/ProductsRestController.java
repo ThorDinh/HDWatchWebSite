@@ -28,64 +28,65 @@ import com.hdwatch.service.ProductsService;
 public class ProductsRestController {
 	@Autowired
 	ProductsService productsService;
-	
+
 	// Lấy danh sách tất cả các sản phẩm (product)
 	@GetMapping
 	public List<Products> getAll() {
 		return productsService.findAll();
 	}
-	
+
 	// Lấy thông tin sản phẩm (product) theo ID
 	@GetMapping("{id}")
 	public Products getOne(@PathVariable("id") Integer id) {
 		return productsService.findById(id);
 	}
-	
-	//Tìm kiếm sản phẩm
+
+	// Tìm kiếm sản phẩm
 	@GetMapping("/search")
-	public List<Products> searchProduct(@RequestParam("kw") Optional<String> kw){
-		String keyword = kw.orElse(null);		
-		if(keyword != null) {
+	public List<Products> searchProduct(@RequestParam("kw") Optional<String> kw) {
+		String keyword = kw.orElse(null);
+		if (keyword != null) {
 			return productsService.findByName(keyword);
-		}else {
+		} else {
 			return productsService.findAll();
 		}
 	}
-	
+
 	// Tạo mới sản phẩm (product)
 	@PostMapping
 	public ResponseEntity<Products> createProducts(@RequestBody Products products) {
-		if(products != null) {
+		if (products != null) {
 			productsService.create(products);
 			return ResponseEntity.ok(products);
 		}
 		return ResponseEntity.badRequest().build();
 	}
-	
+
 	// Lưu thông tin sản phẩm (product) đã chỉnh sửa
 	@PutMapping("{id}")
-	public Products saveProducts(@PathVariable("id")Integer id,@RequestBody Products products) {
+	public Products saveProducts(@PathVariable("id") Integer id, @RequestBody Products products) {
 		return productsService.save(products, id);
 	}
-	
+
 	// Xóa sản phẩm (product) theo ID
 	@DeleteMapping("{id}")
-	public void deleteProduct(@PathVariable("id")Integer id) {
+	public void deleteProduct(@PathVariable("id") Integer id) {
 		productsService.deleteByid(id);
 	}
-	
-	//Xóa hình ảnh
+
+	// Xóa hình ảnh
 	@PostMapping("/deleteImage/{productId}")
-    public ResponseEntity<Map<String, String>> deleteImage(@PathVariable Integer productId, @RequestBody String imageToDelete) {
-        try {
-            productsService.deleteImage(productId, imageToDelete);
-            Map<String, String> response = new HashMap<>();
-            response.put("message", "Image deleted successfully");
-            return ResponseEntity.ok(response);
-        } catch (Exception e) {
-            Map<String, String> response = new HashMap<>();
-            response.put("error", "Error deleting image");
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
-        }
-    }
+	public ResponseEntity<Map<String, String>> deleteImage(@PathVariable Integer productId,
+			@RequestBody String imageToDelete) {
+		try {
+			productsService.deleteImage(productId, imageToDelete);
+			Map<String, String> response = new HashMap<>();
+			response.put("message", "Image deleted successfully");
+			return ResponseEntity.ok(response);
+		} catch (Exception e) {
+			Map<String, String> response = new HashMap<>();
+			response.put("error", "Error deleting image");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+		}
+	}
 }

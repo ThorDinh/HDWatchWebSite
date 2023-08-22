@@ -9,16 +9,17 @@ import org.springframework.stereotype.Service;
 
 import com.hdwatch.dao.BrandsDAO;
 import com.hdwatch.entity.Brands;
-import com.hdwatch.entity.Categories;
 import com.hdwatch.service.BrandsService;
+
+
 @Service
 public class BrandsServiceImpl implements BrandsService {
 	@Autowired
 	BrandsDAO bDao;
-	
+
 	@Override
 	public List<Brands> findAll() {
-		Sort sort = Sort.by(Direction.ASC,"name");
+		Sort sort = Sort.by(Direction.ASC, "name");
 		return bDao.findAll(sort);
 	}
 
@@ -33,12 +34,12 @@ public class BrandsServiceImpl implements BrandsService {
 	}
 
 	@Override
-	public Brands save(Brands brand,Integer id) {
-		   Brands existingBrand = bDao.findById(id).orElse(null);
-	        if (existingBrand != null) {
-	            existingBrand.setName(brand.getName());
-	            return bDao.save(existingBrand);
-	        }
+	public Brands save(Brands brand, Integer id) {
+		Brands existingBrand = bDao.findById(id).orElse(null);
+		if (existingBrand != null) {
+			existingBrand.setName(brand.getName());
+			return bDao.save(existingBrand);
+		}
 		return bDao.save(brand);
 	}
 
@@ -56,18 +57,18 @@ public class BrandsServiceImpl implements BrandsService {
 	public boolean exitsByName(String name) {
 		try {
 			Brands brand = bDao.findByName(name);
-			if(brand.getName().equals(name)) {
-				
+			if (brand.getName().equals(name)) {
+
 			}
 		} catch (Exception e) {
 			return false;
 		}
 		return true;
 	}
-	
+
 	@Override
 	public List<Brands> findByName(String name) {
 		return bDao.findByNameList(name);
 	}
-	
+
 }
