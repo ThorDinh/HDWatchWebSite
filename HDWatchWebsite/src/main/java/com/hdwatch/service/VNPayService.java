@@ -14,15 +14,18 @@ import javax.servlet.http.HttpServletRequest;
 
 @Service
 public class VNPayService {
-
+	
+	// Tạo đơn hàng và trả về URL thanh toán
 	public String createOrder(int total, String id, String urlReturn) {
+		// Các thông tin cần thiết cho VNPay
 		String vnp_Version = "2.1.0";
 		String vnp_Command = "pay";
 		String vnp_TxnRef = String.valueOf(id);
 		String vnp_IpAddr = "127.0.0.1";
 		String vnp_TmnCode = VNPayConfig.vnp_TmnCode;
 		String orderType = "order-type";
-
+		
+		// Xây dựng các tham số VNPay
 		Map<String, String> vnp_Params = new HashMap<>();
 		vnp_Params.put("vnp_Version", vnp_Version);
 		vnp_Params.put("vnp_Command", vnp_Command);
@@ -80,12 +83,15 @@ public class VNPayService {
 		String queryUrl = query.toString();
 		String vnp_SecureHash = VNPayConfig.hmacSHA512(VNPayConfig.vnp_HashSecret, hashData.toString());
 		queryUrl += "&vnp_SecureHash=" + vnp_SecureHash;
+		// Xử lý và trả về URL thanh toán
 		String paymentUrl = VNPayConfig.vnp_PayUrl + "?" + queryUrl;
 		return paymentUrl;
 	}
-
+	
+	// Xử lý kết quả trả về từ VNPay
 	public int orderReturn(HttpServletRequest request) {
 		Map fields = new HashMap();
+		// Xây dựng fields từ request.getParameterNames()
 		for (Enumeration params = request.getParameterNames(); params.hasMoreElements();) {
 			String fieldName = null;
 			String fieldValue = null;
@@ -110,12 +116,12 @@ public class VNPayService {
 		String signValue = VNPayConfig.hashAllFields(fields);
 		if (signValue.equals(vnp_SecureHash)) {
 			if ("00".equals(request.getParameter("vnp_TransactionStatus"))) {
-				return 1;
+				return 1; // Thanh toán thành công
 			} else {
-				return 0;
+				return 0; // Thanh toán thất bại
 			}
 		} else {
-			return -1;
+			return -1; // Hash không hợp lệ
 		}
 	}
 

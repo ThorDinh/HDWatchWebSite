@@ -6,20 +6,29 @@ import com.hdwatch.entity.Brands;
 
 public interface BrandsService {
 
-	List<Brands> findAll();
+    // Lấy danh sách tất cả thương hiệu (brands)
+    List<Brands> findAll();
 
-	Brands findById(Integer id);
+    // Lấy thông tin thương hiệu (brands) theo ID
+    Brands findById(Integer id);
 
-	boolean existsById(Integer id);
+    // Kiểm tra sự tồn tại của thương hiệu (brands) theo ID
+    boolean existsById(Integer id);
 
-	boolean exitsByName(String name);
+    // Kiểm tra sự tồn tại của thương hiệu (brands) theo tên
+    boolean exitsByName(String name);
 
-	Brands create(Brands brand);
+    // Tạo mới thương hiệu (brands)
+    Brands create(Brands brand);
 
-	Brands save(Brands brand, Integer id);
+    // Lưu thông tin thương hiệu (brands) đã chỉnh sửa
+    Brands save(Brands brand, Integer id);
 
-	void deleteById(Integer id);
+    // Xóa thương hiệu (brands) theo ID
+    void deleteById(Integer id);
 
-	List<Brands> findByName(String name);
+    // Tìm thương hiệu theo tên
+    List<Brands> findByName(String name);
 
+    // Bạn có thể thêm các phương thức khác liên quan đến quản lý thương hiệu ở đây
 }

@@ -86,7 +86,6 @@ public class AccountsServiceImpl implements AccountsService {
 
 	@Override
 	public void deleteRoleDetail(Integer id) {
-		// TODO Auto-generated method stub
 		rdDao.deleteById(id);
 	}
 

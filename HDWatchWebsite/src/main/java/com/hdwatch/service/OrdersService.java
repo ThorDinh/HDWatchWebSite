@@ -6,10 +6,14 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.hdwatch.entity.Orders;
 
 public interface OrdersService {
-	Orders create(JsonNode orderData);
+    
+    // Tạo đơn hàng từ dữ liệu JSON
+    Orders create(JsonNode orderData);
 
-	Orders findById(Integer id);
+    // Lấy thông tin đơn hàng theo ID
+    Orders findById(Integer id);
 
-	List<Orders> findByUsername(String username);
+    // Lấy danh sách đơn hàng của một người dùng
+    List<Orders> findByUsername(String username);
 
 }

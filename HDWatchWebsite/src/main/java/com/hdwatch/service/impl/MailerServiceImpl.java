@@ -25,7 +25,6 @@ public class MailerServiceImpl implements MailerService {
 	List<MailInfo> list = new ArrayList<MailInfo>();
 
 	public void send(MailInfo mail) throws MessagingException {
-		// TODO Auto-generated method stub
 		MimeMessage message = sender.createMimeMessage();
 
 		MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
@@ -60,12 +59,10 @@ public class MailerServiceImpl implements MailerService {
 	}
 
 	public void queue(MailInfo mail) throws MessagingException {
-		// TODO Auto-generated method stub
 		list.add(mail);
 	}
 
 	public void queue(String to, String subject, String body) throws MessagingException {
-		// TODO Auto-generated method stub
 		this.queue(new MailInfo(to, subject, body));
 	}
 
@@ -76,7 +73,6 @@ public class MailerServiceImpl implements MailerService {
 			try {
 				this.send(mail);
 			} catch (MessagingException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

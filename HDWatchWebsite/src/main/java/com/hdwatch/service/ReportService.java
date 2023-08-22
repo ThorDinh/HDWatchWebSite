@@ -6,8 +6,14 @@ import com.hdwatch.report.ReportCost;
 //import com.hdwatch.report.ReportProduct;
 
 public interface ReportService {
-	List<ReportCost> reportCostInMonth(Integer month);
-//	List<ReportProduct> reportProductInMonth(Integer month);
+    
+    // Báo cáo chi phí trong một tháng
+    List<ReportCost> reportCostInMonth(Integer month);
 
-	List<Object> getOrdersWithMonthAndTotalCost();
+    // Báo cáo sản phẩm trong một tháng
+    // List<ReportProduct> reportProductInMonth(Integer month);
+
+    // Lấy danh sách đơn hàng với tháng và tổng chi phí
+    List<Object> getOrdersWithMonthAndTotalCost();
+
 }

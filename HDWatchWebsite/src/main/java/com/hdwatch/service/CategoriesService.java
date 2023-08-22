@@ -5,17 +5,26 @@ import java.util.List;
 import com.hdwatch.entity.Categories;
 
 public interface CategoriesService {
-	List<Categories> findAll();
+    
+    // Lấy danh sách tất cả danh mục (categories)
+    List<Categories> findAll();
 
-	boolean existsById(Integer id);
+    // Kiểm tra sự tồn tại của danh mục (categories) theo ID
+    boolean existsById(Integer id);
 
-	Categories findById(Integer id);
+    // Lấy thông tin danh mục (categories) theo ID
+    Categories findById(Integer id);
 
-	Categories save(Categories cate, Integer id);
+    // Lưu thông tin danh mục (categories) đã chỉnh sửa
+    Categories save(Categories cate, Integer id);
 
-	Categories create(Categories cate);
+    // Tạo mới danh mục (categories)
+    Categories create(Categories cate);
 
-	void deleteById(Integer id);
+    // Xóa danh mục (categories) theo ID
+    void deleteById(Integer id);
 
-	List<Categories> findByName(String name);
+    // Tìm danh mục theo tên
+    List<Categories> findByName(String name);
+
 }

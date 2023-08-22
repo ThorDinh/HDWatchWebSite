@@ -10,7 +10,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public interface EmailService {
-
+	
+	// Gửi email đặt lại mật khẩu
 	public static void sendResetPasswordEmail(String email, String resetCode) {
 		// Cấu hình thông tin email
 		Properties properties = new Properties();

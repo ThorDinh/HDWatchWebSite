@@ -6,26 +6,34 @@ import com.hdwatch.entity.Accounts;
 
 public interface AccountsService {
 
-	List<Accounts> findAll();
+    // Lấy danh sách tất cả tài khoản (accounts)
+    List<Accounts> findAll();
 
-	Accounts findById(String id);
+    // Lấy thông tin tài khoản (accounts) theo ID
+    Accounts findById(String id);
 
-	Accounts create(Accounts accounts);
+    // Tạo mới tài khoản (accounts)
+    Accounts create(Accounts accounts);
 
-	Accounts save(String id, Accounts accounts);
+    // Lưu thông tin tài khoản (accounts) đã chỉnh sửa
+    Accounts save(String id, Accounts accounts);
 
-	void deleteById(String id);
+    // Xóa tài khoản (accounts) theo ID
+    void deleteById(String id);
 
-//	Accounts findByEmai(String email);
+    // Xác thực tài khoản
+    boolean authenticate(String username, String password);
 
-	boolean authenticate(String username, String password);
+    // Thay đổi mật khẩu
+    void changePassword(String username, String newPassword);
 
-	void changePassword(String username, String newPassword);
+    // Xóa chi tiết vai trò liên quan đến tài khoản
+    void deleteRoleDetail(Integer id);
 
-	void deleteRoleDetail(Integer id);
+    // Tìm tài khoản theo tên người dùng
+    Accounts findByUserName(String username);
 
-	Accounts findByUserName(String username);
-
-	List<Accounts> findByName(String name);
+    // Tìm danh sách tài khoản theo tên
+    List<Accounts> findByName(String name);
 
 }
