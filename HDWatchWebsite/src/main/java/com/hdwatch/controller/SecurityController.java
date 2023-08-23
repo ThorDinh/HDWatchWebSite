@@ -4,6 +4,8 @@ import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -79,7 +82,7 @@ public class SecurityController {
 
 	// Đăng nhập thành công
 	@RequestMapping("/login/success")
-	public String loginSuccess(Model model, Authentication authentication) {
+	public String loginSuccess(Model model, Authentication authentication, HttpServletRequest request, HttpServletResponse response) {
 		// Tiêu đề trang
 		model.addAttribute("pageTitle", "Đăng nhập thành công");
 		// Kiểm tra xem người dùng đã đăng nhập chưa
@@ -107,10 +110,10 @@ public class SecurityController {
 					// Ví dụ: chuyển hướng đến một trang lỗi hoặc trang chính
 					return "redirect:/some-other-page";
 				}
-			} else {
-				// Tài khoản không còn hoạt động (activated = false)
-				model.addAttribute("message", "Tài khoản không còn hoạt động");
-				return "account/login";
+			} else {		
+				// Thực hiện đăng xuất khi tài khoản không hoạt động
+		        new SecurityContextLogoutHandler().logout(request, response, authentication);
+				return "redirect:/login/error?message=inactive";
 			}
 		} else {
 			// Nếu chưa đăng nhập, hiển thị thông báo mặc định
@@ -121,16 +124,20 @@ public class SecurityController {
 
 	// Đăng nhập thất bại
 	@RequestMapping("/login/error")
-	public String loginError(Model model, Principal principal) {
+	public String loginError(Model model, Principal principal, @RequestParam(required = false) String message) {
 		// Tiêu đề trang
 		model.addAttribute("pageTitle", "Đăng nhập thất bại");
+		
 		// Kiểm tra xem người dùng đã đăng nhập chưa
 		if (principal != null) {
 			// Nếu đã đăng nhập, hiển thị thông báo khác
 			return "redirect:/home";
 		} else {
-			// Nếu chưa đăng nhập, hiển thị thông báo mặc định
-			model.addAttribute("message", "Đăng nhập thất bại");
+			if ("inactive".equals(message)) {
+	            model.addAttribute("message", "Tài khoản không còn hoạt động");
+	        } else {
+	            model.addAttribute("message", "Đăng nhập thất bại");
+	        }
 		}
 		return "account/login";
 	}
